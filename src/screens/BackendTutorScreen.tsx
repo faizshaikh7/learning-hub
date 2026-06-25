@@ -10,7 +10,7 @@ import {
   Layers,
   FileText,
   Timer,
-  Map,
+  Map as MapIcon,
   ChevronRight,
   ChevronDown,
   Code2,
@@ -970,7 +970,7 @@ export default function BackendTutorScreen() {
     { key: 'quiz', label: 'Quiz', icon: <Brain className="w-4 h-4" /> },
     { key: 'cards', label: 'Flashcards', icon: <Layers className="w-4 h-4" /> },
     { key: 'notes', label: 'Notes', icon: <FileText className="w-4 h-4" /> },
-    { key: 'roadmap', label: 'Roadmap', icon: <Map className="w-4 h-4" /> },
+    { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
   ]
 

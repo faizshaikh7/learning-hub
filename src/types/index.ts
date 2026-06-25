@@ -126,6 +126,8 @@ export interface Flashcard {
   id: string
   q: string
   a: string
+  /** Optional mnemonic hint shown on the answer side */
+  hint?: string
 }
 
 export interface FlashcardData {
