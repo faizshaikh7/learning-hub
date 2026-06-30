@@ -11,8 +11,12 @@ import {
   Database,
   Shield,
   Info,
+  Sun,
+  Moon,
+  Palette,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useThemeStore } from '@/store/themeStore'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -117,6 +121,7 @@ function ConfirmAction({
  */
 export default function SettingsScreen() {
   const navigate = useNavigate()
+  const { theme, setTheme } = useThemeStore()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [pending, setPending] = useState<string | null>(null)
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null)
@@ -240,6 +245,54 @@ export default function SettingsScreen() {
             {toast.msg}
           </div>
         )}
+
+        {/* ── Section: Appearance ── */}
+        <section className="mb-6">
+          <SectionHeading icon={<Palette className="w-3.5 h-3.5" />} label="Appearance" />
+          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
+            <p className="text-sm font-medium text-white mb-3">Theme</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={() => setTheme('dark')}
+                className={cn(
+                  'flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all',
+                  theme === 'dark'
+                    ? 'border-blue-500 bg-blue-500/10'
+                    : 'border-gray-700 hover:border-gray-600',
+                )}
+              >
+                <div className="w-10 h-10 rounded-lg bg-gray-950 flex items-center justify-center border border-gray-800">
+                  <Moon className="w-5 h-5 text-blue-400" />
+                </div>
+                <span className={cn('text-sm font-medium', theme === 'dark' ? 'text-white' : 'text-gray-400')}>
+                  Dark
+                </span>
+                {theme === 'dark' && (
+                  <span className="text-[11px] text-blue-400 font-medium">Active</span>
+                )}
+              </button>
+              <button
+                onClick={() => setTheme('light')}
+                className={cn(
+                  'flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all',
+                  theme === 'light'
+                    ? 'border-amber-400 bg-amber-400/10'
+                    : 'border-gray-700 hover:border-gray-600',
+                )}
+              >
+                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center border border-gray-200">
+                  <Sun className="w-5 h-5 text-amber-500" />
+                </div>
+                <span className={cn('text-sm font-medium', theme === 'light' ? 'text-white' : 'text-gray-400')}>
+                  Light
+                </span>
+                {theme === 'light' && (
+                  <span className="text-[11px] text-amber-400 font-medium">Active</span>
+                )}
+              </button>
+            </div>
+          </div>
+        </section>
 
         {/* ── Section: Data Backup ── */}
         <section className="mb-6">

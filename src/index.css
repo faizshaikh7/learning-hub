@@ -37,3 +37,58 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 }
+
+/* ── Light Theme ──────────────────────────────────────────────────────────── */
+/*
+  Tailwind v4 exposes palette colors as CSS custom properties.
+  Overriding them here flips the entire gray scale so dark UI becomes light.
+*/
+html.light {
+  color-scheme: light;
+
+  /* Flip gray scale: darkest ↔ lightest */
+  --color-gray-950: oklch(0.985 0.002 247.858);
+  --color-gray-900: oklch(1 0 0);
+  --color-gray-800: oklch(0.968 0.003 264.542);
+  --color-gray-700: oklch(0.928 0.006 264.531);
+  --color-gray-600: oklch(0.869 0.010 252.894);
+  --color-gray-500: oklch(0.554 0.018 264.184);
+  --color-gray-400: oklch(0.446 0.020 264.436);
+  --color-gray-300: oklch(0.373 0.021 264.436);
+  --color-gray-200: oklch(0.279 0.026 264.436);
+  --color-gray-100: oklch(0.208 0.028 261.692);
+  --color-gray-50:  oklch(0.13 0.028 261.692);
+
+  /* Semantic tokens used by shadcn components */
+  --color-background: hsl(210, 40%, 98%);
+  --color-foreground: hsl(222.2, 84%, 4.9%);
+  --color-card: hsl(0, 0%, 100%);
+  --color-card-foreground: hsl(222.2, 84%, 4.9%);
+  --color-border: hsl(214.3, 31.8%, 91.4%);
+  --color-input: hsl(214.3, 31.8%, 91.4%);
+  --color-muted: hsl(210, 40%, 96.1%);
+  --color-muted-foreground: hsl(215.4, 16.3%, 46.9%);
+}
+
+/* text-white in dark mode must flip to near-black in light mode */
+html.light .text-white { color: #0f172a !important; }
+
+/* Backdrop-blur header needs explicit light bg */
+html.light .bg-gray-950\/80 { background-color: rgba(248,250,252,0.85) !important; }
+html.light .bg-gray-900\/50 { background-color: rgba(255,255,255,0.5) !important; }
+
+/* Hover states */
+html.light .hover\:text-white:hover { color: #0f172a !important; }
+
+/* Code blocks stay dark in both themes for readability */
+html.light pre,
+html.light code.block {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+
+/* Inline code in light mode */
+html.light :not(pre) > code {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}

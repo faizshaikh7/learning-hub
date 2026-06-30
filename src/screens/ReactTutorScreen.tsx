@@ -738,7 +738,7 @@ export default function ReactTutorScreen() {
 
   const [activeTopic, setActiveTopic] = useState<CurriculumTopic>(initialTopic)
   const [activeTab, setActiveTab] = useState<TabKey>('lesson')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768)
   const phaseGroups = useMemo(() => groupByPhase(REACT_CURRICULUM), [])
 
   // Prev/next for bottom navigation
@@ -753,7 +753,7 @@ export default function ReactTutorScreen() {
   const handleSelectTopic = useCallback((t: CurriculumTopic) => {
     setActiveTopic(t)
     setActiveTab('lesson')
-    // Mark as in-progress if not started
+    if (window.innerWidth < 768) setSidebarOpen(false)
     if ((progress[t.id] ?? 'not-started') === 'not-started') {
       markTopic('react', t.id, 'in-progress')
       setProgress(p => ({ ...p, [t.id]: 'in-progress' }))
@@ -795,11 +795,22 @@ export default function ReactTutorScreen() {
 
   return (
     <div className="flex h-screen bg-gray-950 text-white overflow-hidden">
+      {/* Mobile sidebar backdrop */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-20 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
       {/* Sidebar */}
       <aside
         className={cn(
-          'flex-shrink-0 flex flex-col bg-gray-900 border-r border-gray-800 transition-all duration-300',
-          sidebarOpen ? 'w-64' : 'w-0 overflow-hidden',
+          'flex flex-col bg-gray-900 border-r border-gray-800 transition-all duration-300',
+          'fixed left-0 top-0 h-full z-30 w-64',
+          'md:relative md:z-auto md:h-auto md:flex-shrink-0',
+          sidebarOpen
+            ? 'translate-x-0 shadow-2xl md:shadow-none'
+            : '-translate-x-full md:translate-x-0 md:w-0 md:overflow-hidden',
         )}
       >
         {/* Sidebar header */}
