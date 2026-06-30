@@ -25,6 +25,8 @@ import {
   Zap,
   RotateCw,
   MessageSquare,
+  Menu,
+  X,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -736,7 +738,7 @@ export default function FlutterTutorScreen() {
 
   const [activeTopic, setActiveTopic] = useState<CurriculumTopic>(initialTopic)
   const [activeTab, setActiveTab] = useState<TabKey>('lesson')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const phaseGroups = useMemo(() => groupByPhase(FLUTTER_CURRICULUM), [])
 
   /** Select a topic and switch to the lesson tab. */
@@ -785,22 +787,35 @@ export default function FlutterTutorScreen() {
 
   return (
     <div className="flex h-screen bg-gray-950 text-white overflow-hidden">
+      {/* Sidebar backdrop */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 bg-black/50 z-20" onClick={() => setSidebarOpen(false)} />
+      )}
       {/* Sidebar */}
       <aside
         className={cn(
-          'flex-shrink-0 flex flex-col bg-gray-900/50 border-r border-gray-800 transition-all duration-300',
-          sidebarOpen ? 'w-72' : 'w-0 overflow-hidden',
+          'fixed left-0 top-0 h-full flex flex-col bg-gray-900 border-r border-gray-800 transition-transform duration-300 z-30',
+          sidebarOpen ? 'translate-x-0 w-72 shadow-2xl' : '-translate-x-full w-72',
         )}
       >
         {/* Sidebar header */}
         <div className="px-4 py-4 border-b border-gray-800">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-3 text-sm"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Hub
-          </button>
+          <div className="flex items-center justify-between mb-3">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Hub
+            </button>
+            <button
+              onClick={() => setSidebarOpen(false)}
+              className="p-1 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+              aria-label="Close sidebar"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
           <div className="flex items-center gap-2 mb-2">
             <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
               <Smartphone className="w-4 h-4 text-cyan-400" />
@@ -840,10 +855,11 @@ export default function FlutterTutorScreen() {
         <header className="flex items-center gap-3 px-4 py-3 border-b border-gray-800 bg-gray-950/80 backdrop-blur shrink-0">
           <button
             onClick={() => setSidebarOpen(o => !o)}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
-            aria-label="Toggle sidebar"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors text-sm font-medium shrink-0"
+            aria-label="Toggle topics"
           >
-            <Layers className="w-4 h-4" />
+            <Menu className="w-4 h-4" />
+            <span className="hidden sm:inline text-xs">Topics</span>
           </button>
 
           {/* Tabs */}
@@ -867,7 +883,7 @@ export default function FlutterTutorScreen() {
         </header>
 
         {/* Content area */}
-        <main className="flex-1 overflow-y-auto px-4 md:px-8 py-6 max-w-4xl w-full mx-auto">
+        <main className="flex-1 overflow-y-auto px-6 md:px-10 py-6">
           {activeTab === 'lesson' && (
             <LessonView
               topic={activeTopic}

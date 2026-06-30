@@ -26,6 +26,10 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    scrollbar-width: none; /* Firefox */
+  }
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
   }
   body {
     background-color: var(--color-background);
