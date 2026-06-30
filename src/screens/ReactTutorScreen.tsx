@@ -39,6 +39,7 @@ import { REACT_CURRICULUM } from '@/data/react/curriculum'
 import { REACT_FLASHCARDS } from '@/data/react/flashcards'
 import { REACT_CASE_STUDIES } from '@/data/react/case-studies'
 import CaseStudyView from '@/components/shared/CaseStudyView'
+import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -221,6 +222,9 @@ function LessonView({
           )}
         </button>
       </div>
+
+      {/* Read Aloud */}
+      <ReadAloudBar topic={topic} accentColor="orange" />
 
       {/* ELI5 */}
       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">

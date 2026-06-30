@@ -92,3 +92,13 @@ html.light :not(pre) > code {
   background-color: #f1f5f9;
   color: #0f172a;
 }
+
+/* Read-aloud animated bounce dots */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%       { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Hide scrollbars while keeping scroll functionality */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

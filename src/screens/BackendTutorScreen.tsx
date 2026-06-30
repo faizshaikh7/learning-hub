@@ -42,6 +42,7 @@ import { BACKEND_QUIZZES } from '@/data/backend/quizzes'
 import { BACKEND_FLASHCARDS } from '@/data/backend/flashcards'
 import { BACKEND_CASE_STUDIES } from '@/data/backend/case-studies'
 import CaseStudyView from '@/components/shared/CaseStudyView'
+import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -224,6 +225,9 @@ function LessonView({
           )}
         </button>
       </div>
+
+      {/* Read Aloud */}
+      <ReadAloudBar topic={topic} accentColor="blue" />
 
       {/* ELI5 */}
       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">

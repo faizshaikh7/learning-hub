@@ -39,6 +39,7 @@ import { AI_CURRICULUM } from '@/data/ai/curriculum'
 import { AI_FLASHCARDS } from '@/data/ai/flashcards'
 import { AI_CASE_STUDIES } from '@/data/ai/case-studies'
 import CaseStudyView from '@/components/shared/CaseStudyView'
+import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -221,6 +222,9 @@ function LessonView({
           )}
         </button>
       </div>
+
+      {/* Read Aloud */}
+      <ReadAloudBar topic={topic} accentColor="purple" />
 
       {/* ELI5 */}
       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">

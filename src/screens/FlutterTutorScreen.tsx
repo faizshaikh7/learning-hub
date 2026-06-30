@@ -39,6 +39,7 @@ import { FLUTTER_CURRICULUM } from '@/data/flutter/curriculum'
 import { FLUTTER_FLASHCARDS } from '@/data/flutter/flashcards'
 import { FLUTTER_CASE_STUDIES } from '@/data/flutter/case-studies'
 import CaseStudyView from '@/components/shared/CaseStudyView'
+import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -221,6 +222,9 @@ function LessonView({
           )}
         </button>
       </div>
+
+      {/* Read Aloud */}
+      <ReadAloudBar topic={topic} accentColor="cyan" />
 
       {/* ELI5 */}
       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
