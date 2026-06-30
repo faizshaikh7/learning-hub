@@ -931,8 +931,16 @@ export default function BackendTutorScreen() {
 
   const [activeTopic, setActiveTopic] = useState<CurriculumTopic>(initialTopic)
   const [activeTab, setActiveTab] = useState<TabKey>('lesson')
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(true)
   const phaseGroups = useMemo(() => groupByPhase(BACKEND_CURRICULUM), [])
+
+  // Prev/next for bottom navigation
+  const currentTopicIdx = useMemo(
+    () => BACKEND_CURRICULUM.findIndex(t => t.id === activeTopic.id),
+    [activeTopic.id],
+  )
+  const prevTopic = currentTopicIdx > 0 ? BACKEND_CURRICULUM[currentTopicIdx - 1] : null
+  const nextTopic = currentTopicIdx < BACKEND_CURRICULUM.length - 1 ? BACKEND_CURRICULUM[currentTopicIdx + 1] : null
 
   /** Select a topic and switch to the lesson tab. */
   const handleSelectTopic = useCallback((t: CurriculumTopic) => {
@@ -981,15 +989,11 @@ export default function BackendTutorScreen() {
 
   return (
     <div className="flex h-screen bg-gray-950 text-white overflow-hidden">
-      {/* Sidebar backdrop */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 bg-black/50 z-20" onClick={() => setSidebarOpen(false)} />
-      )}
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed left-0 top-0 h-full flex flex-col bg-gray-900 border-r border-gray-800 transition-transform duration-300 z-30',
-          sidebarOpen ? 'translate-x-0 w-72 shadow-2xl' : '-translate-x-full w-72',
+          'flex-shrink-0 flex flex-col bg-gray-900 border-r border-gray-800 transition-all duration-300',
+          sidebarOpen ? 'w-64' : 'w-0 overflow-hidden',
         )}
       >
         {/* Sidebar header */}
@@ -1096,6 +1100,36 @@ export default function BackendTutorScreen() {
             />
           )}
           {activeTab === 'timer' && <TimerView />}
+
+          {/* Previous / Next topic navigation */}
+          {activeTab === 'lesson' && (
+            <div className="flex items-center justify-between gap-4 pt-6 mt-8 border-t border-gray-800">
+              {prevTopic ? (
+                <button
+                  onClick={() => handleSelectTopic(prevTopic)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-700 text-gray-400 hover:text-white transition-all text-sm group max-w-[45%]"
+                >
+                  <ArrowLeft className="w-4 h-4 shrink-0 group-hover:-translate-x-0.5 transition-transform" />
+                  <div className="text-left min-w-0">
+                    <p className="text-xs text-gray-500 mb-0.5">Previous</p>
+                    <p className="font-medium truncate">{prevTopic.title}</p>
+                  </div>
+                </button>
+              ) : <div />}
+              {nextTopic ? (
+                <button
+                  onClick={() => handleSelectTopic(nextTopic)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-700 text-gray-400 hover:text-white transition-all text-sm group max-w-[45%] ml-auto"
+                >
+                  <div className="text-right min-w-0">
+                    <p className="text-xs text-gray-500 mb-0.5">Next</p>
+                    <p className="font-medium truncate">{nextTopic.title}</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+              ) : <div />}
+            </div>
+          )}
         </main>
       </div>
     </div>
