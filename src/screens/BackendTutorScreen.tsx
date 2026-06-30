@@ -40,10 +40,12 @@ import type { CurriculumTopic, TopicStatus, TimerMode } from '@/types'
 import { BACKEND_CURRICULUM } from '@/data/backend/curriculum'
 import { BACKEND_QUIZZES } from '@/data/backend/quizzes'
 import { BACKEND_FLASHCARDS } from '@/data/backend/flashcards'
+import { BACKEND_CASE_STUDIES } from '@/data/backend/case-studies'
+import CaseStudyView from '@/components/shared/CaseStudyView'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'quiz' | 'cards' | 'notes' | 'roadmap' | 'timer'
+type TabKey = 'lesson' | 'quiz' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -981,6 +983,7 @@ export default function BackendTutorScreen() {
     { key: 'notes', label: 'Notes', icon: <FileText className="w-4 h-4" /> },
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
+    { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
   const completedCount = Object.values(progress).filter(s => s === 'completed').length
@@ -1111,6 +1114,9 @@ export default function BackendTutorScreen() {
             />
           )}
           {activeTab === 'timer' && <TimerView />}
+          {activeTab === 'cases' && (
+            <CaseStudyView caseStudies={BACKEND_CASE_STUDIES} accentColor="blue" />
+          )}
 
           {/* Previous / Next topic navigation */}
           {activeTab === 'lesson' && (

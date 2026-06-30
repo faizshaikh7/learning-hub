@@ -37,10 +37,12 @@ import { useTimerStore } from '@/store/timerStore'
 import type { CurriculumTopic, TopicStatus, TimerMode } from '@/types'
 import { REACT_CURRICULUM } from '@/data/react/curriculum'
 import { REACT_FLASHCARDS } from '@/data/react/flashcards'
+import { REACT_CASE_STUDIES } from '@/data/react/case-studies'
+import CaseStudyView from '@/components/shared/CaseStudyView'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer'
+type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -787,6 +789,7 @@ export default function ReactTutorScreen() {
     { key: 'notes', label: 'Notes', icon: <FileText className="w-4 h-4" /> },
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
+    { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
   const completedCount = Object.values(progress).filter(s => s === 'completed').length
@@ -916,6 +919,9 @@ export default function ReactTutorScreen() {
             />
           )}
           {activeTab === 'timer' && <TimerView />}
+          {activeTab === 'cases' && (
+            <CaseStudyView caseStudies={REACT_CASE_STUDIES} accentColor="orange" />
+          )}
 
           {/* Previous / Next topic navigation */}
           {activeTab === 'lesson' && (

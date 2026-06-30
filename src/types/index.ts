@@ -61,6 +61,22 @@ export interface CodeExample {
   code: string
 }
 
+/** A named concept within a topic — each gets 2-4 paragraphs of explanation. */
+export interface TopicConcept {
+  title: string
+  body: string
+  code?: CodeExample
+}
+
+/** A hands-on exercise to complete after reading the lesson. */
+export interface PracticalExercise {
+  title: string
+  objective: string
+  steps: string[]
+  hints: string[]
+  expectedOutput: string
+}
+
 export interface CurriculumTopic {
   id: string
   phase: number
@@ -78,7 +94,36 @@ export interface CurriculumTopic {
   commonMistakes: string[]
   seniorNotes: string
   interviewQuestions: string[]
+  interviewAnswers?: string[]       // model answers paired with interviewQuestions
   codeExamples: CodeExample[]
+  concepts?: TopicConcept[]          // 4-8 named concept deep-dives
+  practicalExercise?: PracticalExercise
+}
+
+// ─── Case Studies ─────────────────────────────────────────────────────────────
+
+export interface CaseStudyDecision {
+  decision: string
+  why: string
+  tradeoffs: string
+}
+
+export interface CaseStudy {
+  id: string
+  company: string
+  logo: string             // emoji stand-in
+  title: string
+  industry: string
+  scale: string            // e.g. "2B users · 100B messages/day"
+  problem: string          // the engineering challenge they faced
+  solution: string         // how they solved it (2-4 paragraphs)
+  techStack: string[]
+  architecture: string     // architectural insight (2-3 paragraphs)
+  keyDecisions: CaseStudyDecision[]
+  results: string[]        // measurable outcomes
+  lessonsLearned: string[]
+  relevantTopics: string[] // topic IDs this relates to
+  estimatedMins: number
 }
 
 // ─── Quiz ─────────────────────────────────────────────────────────────────────

@@ -37,10 +37,12 @@ import { useTimerStore } from '@/store/timerStore'
 import type { CurriculumTopic, TopicStatus, TimerMode } from '@/types'
 import { AI_CURRICULUM } from '@/data/ai/curriculum'
 import { AI_FLASHCARDS } from '@/data/ai/flashcards'
+import { AI_CASE_STUDIES } from '@/data/ai/case-studies'
+import CaseStudyView from '@/components/shared/CaseStudyView'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer'
+type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -787,6 +789,7 @@ export default function AiTutorScreen() {
     { key: 'notes', label: 'Notes', icon: <FileText className="w-4 h-4" /> },
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
+    { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
   const completedCount = Object.values(progress).filter(s => s === 'completed').length
@@ -916,6 +919,9 @@ export default function AiTutorScreen() {
             />
           )}
           {activeTab === 'timer' && <TimerView />}
+          {activeTab === 'cases' && (
+            <CaseStudyView caseStudies={AI_CASE_STUDIES} accentColor="purple" />
+          )}
 
           {/* Previous / Next topic navigation */}
           {activeTab === 'lesson' && (
