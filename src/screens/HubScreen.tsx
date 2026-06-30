@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Zap } from 'lucide-react'
+import { Zap, Settings } from 'lucide-react'
 import { useTrackStore } from '@/store/trackStore'
 import TrackCard, { TRACKS } from '@/components/hub/TrackCard'
 import StatsBar from '@/components/hub/StatsBar'
@@ -27,17 +27,28 @@ export default function HubScreen() {
 
         {/* Header */}
         <header className="mb-8">
-          <div className="flex items-center gap-2.5 mb-1">
-            <div className="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center shrink-0">
-              <Zap className="w-4.5 h-4.5 text-gray-950" fill="currentColor" />
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2.5 mb-1">
+                <div className="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center shrink-0">
+                  <Zap className="w-4.5 h-4.5 text-gray-950" fill="currentColor" />
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  Learning Hub
+                </h1>
+              </div>
+              <p className="text-sm text-gray-400 ml-10.5">
+                Backend · AI Engineer · Flutter · React
+              </p>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Learning Hub
-            </h1>
+            <button
+              onClick={() => navigate('/settings')}
+              className="p-2 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+              aria-label="Settings"
+            >
+              <Settings className="w-5 h-5" />
+            </button>
           </div>
-          <p className="text-sm text-gray-400 ml-10.5">
-            Backend · AI Engineer · Flutter · React
-          </p>
         </header>
 
         {/* Stats bar */}
