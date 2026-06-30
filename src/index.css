@@ -93,10 +93,10 @@ html.light :not(pre) > code {
   color: #0f172a;
 }
 
-/* Read-aloud animated bounce dots */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); opacity: 0.4; }
-  50%       { transform: translateY(-4px); opacity: 1; }
+/* Read-aloud animated waveform bars */
+@keyframes readAloudWave {
+  0%   { transform: scaleY(0.3); opacity: 0.5; }
+  100% { transform: scaleY(1);   opacity: 1; }
 }
 
 /* Hide scrollbars while keeping scroll functionality */
