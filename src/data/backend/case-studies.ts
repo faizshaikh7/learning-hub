@@ -308,7 +308,7 @@ GitHub runs on MySQL — a relational database not particularly known for online
 
 GitHub uses Spokes for distributed git storage. A repository\'s data is stored on multiple geographic replicas. When you push code, it\'s written to your nearest replica and asynchronously propagated. When you pull, you read from a local replica. Git\'s content-addressable storage (every object identified by SHA) makes replication naturally consistent — if two replicas have the same SHA, they have identical content.
 
-For API deployments, GitHub uses a ChatOps model — deployments are initiated via Slack commands (`.deploy feature-branch to production`). The deployment system (Hubot + custom tooling) runs health checks, monitors error rates post-deploy, and can automatically roll back if error rates spike.`,
+For API deployments, GitHub uses a ChatOps model — deployments are initiated via Slack commands (\`.deploy feature-branch to production\`). The deployment system (Hubot + custom tooling) runs health checks, monitors error rates post-deploy, and can automatically roll back if error rates spike.`,
     techStack: ['Ruby on Rails', 'MySQL', 'Redis', 'Elasticsearch', 'Memcached', 'gh-ost', 'Kafka', 'Kubernetes', 'GitHub Actions'],
     keyDecisions: [
       {
