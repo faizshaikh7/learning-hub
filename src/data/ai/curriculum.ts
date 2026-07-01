@@ -1,5 +1,6 @@
 ﻿import type { CurriculumTopic } from '@/types'
 import { AI_EXTRA_TOPICS } from './curriculum-extra'
+import { weaveTopics } from '@/lib/mergeCurriculum'
 
 /** All AI Engineer curriculum topics — 70 topics across 8 phases. */
 const AI_CURRICULUM_BASE: CurriculumTopic[] = [
@@ -3879,4 +3880,11 @@ const AI_CURRICULUM_BASE: CurriculumTopic[] = [
   }
 ]
 
-export const AI_CURRICULUM: CurriculumTopic[] = [...AI_CURRICULUM_BASE, ...AI_EXTRA_TOPICS]
+export const AI_CURRICULUM: CurriculumTopic[] = weaveTopics(
+  AI_CURRICULUM_BASE,
+  AI_EXTRA_TOPICS,
+  {
+    'fine-tuning-lora': 'local-model-inference',
+    'quantization-distillation': 'cost-latency-monitoring',
+  },
+)

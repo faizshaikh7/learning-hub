@@ -1,5 +1,6 @@
 ﻿import type { CurriculumTopic } from '@/types'
 import { BACKEND_EXTRA_TOPICS } from './curriculum-extra'
+import { weaveTopics } from '@/lib/mergeCurriculum'
 
 /** All 91 Backend Engineering curriculum topics. */
 const BACKEND_CURRICULUM_BASE: CurriculumTopic[] = [
@@ -5668,4 +5669,12 @@ const BACKEND_CURRICULUM_BASE: CurriculumTopic[] = [
   }
 ]
 
-export const BACKEND_CURRICULUM: CurriculumTopic[] = [...BACKEND_CURRICULUM_BASE, ...BACKEND_EXTRA_TOPICS]
+export const BACKEND_CURRICULUM: CurriculumTopic[] = weaveTopics(
+  BACKEND_CURRICULUM_BASE,
+  BACKEND_EXTRA_TOPICS,
+  {
+    'pagination-patterns': 'rest-api-design',
+    'idempotency-exactly-once': 'message-queues',
+    'api-versioning': 'openapi-standards',
+  },
+)

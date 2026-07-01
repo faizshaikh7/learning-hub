@@ -1,5 +1,6 @@
 ﻿import type { CurriculumTopic } from '@/types'
 import { FLUTTER_EXTRA_TOPICS } from './curriculum-extra'
+import { weaveTopics } from '@/lib/mergeCurriculum'
 
 /** All Flutter/Dart curriculum topics — 62 topics across 8 phases. */
 const FLUTTER_CURRICULUM_BASE: CurriculumTopic[] = [
@@ -4077,4 +4078,12 @@ if (customerInfo.entitlements.active.containsKey('pro')) {
   },
 ]
 
-export const FLUTTER_CURRICULUM: CurriculumTopic[] = [...FLUTTER_CURRICULUM_BASE, ...FLUTTER_EXTRA_TOPICS]
+export const FLUTTER_CURRICULUM: CurriculumTopic[] = weaveTopics(
+  FLUTTER_CURRICULUM_BASE,
+  FLUTTER_EXTRA_TOPICS,
+  {
+    'deep-linking': 'navigation-routing',
+    'flutter-accessibility': 'forms-input',
+    'platform-channels': 'flutter-internals',
+  },
+)

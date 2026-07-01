@@ -1,5 +1,6 @@
 ﻿import type { CurriculumTopic } from '@/types'
 import { REACT_EXTRA_TOPICS } from './curriculum-extra'
+import { weaveTopics } from '@/lib/mergeCurriculum'
 
 /** All React+Next.js curriculum topics — 78 topics across 9 phases. */
 const REACT_CURRICULUM_BASE: CurriculumTopic[] = [
@@ -4616,4 +4617,12 @@ module.exports = nextConfig;` }]
 
 ]
 
-export const REACT_CURRICULUM: CurriculumTopic[] = [...REACT_CURRICULUM_BASE, ...REACT_EXTRA_TOPICS]
+export const REACT_CURRICULUM: CurriculumTopic[] = weaveTopics(
+  REACT_CURRICULUM_BASE,
+  REACT_EXTRA_TOPICS,
+  {
+    'react-realtime': 'data-fetching-patterns',
+    'react-accessibility': 'shadcn-ui',
+    'react-i18n': 'react-ecosystem-tools',
+  },
+)
