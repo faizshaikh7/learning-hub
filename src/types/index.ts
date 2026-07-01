@@ -228,6 +228,108 @@ export interface ReviewItem {
 /** Recall grade for a review (maps to SM-2 quality). */
 export type ReviewGrade = 'again' | 'hard' | 'good' | 'easy'
 
+// ─── Comparisons ────────────────────────────────────────────────────────────────
+
+/** One row (dimension) in a comparison table. `values` aligns with `contenders`. */
+export interface ComparisonRow {
+  dimension: string
+  values: string[]
+}
+
+/** A standard "X vs Y vs Z" comparison. */
+export interface Comparison {
+  id: string
+  title: string              // e.g. "REST vs GraphQL vs gRPC"
+  subtitle: string
+  category: string           // grouping, e.g. "APIs", "Databases"
+  contenders: string[]       // column headers
+  rows: ComparisonRow[]
+  verdict: string            // the bottom line
+  whenToUse: { choice: string; when: string }[]
+}
+
+// ─── Cheat Sheets ───────────────────────────────────────────────────────────────
+
+export interface CheatEntry {
+  label: string              // e.g. "200 OK" / "git rebase -i"
+  value: string              // description or snippet
+  code?: boolean             // render value as monospace
+}
+
+export interface CheatSection {
+  heading: string
+  entries: CheatEntry[]
+}
+
+export interface Cheatsheet {
+  id: string
+  title: string
+  subtitle: string
+  icon: string
+  sections: CheatSection[]
+}
+
+// ─── Concept Map ────────────────────────────────────────────────────────────────
+
+/** A node in the concept map, optionally linked to related nodes. */
+export interface ConceptNode {
+  id: string
+  label: string
+  summary: string
+  topicId?: string
+  relatesTo?: { id: string; relation: string }[]  // e.g. { id, relation: "enables" }
+}
+
+/** A themed cluster of related concepts. */
+export interface ConceptCluster {
+  id: string
+  name: string
+  concepts: ConceptNode[]
+}
+
+export interface ConceptMap {
+  title: string
+  intro: string
+  clusters: ConceptCluster[]
+}
+
+// ─── Projects & Daily Challenges ─────────────────────────────────────────────────
+
+export interface ProjectMilestone {
+  title: string
+  tasks: string[]
+}
+
+export interface Project {
+  id: string
+  title: string
+  tagline: string
+  difficulty: 'beginner' | 'intermediate' | 'advanced'
+  estimatedTime: string          // e.g. "8-12 hrs"
+  description: string
+  whatYouLearn: string[]
+  techStack: string[]            // with versions where relevant
+  features: string[]             // MVP feature list
+  milestones: ProjectMilestone[]
+  stretchGoals: string[]
+  relevantTopics: string[]
+}
+
+export interface DailyChallenge {
+  id: string
+  title: string
+  difficulty: 'easy' | 'medium' | 'hard'
+  prompt: string
+  hint: string
+  focus: string                  // topic area label
+  topicId?: string
+}
+
+export interface ProjectsBank {
+  projects: Project[]
+  dailyChallenges: DailyChallenge[]
+}
+
 // ─── Quiz ─────────────────────────────────────────────────────────────────────
 
 export type QuizDifficulty = 'beginner' | 'mid' | 'senior'

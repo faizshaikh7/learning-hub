@@ -1,7 +1,8 @@
 ﻿import type { CurriculumTopic } from '@/types'
+import { BACKEND_EXTRA_TOPICS } from './curriculum-extra'
 
 /** All 91 Backend Engineering curriculum topics. */
-export const BACKEND_CURRICULUM: CurriculumTopic[] = [
+const BACKEND_CURRICULUM_BASE: CurriculumTopic[] = [
   {
     "id": "how-internet-works",
     "phase": 0,
@@ -5666,3 +5667,5 @@ export const BACKEND_CURRICULUM: CurriculumTopic[] = [
     ]
   }
 ]
+
+export const BACKEND_CURRICULUM: CurriculumTopic[] = [...BACKEND_CURRICULUM_BASE, ...BACKEND_EXTRA_TOPICS]

@@ -7,10 +7,10 @@ import {
 } from '@/lib/storage'
 
 const TRACK_CONFIG = {
-  backend: { prefix: 'bt', total: 91 },
-  ai:      { prefix: 'at', total: 70 },
-  flutter: { prefix: 'ft', total: 62 },
-  react:   { prefix: 'rt', total: 78 },
+  backend: { prefix: 'bt', total: 94 },
+  ai:      { prefix: 'at', total: 72 },
+  flutter: { prefix: 'ft', total: 65 },
+  react:   { prefix: 'rt', total: 81 },
 } as const
 
 const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]> = {

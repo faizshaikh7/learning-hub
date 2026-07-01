@@ -1,7 +1,8 @@
 ﻿import type { CurriculumTopic } from '@/types'
+import { REACT_EXTRA_TOPICS } from './curriculum-extra'
 
 /** All React+Next.js curriculum topics — 78 topics across 9 phases. */
-export const REACT_CURRICULUM: CurriculumTopic[] = [
+const REACT_CURRICULUM_BASE: CurriculumTopic[] = [
 
   /* â”€â”€ PHASE 0: JS & TS Essentials â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   {
@@ -4615,3 +4616,4 @@ module.exports = nextConfig;` }]
 
 ]
 
+export const REACT_CURRICULUM: CurriculumTopic[] = [...REACT_CURRICULUM_BASE, ...REACT_EXTRA_TOPICS]

@@ -1,7 +1,8 @@
 ﻿import type { CurriculumTopic } from '@/types'
+import { FLUTTER_EXTRA_TOPICS } from './curriculum-extra'
 
 /** All Flutter/Dart curriculum topics — 62 topics across 8 phases. */
-export const FLUTTER_CURRICULUM: CurriculumTopic[] = [
+const FLUTTER_CURRICULUM_BASE: CurriculumTopic[] = [
   /* â”€â”€ PHASE 0: Dart Fundamentals â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   {
     id: 'flutter-intro', phase: 0, phaseName: 'Dart Fundamentals',
@@ -4076,3 +4077,4 @@ if (customerInfo.entitlements.active.containsKey('pro')) {
   },
 ]
 
+export const FLUTTER_CURRICULUM: CurriculumTopic[] = [...FLUTTER_CURRICULUM_BASE, ...FLUTTER_EXTRA_TOPICS]

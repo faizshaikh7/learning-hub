@@ -9,6 +9,7 @@ const STORAGE_KEYS = {
   timer: 'hub_timer',
   interview: 'hub_interview_sessions',
   review: 'hub_review_items',
+  dailyDone: 'hub_daily_done',
 } as const
 
 /** Safely parse JSON from localStorage, returning fallback on error. */
@@ -142,4 +143,19 @@ export function saveReviewItem(item: ReviewItem): void {
 /** Delete a review item by id. */
 export function deleteReviewItem(id: string): void {
   safeSet(STORAGE_KEYS.review, getReviewItems().filter(i => i.id !== id))
+}
+
+// ─── Daily challenge completion ─────────────────────────────────────────────
+
+/** Read the set of completed daily-challenge ids. */
+export function getDoneChallenges(): string[] {
+  return safeGet<string[]>(STORAGE_KEYS.dailyDone, [])
+}
+
+/** Toggle a daily-challenge id as done/undone; returns the new list. */
+export function toggleDoneChallenge(id: string): string[] {
+  const done = getDoneChallenges()
+  const next = done.includes(id) ? done.filter(x => x !== id) : [...done, id]
+  safeSet(STORAGE_KEYS.dailyDone, next)
+  return next
 }

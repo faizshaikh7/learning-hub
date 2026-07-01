@@ -1,7 +1,8 @@
 ﻿import type { CurriculumTopic } from '@/types'
+import { AI_EXTRA_TOPICS } from './curriculum-extra'
 
 /** All AI Engineer curriculum topics — 70 topics across 8 phases. */
-export const AI_CURRICULUM: CurriculumTopic[] = [
+const AI_CURRICULUM_BASE: CurriculumTopic[] = [
   {
     "id": "ai-engineer-intro",
     "phase": 0,
@@ -3878,3 +3879,4 @@ export const AI_CURRICULUM: CurriculumTopic[] = [
   }
 ]
 
+export const AI_CURRICULUM: CurriculumTopic[] = [...AI_CURRICULUM_BASE, ...AI_EXTRA_TOPICS]
