@@ -126,6 +126,33 @@ export interface CaseStudy {
   estimatedMins: number
 }
 
+// ─── Lifecycle ────────────────────────────────────────────────────────────────
+
+/** A single stage/phase within a lifecycle flow. */
+export interface LifecycleStage {
+  name: string
+  shortLabel: string          // compact label for the flow diagram node
+  description: string         // 1-3 sentences: what happens in this stage
+  details: string[]           // key things that occur / you must know
+  code?: CodeExample          // optional code illustrating this stage
+  gotchas?: string[]          // pitfalls / what breaks at this stage
+  durationHint?: string       // e.g. "~50ms", "once", "every render"
+}
+
+/** A named lifecycle (e.g. "React Component Lifecycle", "ML Model Lifecycle"). */
+export interface Lifecycle {
+  id: string
+  title: string
+  subtitle: string
+  icon: string                // emoji stand-in shown on the card
+  flow: 'linear' | 'cyclic'   // linear = start→end, cyclic = loops back
+  overview: string            // 2-4 sentence intro to the lifecycle
+  stages: LifecycleStage[]
+  keyTakeaways: string[]
+  interviewNotes: string[]
+  relatedTopics: string[]     // curriculum topic ids this maps to
+}
+
 // ─── Quiz ─────────────────────────────────────────────────────────────────────
 
 export type QuizDifficulty = 'beginner' | 'mid' | 'senior'

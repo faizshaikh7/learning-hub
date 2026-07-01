@@ -27,6 +27,7 @@ import {
   MessageSquare,
   Menu,
   X,
+  Workflow,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -38,12 +39,14 @@ import type { CurriculumTopic, TopicStatus, TimerMode } from '@/types'
 import { FLUTTER_CURRICULUM } from '@/data/flutter/curriculum'
 import { FLUTTER_FLASHCARDS } from '@/data/flutter/flashcards'
 import { FLUTTER_CASE_STUDIES } from '@/data/flutter/case-studies'
+import { FLUTTER_LIFECYCLES } from '@/data/flutter/lifecycles'
 import CaseStudyView from '@/components/shared/CaseStudyView'
+import LifecycleView from '@/components/shared/LifecycleView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases'
+type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -793,6 +796,7 @@ export default function FlutterTutorScreen() {
     { key: 'notes', label: 'Notes', icon: <FileText className="w-4 h-4" /> },
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
+    { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -923,6 +927,9 @@ export default function FlutterTutorScreen() {
             />
           )}
           {activeTab === 'timer' && <TimerView />}
+          {activeTab === 'lifecycle' && (
+            <LifecycleView lifecycles={FLUTTER_LIFECYCLES} accentColor="cyan" />
+          )}
           {activeTab === 'cases' && (
             <CaseStudyView caseStudies={FLUTTER_CASE_STUDIES} accentColor="cyan" />
           )}

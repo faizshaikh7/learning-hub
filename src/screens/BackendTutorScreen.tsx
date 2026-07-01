@@ -29,6 +29,7 @@ import {
   RotateCw,
   MessageSquare,
   Menu,
+  Workflow,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -41,12 +42,14 @@ import { BACKEND_CURRICULUM } from '@/data/backend/curriculum'
 import { BACKEND_QUIZZES } from '@/data/backend/quizzes'
 import { BACKEND_FLASHCARDS } from '@/data/backend/flashcards'
 import { BACKEND_CASE_STUDIES } from '@/data/backend/case-studies'
+import { BACKEND_LIFECYCLES } from '@/data/backend/lifecycles'
 import CaseStudyView from '@/components/shared/CaseStudyView'
+import LifecycleView from '@/components/shared/LifecycleView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'quiz' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases'
+type TabKey = 'lesson' | 'quiz' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -987,6 +990,7 @@ export default function BackendTutorScreen() {
     { key: 'notes', label: 'Notes', icon: <FileText className="w-4 h-4" /> },
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
+    { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -1118,6 +1122,9 @@ export default function BackendTutorScreen() {
             />
           )}
           {activeTab === 'timer' && <TimerView />}
+          {activeTab === 'lifecycle' && (
+            <LifecycleView lifecycles={BACKEND_LIFECYCLES} accentColor="blue" />
+          )}
           {activeTab === 'cases' && (
             <CaseStudyView caseStudies={BACKEND_CASE_STUDIES} accentColor="blue" />
           )}
