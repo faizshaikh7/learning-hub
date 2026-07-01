@@ -7,7 +7,6 @@ import { cn } from '@/lib/utils'
 import type { TrackKey } from '@/types'
 
 const TRACK_KEYS: TrackKey[] = ['backend', 'ai', 'flutter', 'react']
-const TOTAL_TOPICS = 301
 
 interface StatPillProps {
   icon: ReactNode
@@ -44,15 +43,17 @@ export default function StatsBar() {
 
   const aggregated = useMemo(() => {
     let totalCompleted = 0
+    let totalTopics = 0
     let maxStreak = 0
 
     for (const key of TRACK_KEYS) {
       const s = stats[key]
       totalCompleted += s.completed
+      totalTopics += s.total
       if (s.streak > maxStreak) maxStreak = s.streak
     }
 
-    return { totalCompleted, maxStreak }
+    return { totalCompleted, totalTopics, maxStreak }
   }, [stats])
 
   const levelInfo = useMemo(() => getLevelInfo(), [getLevelInfo, xp.totalXP])
@@ -62,13 +63,13 @@ export default function StatsBar() {
       <StatPill
         icon={<BookOpen className="w-4 h-4 text-white" />}
         label="Topics Completed"
-        value={`${aggregated.totalCompleted} / ${TOTAL_TOPICS}`}
+        value={`${aggregated.totalCompleted} / ${aggregated.totalTopics}`}
         colorClass="bg-blue-500/20 border border-blue-500/30"
       />
       <StatPill
         icon={<CheckCircle2 className="w-4 h-4 text-white" />}
         label="Completion"
-        value={`${Math.round((aggregated.totalCompleted / TOTAL_TOPICS) * 100)}%`}
+        value={`${aggregated.totalTopics ? Math.round((aggregated.totalCompleted / aggregated.totalTopics) * 100) : 0}%`}
         colorClass="bg-green-500/20 border border-green-500/30"
       />
       <StatPill

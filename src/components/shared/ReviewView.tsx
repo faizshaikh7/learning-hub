@@ -202,8 +202,8 @@ export default function ReviewView({ track, curriculum, flashcards, accentColor 
           Memory Bank
         </h2>
         <p className="text-sm text-gray-400 max-w-xl">
-          Spaced repetition beats cramming. Cards resurface right before you\'d forget them — grade
-          your recall and the schedule adapts. Add cards from any interview question or seed a topic\'s flashcards.
+          Spaced repetition beats cramming. Cards resurface right before you&apos;d forget them — grade
+          your recall and the schedule adapts. Add cards from any interview question or seed a topic&apos;s flashcards.
         </p>
       </div>
 
@@ -245,7 +245,7 @@ export default function ReviewView({ track, curriculum, flashcards, accentColor 
           className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-800/50 transition-colors"
         >
           <span className="flex items-center gap-2 text-sm font-medium text-white">
-            <Plus className={cn('w-4 h-4', a.text)} /> Add cards from a topic\'s flashcards
+            <Plus className={cn('w-4 h-4', a.text)} /> Add cards from a topic&apos;s flashcards
           </span>
           <ChevronRight className={cn('w-4 h-4 text-gray-500 transition-transform', addOpen && 'rotate-90')} />
         </button>
@@ -322,7 +322,7 @@ export default function ReviewView({ track, curriculum, flashcards, accentColor 
           <Brain className="w-10 h-10 text-gray-700 mx-auto mb-3" />
           <p className="text-sm text-gray-400 mb-1">Your memory bank is empty</p>
           <p className="text-xs text-gray-600 max-w-sm mx-auto">
-            Add cards by seeding a topic\'s flashcards above, or hit “Add to Review” on any question in the Interview tab.
+            Add cards by seeding a topic&apos;s flashcards above, or hit “Add to Review” on any question in the Interview tab.
           </p>
         </div>
       )}

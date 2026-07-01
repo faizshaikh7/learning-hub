@@ -85,7 +85,7 @@ function ProjectDetail({ project, accent, onBack, onOpenTopic }: {
 
       {/* What you learn */}
       <div className={cn('rounded-xl p-5 border', a.bg, a.border)}>
-        <h2 className={cn('text-sm font-semibold mb-2 flex items-center gap-2', a.text)}><Target className="w-4 h-4" /> What you\'ll learn</h2>
+        <h2 className={cn('text-sm font-semibold mb-2 flex items-center gap-2', a.text)}><Target className="w-4 h-4" /> What you&apos;ll learn</h2>
         <ul className="space-y-1.5">
           {project.whatYouLearn.map((w, i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-gray-300"><CheckCircle2 className={cn('w-4 h-4 shrink-0 mt-0.5', a.text)} /> {w}</li>
@@ -283,7 +283,7 @@ export default function ProjectsView({ bank, accentColor, onOpenTopic }: Project
       {sub === 'daily' && (
         <div className="space-y-5">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-400">A new challenge surfaces each day. Do it without notes — that\'s the point.</p>
+            <p className="text-sm text-gray-400">A new challenge surfaces each day. Do it without notes — that&apos;s the point.</p>
             <span className="text-xs text-gray-500 flex items-center gap-1 shrink-0"><Flame className="w-3.5 h-3.5 text-orange-400" /> {doneCount} done</span>
           </div>
 

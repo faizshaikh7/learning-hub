@@ -302,7 +302,7 @@ export default function InterviewView({
             </h2>
             <p className="text-sm text-gray-400 max-w-xl">
               A realistic 3-round loop — phone screen, technical deep dive, and system design —
-              tailored to the role you\'re targeting and the topics you\'ve studied.
+              tailored to the role you&apos;re targeting and the topics you&apos;ve studied.
             </p>
           </div>
           {avg !== null && (
@@ -333,7 +333,7 @@ export default function InterviewView({
               {readiness >= 70 ? 'You\'re interview-ready' : readiness >= 30 ? 'Building readiness' : 'Early days — keep studying'}
             </p>
             <p className="text-xs text-gray-400">
-              {completedCount}/{curriculum.length} topics completed. Questions on topics you\'ve studied are prioritized.
+              {completedCount}/{curriculum.length} topics completed. Questions on topics you&apos;ve studied are prioritized.
             </p>
           </div>
           <label className="ml-auto flex items-center gap-2 text-xs text-gray-400 cursor-pointer shrink-0">
@@ -354,7 +354,7 @@ export default function InterviewView({
         {/* Role selection */}
         <div>
           <h3 className="text-sm font-semibold text-white mb-1">Choose your target role</h3>
-          <p className="text-xs text-gray-500 mb-3">The interview\'s questions and system-design scenarios adapt to the role.</p>
+          <p className="text-xs text-gray-500 mb-3">The interview&apos;s questions and system-design scenarios adapt to the role.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {bank.roles.map(r => (
               <div key={r.id} className="bg-gray-900 border border-gray-800 rounded-2xl p-5 flex flex-col">

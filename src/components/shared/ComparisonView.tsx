@@ -117,8 +117,8 @@ export default function ComparisonView({ comparisons, accentColor }: ComparisonV
           <GitCompare className={cn('w-5 h-5', a.text)} /> Comparisons
         </h2>
         <p className="text-sm text-gray-400 max-w-xl">
-          Side-by-side breakdowns of the choices you\'ll defend in interviews and design reviews —
-          with a clear "when to use which" verdict for each.
+          Side-by-side breakdowns of the choices you&apos;ll defend in interviews and design reviews —
+          with a clear &quot;when to use which&quot; verdict for each.
         </p>
       </div>
 
