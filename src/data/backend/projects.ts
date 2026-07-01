@@ -1,0 +1,173 @@
+import type { ProjectsBank } from '@/types'
+
+/** Backend real-world projects + daily challenges. */
+export const BACKEND_PROJECTS: ProjectsBank = {
+  projects: [
+    {
+      id: 'url-shortener',
+      title: 'URL Shortener with Analytics',
+      tagline: 'Build a bit.ly clone that survives real traffic.',
+      difficulty: 'beginner',
+      estimatedTime: '8-12 hrs',
+      description:
+        'A classic system-design-in-miniature: generate short codes, redirect fast, and count clicks asynchronously. You\'ll touch hashing, caching, and the read-heavy access pattern that defines so many real systems.',
+      whatYouLearn: [
+        'Short-code generation (base62) and collision handling',
+        'Cache-first reads with Redis for hot links',
+        'Async analytics via a queue so redirects stay fast',
+        'Proper 301 vs 302 semantics',
+      ],
+      techStack: ['Node.js 20 / Express 4', 'PostgreSQL 16', 'Redis 7', 'Docker'],
+      features: [
+        'POST /shorten returns a short code',
+        'GET /:code redirects (301/302)',
+        'Redis cache in front of the DB lookup',
+        'Async click counting',
+        'Basic analytics endpoint (clicks over time)',
+      ],
+      milestones: [
+        { title: 'Core mapping', tasks: ['Design the schema (code → url)', 'Implement base62 encoding of an id', 'Build shorten + redirect endpoints'] },
+        { title: 'Make it fast', tasks: ['Add Redis cache-first lookup', 'Set correct cache headers', 'Load test with k6/autocannon'] },
+        { title: 'Analytics', tasks: ['Publish click events to a queue', 'Consume + aggregate counts', 'Expose an analytics endpoint'] },
+      ],
+      stretchGoals: ['Custom vanity codes', 'Link expiry + rate limiting', 'QR code generation', 'Per-user dashboards'],
+      relevantTopics: ['rest-api-design', 'caching', 'message-queues', 'system-design-prep'],
+    },
+    {
+      id: 'auth-service',
+      title: 'Production-Grade Auth Service',
+      tagline: 'The thing every app needs and everyone gets subtly wrong.',
+      difficulty: 'intermediate',
+      estimatedTime: '15-20 hrs',
+      description:
+        'Implement registration, login, JWT access + refresh tokens with rotation, password reset, and rate limiting. Auth is where security theory meets brutal practical detail.',
+      whatYouLearn: [
+        'Password hashing with bcrypt/argon2 and why slow is good',
+        'Access + refresh token flow with rotation & revocation',
+        'Secure cookie flags (HttpOnly, Secure, SameSite)',
+        'Defending login: rate limiting & user-enumeration resistance',
+      ],
+      techStack: ['Node.js 20 / Fastify', 'PostgreSQL 16', 'Redis 7 (token store)', 'argon2'],
+      features: [
+        'Register + email verification',
+        'Login issuing access + refresh tokens',
+        'Refresh with token rotation',
+        'Password reset flow',
+        'Logout that actually revokes',
+      ],
+      milestones: [
+        { title: 'Accounts', tasks: ['User model + argon2 hashing', 'Register + verify email', 'Constant-time login responses'] },
+        { title: 'Tokens', tasks: ['Sign short-lived access JWTs', 'Refresh tokens in a revocable store', 'Rotate refresh tokens on use'] },
+        { title: 'Hardening', tasks: ['Rate-limit auth endpoints', 'Add password reset', 'Write auth middleware + tests'] },
+      ],
+      stretchGoals: ['OAuth social login', 'TOTP 2FA', 'Device/session management UI', 'Audit log of auth events'],
+      relevantTopics: ['authentication', 'jwt-deep', 'api-security', 'rate-limiting-deep'],
+    },
+    {
+      id: 'realtime-chat',
+      title: 'Real-Time Chat Backend',
+      tagline: 'WebSockets, presence, and message delivery at scale.',
+      difficulty: 'intermediate',
+      estimatedTime: '20-25 hrs',
+      description:
+        'Build the backend for a Slack-lite: rooms, real-time messaging over WebSockets, presence, and history. You\'ll learn how to scale stateful connections horizontally.',
+      whatYouLearn: [
+        'WebSocket lifecycle and connection management',
+        'Scaling WS across instances with a Redis pub/sub backplane',
+        'Message persistence + pagination of history',
+        'Presence and typing indicators',
+      ],
+      techStack: ['Node.js 20 / ws or Socket.IO', 'Redis 7 (pub/sub)', 'PostgreSQL 16'],
+      features: [
+        'Create/join rooms',
+        'Real-time send/receive over WebSockets',
+        'Message history with cursor pagination',
+        'Online presence + typing indicators',
+      ],
+      milestones: [
+        { title: 'Sockets', tasks: ['Accept WS connections + auth handshake', 'Join/leave room semantics', 'Broadcast within a room'] },
+        { title: 'Scale out', tasks: ['Add Redis pub/sub backplane', 'Verify messages cross instances', 'Handle reconnects'] },
+        { title: 'Durability', tasks: ['Persist messages', 'Keyset-paginate history', 'Presence via Redis TTL keys'] },
+      ],
+      stretchGoals: ['Read receipts', 'Message reactions', 'File attachments to object storage', 'Push notifications when offline'],
+      relevantTopics: ['websockets-sse', 'redis-patterns', 'horizontal-scaling', 'pagination-patterns'],
+    },
+    {
+      id: 'ecommerce-api',
+      title: 'E-Commerce Order System',
+      tagline: 'Carts, payments, inventory — where correctness really matters.',
+      difficulty: 'advanced',
+      estimatedTime: '25-35 hrs',
+      description:
+        'Model products, carts, orders, and payments with idempotency and inventory that can\'t oversell. This is the project that teaches transactions, idempotency, and eventual consistency for real.',
+      whatYouLearn: [
+        'Idempotent payment endpoints with idempotency keys',
+        'Preventing oversell with row locking or reservations',
+        'The outbox pattern for reliable event publishing',
+        'Sagas for multi-step order workflows',
+      ],
+      techStack: ['Node.js 20 / NestJS', 'PostgreSQL 16', 'Redis 7', 'Stripe API', 'RabbitMQ'],
+      features: [
+        'Product catalog + inventory',
+        'Cart → checkout → order',
+        'Idempotent payment processing',
+        'Inventory that never oversells',
+        'Order status via events',
+      ],
+      milestones: [
+        { title: 'Catalog & cart', tasks: ['Products + inventory schema', 'Cart operations', 'Price + stock validation'] },
+        { title: 'Checkout', tasks: ['Idempotency-key middleware', 'Payment integration (test mode)', 'Reserve inventory transactionally'] },
+        { title: 'Reliability', tasks: ['Outbox pattern for order events', 'Consumer to fulfill orders', 'Handle payment failures/refunds'] },
+      ],
+      stretchGoals: ['Distributed saga for multi-warehouse', 'Read-model with CQRS', 'Admin analytics dashboard', 'Webhook delivery to merchants'],
+      relevantTopics: ['database-transactions', 'idempotency-exactly-once', 'cqrs-event-sourcing', 'saga-pattern'],
+    },
+    {
+      id: 'rate-limiter-service',
+      title: 'Distributed Rate Limiter',
+      tagline: 'A reusable service that protects everything behind it.',
+      difficulty: 'advanced',
+      estimatedTime: '12-18 hrs',
+      description:
+        'Build a rate-limiting service usable as middleware or a standalone API. Implement token bucket and sliding window with shared Redis state, and reason about accuracy vs latency.',
+      whatYouLearn: [
+        'Token bucket vs sliding window algorithms',
+        'Atomic counters in Redis (Lua scripts)',
+        'Distributed state across nodes',
+        'Returning 429 + Retry-After correctly',
+      ],
+      techStack: ['Go 1.22 or Node.js 20', 'Redis 7', 'Docker'],
+      features: [
+        'Per-key limits (API key / IP / user)',
+        'Token bucket + sliding window strategies',
+        'Atomic Redis operations',
+        'Config-driven limits',
+      ],
+      milestones: [
+        { title: 'Algorithm', tasks: ['Implement token bucket in memory', 'Add sliding-window-counter', 'Unit test edge cases'] },
+        { title: 'Distributed', tasks: ['Move state to Redis with a Lua script', 'Verify correctness under concurrency', 'Benchmark added latency'] },
+        { title: 'Integrate', tasks: ['Expose as middleware', 'Config for tiers/routes', 'Emit metrics'] },
+      ],
+      stretchGoals: ['Local+central hybrid limiting', 'Distributed leaky bucket', 'Dashboard of limit hits', 'Dynamic limits per plan'],
+      relevantTopics: ['rate-limiting-deep', 'redis-patterns', 'concurrency-parallelism'],
+    },
+  ],
+
+  dailyChallenges: [
+    { id: 'be-dc-1', title: 'Idempotency in 5 minutes', difficulty: 'medium', focus: 'Reliability', topicId: 'idempotency-exactly-once', prompt: 'Sketch the schema + logic for an idempotency-key store so a retried POST /charge never double-charges. What do you store, and when?', hint: 'Store (key → response, status) and check-then-write inside the same transaction as the side effect.' },
+    { id: 'be-dc-2', title: 'Index this query', difficulty: 'medium', focus: 'Databases', topicId: 'sql-deep-dive', prompt: 'A query filters WHERE tenant_id = ? AND status = ? ORDER BY created_at DESC LIMIT 20. What single index makes it fast?', hint: 'A composite index on (tenant_id, status, created_at DESC) lets the DB seek then read in order.' },
+    { id: 'be-dc-3', title: 'Cursor, not offset', difficulty: 'easy', focus: 'APIs', topicId: 'pagination-patterns', prompt: 'Rewrite `LIMIT 20 OFFSET 10000` as keyset pagination. Why is yours faster and stable under inserts?', hint: 'WHERE created_at < :lastSeen ORDER BY created_at DESC LIMIT 20 — no rows scanned-and-discarded.' },
+    { id: 'be-dc-4', title: 'Spot the N+1', difficulty: 'easy', focus: 'Performance', topicId: 'orm-patterns', prompt: 'You load 50 posts then each post\'s author in a loop. How many queries, and how do you fix it to 2?', hint: '51 queries → eager-load/JOIN or a single WHERE author_id IN (...) batch.' },
+    { id: 'be-dc-5', title: 'Deadlock detective', difficulty: 'hard', focus: 'Databases', topicId: 'database-transactions', prompt: 'Two transactions deadlock updating the same two rows. Name the cause and two fixes.', hint: 'Opposite lock ordering. Fix: consistent lock order + short transactions (+ retry on deadlock).' },
+    { id: 'be-dc-6', title: '429 done right', difficulty: 'easy', focus: 'APIs', topicId: 'rate-limiting-deep', prompt: 'What status code and which header do you return when a client is rate limited, and what should the header contain?', hint: '429 Too Many Requests + Retry-After: seconds until they can try again.' },
+    { id: 'be-dc-7', title: 'Cache stampede', difficulty: 'hard', focus: 'Caching', topicId: 'caching', prompt: 'A popular key expires and 10k requests all recompute it at once. Name two ways to prevent the stampede.', hint: 'Request coalescing / single-flight locks, and jittered TTLs (or early recompute).' },
+    { id: 'be-dc-8', title: 'Pick the isolation level', difficulty: 'medium', focus: 'Databases', topicId: 'database-transactions', prompt: 'You must prevent two users from booking the last seat. Which isolation level or locking approach do you use and why?', hint: 'SELECT ... FOR UPDATE (pessimistic) on the seat row, or Serializable with retry.' },
+    { id: 'be-dc-9', title: 'JWT can\'t log out?', difficulty: 'medium', focus: 'Security', topicId: 'jwt-deep', prompt: 'A stateless JWT can\'t be revoked before expiry. How do teams support instant logout anyway?', hint: 'Short-lived access tokens + a revocable refresh token / token denylist keyed by jti.' },
+    { id: 'be-dc-10', title: 'Blue-green vs canary', difficulty: 'easy', focus: 'Deployment', topicId: 'deployment-basics', prompt: 'In one sentence each, contrast blue-green and canary deployments.', hint: 'Blue-green: flip all traffic between two full envs (instant rollback). Canary: shift traffic gradually while watching metrics.' },
+    { id: 'be-dc-11', title: 'Idempotent by verb', difficulty: 'easy', focus: 'APIs', topicId: 'rest-api-design', prompt: 'Which HTTP methods are idempotent, and why does it matter for retries?', hint: 'GET, PUT, DELETE, HEAD are idempotent; POST is not. Safe retries depend on it.' },
+    { id: 'be-dc-12', title: 'Outbox pattern', difficulty: 'hard', focus: 'Architecture', topicId: 'idempotency-exactly-once', prompt: 'Why can\'t you just "save to DB and publish to Kafka" in a handler? What does the outbox pattern fix?', hint: 'Dual-write can partially fail. Write the event to an outbox table in the same txn; a relay publishes it reliably.' },
+    { id: 'be-dc-13', title: 'Connection pool math', difficulty: 'medium', focus: 'Performance', topicId: 'connection-pooling', prompt: 'Your DB allows 100 connections and you run 10 app instances. What pool size per instance is safe, and why not more?', hint: '~8-9 each (leave headroom). Too many connections thrash the DB; pooling reuses a small set.' },
+    { id: 'be-dc-14', title: 'Graceful shutdown', difficulty: 'medium', focus: 'Production', topicId: 'graceful-shutdown', prompt: 'On SIGTERM, what must your server do before exiting so no requests are dropped?', hint: 'Stop accepting new conns, finish in-flight requests, drain the queue, close DB pool, then exit.' },
+    { id: 'be-dc-15', title: 'CAP in practice', difficulty: 'hard', focus: 'Distributed', topicId: 'cap-theorem', prompt: 'During a network partition, your system must choose. What does choosing CP vs AP mean for users?', hint: 'CP: reject/err to stay consistent. AP: stay available but may serve stale/conflicting data.' },
+  ],
+}

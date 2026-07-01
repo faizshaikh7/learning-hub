@@ -32,6 +32,10 @@ import {
   Workflow,
   Briefcase,
   GraduationCap,
+  GitCompare,
+  ScrollText,
+  Network,
+  Hammer,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -46,15 +50,23 @@ import { BACKEND_FLASHCARDS } from '@/data/backend/flashcards'
 import { BACKEND_CASE_STUDIES } from '@/data/backend/case-studies'
 import { BACKEND_LIFECYCLES } from '@/data/backend/lifecycles'
 import { BACKEND_INTERVIEW } from '@/data/backend/interview'
+import { BACKEND_COMPARISONS } from '@/data/backend/comparisons'
+import { BACKEND_CHEATSHEETS } from '@/data/backend/cheatsheets'
+import { BACKEND_CONCEPT_MAP } from '@/data/backend/concept-map'
+import { BACKEND_PROJECTS } from '@/data/backend/projects'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
 import InterviewView from '@/components/shared/InterviewView'
 import ReviewView from '@/components/shared/ReviewView'
+import ComparisonView from '@/components/shared/ComparisonView'
+import CheatsheetView from '@/components/shared/CheatsheetView'
+import ConceptMapView from '@/components/shared/ConceptMapView'
+import ProjectsView from '@/components/shared/ProjectsView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'quiz' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
+type TabKey = 'lesson' | 'quiz' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview' | 'comparisons' | 'cheatsheet' | 'conceptmap' | 'projects'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -998,6 +1010,10 @@ export default function BackendTutorScreen() {
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
     { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
     { key: 'interview', label: 'Interview', icon: <Briefcase className="w-4 h-4" /> },
+    { key: 'comparisons', label: 'Comparisons', icon: <GitCompare className="w-4 h-4" /> },
+    { key: 'conceptmap', label: 'Concept Map', icon: <Network className="w-4 h-4" /> },
+    { key: 'cheatsheet', label: 'Cheat Sheets', icon: <ScrollText className="w-4 h-4" /> },
+    { key: 'projects', label: 'Projects', icon: <Hammer className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -1146,6 +1162,32 @@ export default function BackendTutorScreen() {
               curriculum={BACKEND_CURRICULUM}
               progress={progress}
               track="backend"
+              accentColor="blue"
+              onOpenTopic={(id) => {
+                const t = BACKEND_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
+          )}
+          {activeTab === 'comparisons' && (
+            <ComparisonView comparisons={BACKEND_COMPARISONS} accentColor="blue" />
+          )}
+          {activeTab === 'conceptmap' && (
+            <ConceptMapView
+              conceptMap={BACKEND_CONCEPT_MAP}
+              accentColor="blue"
+              onOpenTopic={(id) => {
+                const t = BACKEND_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
+          )}
+          {activeTab === 'cheatsheet' && (
+            <CheatsheetView cheatsheets={BACKEND_CHEATSHEETS} accentColor="blue" />
+          )}
+          {activeTab === 'projects' && (
+            <ProjectsView
+              bank={BACKEND_PROJECTS}
               accentColor="blue"
               onOpenTopic={(id) => {
                 const t = BACKEND_CURRICULUM.find(x => x.id === id)
