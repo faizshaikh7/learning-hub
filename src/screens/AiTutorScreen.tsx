@@ -28,6 +28,7 @@ import {
   Menu,
   X,
   Workflow,
+  Briefcase,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -40,13 +41,15 @@ import { AI_CURRICULUM } from '@/data/ai/curriculum'
 import { AI_FLASHCARDS } from '@/data/ai/flashcards'
 import { AI_CASE_STUDIES } from '@/data/ai/case-studies'
 import { AI_LIFECYCLES } from '@/data/ai/lifecycles'
+import { AI_INTERVIEW } from '@/data/ai/interview'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
+import InterviewView from '@/components/shared/InterviewView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle'
+type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -797,6 +800,7 @@ export default function AiTutorScreen() {
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
     { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
+    { key: 'interview', label: 'Interview', icon: <Briefcase className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -929,6 +933,19 @@ export default function AiTutorScreen() {
           {activeTab === 'timer' && <TimerView />}
           {activeTab === 'lifecycle' && (
             <LifecycleView lifecycles={AI_LIFECYCLES} accentColor="purple" />
+          )}
+          {activeTab === 'interview' && (
+            <InterviewView
+              bank={AI_INTERVIEW}
+              curriculum={AI_CURRICULUM}
+              progress={progress}
+              track="ai"
+              accentColor="purple"
+              onOpenTopic={(id) => {
+                const t = AI_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
           )}
           {activeTab === 'cases' && (
             <CaseStudyView caseStudies={AI_CASE_STUDIES} accentColor="purple" />

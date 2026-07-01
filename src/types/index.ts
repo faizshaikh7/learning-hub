@@ -153,6 +153,81 @@ export interface Lifecycle {
   relatedTopics: string[]     // curriculum topic ids this maps to
 }
 
+// ─── Interview ────────────────────────────────────────────────────────────────
+
+/** A job role a learner can target with a given course. */
+export interface InterviewRole {
+  id: string
+  title: string            // e.g. "Backend Engineer"
+  seniority: string        // e.g. "Junior → Mid" / "Mid → Senior"
+  icon: string             // emoji stand-in
+  description: string      // what the role actually does day to day
+  focus: string[]          // core skill areas this role is judged on
+  demandNote: string       // market demand / comp signal
+}
+
+/** The three real-world interview rounds. */
+export type InterviewLevel = 'screen' | 'technical' | 'design'
+
+export type InterviewCategory = 'concept' | 'debugging' | 'design' | 'behavioral' | 'tradeoff'
+
+/** A single interview question with a model answer and rubric. */
+export interface InterviewQuestion {
+  id: string
+  level: InterviewLevel
+  difficulty: QuizDifficulty      // beginner | mid | senior
+  roleIds?: string[]              // if omitted, applies to every role in the course
+  category: InterviewCategory
+  question: string
+  modelAnswer: string             // what a strong answer sounds like
+  keyPoints: string[]             // signals an interviewer listens for
+  followUp?: string               // a likely follow-up probe
+  redFlags?: string[]             // answers that sink the candidate
+  topicId?: string                // related curriculum topic id
+}
+
+/** A per-course bank of roles and questions. */
+export interface InterviewBank {
+  roles: InterviewRole[]
+  questions: InterviewQuestion[]
+}
+
+/** Persisted result of one completed interview session. */
+export interface InterviewSession {
+  id: string
+  track: TrackKey
+  roleId: string
+  date: string                    // ISO date
+  roundScores: Record<InterviewLevel, number>  // 0-100 per round
+  overall: number                 // 0-100
+  verdict: 'strong-hire' | 'hire' | 'lean-hire' | 'no-hire'
+  weakTopicIds: string[]
+}
+
+// ─── Review (spaced repetition) ─────────────────────────────────────────────────
+
+/**
+ * A card in the spaced-repetition memory bank. Scheduling uses an SM-2-style
+ * algorithm: correct recalls grow the interval, lapses reset it.
+ */
+export interface ReviewItem {
+  id: string                 // stable id, e.g. `${track}:${topicId}`
+  track: TrackKey
+  topicId: string
+  topicTitle: string
+  front: string              // prompt / question shown first
+  back: string               // answer revealed
+  ease: number               // SM-2 ease factor (starts 2.5)
+  intervalDays: number       // current interval in days
+  repetitions: number        // consecutive successful recalls
+  dueDate: string            // ISO date when next due
+  lastReviewed: string       // ISO date of last review ('' if never)
+  createdAt: string          // ISO date added
+}
+
+/** Recall grade for a review (maps to SM-2 quality). */
+export type ReviewGrade = 'again' | 'hard' | 'good' | 'easy'
+
 // ─── Quiz ─────────────────────────────────────────────────────────────────────
 
 export type QuizDifficulty = 'beginner' | 'mid' | 'senior'

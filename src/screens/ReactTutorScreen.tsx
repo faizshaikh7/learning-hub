@@ -28,6 +28,7 @@ import {
   Menu,
   X,
   Workflow,
+  Briefcase,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -40,13 +41,15 @@ import { REACT_CURRICULUM } from '@/data/react/curriculum'
 import { REACT_FLASHCARDS } from '@/data/react/flashcards'
 import { REACT_CASE_STUDIES } from '@/data/react/case-studies'
 import { REACT_LIFECYCLES } from '@/data/react/lifecycles'
+import { REACT_INTERVIEW } from '@/data/react/interview'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
+import InterviewView from '@/components/shared/InterviewView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle'
+type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -797,6 +800,7 @@ export default function ReactTutorScreen() {
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
     { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
+    { key: 'interview', label: 'Interview', icon: <Briefcase className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -929,6 +933,19 @@ export default function ReactTutorScreen() {
           {activeTab === 'timer' && <TimerView />}
           {activeTab === 'lifecycle' && (
             <LifecycleView lifecycles={REACT_LIFECYCLES} accentColor="orange" />
+          )}
+          {activeTab === 'interview' && (
+            <InterviewView
+              bank={REACT_INTERVIEW}
+              curriculum={REACT_CURRICULUM}
+              progress={progress}
+              track="react"
+              accentColor="orange"
+              onOpenTopic={(id) => {
+                const t = REACT_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
           )}
           {activeTab === 'cases' && (
             <CaseStudyView caseStudies={REACT_CASE_STUDIES} accentColor="orange" />

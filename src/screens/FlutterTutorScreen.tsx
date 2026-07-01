@@ -28,6 +28,7 @@ import {
   Menu,
   X,
   Workflow,
+  Briefcase,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -40,13 +41,15 @@ import { FLUTTER_CURRICULUM } from '@/data/flutter/curriculum'
 import { FLUTTER_FLASHCARDS } from '@/data/flutter/flashcards'
 import { FLUTTER_CASE_STUDIES } from '@/data/flutter/case-studies'
 import { FLUTTER_LIFECYCLES } from '@/data/flutter/lifecycles'
+import { FLUTTER_INTERVIEW } from '@/data/flutter/interview'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
+import InterviewView from '@/components/shared/InterviewView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle'
+type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -797,6 +800,7 @@ export default function FlutterTutorScreen() {
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
     { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
+    { key: 'interview', label: 'Interview', icon: <Briefcase className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -929,6 +933,19 @@ export default function FlutterTutorScreen() {
           {activeTab === 'timer' && <TimerView />}
           {activeTab === 'lifecycle' && (
             <LifecycleView lifecycles={FLUTTER_LIFECYCLES} accentColor="cyan" />
+          )}
+          {activeTab === 'interview' && (
+            <InterviewView
+              bank={FLUTTER_INTERVIEW}
+              curriculum={FLUTTER_CURRICULUM}
+              progress={progress}
+              track="flutter"
+              accentColor="cyan"
+              onOpenTopic={(id) => {
+                const t = FLUTTER_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
           )}
           {activeTab === 'cases' && (
             <CaseStudyView caseStudies={FLUTTER_CASE_STUDIES} accentColor="cyan" />

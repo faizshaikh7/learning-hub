@@ -1,4 +1,4 @@
-import type { TrackProgress, StreakData, StreakHistory, Note, XPState } from '@/types'
+import type { TrackProgress, StreakData, StreakHistory, Note, XPState, InterviewSession, ReviewItem } from '@/types'
 
 const STORAGE_KEYS = {
   progress: (prefix: string) => `${prefix}_progress`,
@@ -7,6 +7,8 @@ const STORAGE_KEYS = {
   notes: 'hub_notes',
   xp: 'hub_xp',
   timer: 'hub_timer',
+  interview: 'hub_interview_sessions',
+  review: 'hub_review_items',
 } as const
 
 /** Safely parse JSON from localStorage, returning fallback on error. */
@@ -104,4 +106,40 @@ export function getXP(): XPState {
 /** Write XP state. */
 export function setXP(xp: XPState): void {
   safeSet(STORAGE_KEYS.xp, xp)
+}
+
+// ─── Interview sessions ─────────────────────────────────────────────────────
+
+/** Read all completed interview sessions across tracks. */
+export function getInterviewSessions(): InterviewSession[] {
+  return safeGet<InterviewSession[]>(STORAGE_KEYS.interview, [])
+}
+
+/** Append a completed interview session. */
+export function saveInterviewSession(session: InterviewSession): void {
+  const sessions = getInterviewSessions()
+  safeSet(STORAGE_KEYS.interview, [...sessions, session])
+}
+
+/** Clear interview history (all tracks). */
+export function clearInterviewSessions(): void {
+  safeSet(STORAGE_KEYS.interview, [])
+}
+
+// ─── Spaced-repetition review ───────────────────────────────────────────────
+
+/** Read all review items (spaced-repetition memory bank). */
+export function getReviewItems(): ReviewItem[] {
+  return safeGet<ReviewItem[]>(STORAGE_KEYS.review, [])
+}
+
+/** Create or update a review item by id. */
+export function saveReviewItem(item: ReviewItem): void {
+  const items = getReviewItems().filter(i => i.id !== item.id)
+  safeSet(STORAGE_KEYS.review, [...items, item])
+}
+
+/** Delete a review item by id. */
+export function deleteReviewItem(id: string): void {
+  safeSet(STORAGE_KEYS.review, getReviewItems().filter(i => i.id !== id))
 }

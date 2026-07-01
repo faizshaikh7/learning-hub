@@ -30,6 +30,7 @@ import {
   MessageSquare,
   Menu,
   Workflow,
+  Briefcase,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -43,13 +44,15 @@ import { BACKEND_QUIZZES } from '@/data/backend/quizzes'
 import { BACKEND_FLASHCARDS } from '@/data/backend/flashcards'
 import { BACKEND_CASE_STUDIES } from '@/data/backend/case-studies'
 import { BACKEND_LIFECYCLES } from '@/data/backend/lifecycles'
+import { BACKEND_INTERVIEW } from '@/data/backend/interview'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
+import InterviewView from '@/components/shared/InterviewView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'quiz' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle'
+type TabKey = 'lesson' | 'quiz' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -991,6 +994,7 @@ export default function BackendTutorScreen() {
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
     { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
+    { key: 'interview', label: 'Interview', icon: <Briefcase className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -1124,6 +1128,19 @@ export default function BackendTutorScreen() {
           {activeTab === 'timer' && <TimerView />}
           {activeTab === 'lifecycle' && (
             <LifecycleView lifecycles={BACKEND_LIFECYCLES} accentColor="blue" />
+          )}
+          {activeTab === 'interview' && (
+            <InterviewView
+              bank={BACKEND_INTERVIEW}
+              curriculum={BACKEND_CURRICULUM}
+              progress={progress}
+              track="backend"
+              accentColor="blue"
+              onOpenTopic={(id) => {
+                const t = BACKEND_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
           )}
           {activeTab === 'cases' && (
             <CaseStudyView caseStudies={BACKEND_CASE_STUDIES} accentColor="blue" />
