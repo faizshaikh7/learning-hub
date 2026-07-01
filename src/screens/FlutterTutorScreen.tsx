@@ -29,6 +29,7 @@ import {
   X,
   Workflow,
   Briefcase,
+  GraduationCap,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -45,11 +46,12 @@ import { FLUTTER_INTERVIEW } from '@/data/flutter/interview'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
 import InterviewView from '@/components/shared/InterviewView'
+import ReviewView from '@/components/shared/ReviewView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
+type TabKey = 'lesson' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -796,6 +798,7 @@ export default function FlutterTutorScreen() {
   const tabs: { key: TabKey; label: string; icon: ReactNode }[] = [
     { key: 'lesson', label: 'Lesson', icon: <BookOpen className="w-4 h-4" /> },
     { key: 'cards', label: 'Flashcards', icon: <Layers className="w-4 h-4" /> },
+    { key: 'review', label: 'Review', icon: <GraduationCap className="w-4 h-4" /> },
     { key: 'notes', label: 'Notes', icon: <FileText className="w-4 h-4" /> },
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
@@ -922,6 +925,14 @@ export default function FlutterTutorScreen() {
             />
           )}
           {activeTab === 'cards' && <FlashcardView topic={activeTopic} />}
+          {activeTab === 'review' && (
+            <ReviewView
+              track="flutter"
+              curriculum={FLUTTER_CURRICULUM}
+              flashcards={FLUTTER_FLASHCARDS}
+              accentColor="cyan"
+            />
+          )}
           {activeTab === 'notes' && <NotesView topic={activeTopic} />}
           {activeTab === 'roadmap' && (
             <RoadmapView

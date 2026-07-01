@@ -31,6 +31,7 @@ import {
   Menu,
   Workflow,
   Briefcase,
+  GraduationCap,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -48,11 +49,12 @@ import { BACKEND_INTERVIEW } from '@/data/backend/interview'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
 import InterviewView from '@/components/shared/InterviewView'
+import ReviewView from '@/components/shared/ReviewView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'quiz' | 'cards' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
+type TabKey = 'lesson' | 'quiz' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -990,6 +992,7 @@ export default function BackendTutorScreen() {
     { key: 'lesson', label: 'Lesson', icon: <BookOpen className="w-4 h-4" /> },
     { key: 'quiz', label: 'Quiz', icon: <Brain className="w-4 h-4" /> },
     { key: 'cards', label: 'Flashcards', icon: <Layers className="w-4 h-4" /> },
+    { key: 'review', label: 'Review', icon: <GraduationCap className="w-4 h-4" /> },
     { key: 'notes', label: 'Notes', icon: <FileText className="w-4 h-4" /> },
     { key: 'roadmap', label: 'Roadmap', icon: <MapIcon className="w-4 h-4" /> },
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
@@ -1117,6 +1120,14 @@ export default function BackendTutorScreen() {
           )}
           {activeTab === 'quiz' && <QuizView topic={activeTopic} />}
           {activeTab === 'cards' && <FlashcardView topic={activeTopic} />}
+          {activeTab === 'review' && (
+            <ReviewView
+              track="backend"
+              curriculum={BACKEND_CURRICULUM}
+              flashcards={BACKEND_FLASHCARDS}
+              accentColor="blue"
+            />
+          )}
           {activeTab === 'notes' && <NotesView topic={activeTopic} />}
           {activeTab === 'roadmap' && (
             <RoadmapView
