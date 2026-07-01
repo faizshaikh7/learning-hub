@@ -30,6 +30,10 @@ import {
   Workflow,
   Briefcase,
   GraduationCap,
+  GitCompare,
+  ScrollText,
+  Network,
+  Hammer,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -43,15 +47,23 @@ import { REACT_FLASHCARDS } from '@/data/react/flashcards'
 import { REACT_CASE_STUDIES } from '@/data/react/case-studies'
 import { REACT_LIFECYCLES } from '@/data/react/lifecycles'
 import { REACT_INTERVIEW } from '@/data/react/interview'
+import { REACT_COMPARISONS } from '@/data/react/comparisons'
+import { REACT_CHEATSHEETS } from '@/data/react/cheatsheets'
+import { REACT_CONCEPT_MAP } from '@/data/react/concept-map'
+import { REACT_PROJECTS } from '@/data/react/projects'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
 import InterviewView from '@/components/shared/InterviewView'
 import ReviewView from '@/components/shared/ReviewView'
+import ComparisonView from '@/components/shared/ComparisonView'
+import CheatsheetView from '@/components/shared/CheatsheetView'
+import ConceptMapView from '@/components/shared/ConceptMapView'
+import ProjectsView from '@/components/shared/ProjectsView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
+type TabKey = 'lesson' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview' | 'comparisons' | 'cheatsheet' | 'conceptmap' | 'projects'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -804,6 +816,10 @@ export default function ReactTutorScreen() {
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
     { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
     { key: 'interview', label: 'Interview', icon: <Briefcase className="w-4 h-4" /> },
+    { key: 'comparisons', label: 'Comparisons', icon: <GitCompare className="w-4 h-4" /> },
+    { key: 'conceptmap', label: 'Concept Map', icon: <Network className="w-4 h-4" /> },
+    { key: 'cheatsheet', label: 'Cheat Sheets', icon: <ScrollText className="w-4 h-4" /> },
+    { key: 'projects', label: 'Projects', icon: <Hammer className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -951,6 +967,32 @@ export default function ReactTutorScreen() {
               curriculum={REACT_CURRICULUM}
               progress={progress}
               track="react"
+              accentColor="orange"
+              onOpenTopic={(id) => {
+                const t = REACT_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
+          )}
+          {activeTab === 'comparisons' && (
+            <ComparisonView comparisons={REACT_COMPARISONS} accentColor="orange" />
+          )}
+          {activeTab === 'conceptmap' && (
+            <ConceptMapView
+              conceptMap={REACT_CONCEPT_MAP}
+              accentColor="orange"
+              onOpenTopic={(id) => {
+                const t = REACT_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
+          )}
+          {activeTab === 'cheatsheet' && (
+            <CheatsheetView cheatsheets={REACT_CHEATSHEETS} accentColor="orange" />
+          )}
+          {activeTab === 'projects' && (
+            <ProjectsView
+              bank={REACT_PROJECTS}
               accentColor="orange"
               onOpenTopic={(id) => {
                 const t = REACT_CURRICULUM.find(x => x.id === id)

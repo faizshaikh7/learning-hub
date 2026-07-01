@@ -30,6 +30,10 @@ import {
   Workflow,
   Briefcase,
   GraduationCap,
+  GitCompare,
+  ScrollText,
+  Network,
+  Hammer,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -43,15 +47,23 @@ import { AI_FLASHCARDS } from '@/data/ai/flashcards'
 import { AI_CASE_STUDIES } from '@/data/ai/case-studies'
 import { AI_LIFECYCLES } from '@/data/ai/lifecycles'
 import { AI_INTERVIEW } from '@/data/ai/interview'
+import { AI_COMPARISONS } from '@/data/ai/comparisons'
+import { AI_CHEATSHEETS } from '@/data/ai/cheatsheets'
+import { AI_CONCEPT_MAP } from '@/data/ai/concept-map'
+import { AI_PROJECTS } from '@/data/ai/projects'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
 import InterviewView from '@/components/shared/InterviewView'
 import ReviewView from '@/components/shared/ReviewView'
+import ComparisonView from '@/components/shared/ComparisonView'
+import CheatsheetView from '@/components/shared/CheatsheetView'
+import ConceptMapView from '@/components/shared/ConceptMapView'
+import ProjectsView from '@/components/shared/ProjectsView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
+type TabKey = 'lesson' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview' | 'comparisons' | 'cheatsheet' | 'conceptmap' | 'projects'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -804,6 +816,10 @@ export default function AiTutorScreen() {
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
     { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
     { key: 'interview', label: 'Interview', icon: <Briefcase className="w-4 h-4" /> },
+    { key: 'comparisons', label: 'Comparisons', icon: <GitCompare className="w-4 h-4" /> },
+    { key: 'conceptmap', label: 'Concept Map', icon: <Network className="w-4 h-4" /> },
+    { key: 'cheatsheet', label: 'Cheat Sheets', icon: <ScrollText className="w-4 h-4" /> },
+    { key: 'projects', label: 'Projects', icon: <Hammer className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -951,6 +967,32 @@ export default function AiTutorScreen() {
               curriculum={AI_CURRICULUM}
               progress={progress}
               track="ai"
+              accentColor="purple"
+              onOpenTopic={(id) => {
+                const t = AI_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
+          )}
+          {activeTab === 'comparisons' && (
+            <ComparisonView comparisons={AI_COMPARISONS} accentColor="purple" />
+          )}
+          {activeTab === 'conceptmap' && (
+            <ConceptMapView
+              conceptMap={AI_CONCEPT_MAP}
+              accentColor="purple"
+              onOpenTopic={(id) => {
+                const t = AI_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
+          )}
+          {activeTab === 'cheatsheet' && (
+            <CheatsheetView cheatsheets={AI_CHEATSHEETS} accentColor="purple" />
+          )}
+          {activeTab === 'projects' && (
+            <ProjectsView
+              bank={AI_PROJECTS}
               accentColor="purple"
               onOpenTopic={(id) => {
                 const t = AI_CURRICULUM.find(x => x.id === id)

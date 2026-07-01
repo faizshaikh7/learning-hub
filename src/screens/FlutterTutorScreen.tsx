@@ -30,6 +30,10 @@ import {
   Workflow,
   Briefcase,
   GraduationCap,
+  GitCompare,
+  ScrollText,
+  Network,
+  Hammer,
 } from 'lucide-react'
 import { cn, formatTime } from '@/lib/utils'
 import { getProgress } from '@/lib/storage'
@@ -43,15 +47,23 @@ import { FLUTTER_FLASHCARDS } from '@/data/flutter/flashcards'
 import { FLUTTER_CASE_STUDIES } from '@/data/flutter/case-studies'
 import { FLUTTER_LIFECYCLES } from '@/data/flutter/lifecycles'
 import { FLUTTER_INTERVIEW } from '@/data/flutter/interview'
+import { FLUTTER_COMPARISONS } from '@/data/flutter/comparisons'
+import { FLUTTER_CHEATSHEETS } from '@/data/flutter/cheatsheets'
+import { FLUTTER_CONCEPT_MAP } from '@/data/flutter/concept-map'
+import { FLUTTER_PROJECTS } from '@/data/flutter/projects'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
 import InterviewView from '@/components/shared/InterviewView'
 import ReviewView from '@/components/shared/ReviewView'
+import ComparisonView from '@/components/shared/ComparisonView'
+import CheatsheetView from '@/components/shared/CheatsheetView'
+import ConceptMapView from '@/components/shared/ConceptMapView'
+import ProjectsView from '@/components/shared/ProjectsView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type TabKey = 'lesson' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview'
+type TabKey = 'lesson' | 'cards' | 'review' | 'notes' | 'roadmap' | 'timer' | 'cases' | 'lifecycle' | 'interview' | 'comparisons' | 'cheatsheet' | 'conceptmap' | 'projects'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -804,6 +816,10 @@ export default function FlutterTutorScreen() {
     { key: 'timer', label: 'Timer', icon: <Timer className="w-4 h-4" /> },
     { key: 'lifecycle', label: 'Lifecycles', icon: <Workflow className="w-4 h-4" /> },
     { key: 'interview', label: 'Interview', icon: <Briefcase className="w-4 h-4" /> },
+    { key: 'comparisons', label: 'Comparisons', icon: <GitCompare className="w-4 h-4" /> },
+    { key: 'conceptmap', label: 'Concept Map', icon: <Network className="w-4 h-4" /> },
+    { key: 'cheatsheet', label: 'Cheat Sheets', icon: <ScrollText className="w-4 h-4" /> },
+    { key: 'projects', label: 'Projects', icon: <Hammer className="w-4 h-4" /> },
     { key: 'cases', label: 'Case Studies', icon: <Trophy className="w-4 h-4" /> },
   ]
 
@@ -951,6 +967,32 @@ export default function FlutterTutorScreen() {
               curriculum={FLUTTER_CURRICULUM}
               progress={progress}
               track="flutter"
+              accentColor="cyan"
+              onOpenTopic={(id) => {
+                const t = FLUTTER_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
+          )}
+          {activeTab === 'comparisons' && (
+            <ComparisonView comparisons={FLUTTER_COMPARISONS} accentColor="cyan" />
+          )}
+          {activeTab === 'conceptmap' && (
+            <ConceptMapView
+              conceptMap={FLUTTER_CONCEPT_MAP}
+              accentColor="cyan"
+              onOpenTopic={(id) => {
+                const t = FLUTTER_CURRICULUM.find(x => x.id === id)
+                if (t) { handleSelectTopic(t); setActiveTab('lesson') }
+              }}
+            />
+          )}
+          {activeTab === 'cheatsheet' && (
+            <CheatsheetView cheatsheets={FLUTTER_CHEATSHEETS} accentColor="cyan" />
+          )}
+          {activeTab === 'projects' && (
+            <ProjectsView
+              bank={FLUTTER_PROJECTS}
               accentColor="cyan"
               onOpenTopic={(id) => {
                 const t = FLUTTER_CURRICULUM.find(x => x.id === id)
