@@ -7,8 +7,8 @@ import {
 } from '@/lib/storage'
 
 const TRACK_CONFIG = {
-  backend: { prefix: 'bt', total: 94 },
-  ai:      { prefix: 'at', total: 72 },
+  backend: { prefix: 'bt', total: 95 },
+  ai:      { prefix: 'at', total: 73 },
   flutter: { prefix: 'ft', total: 65 },
   react:   { prefix: 'rt', total: 81 },
 } as const
