@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ArrowLeft,
   ChevronRight,
@@ -10,6 +10,9 @@ import {
   MessageSquare,
   Code2,
   CircleDot,
+  Play,
+  Pause,
+  RotateCcw,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Lifecycle, LifecycleStage } from '@/types'
@@ -179,6 +182,148 @@ function StageNode({
 
 // ─── Lifecycle detail ──────────────────────────────────────────────────────────
 
+/**
+ * LifecycleDiagram — an animated, auto-playing flow chart of the lifecycle.
+ * A "playhead" advances through the stages: passed connectors fill in, the
+ * active node glows, and a live caption explains the current step. Tap a node
+ * to jump; play/pause/restart to control. Cyclic flows loop with a return arrow.
+ */
+function LifecycleDiagram({
+  stages,
+  accent,
+  isCyclic,
+}: {
+  stages: LifecycleStage[]
+  accent: Accent
+  isCyclic: boolean
+}) {
+  const a = ACCENT[accent]
+  const STEP_MS = 1700
+  const [step, setStep] = useState(0)
+  const [playing, setPlaying] = useState(true)
+
+  useEffect(() => {
+    if (!playing) return
+    const id = setInterval(() => {
+      setStep(s => {
+        const next = s + 1
+        if (next >= stages.length) {
+          // Linear flows pause at the end; cyclic flows loop.
+          if (!isCyclic) { setPlaying(false); return s }
+          return 0
+        }
+        return next
+      })
+    }, STEP_MS)
+    return () => clearInterval(id)
+  }, [playing, stages.length, isCyclic])
+
+  const current = stages[step]
+
+  return (
+    <div className="rounded-2xl border border-gray-800 bg-gray-900/60 p-4 sm:p-5">
+      {/* Controls */}
+      <div className="flex items-center justify-between mb-4">
+        <span className={cn('text-xs font-semibold flex items-center gap-1.5', a.text)}>
+          <Play className="w-3.5 h-3.5" /> Animated flow
+        </span>
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={() => setPlaying(p => !p)}
+            className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-gray-800 hover:bg-gray-700 text-gray-200 transition-colors"
+            aria-label={playing ? 'Pause' : 'Play'}
+          >
+            {playing ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+            {playing ? 'Pause' : 'Play'}
+          </button>
+          <button
+            onClick={() => { setStep(0); setPlaying(true) }}
+            className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium bg-gray-800 hover:bg-gray-700 text-gray-200 transition-colors"
+            aria-label="Restart"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Node track (horizontal scroll on small screens) */}
+      <div className="overflow-x-auto scrollbar-hide pb-2">
+        <div className="flex items-start min-w-max px-1">
+          {stages.map((stage, i) => {
+            const state = i < step ? 'done' : i === step ? 'active' : 'todo'
+            return (
+              <div key={i} className="flex items-start shrink-0">
+                {/* Node */}
+                <button
+                  onClick={() => { setStep(i); setPlaying(false) }}
+                  className="flex flex-col items-center gap-1.5 w-[4.5rem] shrink-0"
+                >
+                  <span
+                    className={cn(
+                      'w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all duration-300',
+                      state === 'todo' && 'bg-gray-800 text-gray-500 border-gray-700',
+                      state === 'done' && cn(a.node, 'text-white border-transparent'),
+                      state === 'active' && cn(a.node, 'text-white border-transparent scale-110 shadow-lg ring-4 animate-pulse', a.ring),
+                    )}
+                  >
+                    {i + 1}
+                  </span>
+                  <span
+                    className={cn(
+                      'text-[10px] text-center leading-tight transition-colors',
+                      state === 'active' ? a.text : state === 'done' ? 'text-gray-300' : 'text-gray-600',
+                    )}
+                  >
+                    {stage.shortLabel}
+                  </span>
+                </button>
+
+                {/* Connector to next node */}
+                {i < stages.length - 1 && (
+                  <div className="flex items-center h-10 w-6 sm:w-10 shrink-0">
+                    <div className="relative h-1 w-full bg-gray-800 rounded-full overflow-hidden">
+                      <div
+                        className={cn('absolute inset-0 origin-left rounded-full', a.node)}
+                        style={{
+                          transform: `scaleX(${i < step ? 1 : i === step ? 1 : 0})`,
+                          transition: `transform ${STEP_MS}ms linear`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+
+          {/* Cyclic loop-back indicator */}
+          {isCyclic && (
+            <div className="flex items-center h-10 pl-1 shrink-0">
+              <RefreshCw className={cn('w-4 h-4', a.text, step === stages.length - 1 && 'animate-spin')} />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Live caption for the current stage */}
+      <div className={cn('mt-3 rounded-xl p-3 border', a.bg, a.border)}>
+        <div className="flex items-center gap-2 mb-1 flex-wrap">
+          <span className={cn('text-[10px] font-bold px-1.5 py-0.5 rounded border', a.badge)}>
+            Step {step + 1} / {stages.length}
+          </span>
+          <span className="text-sm font-semibold text-white">{current.name}</span>
+          {current.durationHint && (
+            <span className={cn('text-[10px] font-mono px-1.5 py-0.5 rounded border', a.badge)}>
+              {current.durationHint}
+            </span>
+          )}
+        </div>
+        <p className="text-xs text-gray-400 leading-relaxed">{current.description}</p>
+      </div>
+    </div>
+  )
+}
+
 /** Full detail view for one selected lifecycle. */
 function LifecycleDetail({
   lifecycle,
@@ -219,6 +364,9 @@ function LifecycleDetail({
           </div>
         </div>
       </div>
+
+      {/* Animated diagram */}
+      <LifecycleDiagram stages={lifecycle.stages} accent={accent} isCyclic={isCyclic} />
 
       {/* Flow */}
       <div>

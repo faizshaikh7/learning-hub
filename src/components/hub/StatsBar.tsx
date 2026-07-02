@@ -18,7 +18,7 @@ interface StatPillProps {
 
 /** A single stat pill used in the StatsBar. */
 const StatPill = ({ icon, label, value, sub, colorClass }: StatPillProps) => (
-  <div className="flex items-center gap-3 bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 flex-1 min-w-0">
+  <div className="flex items-center gap-3 bg-gray-900 border border-gray-800 rounded-xl px-3 sm:px-4 py-3 min-w-0">
     <div className={cn('shrink-0 w-9 h-9 rounded-lg flex items-center justify-center', colorClass)}>
       {icon}
     </div>
@@ -59,7 +59,7 @@ export default function StatsBar() {
   const levelInfo = useMemo(() => getLevelInfo(), [getLevelInfo, xp.totalXP])
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
       <StatPill
         icon={<BookOpen className="w-4 h-4 text-white" />}
         label="Topics Completed"
