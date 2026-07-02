@@ -8,7 +8,7 @@ import {
 
 const TRACK_CONFIG = {
   backend: { prefix: 'bt', total: 95 },
-  ai:      { prefix: 'at', total: 73 },
+  ai:      { prefix: 'at', total: 76 },
   flutter: { prefix: 'ft', total: 65 },
   react:   { prefix: 'rt', total: 81 },
 } as const

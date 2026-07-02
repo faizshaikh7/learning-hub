@@ -3888,5 +3888,8 @@ export const AI_CURRICULUM: CurriculumTopic[] = weaveTopics(
     'fine-tuning-lora': 'local-model-inference',
     'quantization-distillation': 'cost-latency-monitoring',
     'beyond-rag': 'advanced-rag',
+    'ai-ml-dl-foundations': 'ai-engineer-intro',
+    'transformers-attention': 'llm-fundamentals',
+    'rlhf-alignment': 'transformers-attention',
   },
 )

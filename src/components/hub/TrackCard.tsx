@@ -23,7 +23,7 @@ export const TRACKS: Track[] = [
     subtitle: 'Machine Learning',
     emoji: '🤖',
     prefix: 'at',
-    total: 73,
+    total: 76,
     colorClass: 'bg-purple-500',
     borderClass: 'border-purple-500/30',
     textClass: 'text-purple-400',
