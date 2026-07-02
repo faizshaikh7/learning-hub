@@ -60,6 +60,7 @@ import CheatsheetView from '@/components/shared/CheatsheetView'
 import ConceptMapView from '@/components/shared/ConceptMapView'
 import ProjectsView from '@/components/shared/ProjectsView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
+import TabBar from '@/components/shared/TabBar'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -912,23 +913,12 @@ export default function FlutterTutorScreen() {
           </button>
 
           {/* Tabs */}
-          <nav className="flex gap-1 overflow-x-auto scrollbar-hide">
-            {tabs.map(tab => (
-              <button
-                key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                className={cn(
-                  'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors',
-                  activeTab === tab.key
-                    ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
-                    : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/60',
-                )}
-              >
-                {tab.icon}
-                <span className="hidden sm:inline">{tab.label}</span>
-              </button>
-            ))}
-          </nav>
+          <TabBar
+            tabs={tabs}
+            activeTab={activeTab}
+            onSelect={(key) => setActiveTab(key as TabKey)}
+            accentColor="cyan"
+          />
         </header>
 
         {/* Content area */}
