@@ -34,11 +34,11 @@ export default function HubScreen() {
                   <Zap className="w-4.5 h-4.5 text-gray-950" fill="currentColor" />
                 </div>
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                  Learning Hub
+                  LearnKar
                 </h1>
               </div>
               <p className="text-sm text-gray-400 ml-10.5">
-                Backend · AI Engineer · Flutter · React
+                Backend · AI · Flutter · React · AI/ML
               </p>
             </div>
             <button
