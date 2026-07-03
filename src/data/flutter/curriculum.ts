@@ -12,12 +12,12 @@ const FLUTTER_CURRICULUM_BASE: CurriculumTopic[] = [
     eli5: 'Flutter lets you write one app that runs on iPhone, Android, web, and desktop. Instead of using each platform\'s buttons and menus, Flutter paints every pixel itself — like bringing your own LEGO set instead of borrowing each house\'s furniture.',
     analogy: 'Native development is hiring two builders who each build the same house with local materials. Flutter is one builder with a 3D printer that prints the identical house anywhere.',
     explanation: 'Flutter is Google\'s UI toolkit for building natively compiled, multi-platform apps from a single Dart codebase. Unlike React Native (which bridges to native widgets), Flutter renders everything itself with its own engine (Impeller/Skia), giving identical pixels on every platform and excellent performance.',
-    technicalDeep: 'Architecture layers: your Dart code â†’ Flutter framework (widgets, rendering, animation libraries — all Dart) â†’ Flutter engine (C++, Impeller graphics, text layout, Dart runtime) â†’ platform embedder (iOS/Android/web/desktop glue). Compilation: dev mode uses JIT (enables sub-second hot reload — injects new code into the running Dart VM, preserving state); release mode compiles AOT to native ARM/x64 machine code. Everything on screen is a widget composed into a tree; Flutter diffs and repaints at up to 120fps.',
+    technicalDeep: 'Architecture layers: your Dart code → Flutter framework (widgets, rendering, animation libraries — all Dart) → Flutter engine (C++, Impeller graphics, text layout, Dart runtime) → platform embedder (iOS/Android/web/desktop glue). Compilation: dev mode uses JIT (enables sub-second hot reload — injects new code into the running Dart VM, preserving state); release mode compiles AOT to native ARM/x64 machine code. Everything on screen is a widget composed into a tree; Flutter diffs and repaints at up to 120fps.',
     whatBreaks: 'Assuming Flutter widgets ARE native widgets — they\'re drawn replicas, so brand-new iOS design changes need Flutter updates to appear. Heavy platform-specific features (advanced camera, background services) need platform channels. Web output is a canvas — SEO-hostile for content sites.',
     efficientWay: {
       title: 'Starting with Flutter',
       approaches: [
-        { name: 'Build a real app while learning', verdict: 'best', reason: 'The freeCodeCamp notes-app path (auth â†’ CRUD â†’ cloud â†’ release) teaches everything in context.' },
+        { name: 'Build a real app while learning', verdict: 'best', reason: 'The freeCodeCamp notes-app path (auth → CRUD → cloud → release) teaches everything in context.' },
         { name: 'Widget-of-the-week videos + docs', verdict: 'ok', reason: 'Great supplements, but passive watching doesn\'t build muscle memory.' },
         { name: 'Learning all of Dart before touching Flutter', verdict: 'weak', reason: 'You need core Dart, but Dart sticks fastest when used inside real widgets.' }
       ],
@@ -66,12 +66,12 @@ class MyApp extends StatelessWidget {
     eli5: 'Before building apps you need your workshop set up: the Flutter tool itself, an editor (VS Code or Android Studio), and the simulators that pretend to be phones on your computer.',
     analogy: 'Setting up Flutter is like setting up a kitchen before cooking: stove (Flutter SDK), knives (IDE), and taste-testers (emulators). A well-set kitchen makes every future meal faster.',
     explanation: 'A complete Flutter environment includes: the Flutter SDK, platform toolchains (Xcode for iOS, Android Studio/SDK for Android), an IDE with Flutter plugins, device emulators, and developer accounts for eventual store releases. flutter doctor diagnoses what\'s missing.',
-    technicalDeep: 'Install: download Flutter SDK, add to PATH, run flutter doctor and fix every âœ—. iOS (Mac only): Xcode + CocoaPods + simulator. Android: Android Studio, SDK, accept licenses (flutter doctor --android-licenses), create an AVD. IDEs: VS Code (lightweight, great Flutter extension) or Android Studio (full-featured, built-in emulator controls). FVM (Flutter Version Management): pin Flutter versions per project — essential when maintaining multiple apps. DartPad: zero-install browser playground for Dart experiments. Developer accounts: Apple Developer ($99/yr), Google Play ($25 once) — register early, verification takes days.',
-    whatBreaks: 'PATH not set â†’ "flutter: command not found". Unaccepted Android licenses block builds. CocoaPods version conflicts break iOS builds. Different Flutter versions across team members cause "works on my machine" — FVM fixes this.',
+    technicalDeep: 'Install: download Flutter SDK, add to PATH, run flutter doctor and fix every ✗. iOS (Mac only): Xcode + CocoaPods + simulator. Android: Android Studio, SDK, accept licenses (flutter doctor --android-licenses), create an AVD. IDEs: VS Code (lightweight, great Flutter extension) or Android Studio (full-featured, built-in emulator controls). FVM (Flutter Version Management): pin Flutter versions per project — essential when maintaining multiple apps. DartPad: zero-install browser playground for Dart experiments. Developer accounts: Apple Developer ($99/yr), Google Play ($25 once) — register early, verification takes days.',
+    whatBreaks: 'PATH not set → "flutter: command not found". Unaccepted Android licenses block builds. CocoaPods version conflicts break iOS builds. Different Flutter versions across team members cause "works on my machine" — FVM fixes this.',
     efficientWay: {
       title: 'Setting up efficiently',
       approaches: [
-        { name: 'flutter doctor-driven setup', verdict: 'best', reason: 'Fix each âœ— it reports, in order. It tells you exactly what\'s missing.' },
+        { name: 'flutter doctor-driven setup', verdict: 'best', reason: 'Fix each ✗ it reports, in order. It tells you exactly what\'s missing.' },
         { name: 'VS Code + Flutter extension', verdict: 'best', reason: 'Fast, light, excellent debugging — most popular choice for Flutter.' },
         { name: 'Skipping emulators, using only a real device', verdict: 'ok', reason: 'Real devices are great, but you need emulators to test multiple screen sizes.' }
       ],
@@ -121,8 +121,8 @@ fvm flutter run`
     eli5: 'Dart is the language Flutter speaks. It looks a lot like JavaScript or Java: you make variables to store things, functions to do things, and types so the computer knows what kind of thing each variable holds.',
     analogy: 'If languages were vehicles, Dart is a modern hybrid: the familiarity of Java\'s structure with JavaScript\'s ease, plus type safety as standard airbags.',
     explanation: 'Dart is a statically-typed, object-oriented language with type inference. Core concepts: variables (var/final/const), built-in types (int, double, String, bool), functions (named/optional parameters, arrow syntax), and string interpolation. If you know JS/Java/Kotlin, Dart takes days, not weeks.',
-    technicalDeep: 'var infers type at assignment and the type is then fixed (var x = 5; x = "hi" â†’ error). final = set once at runtime; const = compile-time constant (deep-immutable, canonicalized). dynamic opts out of type checking — avoid. Numbers: int and double (both subtypes of num). Strings: single/double quotes, interpolation with $variable and ${expression}, multi-line with triple quotes. Functions are first-class objects: named parameters {required int a, int b = 0}, positional optional [int? c], arrow shorthand =>. Type system is sound: if it compiles to type T, it IS T at runtime.',
-    whatBreaks: 'Using dynamic everywhere defeats the type system and moves errors to runtime. Confusing final vs const: const requires compile-time values (const now = DateTime.now() â†’ error). Integer division: 5 / 2 is 2.5 (double); use 5 ~/ 2 for integer 2.',
+    technicalDeep: 'var infers type at assignment and the type is then fixed (var x = 5; x = "hi" → error). final = set once at runtime; const = compile-time constant (deep-immutable, canonicalized). dynamic opts out of type checking — avoid. Numbers: int and double (both subtypes of num). Strings: single/double quotes, interpolation with $variable and ${expression}, multi-line with triple quotes. Functions are first-class objects: named parameters {required int a, int b = 0}, positional optional [int? c], arrow shorthand =>. Type system is sound: if it compiles to type T, it IS T at runtime.',
+    whatBreaks: 'Using dynamic everywhere defeats the type system and moves errors to runtime. Confusing final vs const: const requires compile-time values (const now = DateTime.now() → error). Integer division: 5 / 2 is 2.5 (double); use 5 ~/ 2 for integer 2.',
     efficientWay: {
       title: 'Learning Dart fast',
       approaches: [
@@ -238,7 +238,7 @@ final menu = [
     analogy: 'A List is a numbered parking lot. A Map is a hotel front desk — give the key (room number), get the guest. A Set is a guest list — each name appears exactly once.',
     explanation: 'Lists, Maps, and Sets are the workhorses of every Flutter app: lists of messages, maps of JSON data, sets of selected IDs. Mastering their methods (map, where, fold, firstWhere) is mastering data manipulation in Dart.',
     technicalDeep: 'List<T>: ordered, indexed, growable by default. Map<K,V>: insertion-ordered hash map. Set<T>: unique elements, fast contains. Functional methods: .map() transforms (returns a lazy Iterable — call .toList()), .where() filters, .fold()/.reduce() aggregates, .firstWhere(orElse:), .any()/.every(), .expand() flat-maps. Spread ... and ...? (null-safe spread) merge collections. Records (Dart 3): lightweight tuples (int, String) and named ({int id, String name}) — great for returning multiple values without a class. Immutability: List.unmodifiable, const literals.',
-    whatBreaks: 'Forgetting .toList() after .map() then wondering why the UI shows nothing (lazy Iterable never evaluated). Mutating a list while iterating it â†’ ConcurrentModificationError. firstWhere without orElse â†’ StateError crash when nothing matches.',
+    whatBreaks: 'Forgetting .toList() after .map() then wondering why the UI shows nothing (lazy Iterable never evaluated). Mutating a list while iterating it → ConcurrentModificationError. firstWhere without orElse → StateError crash when nothing matches.',
     efficientWay: {
       title: 'Working with collections',
       approaches: [
@@ -363,7 +363,7 @@ class Repo {
     analogy: 'Classes are cookie cutters; objects are the cookies. Constructors decide the dough that goes in. Enums are the fixed flavor menu — you can\'t order a flavor that isn\'t on it.',
     explanation: 'Dart is deeply object-oriented: everything is an object (even numbers and functions). Understanding classes, constructors (default, named, factory, const), inheritance, interfaces, and enhanced enums is mandatory — every StatelessWidget you write is a subclass with an overridden method.',
     technicalDeep: 'Constructors: generative Person(this.name) with initializing formals; named Person.guest(); factory (can return cached instances or subtypes — used for singletons and fromJson); const constructors enable compile-time widget instances (huge for performance: const Text(\'hi\') is canonicalized and never rebuilt). Inheritance: extends (single), implements (any class is an implicit interface — must reimplement everything), with mixins (reusable behavior injection — TickerProviderStateMixin in animations). Enhanced enums (Dart 2.17+): fields, methods, constructors. Getters/setters, @override, toString, == and hashCode overriding (or use Equatable package).',
-    whatBreaks: 'Forgetting ==/hashCode overrides â†’ two identical-looking objects aren\'t equal â†’ state comparisons fail, Sets hold duplicates, BLoC emits "new" states that look the same. Deep inheritance hierarchies — Flutter favors composition (widgets containing widgets) over inheritance.',
+    whatBreaks: 'Forgetting ==/hashCode overrides → two identical-looking objects aren\'t equal → state comparisons fail, Sets hold duplicates, BLoC emits "new" states that look the same. Deep inheritance hierarchies — Flutter favors composition (widgets containing widgets) over inheritance.',
     efficientWay: {
       title: 'Dart OOP for Flutter',
       approaches: [
@@ -427,7 +427,7 @@ enum Plan {
     eli5: 'Advanced Dart is the power-tool drawer: generics let one class work with any type safely, mixins let you share abilities between unrelated classes, and functional programming treats functions like ingredients you pass around.',
     analogy: 'Generics are adjustable wrenches — one tool, any bolt size, still a perfect grip. Mixins are skill badges — any scout (class) can earn the "swimming" badge without being in the swim-team family tree.',
     explanation: 'These features appear constantly in real Flutter code: generics in Future<T> and List<Widget>, mixins in TickerProviderStateMixin, extension methods on BuildContext, and functions-as-values in every onPressed callback. Mastering them is the difference between copying snippets and understanding them.',
-    technicalDeep: 'Generics: class Cache<T> { T? value; } with constraints <T extends num>. Generic methods: T pick<T>(List<T> list). Mixins: mixin Logger { void log(String m) => print(m); } applied with with; can declare on SomeClass to restrict usage. Extension methods: extension on String { bool get isEmail => contains(\'@\'); } — add capabilities to types you don\'t own (context.screenWidth is the famous Flutter use). First-class functions: typedef Validator = String? Function(String?); closures capture variables. Sealed classes (Dart 3): compiler knows every subtype â†’ exhaustive switches. Lambdas and higher-order functions everywhere.',
+    technicalDeep: 'Generics: class Cache<T> { T? value; } with constraints <T extends num>. Generic methods: T pick<T>(List<T> list). Mixins: mixin Logger { void log(String m) => print(m); } applied with with; can declare on SomeClass to restrict usage. Extension methods: extension on String { bool get isEmail => contains(\'@\'); } — add capabilities to types you don\'t own (context.screenWidth is the famous Flutter use). First-class functions: typedef Validator = String? Function(String?); closures capture variables. Sealed classes (Dart 3): compiler knows every subtype → exhaustive switches. Lambdas and higher-order functions everywhere.',
     whatBreaks: 'Overusing dynamic in generics (Cache<dynamic>) silently disables type safety. Mixin ordering matters — with A, B: B overrides A on conflicts. Extension method conflicts when two imports add the same name — resolve with import show/hide.',
     efficientWay: {
       title: 'Learning advanced Dart',
@@ -490,7 +490,7 @@ extension ContextX on BuildContext {
     analogy: 'A Future is ordering one pizza — it arrives once. A Stream is a pizza subscription — deliveries keep coming until you cancel. An Isolate is hiring a second cook with their own kitchen so yours stays clean.',
     explanation: 'Async programming is unavoidable in Flutter: every network call, database read, and file access is async. Dart\'s single-threaded event loop plus async/await keeps UIs responsive; Streams power real-time data (Firestore listeners, BLoC); isolates handle CPU-heavy work without jank.',
     technicalDeep: 'Event loop: Dart runs one thread per isolate; await yields control so the UI keeps painting. Future<T>: then/catchError or async/await with try/catch. Future.wait([a, b]) for parallel awaits. Streams: single-subscription (default) vs broadcast (many listeners). Create with async* + yield, transform with map/where/debounce (rxdart). StreamController for manual control — always close() it. await for to consume. Isolates: true parallelism with no shared memory — communicate via messages. Isolate.run(() => heavyParse(json)) (Dart 2.19+) or compute() in Flutter for one-off background work. Use for: JSON parsing >100KB, image processing, crypto.',
-    whatBreaks: 'Blocking the event loop with synchronous heavy work â†’ frozen UI and dropped frames (jank). Forgetting await â†’ fire-and-forget bugs where errors vanish. Unclosed StreamControllers/subscriptions â†’ memory leaks. Calling setState after the widget was disposed (async completes late) â†’ crash; check mounted.',
+    whatBreaks: 'Blocking the event loop with synchronous heavy work → frozen UI and dropped frames (jank). Forgetting await → fire-and-forget bugs where errors vanish. Unclosed StreamControllers/subscriptions → memory leaks. Calling setState after the widget was disposed (async completes late) → crash; check mounted.',
     efficientWay: {
       title: 'Async patterns',
       approaches: [
@@ -557,8 +557,8 @@ void dispose() { _sub?.cancel(); }`
     eli5: 'flutter create gives you a folder full of files. Knowing what each one does — and where YOUR code should live — turns a confusing pile into an organized workshop.',
     analogy: 'A Flutter project is like a restaurant: lib/ is your kitchen (where you cook), pubspec.yaml is the supplier contract (ingredients you order), android/ and ios/ are the dining rooms you rarely redecorate.',
     explanation: 'Every Flutter project shares a standard layout: lib/ for Dart code (main.dart is the entry), pubspec.yaml for dependencies and assets, android//ios//web/ for platform shells, and test/ for tests. A scalable internal structure of lib/ is your responsibility — and it matters from day one.',
-    technicalDeep: 'pubspec.yaml: dependencies (runtime), dev_dependencies (codegen, lints, tests), assets and fonts declarations — every asset must be listed or it won\'t bundle. flutter pub get installs; pubspec.lock pins exact versions (commit it for apps). Project structures: by-layer (screens/, widgets/, services/, models/) works for small apps; by-feature (features/auth/, features/notes/ — each with views, logic, data) scales better and matches team ownership. Entry flow: main() â†’ runApp() â†’ MaterialApp(routes/theme/home). iOS: bundle ID, signing via Xcode, Info.plist permissions. Android: applicationId in build.gradle, AndroidManifest permissions, minSdkVersion.',
-    whatBreaks: 'Assets not declared in pubspec â†’ runtime "Unable to load asset" crash. Wrong indentation in pubspec.yaml (it\'s YAML — spaces matter). Dumping every widget into main.dart — unmaintainable by week two. Renaming applicationId/bundle ID after release breaks updates.',
+    technicalDeep: 'pubspec.yaml: dependencies (runtime), dev_dependencies (codegen, lints, tests), assets and fonts declarations — every asset must be listed or it won\'t bundle. flutter pub get installs; pubspec.lock pins exact versions (commit it for apps). Project structures: by-layer (screens/, widgets/, services/, models/) works for small apps; by-feature (features/auth/, features/notes/ — each with views, logic, data) scales better and matches team ownership. Entry flow: main() → runApp() → MaterialApp(routes/theme/home). iOS: bundle ID, signing via Xcode, Info.plist permissions. Android: applicationId in build.gradle, AndroidManifest permissions, minSdkVersion.',
+    whatBreaks: 'Assets not declared in pubspec → runtime "Unable to load asset" crash. Wrong indentation in pubspec.yaml (it\'s YAML — spaces matter). Dumping every widget into main.dart — unmaintainable by week two. Renaming applicationId/bundle ID after release breaks updates.',
     efficientWay: {
       title: 'Structuring a project',
       approaches: [
@@ -619,7 +619,7 @@ void dispose() { _sub?.cancel(); }`
     eli5: 'In Flutter, EVERYTHING you see is a widget: text, buttons, padding, even the invisible centering of things. Widgets nest inside widgets, forming a tree — like Russian dolls describing your whole screen.',
     analogy: 'Widgets are LEGO bricks. A screen isn\'t one molded piece — it\'s thousands of small bricks (text, padding, rows) snapped together. Want rounded corners? Snap your content into a rounded-corner brick.',
     explanation: 'The widget is Flutter\'s unit of UI composition. Widgets are immutable descriptions ("configuration") of a piece of interface; Flutter turns the widget tree into actual pixels. UI development in Flutter = composing widget trees and letting the framework rebuild them efficiently when data changes.',
-    technicalDeep: 'Three trees: Widget tree (your immutable configs, rebuilt cheaply all the time) â†’ Element tree (mutable instances managing lifecycle and state, mostly stable) â†’ RenderObject tree (layout + paint, expensive, reused aggressively). build() returns a new widget tree; Flutter diffs against the old one (by runtimeType + key) and only updates changed elements/render objects — this is why rebuilds are cheap. Core widgets: Container, Row/Column, Stack, Text, Image, Icon, Scaffold, Center, Padding, SizedBox, Expanded/Flexible. BuildContext: a widget\'s location in the tree — Theme.of(context) walks UP the tree to find data.',
+    technicalDeep: 'Three trees: Widget tree (your immutable configs, rebuilt cheaply all the time) → Element tree (mutable instances managing lifecycle and state, mostly stable) → RenderObject tree (layout + paint, expensive, reused aggressively). build() returns a new widget tree; Flutter diffs against the old one (by runtimeType + key) and only updates changed elements/render objects — this is why rebuilds are cheap. Core widgets: Container, Row/Column, Stack, Text, Image, Icon, Scaffold, Center, Padding, SizedBox, Expanded/Flexible. BuildContext: a widget\'s location in the tree — Theme.of(context) walks UP the tree to find data.',
     whatBreaks: 'Treating rebuilds as expensive and avoiding them with hacks — rebuilds are designed to be cheap; the render layer is what\'s smartly reused. Misunderstanding BuildContext: using a context from above a Provider/Navigator and wondering why .of() can\'t find it.',
     efficientWay: {
       title: 'Learning widgets',
@@ -692,8 +692,8 @@ Scaffold(
     eli5: 'A StatelessWidget is a printed poster — it never changes once shown. A StatefulWidget is a whiteboard — it remembers things (state) and can redraw itself when those things change, like a counter going 1, 2, 3.',
     analogy: 'Stateless is a photo of a clock — always shows the same time. Stateful is an actual clock — it holds internal state (current time) and updates its display as that state changes.',
     explanation: 'StatelessWidget renders purely from its constructor inputs. StatefulWidget pairs an immutable widget with a mutable State object that survives rebuilds; calling setState() tells Flutter "my data changed — rebuild me". Knowing which to use, and the State lifecycle, is fundamental to everything that follows.',
-    technicalDeep: 'StatefulWidget creates a State<T> via createState(); the State lives in the element tree and persists across widget rebuilds. Lifecycle: createState â†’ initState (once — init controllers, subscriptions; no context-dependent lookups) â†’ didChangeDependencies (after initState and when inherited deps change) â†’ build (many times) â†’ didUpdateWidget (parent rebuilt with new config) â†’ dispose (cleanup — controllers, subscriptions; no setState after). setState(() {…}): mutate inside the callback, marks the element dirty, schedules rebuild of THIS subtree only. The mounted property guards async callbacks. const stateless widgets are skipped entirely during parent rebuilds.',
-    whatBreaks: 'setState after dispose (late async result) â†’ crash; guard with if (mounted). Heavy work inside build() — it runs often; build must be fast and side-effect free. Forgetting dispose() on AnimationControllers/TextEditingControllers â†’ leaks. Initializing things needing context in initState â†’ use didChangeDependencies.',
+    technicalDeep: 'StatefulWidget creates a State<T> via createState(); the State lives in the element tree and persists across widget rebuilds. Lifecycle: createState → initState (once — init controllers, subscriptions; no context-dependent lookups) → didChangeDependencies (after initState and when inherited deps change) → build (many times) → didUpdateWidget (parent rebuilt with new config) → dispose (cleanup — controllers, subscriptions; no setState after). setState(() {…}): mutate inside the callback, marks the element dirty, schedules rebuild of THIS subtree only. The mounted property guards async callbacks. const stateless widgets are skipped entirely during parent rebuilds.',
+    whatBreaks: 'setState after dispose (late async result) → crash; guard with if (mounted). Heavy work inside build() — it runs often; build must be fast and side-effect free. Forgetting dispose() on AnimationControllers/TextEditingControllers → leaks. Initializing things needing context in initState → use didChangeDependencies.',
     efficientWay: {
       title: 'Choosing widget types',
       approaches: [
@@ -701,14 +701,14 @@ Scaffold(
         { name: 'setState for local UI state only', verdict: 'best', reason: 'Toggles, animations, text input — local. App data (user, notes) belongs in state management, not setState.' },
         { name: 'StatefulWidget everywhere "to be safe"', verdict: 'weak', reason: 'Unneeded lifecycle complexity and lost const optimization.' }
       ],
-      recommendation: 'Ask: "does this widget OWN data that changes over time?" No â†’ Stateless. Yes, and it\'s purely local UI state â†’ Stateful + setState. Yes, and other screens care â†’ state management (Phase 3).'
+      recommendation: 'Ask: "does this widget OWN data that changes over time?" No → Stateless. Yes, and it\'s purely local UI state → Stateful + setState. Yes, and other screens care → state management (Phase 3).'
     },
     commonMistakes: [
       'Calling setState outside its callback or after dispose.',
       'Doing network calls in build() — it runs on every rebuild; use initState/FutureBuilder.',
       'Recreating controllers in build() instead of initState — resets state every frame.'
     ],
-    seniorNotes: 'The lifecycle question every Flutter interview asks: walk initState â†’ didChangeDependencies â†’ build â†’ didUpdateWidget â†’ dispose, and WHEN each fires. Bonus points: explain why State persists when the widget rebuilds (the element tree holds it; matched by type+key in the diff).',
+    seniorNotes: 'The lifecycle question every Flutter interview asks: walk initState → didChangeDependencies → build → didUpdateWidget → dispose, and WHEN each fires. Bonus points: explain why State persists when the widget rebuilds (the element tree holds it; matched by type+key in the diff).',
     interviewQuestions: [
       'Walk through the complete StatefulWidget lifecycle.',
       'Why does setState only rebuild a subtree, not the whole app?',
@@ -827,7 +827,7 @@ Switch.adaptive(value: isOn, onChanged: toggle)  // Material on Android, iOS sty
     analogy: 'CSS styles are sticky labels you attach to elements. Flutter styles are gift boxes — you place your content inside a decorated box, and boxes inside boxes build up the look.',
     explanation: 'Visual styling flows through dedicated widgets and style objects: Container + BoxDecoration (color, gradient, border, radius, shadow), TextStyle for typography, Padding/SizedBox for spacing, ClipRRect for rounding anything. Consistency comes from pulling values out of ThemeData rather than scattering literals.',
     technicalDeep: 'Container combines: padding, margin, width/height, alignment, decoration, constraints. BoxDecoration: color, gradient (Linear/Radial), border, borderRadius, boxShadow, image, shape. Conflict rule: Container color and decoration are mutually exclusive (color goes inside decoration). TextStyle: fontSize, fontWeight, height (line-height multiplier), letterSpacing, color, fontFamily, shadows. Text scaling: respect user accessibility settings (MediaQuery.textScalerOf). WidgetStateProperty for button styles that vary by pressed/hovered/disabled. Component themes: ElevatedButtonThemeData, CardThemeData, InputDecorationTheme — style once in ThemeData, apply app-wide.',
-    whatBreaks: 'Both color and decoration on Container â†’ runtime assertion error. Fixed pixel font sizes ignoring textScaler â†’ broken layouts for accessibility users. Styling each button inline â†’ inconsistent UI and unmaintainable changes; component themes exist for this.',
+    whatBreaks: 'Both color and decoration on Container → runtime assertion error. Fixed pixel font sizes ignoring textScaler → broken layouts for accessibility users. Styling each button inline → inconsistent UI and unmaintainable changes; component themes exist for this.',
     efficientWay: {
       title: 'Styling strategy',
       approaches: [
@@ -952,7 +952,7 @@ final data = jsonDecode(config);`
     eli5: 'Your app runs on tiny phones, big phones, tablets, and desktops. Responsive design means the layout flexes to fit — like water taking the shape of its container instead of overflowing.',
     analogy: 'A responsive layout is a stretchy waistband, not a fixed belt. MediaQuery tells you the waist size; Expanded and Flexible are the elastic; LayoutBuilder lets each section tailor itself to the space it actually got.',
     explanation: 'Flutter gives you the device\'s dimensions (MediaQuery), per-widget available space (LayoutBuilder), and flexible sizing primitives (Expanded, Flexible, FractionallySizedBox, AspectRatio). Responsive apps combine these with breakpoints to swap layouts — list on phones, side-by-side on tablets.',
-    technicalDeep: 'MediaQuery.sizeOf(context): screen size (prefer over .of().size — rebuilds less). LayoutBuilder: constraints of THIS widget\'s slot — the right tool for component-level responsiveness. Expanded fills remaining flex space; Flexible can be smaller; flex: ratios divide space. Overflow: Row children exceeding width â†’ yellow-black stripes in debug; fix with Expanded, Flexible, or scrolling. SafeArea avoids notches/status bars. OrientationBuilder for portrait/landscape. Breakpoint pattern: width < 600 phone, 600-1024 tablet, > 1024 desktop. Adaptive vs responsive: responsive = same UI scaled; adaptive = different UI per form factor (NavigationBar on phone â†’ NavigationRail on tablet/desktop).',
+    technicalDeep: 'MediaQuery.sizeOf(context): screen size (prefer over .of().size — rebuilds less). LayoutBuilder: constraints of THIS widget\'s slot — the right tool for component-level responsiveness. Expanded fills remaining flex space; Flexible can be smaller; flex: ratios divide space. Overflow: Row children exceeding width → yellow-black stripes in debug; fix with Expanded, Flexible, or scrolling. SafeArea avoids notches/status bars. OrientationBuilder for portrait/landscape. Breakpoint pattern: width < 600 phone, 600-1024 tablet, > 1024 desktop. Adaptive vs responsive: responsive = same UI scaled; adaptive = different UI per form factor (NavigationBar on phone → NavigationRail on tablet/desktop).',
     whatBreaks: 'Hardcoded widths overflow on small phones — the #1 beginner crash course in yellow stripes. Text in fixed-size containers breaks when users increase system font size. Designing only on your emulator — real-world devices range 320px to 1600px+ wide.',
     efficientWay: {
       title: 'Building responsive UIs',
@@ -1017,11 +1017,11 @@ extension Responsive on BuildContext {
     analogy: 'Building an app without Git is sculpting without photos of your progress — one bad cut and there\'s no going back. Git photographs every stage; GitHub puts the album safely in the cloud.',
     explanation: 'Every Flutter project should be a Git repo from minute one. Flutter adds specific considerations: a proper .gitignore (build artifacts, IDE files), committing pubspec.lock, never committing secrets/keystores, and later wiring GitHub Actions for automated builds. (Deep Git fundamentals live in the Backend track — this covers the Flutter-specific layer.)',
     technicalDeep: 'flutter create generates a solid .gitignore: /build/, .dart_tool/, .idea/, *.iml. Commit: pubspec.lock (apps — reproducible builds), android/ and ios/ platform folders (they hold real config). Never commit: keystores (*.jks, *.keystore), key.properties, .env files, App Store API keys. Generated code (*.g.dart, *.freezed.dart): teams differ — committing avoids requiring codegen on checkout; ignoring keeps diffs clean. Branching: feature branches per screen/feature; tag releases (v1.2.0) matching store versions for traceable rollbacks. Secrets at build time: --dart-define=KEY=value, read with String.fromEnvironment.',
-    whatBreaks: 'Committing a keystore + key.properties to a public repo = anyone can sign as you. Losing the keystore (not backing it up anywhere safe) = you can NEVER update your Play Store app — store it in a password manager/secure vault. Messy repos with build/ committed â†’ 100MB+ clones.',
+    whatBreaks: 'Committing a keystore + key.properties to a public repo = anyone can sign as you. Losing the keystore (not backing it up anywhere safe) = you can NEVER update your Play Store app — store it in a password manager/secure vault. Messy repos with build/ committed → 100MB+ clones.',
     efficientWay: {
       title: 'Git hygiene for Flutter',
       approaches: [
-        { name: 'Repo + first commit before any code', verdict: 'best', reason: 'flutter create â†’ git init â†’ commit. A clean baseline makes every later diff meaningful.' },
+        { name: 'Repo + first commit before any code', verdict: 'best', reason: 'flutter create → git init → commit. A clean baseline makes every later diff meaningful.' },
         { name: 'Secrets via --dart-define + CI secrets', verdict: 'best', reason: 'Keys live in the build environment, never in history.' },
         { name: 'Adding Git "once the app works"', verdict: 'weak', reason: 'You\'ll want to undo something on day two — without Git, you can\'t.' }
       ],
@@ -1074,7 +1074,7 @@ git tag v1.0.0 && git push origin v1.0.0`
     analogy: 'It\'s like a parking garage: the garage tells your car the maximum space available (constraints), your car takes the space it needs (size), and the attendant decides which spot you get (position).',
     explanation: 'One rule governs all Flutter layout: constraints go down, sizes go up, parent sets position. Every confusing layout behavior — why Container ignores its width, why ListView crashes in Column, why Expanded fixes overflows — is this rule in action. Master it and layout becomes predictable.',
     technicalDeep: 'Constraints are min/max width/height passed down. Tight constraints (min == max) force a size — that\'s why a Container in the screen root fills everything (Scaffold passes tight constraints). Unbounded constraints (max = infinity) come from scrollables — a ListView gives children infinite height; a child that wants "all available height" crashes. Row/Column: lay out non-flex children first with unbounded main-axis, then divide remaining space among Expanded/Flexible by flex factor. Common fixes: Expanded (take remaining space), SizedBox (fixed), ConstrainedBox/LimitedBox (add bounds), IntrinsicHeight (size to child — expensive), Align/Center (loosen tight constraints).',
-    whatBreaks: 'ListView inside Column â†’ "Vertical viewport was given unbounded height" — wrap in Expanded. Container with width: 200 inside a tight-constraint parent ignores your width (tight wins). Row with unbounded-width children (TextField) â†’ "BoxConstraints forces an infinite width" — wrap in Expanded.',
+    whatBreaks: 'ListView inside Column → "Vertical viewport was given unbounded height" — wrap in Expanded. Container with width: 200 inside a tight-constraint parent ignores your width (tight wins). Row with unbounded-width children (TextField) → "BoxConstraints forces an infinite width" — wrap in Expanded.',
     efficientWay: {
       title: 'Debugging layout',
       approaches: [
@@ -1087,7 +1087,7 @@ git tag v1.0.0 && git push origin v1.0.0`
     commonMistakes: [
       'ListView/GridView inside Column without Expanded — unbounded height crash.',
       'Expecting width/height on Container to always win — tight parent constraints override.',
-      'IntrinsicHeight/IntrinsicWidth everywhere — O(nÂ²) layout cost; use sparingly.'
+      'IntrinsicHeight/IntrinsicWidth everywhere — O(n²) layout cost; use sparingly.'
     ],
     seniorNotes: '"Explain Flutter\'s constraint model" is a standard interview question. The expert answer covers: constraints down / sizes up / parent positions, tight vs loose vs unbounded constraints, why scrollables create unbounded constraints, and how Expanded works inside flex layout (it imposes tight constraints from the leftover space).',
     interviewQuestions: [
@@ -1113,7 +1113,7 @@ Column(children: [
   ),
 ])
 
-// BROKEN: TextField in Row â†’ infinite width error
+// BROKEN: TextField in Row → infinite width error
 // Row(children: [TextField()])
 
 // FIX: Expanded bounds the width
@@ -1137,7 +1137,7 @@ Center(child: Container(width: 200, height: 100, color: Colors.blue))`
     analogy: 'ListView.builder is a conveyor-belt sushi restaurant: plates (widgets) are made just before they reach you and recycled after they pass. A plain Column would cook all 10,000 plates up front.',
     explanation: 'Scrollables are the backbone of most screens: ListView (linear), GridView (grid), and their lazy .builder constructors that virtualize rendering. CustomScrollView with slivers handles advanced effects (collapsing app bars, mixed lists and grids in one scroll).',
     technicalDeep: 'ListView.builder(itemCount, itemBuilder): builds only visible items + a small cache window (cacheExtent); elements/render objects are recycled as you scroll. ListView.separated adds dividers cleanly. GridView.builder with SliverGridDelegateWithFixedCrossAxisCount (n columns) or MaxCrossAxisExtent (responsive column count). shrinkWrap: true measures all children — defeats laziness, O(n); avoid in long lists. Nested scrolling: NestedScrollView for app-bar + tabs scenarios. Slivers: CustomScrollView([SliverAppBar(pinned/floating), SliverList, SliverGrid]) — everything composable in one scroll viewport. Infinite scroll: listen to ScrollController, fetch more when position.pixels nears maxScrollExtent. Keys in lists: ValueKey(item.id) keeps state attached to the right item across reorders.',
-    whatBreaks: 'Using ListView(children: [...10000 items]) builds everything immediately — jank and memory spikes; always .builder for dynamic lists. shrinkWrap+NeverScrollableScrollPhysics nested in another scrollable as a "fix" — works but loses virtualization. Missing keys on stateful list items â†’ state (checkboxes, text) sticks to positions, not items.',
+    whatBreaks: 'Using ListView(children: [...10000 items]) builds everything immediately — jank and memory spikes; always .builder for dynamic lists. shrinkWrap+NeverScrollableScrollPhysics nested in another scrollable as a "fix" — works but loses virtualization. Missing keys on stateful list items → state (checkboxes, text) sticks to positions, not items.',
     efficientWay: {
       title: 'Building lists',
       approaches: [
@@ -1204,7 +1204,7 @@ CustomScrollView(slivers: [
     eli5: 'Forms are how users type things into your app — login screens, sign-ups, search bars. Flutter gives you TextField for input and Form/TextFormField to check that what users typed makes sense before accepting it.',
     analogy: 'A Form is a passport control desk: each TextFormField is one document check (validator), and form.validate() is the officer reviewing everything before stamping approval (submit).',
     explanation: 'Text input flows through TextEditingController (read/set value), focus through FocusNode, and validation through Form + TextFormField validators. The registration/login screens of every app — including the course\'s notes app — are built from exactly these pieces.',
-    technicalDeep: 'TextEditingController: .text to read/write, .addListener for changes; create in initState, dispose in dispose. TextField vs TextFormField: the latter integrates with Form for validation. Form with GlobalKey<FormState>: formKey.currentState!.validate() runs all validators (return null = valid, String = error shown), .save() triggers onSaved. Validators compose: required â†’ format (email regex) â†’ length. keyboardType (emailAddress, number, phone), textInputAction (next/done) + onFieldSubmitted with FocusScope.of(context).nextFocus() for field-to-field flow. obscureText for passwords. autovalidateMode: onUserInteraction shows errors as users type (after first interaction). InputDecoration: label, hint, errorText, prefix/suffix icons (password visibility toggle).',
+    technicalDeep: 'TextEditingController: .text to read/write, .addListener for changes; create in initState, dispose in dispose. TextField vs TextFormField: the latter integrates with Form for validation. Form with GlobalKey<FormState>: formKey.currentState!.validate() runs all validators (return null = valid, String = error shown), .save() triggers onSaved. Validators compose: required → format (email regex) → length. keyboardType (emailAddress, number, phone), textInputAction (next/done) + onFieldSubmitted with FocusScope.of(context).nextFocus() for field-to-field flow. obscureText for passwords. autovalidateMode: onUserInteraction shows errors as users type (after first interaction). InputDecoration: label, hint, errorText, prefix/suffix icons (password visibility toggle).',
     whatBreaks: 'Controllers created in build() — wiped every rebuild, cursor jumps, state lost. Forgetting controller/focusNode dispose — leaks. Validating only client-side — servers must re-validate everything (client checks are UX, not security). Submitting without unfocusing — keyboard stays up over the loading state.',
     efficientWay: {
       title: 'Building forms',
@@ -1220,7 +1220,7 @@ CustomScrollView(slivers: [
       'No keyboardType — users get the wrong keyboard for emails/numbers.',
       'Error messages like "invalid input" — say what\'s wrong and how to fix it.'
     ],
-    seniorNotes: 'Production forms handle the full lifecycle: disable submit while in-flight (prevents double-submission), map backend errors to specific fields (email-already-in-use â†’ show under the email field), and preserve user input through failures. The course\'s register/login error-handling chapters are exactly this discipline.',
+    seniorNotes: 'Production forms handle the full lifecycle: disable submit while in-flight (prevents double-submission), map backend errors to specific fields (email-already-in-use → show under the email field), and preserve user input through failures. The course\'s register/login error-handling chapters are exactly this discipline.',
     interviewQuestions: [
       'How does Form validation work in Flutter?',
       'Why must TextEditingControllers be created in initState and disposed?',
@@ -1285,8 +1285,8 @@ Future<void> _submit() async {
     eli5: 'Navigation is moving between screens: tap a note to open it, press back to return. Flutter keeps screens in a stack — opening pushes a new screen on top, going back pops it off, like a stack of plates.',
     analogy: 'The Navigator is a deck of cards: push deals a new card on top (only the top is visible), pop removes it revealing the previous one, and pushReplacement swaps the top card (no going back to it — perfect after login).',
     explanation: 'Navigator 1.0 manages a stack of routes imperatively: push, pop, pushNamed, pushReplacement, pushAndRemoveUntil. Named routes centralize screen registration. Cleaning up routes — pushReplacement after login, pushAndRemoveUntil after logout — is what the course\'s "Cleaning Up our Routes" chapter is about; getting it wrong leaves users backing into screens they shouldn\'t see.',
-    technicalDeep: 'Navigator.push(context, MaterialPageRoute(builder: ...)) / .pop(context, result) — pop can return a value to the awaiting pusher. Named routes: MaterialApp(routes: {\'/login\': (c) => LoginView()}), Navigator.pushNamed(context, \'/login\', arguments: x). Stack surgery: pushReplacementNamed (login â†’ home: replace so back doesn\'t return to login), pushNamedAndRemoveUntil(\'/home\', (route) => false) (clear everything — logout), popUntil. WillPopScope/PopScope intercepts back. Dialogs and bottom sheets are also routes (showDialog pushes). Navigator 2.0/Router API: declarative, needed for web URL sync — most teams use go_router instead: declarative paths, deep links, redirect guards (auth!), nested navigation, type-safe params.',
-    whatBreaks: 'push after login instead of pushReplacement â†’ back button returns to the login screen. Not awaiting pop results when the next screen returns data. context.mounted check needed after await before navigating. Deep links and web URLs don\'t work with pure Navigator 1.0 — that\'s what go_router solves.',
+    technicalDeep: 'Navigator.push(context, MaterialPageRoute(builder: ...)) / .pop(context, result) — pop can return a value to the awaiting pusher. Named routes: MaterialApp(routes: {\'/login\': (c) => LoginView()}), Navigator.pushNamed(context, \'/login\', arguments: x). Stack surgery: pushReplacementNamed (login → home: replace so back doesn\'t return to login), pushNamedAndRemoveUntil(\'/home\', (route) => false) (clear everything — logout), popUntil. WillPopScope/PopScope intercepts back. Dialogs and bottom sheets are also routes (showDialog pushes). Navigator 2.0/Router API: declarative, needed for web URL sync — most teams use go_router instead: declarative paths, deep links, redirect guards (auth!), nested navigation, type-safe params.',
+    whatBreaks: 'push after login instead of pushReplacement → back button returns to the login screen. Not awaiting pop results when the next screen returns data. context.mounted check needed after await before navigating. Deep links and web URLs don\'t work with pure Navigator 1.0 — that\'s what go_router solves.',
     efficientWay: {
       title: 'Choosing navigation',
       approaches: [
@@ -1354,7 +1354,7 @@ final router = GoRouter(
     analogy: 'Dialogs are a waiter stopping you to confirm the order. Snackbars are the kitchen bell — a brief "order\'s up!" that doesn\'t interrupt. Loading states are the "your food is being prepared" sign that stops you wondering if anyone heard you.',
     explanation: 'Flutter provides showDialog (blocking decisions), SnackBar (transient feedback), showModalBottomSheet (mobile-friendly action menus), and loading patterns (button spinners, full-screen overlays). The course dedicates whole chapters to error dialogs and loading screens because every async action needs all three states: loading, success, error.',
     technicalDeep: 'showDialog<T> returns Future<T?> — awaits the user\'s choice; AlertDialog(title, content, actions). Confirmation idiom: final ok = await showDialog<bool>(...); barrierDismissible controls tap-outside. SnackBar via ScaffoldMessenger.of(context).showSnackBar — works across screen pops (it\'s scoped to the Scaffold, messenger survives). showModalBottomSheet for action sheets. Loading: per-button (replace label with spinner + disable), full-screen overlay (Stack + ModalBarrier or a dialog you pop programmatically), skeleton screens (shimmer) for content loads. Generic error dialog helper: one showErrorDialog(context, message) reused app-wide — the course builds exactly this. Reusable confirmation helper too.',
-    whatBreaks: 'Showing dialogs with a context that\'s gone (after await without mounted check). Forgetting to pop a programmatic loading dialog on error path â†’ app stuck behind a spinner forever. SnackBar via Scaffold.of instead of ScaffoldMessenger (pre-2.0 pattern) breaks across navigation.',
+    whatBreaks: 'Showing dialogs with a context that\'s gone (after await without mounted check). Forgetting to pop a programmatic loading dialog on error path → app stuck behind a spinner forever. SnackBar via Scaffold.of instead of ScaffoldMessenger (pre-2.0 pattern) breaks across navigation.',
     efficientWay: {
       title: 'Feedback patterns',
       approaches: [
@@ -1362,14 +1362,14 @@ final router = GoRouter(
         { name: 'State-driven overlays (loading in BLoC state)', verdict: 'best', reason: 'UI renders from state (isLoading) instead of imperatively pushing/popping spinners — fewer stuck states.' },
         { name: 'Inline one-off dialogs per screen', verdict: 'weak', reason: 'Six subtly different error dialogs by month two.' }
       ],
-      recommendation: 'Build three helpers early: showErrorDialog, showConfirmDialog (returns Future<bool>), and a LoadingOverlay tied to state. Every async flow then reads: loading state â†’ action â†’ success snack / error dialog.'
+      recommendation: 'Build three helpers early: showErrorDialog, showConfirmDialog (returns Future<bool>), and a LoadingOverlay tied to state. Every async flow then reads: loading state → action → success snack / error dialog.'
     },
     commonMistakes: [
       'No loading state at all — users double-tap submit and fire duplicate requests.',
       'Raw exception text in error dialogs — map exceptions to human messages.',
       'Dialog logic after await without if (context.mounted) guard.'
     ],
-    seniorNotes: 'The mature pattern: UI never imperatively shows loading dialogs; it renders from state. BlocConsumer listener shows dialogs/snacks on state transitions (Failure â†’ error dialog), builder renders spinner when state.isLoading. Imperative overlay management is where "stuck spinner" bugs live.',
+    seniorNotes: 'The mature pattern: UI never imperatively shows loading dialogs; it renders from state. BlocConsumer listener shows dialogs/snacks on state transitions (Failure → error dialog), builder renders spinner when state.isLoading. Imperative overlay management is where "stuck spinner" bugs live.',
     interviewQuestions: [
       'How do you return a confirmation result from a dialog?',
       'Why use ScaffoldMessenger rather than Scaffold.of for snackbars?',
@@ -1420,7 +1420,7 @@ Future<void> _deleteNote(Note note) async {
     analogy: 'Constructor passing is whispering a message down a long line of people. InheritedWidget is the office PA system: announce once at the top, anyone below who cares just listens.',
     explanation: 'InheritedWidget is Flutter\'s built-in mechanism for sharing data down the tree without constructor drilling. It\'s how Theme.of(context), MediaQuery.of(context), and Navigator.of(context) work — and it\'s the foundation underneath Provider, Riverpod, and BLoC. Understanding it demystifies all state management.',
     technicalDeep: 'An InheritedWidget sits in the tree holding data; descendants call context.dependOnInheritedWidgetOfExactType<MyInherited>() (wrapped in a static .of(context) by convention). dependOn registers the calling element as a dependent: when the InheritedWidget updates and updateShouldNotify(old) returns true, exactly the dependent widgets rebuild — surgical, efficient updates. getInheritedWidgetOfExactType reads WITHOUT subscribing (read-once). Limitation: InheritedWidget is immutable — to change data you pair it with a StatefulWidget above that rebuilds it with new values; this pairing is essentially what Provider automates. The .of(context) pattern: static MyData of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<MyInherited>()!.data.',
-    whatBreaks: '.of(context) above the provider in the tree â†’ null/throws ("could not find ancestor") — the classic Provider-not-found error, now explicable: the lookup walks UP from context. Subscribing (dependOn) when you only need a one-time read â†’ unnecessary rebuilds. updateShouldNotify always true â†’ every dependent rebuilds on every change.',
+    whatBreaks: '.of(context) above the provider in the tree → null/throws ("could not find ancestor") — the classic Provider-not-found error, now explicable: the lookup walks UP from context. Subscribing (dependOn) when you only need a one-time read → unnecessary rebuilds. updateShouldNotify always true → every dependent rebuilds on every change.',
     efficientWay: {
       title: 'Learning inherited widgets',
       approaches: [
@@ -1489,7 +1489,7 @@ class ProfileBadge extends StatelessWidget {
       title: 'Managing dependencies',
       approaches: [
         { name: 'Few, well-maintained, popular packages', verdict: 'best', reason: 'Every dependency is a liability across Flutter upgrades; choose boring and maintained.' },
-        { name: 'Wrap third-party APIs behind your own interfaces', verdict: 'best', reason: 'Swapping httpâ†’dio touches one file, not 40 — abstraction pays at upgrade time.' },
+        { name: 'Wrap third-party APIs behind your own interfaces', verdict: 'best', reason: 'Swapping http→dio touches one file, not 40 — abstraction pays at upgrade time.' },
         { name: 'A package for every tiny problem', verdict: 'weak', reason: '60-dependency apps break on every Flutter release; some of that code is 5 lines to write.' }
       ],
       recommendation: 'Check (1) Flutter Favorite / verified publisher, (2) recent commits, (3) pub points before adopting. Wrap external services (HTTP, storage, analytics) behind your own thin interface so packages stay replaceable.'
@@ -1519,9 +1519,9 @@ flutter pub upgrade            # within pubspec constraints
 flutter pub deps               # full dependency tree
 
 # pubspec.yaml version syntax
-# http: ^1.2.0      â†’ >=1.2.0 <2.0.0 (recommended)
-# http: 1.2.0       â†’ exactly 1.2.0
-# http: any         â†’ never do this
+# http: ^1.2.0      → >=1.2.0 <2.0.0 (recommended)
+# http: 1.2.0       → exactly 1.2.0
+# http: any         → never do this
 
 # Temporary conflict fix (remove ASAP)
 # dependency_overrides:
@@ -1537,7 +1537,7 @@ flutter pub deps               # full dependency tree
     analogy: 'A well-designed codebase is a professional kitchen: each station does one job (single responsibility), stations are swappable (dependency injection), and the head chef coordinates without doing every station\'s work (separation of concerns).',
     explanation: 'As apps grow past a few screens, structure decides velocity. SOLID principles, dependency injection, and common patterns (repository, service, singleton, factory, observer) keep Flutter codebases testable and changeable — and they\'re what the course applies when it extracts an AuthService from raw Firebase calls.',
     technicalDeep: 'SOLID in Flutter terms: S — widgets render, services do logic, repositories fetch (the course\'s AuthService extraction); O — extend via new implementations of an interface, not edits to working code; L — any AuthProvider implementation must honor the same contract; I — small focused abstract classes beat god-interfaces; D — depend on abstractions: NotesBloc takes a NotesRepository interface, not FirebaseFirestore directly. DI in Flutter: constructor injection (best for testability), Provider/Riverpod as injection containers, get_it as a service locator. Patterns: Repository (abstract data source behind an interface — swap Firebase for SQLite without touching UI), Service (stateless domain operations), Singleton via factory constructor, Observer (Streams/Listenable — the basis of all Flutter state management).',
-    whatBreaks: 'UI calling Firebase directly: untestable (real network in widget tests), unswappable (Firestore â†’ Supabase = rewrite every screen), and unmockable. God classes (AppManager doing auth+notes+settings). Premature abstraction is real too — interfaces with one forever-implementation for a todo app is ceremony, not engineering.',
+    whatBreaks: 'UI calling Firebase directly: untestable (real network in widget tests), unswappable (Firestore → Supabase = rewrite every screen), and unmockable. God classes (AppManager doing auth+notes+settings). Premature abstraction is real too — interfaces with one forever-implementation for a todo app is ceremony, not engineering.',
     efficientWay: {
       title: 'Applying principles',
       approaches: [
@@ -1545,7 +1545,7 @@ flutter pub deps               # full dependency tree
         { name: 'Abstract interfaces for external services', verdict: 'best', reason: 'AuthProvider interface with FirebaseAuthProvider impl — the course does exactly this before testing.' },
         { name: 'Full clean-architecture ceremony on day one', verdict: 'ok', reason: 'Use-cases/entities/data-sources per feature is justified at team scale; overkill for solo MVPs.' }
       ],
-      recommendation: 'Minimum viable architecture: UI â†’ state management â†’ service/repository (interface) â†’ data source. Inject dependencies through constructors. That single discipline makes unit testing (Phase 6) possible.'
+      recommendation: 'Minimum viable architecture: UI → state management → service/repository (interface) → data source. Inject dependencies through constructors. That single discipline makes unit testing (Phase 6) possible.'
     },
     commonMistakes: [
       'Business logic inside build() methods or onPressed callbacks.',
@@ -1613,11 +1613,11 @@ class FakeNotesRepo implements NotesRepository {
     efficientWay: {
       title: 'Approaching state management',
       approaches: [
-        { name: 'setState â†’ lift up â†’ Provider/BLoC when it hurts', verdict: 'best', reason: 'Feel each tool\'s limits before adopting the next — you\'ll use each correctly forever after.' },
+        { name: 'setState → lift up → Provider/BLoC when it hurts', verdict: 'best', reason: 'Feel each tool\'s limits before adopting the next — you\'ll use each correctly forever after.' },
         { name: 'Adopt the team standard immediately', verdict: 'ok', reason: 'Joining a BLoC team? Learn BLoC. But still understand WHAT it solves.' },
         { name: 'Mixing three state libraries in one app', verdict: 'weak', reason: 'Pick one app-state solution; consistency beats theoretical per-case optimality.' }
       ],
-      recommendation: 'Internalize the decision tree: single widget â†’ setState; subtree â†’ lift state up; app-wide â†’ one of Provider (simplest), Riverpod (modern), BLoC (structured, this course\'s choice). Learn one deeply rather than three shallowly.'
+      recommendation: 'Internalize the decision tree: single widget → setState; subtree → lift state up; app-wide → one of Provider (simplest), Riverpod (modern), BLoC (structured, this course\'s choice). Learn one deeply rather than three shallowly.'
     },
     commonMistakes: [
       'Treating setState as "bad" — it\'s the right tool for local UI state.',
@@ -1656,8 +1656,8 @@ class _CartScreenState extends State<CartScreen> {
 }
 
 // Works great at this scale. The pain that motivates Provider/BLoC:
-// - CartSummary is 10 layers deep â†’ drilling count through 10 constructors
-// - Another SCREEN needs the cart â†’ no common ancestor except the app root
+// - CartSummary is 10 layers deep → drilling count through 10 constructors
+// - Another SCREEN needs the cart → no common ancestor except the app root
 // - setState here rebuilds the whole screen for every change`
       }
     ]
@@ -1670,7 +1670,7 @@ class _CartScreenState extends State<CartScreen> {
     analogy: 'ChangeNotifier is a YouTube channel: it publishes updates (notifyListeners) and subscribers (watching widgets) get notified automatically. Provider is the platform hosting the channel where anyone can find it.',
     explanation: 'Provider is the gateway drug of Flutter state management — simple, official-recommended for years, and built directly on InheritedWidget. A ChangeNotifier model holds state and calls notifyListeners() on change; ChangeNotifierProvider exposes it; context.watch rebuilds on changes, context.read accesses without subscribing.',
     technicalDeep: 'ChangeNotifier: mixin with addListener/removeListener/notifyListeners; ValueNotifier<T> is its single-value sibling (pairs with ValueListenableBuilder — zero-dependency mini state management). ChangeNotifierProvider(create: (_) => CartModel()) owns lifecycle (auto-dispose). Reading: context.watch<T>() subscribes (build-time only), context.read<T>() one-shot (callbacks), context.select<T,R>((m) => m.count) subscribes to a SLICE — rebuild only when that slice changes. Consumer<T> for narrowing rebuild scope within a big build method. MultiProvider composes several. ProxyProvider derives one provider from another (NotesModel needs AuthModel\'s userId). Pitfalls: watch in callbacks throws; read in build silently never updates.',
-    whatBreaks: 'context.watch inside onPressed â†’ assertion error (subscriptions only make sense during build). context.read in build â†’ UI silently never updates. Forgetting notifyListeners() after mutation — state changed, nobody heard. Provider placed below the navigator â†’ new routes can\'t find it (it\'s tree-based lookup).',
+    whatBreaks: 'context.watch inside onPressed → assertion error (subscriptions only make sense during build). context.read in build → UI silently never updates. Forgetting notifyListeners() after mutation — state changed, nobody heard. Provider placed below the navigator → new routes can\'t find it (it\'s tree-based lookup).',
     efficientWay: {
       title: 'Using Provider well',
       approaches: [
@@ -1702,7 +1702,7 @@ class _CartScreenState extends State<CartScreen> {
 
   void add(Item item) {
     _items.add(item);
-    notifyListeners();        // â† tell subscribers
+    notifyListeners();        // ← tell subscribers
   }
 }
 
@@ -1741,7 +1741,7 @@ onPressed: () => context.read<CartModel>().add(item),`
     analogy: 'Provider is a filing system bolted to the building (widget tree) — go to the wrong floor and the file isn\'t there. Riverpod is cloud storage: files exist independently of the building, accessible from anywhere, with permissions checked at compile time.',
     explanation: 'Riverpod (by Provider\'s author) removes Provider\'s structural weaknesses: providers live outside the widget tree (no scoping bugs), are compile-time safe, auto-dispose by default, and compose elegantly. Async state is first-class via FutureProvider/StreamProvider and AsyncValue.',
     technicalDeep: 'Providers are top-level finals: Provider (computed/immutable), StateProvider (simple mutable), NotifierProvider/AsyncNotifierProvider (class-based logic — the modern core), FutureProvider/StreamProvider (async sources). Widgets: ConsumerWidget with ref.watch(myProvider) / ref.read (callbacks) / ref.listen (side effects like snackbars). AsyncValue<T>: union of loading/data/error — .when(loading:, data:, error:) forces handling all three (no forgotten spinners). Composition: a provider can ref.watch another — dependency graph with automatic recomputation. autoDispose tears down unwatched state; family parameterizes providers (notesProvider(userId)). Code generation (@riverpod annotation) reduces boilerplate further. Testing: ProviderContainer with overrides — swap any provider for a mock without widgets.',
-    whatBreaks: 'Mixing Riverpod and old Provider mental models — ref vs context confusion. Overusing StateProvider for complex logic that belongs in a Notifier. Forgetting autoDispose on per-screen state â†’ stale data on revisit; forgetting to REMOVE it for app-wide state â†’ logout-on-navigation surprises.',
+    whatBreaks: 'Mixing Riverpod and old Provider mental models — ref vs context confusion. Overusing StateProvider for complex logic that belongs in a Notifier. Forgetting autoDispose on per-screen state → stale data on revisit; forgetting to REMOVE it for app-wide state → logout-on-navigation surprises.',
     efficientWay: {
       title: 'Adopting Riverpod',
       approaches: [
@@ -1810,9 +1810,9 @@ class NotesView extends ConsumerWidget {
     title: 'BLoC Pattern: Events, States & Cubit',
     eli5: 'BLoC puts a strict mailroom between your UI and your logic: the UI can only send letters (events) like "user pressed login", and the mailroom can only reply with status updates (states) like "logging in…" then "logged in!". Nothing else gets through.',
     analogy: 'BLoC is a restaurant kitchen with a ticket system: waiters (UI) submit order tickets (events), the kitchen (bloc) works through them and updates the order board (states). Waiters never cook; cooks never take orders — total separation.',
-    explanation: 'BLoC (Business Logic Component) enforces unidirectional flow: UI dispatches Events â†’ Bloc processes them (calling services) â†’ Bloc emits States â†’ UI rebuilds from state. Maximum structure, maximum testability — which is why large teams and this course\'s notes app use it. Cubit is the lighter sibling: direct method calls instead of events.',
+    explanation: 'BLoC (Business Logic Component) enforces unidirectional flow: UI dispatches Events → Bloc processes them (calling services) → Bloc emits States → UI rebuilds from state. Maximum structure, maximum testability — which is why large teams and this course\'s notes app use it. Cubit is the lighter sibling: direct method calls instead of events.',
     technicalDeep: 'flutter_bloc package. Cubit<State>: methods call emit(newState) — less ceremony, great for simple features. Bloc<Event, State>: on<EventType>((event, emit) {...}) handlers; events are classes (LoginRequested), states are classes (AuthLoading, AuthSuccess, AuthFailure — model as sealed class hierarchy for exhaustive switching). States must be immutable with value equality (Equatable/freezed) — bloc skips emitting states equal to current. Widgets: BlocProvider (DI + lifecycle), BlocBuilder (rebuild on state), BlocListener (side effects: navigation, dialogs — fires once per state change), BlocConsumer (both), buildWhen/listenWhen filters. context.read<AuthBloc>().add(LoginRequested(email, pw)). Event transformers (droppable, restartable from bloc_concurrency) control concurrent event handling — e.g., restartable search-as-you-type cancels stale lookups.',
-    whatBreaks: 'Mutating state objects instead of emitting new ones â†’ equality says nothing changed â†’ UI frozen. Doing navigation inside BlocBuilder (it builds many times) instead of BlocListener (fires once per transition). Calling emit after an await without checking the handler is still active. God-blocs handling six features.',
+    whatBreaks: 'Mutating state objects instead of emitting new ones → equality says nothing changed → UI frozen. Doing navigation inside BlocBuilder (it builds many times) instead of BlocListener (fires once per transition). Calling emit after an await without checking the handler is still active. God-blocs handling six features.',
     efficientWay: {
       title: 'Learning BLoC',
       approaches: [
@@ -1926,7 +1926,7 @@ class AppRoot extends StatelessWidget {
         AuthNeedsVerification() => const VerifyEmailView(),
         AuthLoggedIn() => const NotesView(),
         AuthLoggedOut() || AuthFailure() => const LoginView(),
-      },   // sealed states â†’ compiler guarantees every case is handled
+      },   // sealed states → compiler guarantees every case is handled
     );
   }
 }
@@ -1950,7 +1950,7 @@ class AuthService {
 class AppBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
-    log('\${bloc.runtimeType}: \${transition.event} â†’ \${transition.nextState}');
+    log('\${bloc.runtimeType}: \${transition.event} → \${transition.nextState}');
     super.onTransition(bloc, transition);
   }
 }`
@@ -2022,7 +2022,7 @@ ValueListenableBuilder<int>(
     analogy: 'Imperative code is fetching buckets of water from the well each time. Reactive code is installing plumbing: connect pipes (operators) once — filtering, mixing hot and cold (combining streams) — and water just arrives transformed, forever.',
     explanation: 'Flutter is already reactive (Firestore snapshots, auth state changes, BLoC states are all Streams). RxDart extends Dart streams with powerful operators: debounce for search-as-you-type, combineLatest to merge sources, switchMap to cancel stale requests, and BehaviorSubject for streams that remember their latest value.',
     technicalDeep: 'RxDart adds: BehaviorSubject (broadcast + replays latest value to new listeners — solves "subscribed after the value was emitted"; the classic auth-state holder), ReplaySubject, PublishSubject. Operators: debounceTime(300ms) (wait for typing pause), distinct() (skip duplicates), switchMap (map to inner stream, auto-cancelling the previous — THE search pattern), combineLatest2(notes$, filter$, apply) (recompute when either changes), merge, throttleTime, startWith, scan (running accumulation). The search pipeline: input.debounceTime(300).distinct().switchMap(api.search) — four operators replacing a page of timer-and-flag bookkeeping. StreamBuilder renders any of this. The course\'s "Working with Streams in Notes Service" — caching notes in a local list and exposing a stream — is a hand-rolled BehaviorSubject.',
-    whatBreaks: 'Unclosed Subjects — leaks plus "Stream already closed" crashes elsewhere. Plain StreamController where BehaviorSubject is needed â†’ late subscribers miss the current value (UI blank until next change). flatMap where switchMap is right â†’ stale search results racing back out of order.',
+    whatBreaks: 'Unclosed Subjects — leaks plus "Stream already closed" crashes elsewhere. Plain StreamController where BehaviorSubject is needed → late subscribers miss the current value (UI blank until next change). flatMap where switchMap is right → stale search results racing back out of order.',
     efficientWay: {
       title: 'Using reactive patterns',
       approaches: [
@@ -2037,7 +2037,7 @@ ValueListenableBuilder<int>(
       'Wrong subject type — Publish (no replay) when Behavior (replay latest) is needed.',
       'Nesting listens inside listens instead of composing with operators.'
     ],
-    seniorNotes: 'The search-box pipeline (debounce â†’ distinct â†’ switchMap) is a favorite practical interview question — answering it in four operator names, with WHY each is there (rate-limit, dedupe, cancel-stale), demonstrates real reactive fluency. Bloc\'s event transformers expose the same concepts (restartable â‰ˆ switchMap).',
+    seniorNotes: 'The search-box pipeline (debounce → distinct → switchMap) is a favorite practical interview question — answering it in four operator names, with WHY each is there (rate-limit, dedupe, cancel-stale), demonstrates real reactive fluency. Bloc\'s event transformers expose the same concepts (restartable ≈ switchMap).',
     interviewQuestions: [
       'What does BehaviorSubject add over a broadcast StreamController?',
       'Design search-as-you-type that never shows stale results.',
@@ -2069,7 +2069,7 @@ class NotesService {
   void dispose() => _notes.close();
 }
 
-// combineLatest: notes + filter â†’ visible list, auto-recomputed
+// combineLatest: notes + filter → visible list, auto-recomputed
 final visible$ = Rx.combineLatest2(
   notesService.stream,
   filter$,
@@ -2085,7 +2085,7 @@ final visible$ = Rx.combineLatest2(
     eli5: 'You\'ve now seen all the options — so which one? Like choosing a vehicle: a bike (setState), a car (Provider/Riverpod), or a truck with logging and paperwork (BLoC). The answer depends on the cargo and the crew, not fashion.',
     analogy: 'Choosing state management is choosing a team sport\'s playbook: a pickup game needs three plays (Provider), a professional league team needs the full structured playbook every player runs identically (BLoC). The playbook doesn\'t win games — fit does.',
     explanation: 'A decision topic: consolidate the trade-offs into a usable framework. The honest answer to "which is best" is a decision tree over app complexity, team size, async intensity, and existing codebase — plus the meta-skill of recognizing that all of them implement the same three primitives (state location, lookup, change notification).',
-    technicalDeep: 'Decision factors: (1) Scope — single widget: setState; shared-but-simple: ValueNotifier/Provider; complex app: Riverpod or BLoC. (2) Team — solo/small: Riverpod\'s brevity wins; large team needing uniformity and audit trails: BLoC\'s ceremony IS the feature. (3) Async intensity — heavy streams/cancellation: Riverpod AsyncValue or Bloc transformers both excel. (4) Legacy — Provider apps: Riverpod migrates incrementally (same author, riverpod\'s ChangeNotifierProvider bridge); GetX apps: usually stay GetX. (5) Hiring/market — BLoC dominates job listings in many markets; Riverpod rising fast. Universal architecture beneath any choice: UI â†’ state holder â†’ repository interface â†’ data source, with constructor injection. Migration cost is mostly in widgets; keeping logic in plain Dart classes (services/repos) makes the state layer swappable.',
+    technicalDeep: 'Decision factors: (1) Scope — single widget: setState; shared-but-simple: ValueNotifier/Provider; complex app: Riverpod or BLoC. (2) Team — solo/small: Riverpod\'s brevity wins; large team needing uniformity and audit trails: BLoC\'s ceremony IS the feature. (3) Async intensity — heavy streams/cancellation: Riverpod AsyncValue or Bloc transformers both excel. (4) Legacy — Provider apps: Riverpod migrates incrementally (same author, riverpod\'s ChangeNotifierProvider bridge); GetX apps: usually stay GetX. (5) Hiring/market — BLoC dominates job listings in many markets; Riverpod rising fast. Universal architecture beneath any choice: UI → state holder → repository interface → data source, with constructor injection. Migration cost is mostly in widgets; keeping logic in plain Dart classes (services/repos) makes the state layer swappable.',
     whatBreaks: 'Choosing by hype then fighting the tool for years. Mixing two app-state libraries "temporarily" — temporary becomes permanent. Letting the library dictate architecture — repositories and services should be identical Dart regardless of what notifies the UI.',
     efficientWay: {
       title: 'Making the choice',
@@ -2147,7 +2147,7 @@ class NotesFilterLogic {
     analogy: 'Calling a REST API is mail-ordering from a catalog: you send a structured order form (request) to a known address (endpoint), and the warehouse posts back your package (JSON response) — or a "sorry, out of stock" note (error status).',
     explanation: 'Flutter has two main HTTP clients: http (simple, official) and dio (interceptors, cancellation, retries — the production favorite). A clean API layer wraps the client behind service classes, maps status codes to typed exceptions, and never lets raw network details leak into widgets.',
     technicalDeep: 'http package: http.get/post/put/delete(Uri.parse(url), headers, body). Check res.statusCode explicitly — non-2xx does NOT throw. dio: BaseOptions(baseUrl, connectTimeout, headers), interceptors (auth token injection, logging, 401-refresh-retry), CancelToken (cancel in-flight on screen dispose), FormData for uploads, built-in timeout errors. Auth pattern: interceptor adds Authorization: Bearer header; on 401, refresh token and replay request (queue concurrent 401s behind one refresh). Error taxonomy: connectivity (SocketException/DioException.connectionError), timeouts, 4xx (client — don\'t retry), 5xx (server — retry with backoff). Retries: exponential backoff with jitter, idempotent requests only. Always set timeouts — defaults are infinite-ish.',
-    whatBreaks: 'Not checking statusCode with http package â†’ parsing an HTML error page as JSON. No timeouts â†’ spinners forever on dead networks. Retrying POSTs blindly â†’ duplicate orders. Hardcoded URLs scattered through widgets â†’ environment switching requires find-and-replace.',
+    whatBreaks: 'Not checking statusCode with http package → parsing an HTML error page as JSON. No timeouts → spinners forever on dead networks. Retrying POSTs blindly → duplicate orders. Hardcoded URLs scattered through widgets → environment switching requires find-and-replace.',
     efficientWay: {
       title: 'Building the network layer',
       approaches: [
@@ -2162,7 +2162,7 @@ class NotesFilterLogic {
       'No CancelToken — responses landing on disposed screens.',
       'Logging full responses with tokens/PII in production builds.'
     ],
-    seniorNotes: 'The 401-refresh interceptor is a classic interview whiteboard: intercept error â†’ if 401 and not the refresh endpoint itself â†’ pause queue â†’ refresh token once â†’ replay queued requests with the new token â†’ on refresh failure, force logout. Race-safety (one refresh for N concurrent 401s) is the senior detail.',
+    seniorNotes: 'The 401-refresh interceptor is a classic interview whiteboard: intercept error → if 401 and not the refresh endpoint itself → pause queue → refresh token once → replay queued requests with the new token → on refresh failure, force logout. Race-safety (one refresh for N concurrent 401s) is the senior detail.',
     interviewQuestions: [
       'Design a Flutter network layer with auth token refresh.',
       'http vs dio — when is each appropriate?',
@@ -2226,8 +2226,8 @@ class NotesApi {
     eli5: 'Servers speak JSON (text), your app speaks Dart objects. Serialization is the translation booth: fromJson turns server text into typed objects your code can safely use; toJson turns objects back into text to send.',
     analogy: 'JSON is flat-packed IKEA furniture arriving at your door. fromJson is assembling it into a real chair (typed object with guarantees). toJson is disassembling it back into the flat box to ship elsewhere.',
     explanation: 'Every API-connected app needs model classes with fromJson/toJson. Hand-written works for small models; code generation (json_serializable or freezed) scales better — generating the boilerplate, handling nulls, nested objects, and lists consistently. Typed models catch API surprises at the boundary instead of deep in the UI.',
-    technicalDeep: 'jsonDecode(body) â†’ Map<String, dynamic> / List<dynamic>. Hand-written: factory Note.fromJson(Map<String, dynamic> json) with explicit casts and defaults — total control, tedious at scale. json_serializable: @JsonSerializable() class + part file + build_runner generates _$NoteFromJson; @JsonKey(name: \'created_at\', defaultValue:) maps snake_case and absences. freezed: data classes + unions + json in one — generates copyWith, ==, hashCode AND serialization; the de facto standard for model layers. Nested models compose (Author.fromJson inside Note.fromJson). Defensive boundary: validate enums (unknown â†’ fallback), dates (tryParse), and never trust field presence. Large payloads: parse in an isolate (compute(parseNotes, body)) to avoid jank.',
-    whatBreaks: 'json[\'price\'] as double when the API sends an int â†’ cast error in production (use (json[\'price\'] as num).toDouble()). New enum value from the server crashing old app versions — always provide unknown fallbacks. Parsing megabyte payloads on the UI thread â†’ visible jank.',
+    technicalDeep: 'jsonDecode(body) → Map<String, dynamic> / List<dynamic>. Hand-written: factory Note.fromJson(Map<String, dynamic> json) with explicit casts and defaults — total control, tedious at scale. json_serializable: @JsonSerializable() class + part file + build_runner generates _$NoteFromJson; @JsonKey(name: \'created_at\', defaultValue:) maps snake_case and absences. freezed: data classes + unions + json in one — generates copyWith, ==, hashCode AND serialization; the de facto standard for model layers. Nested models compose (Author.fromJson inside Note.fromJson). Defensive boundary: validate enums (unknown → fallback), dates (tryParse), and never trust field presence. Large payloads: parse in an isolate (compute(parseNotes, body)) to avoid jank.',
+    whatBreaks: 'json[\'price\'] as double when the API sends an int → cast error in production (use (json[\'price\'] as num).toDouble()). New enum value from the server crashing old app versions — always provide unknown fallbacks. Parsing megabyte payloads on the UI thread → visible jank.',
     efficientWay: {
       title: 'Model strategy',
       approaches: [
@@ -2235,7 +2235,7 @@ class NotesApi {
         { name: 'json_serializable only', verdict: 'ok', reason: 'Solid serialization; you\'ll still hand-write copyWith and == that freezed includes.' },
         { name: 'Hand-written everywhere', verdict: 'ok', reason: 'Fine under ~10 small models and great for learning; boilerplate compounds beyond that.' }
       ],
-      recommendation: 'Hand-write your first few models to understand the mechanics, then switch to freezed + json_serializable. Defend the boundary: defaults for missing fields, fallbacks for unknown enums, numâ†’toDouble for numerics.'
+      recommendation: 'Hand-write your first few models to understand the mechanics, then switch to freezed + json_serializable. Defend the boundary: defaults for missing fields, fallbacks for unknown enums, num→toDouble for numerics.'
     },
     commonMistakes: [
       'as double on JSON numbers — servers send 5 not 5.0; use (x as num).toDouble().',
@@ -2294,8 +2294,8 @@ final notes = await compute(
     eli5: 'REST is sending letters back and forth — fine until you need live chat. WebSockets keep a phone line open so the server can speak the instant something happens. GraphQL is a different ordering style: instead of fixed meals, you list exactly the ingredients you want.',
     analogy: 'REST is knocking on the server\'s door for each question. A WebSocket is moving in together — either side just speaks. GraphQL is a bespoke tailor: you specify exactly the measurements (fields) you want, and that\'s precisely what gets made — no more, no less.',
     explanation: 'Two API styles beyond REST you\'ll meet in Flutter jobs: WebSockets for real-time (chat, live scores, collaborative editing) via web_socket_channel, and GraphQL (query exactly the fields you need) via graphql_flutter. Both integrate naturally with Flutter\'s stream-based UI.',
-    technicalDeep: 'WebSockets: WebSocketChannel.connect(Uri.parse(\'wss://...\')) â†’ channel.stream (listen) + channel.sink.add (send). It\'s just a Stream — StreamBuilder renders it directly. Production needs: heartbeat ping/pong, reconnection with exponential backoff, message protocol (JSON envelopes with type field), resubscribe-on-reconnect. web_socket_channel is the standard package. GraphQL: one POST endpoint, body = query string + variables; graphql_flutter provides GraphQLClient with normalized caching, Query/Mutation widgets or direct client.query(QueryOptions). Subscriptions (GraphQL over WebSocket) for real-time. Codegen (graphql_codegen) generates typed Dart from .graphql files. When to use which: GraphQL shines when mobile needs differ from web needs (fetch exactly mobile\'s fields — less data over cellular); WebSockets whenever server-initiated push matters.',
-    whatBreaks: 'No reconnect logic â†’ one subway tunnel kills the connection until app restart. Unclosed channels â†’ leaks. GraphQL: over-nesting queries (server N+1 amplification), cache normalization confusion (stale UI after mutations — refetch or update cache explicitly).',
+    technicalDeep: 'WebSockets: WebSocketChannel.connect(Uri.parse(\'wss://...\')) → channel.stream (listen) + channel.sink.add (send). It\'s just a Stream — StreamBuilder renders it directly. Production needs: heartbeat ping/pong, reconnection with exponential backoff, message protocol (JSON envelopes with type field), resubscribe-on-reconnect. web_socket_channel is the standard package. GraphQL: one POST endpoint, body = query string + variables; graphql_flutter provides GraphQLClient with normalized caching, Query/Mutation widgets or direct client.query(QueryOptions). Subscriptions (GraphQL over WebSocket) for real-time. Codegen (graphql_codegen) generates typed Dart from .graphql files. When to use which: GraphQL shines when mobile needs differ from web needs (fetch exactly mobile\'s fields — less data over cellular); WebSockets whenever server-initiated push matters.',
+    whatBreaks: 'No reconnect logic → one subway tunnel kills the connection until app restart. Unclosed channels → leaks. GraphQL: over-nesting queries (server N+1 amplification), cache normalization confusion (stale UI after mutations — refetch or update cache explicitly).',
     efficientWay: {
       title: 'Real-time & GraphQL',
       approaches: [
@@ -2366,7 +2366,7 @@ final result = await client.query(QueryOptions(
     analogy: 'SharedPreferences is your pocket — keys, a few coins, quick to reach but tiny. SQLite is the garage with labeled shelves and an index — more setup, but you can store thousands of things and find any of them fast.',
     explanation: 'The local persistence ladder: SharedPreferences (key-value: settings, flags, tokens-ish), sqflite (raw SQLite: relational data with SQL), drift (type-safe reactive SQLite), and flutter_secure_storage (encrypted: real tokens/secrets). The course builds full CRUD on local SQLite before moving to the cloud — the local layer remains the offline backbone.',
     technicalDeep: 'SharedPreferences: async init, get/setString/Bool/Int — plaintext XML/plist, so NEVER secrets. flutter_secure_storage: Keychain (iOS) / EncryptedSharedPreferences-Keystore (Android) for tokens. sqflite: openDatabase(path, version, onCreate, onUpgrade) — onUpgrade migrations are YOUR job (if oldVersion < 2 ALTER TABLE...); db.query(table, where: \'owner = ?\', whereArgs: [id]) — parameterized always (injection + correctness); db.insert/update/delete; transactions via db.transaction. drift: tables as Dart classes, compile-time-checked queries, and .watch() returning Streams — query results that auto-update the UI when underlying data changes (pairs beautifully with StreamBuilder/BLoC). CRUD service pattern from the course: NotesService wrapping the DB, caching list in memory, exposing a stream — UI never touches SQL.',
-    whatBreaks: 'Tokens in SharedPreferences — readable on rooted/jailbroken devices; use secure storage. Schema change without onUpgrade migration â†’ crash on update for every existing user. String-built SQL with user input. Heavy queries on the UI thread (sqflite helps but big result sets still cost — paginate).',
+    whatBreaks: 'Tokens in SharedPreferences — readable on rooted/jailbroken devices; use secure storage. Schema change without onUpgrade migration → crash on update for every existing user. String-built SQL with user input. Heavy queries on the UI thread (sqflite helps but big result sets still cost — paginate).',
     efficientWay: {
       title: 'Choosing local storage',
       approaches: [
@@ -2374,11 +2374,11 @@ final result = await client.query(QueryOptions(
         { name: 'sqflite raw for learning + simple needs', verdict: 'ok', reason: 'Understanding real SQL underneath is valuable; boilerplate grows with the schema.' },
         { name: 'SharedPreferences as a database', verdict: 'weak', reason: 'JSON blobs in prefs = no queries, no migrations, corruption-prone — the classic shortcut that becomes a rewrite.' }
       ],
-      recommendation: 'Rule of thumb: scalar settings â†’ SharedPreferences; secrets â†’ flutter_secure_storage; anything you\'d call "records" â†’ drift (or sqflite while learning). Wrap whichever behind a repository interface — the cloud swap in two topics depends on it.'
+      recommendation: 'Rule of thumb: scalar settings → SharedPreferences; secrets → flutter_secure_storage; anything you\'d call "records" → drift (or sqflite while learning). Wrap whichever behind a repository interface — the cloud swap in two topics depends on it.'
     },
     commonMistakes: [
       'Secrets in SharedPreferences instead of secure storage.',
-      'No migration plan from schema v1 â†’ v2 — existing users crash on update.',
+      'No migration plan from schema v1 → v2 — existing users crash on update.',
       'SQL string interpolation instead of whereArgs parameters.'
     ],
     seniorNotes: 'The offline-first architecture interviews love: local DB is the single source of truth for the UI (drift watch() streams), network sync updates the DB in the background, and pending writes queue locally with retry. The UI never waits on the network — it renders local state that syncs eventually.',
@@ -2438,8 +2438,8 @@ await storage.write(key: 'refresh_token', value: token);   // Keychain/Keystore`
     eli5: 'Firebase is a rent-a-backend from Google: login systems, databases, file storage, and push notifications — all ready-made. Instead of building a server, you plug your Flutter app into Firebase and get backend superpowers in an afternoon.',
     analogy: 'Building your own backend is constructing a house from foundations up. Firebase is moving into a serviced apartment: electricity (auth), plumbing (database), and security (rules) already installed — you pay rent (usage) and follow house rules.',
     explanation: 'Firebase is the fastest path to a full-featured backend for Flutter apps — and Flutter\'s most common production backend. Setup involves: creating a Firebase project, registering iOS/Android apps, and wiring with FlutterFire CLI which generates configuration automatically. The course\'s notes app runs entirely on it.',
-    technicalDeep: 'Modern setup: firebase login (Firebase CLI) â†’ dart pub global activate flutterfire_cli â†’ flutterfire configure (selects project, registers all platforms, generates firebase_options.dart) â†’ Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform) in main() before runApp. Packages: firebase_core (required), then per-product: firebase_auth, cloud_firestore, firebase_storage, firebase_messaging, firebase_analytics, firebase_crashlytics. Platform artifacts: google-services.json (Android) and GoogleService-Info.plist (iOS) — flutterfire manages them. Spark plan (free): generous auth/Firestore quotas — entire learning path fits free. Blaze (pay-as-you-go): needed for Cloud Functions. Environments: separate Firebase projects per stage (myapp-dev / myapp-prod) with flavor-specific configs — never develop against prod data.',
-    whatBreaks: 'Forgetting await Firebase.initializeApp before any Firebase call â†’ crash on launch. Mismatched bundle ID/applicationId between app and Firebase registration â†’ silent auth failures. One Firebase project for dev AND prod â†’ test data pollution and accidental prod writes. Stale flutterfire configure after adding platforms.',
+    technicalDeep: 'Modern setup: firebase login (Firebase CLI) → dart pub global activate flutterfire_cli → flutterfire configure (selects project, registers all platforms, generates firebase_options.dart) → Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform) in main() before runApp. Packages: firebase_core (required), then per-product: firebase_auth, cloud_firestore, firebase_storage, firebase_messaging, firebase_analytics, firebase_crashlytics. Platform artifacts: google-services.json (Android) and GoogleService-Info.plist (iOS) — flutterfire manages them. Spark plan (free): generous auth/Firestore quotas — entire learning path fits free. Blaze (pay-as-you-go): needed for Cloud Functions. Environments: separate Firebase projects per stage (myapp-dev / myapp-prod) with flavor-specific configs — never develop against prod data.',
+    whatBreaks: 'Forgetting await Firebase.initializeApp before any Firebase call → crash on launch. Mismatched bundle ID/applicationId between app and Firebase registration → silent auth failures. One Firebase project for dev AND prod → test data pollution and accidental prod writes. Stale flutterfire configure after adding platforms.',
     efficientWay: {
       title: 'Setting up Firebase',
       approaches: [
@@ -2495,22 +2495,22 @@ flutter pub add firebase_core firebase_auth cloud_firestore
     analogy: 'Building auth yourself is training your own security team (password hashing, token signing, session storage — months of risky work). Firebase Auth is hiring a professional firm: show them your guest policy, they handle the door.',
     explanation: 'The complete email/password journey — register, verify email, login, logout, session persistence — is the heart of the course\'s app and of most real apps. Firebase Auth provides it: createUser, signIn, sendEmailVerification, authStateChanges stream, plus social providers (Google/Apple) when you\'re ready.',
     technicalDeep: 'Core API: FirebaseAuth.instance.createUserWithEmailAndPassword / signInWithEmailAndPassword / signOut; currentUser (sync snapshot); authStateChanges() — THE stream: emits user/null on every auth change; the root widget listens and switches trees (state-driven routing from Phase 3 — it all connects). Email verification: user.sendEmailVerification(), check user.emailVerified after reload() — gate the main UI on it (the course\'s VerifyEmailView). Errors: FirebaseAuthException codes (email-already-in-use, user-not-found, wrong-password, weak-password, too-many-requests) — map each to a friendly message on the right field. Sessions persist across restarts automatically (secure platform storage). Password reset: sendPasswordResetEmail. Social: google_sign_in / Sign in with Apple (REQUIRED by App Store if you offer any social login). The course\'s AuthService wraps all this behind an interface — swap-able, testable.',
-    whatBreaks: 'Trusting emailVerified without user.reload() — it\'s cached stale. Showing raw e.message to users instead of mapped friendly text. Forgetting Apple Sign-In when shipping Google Sign-In to iOS â†’ App Store rejection. Building UI off currentUser once instead of listening to authStateChanges â†’ UI doesn\'t react to logout/expiry.',
+    whatBreaks: 'Trusting emailVerified without user.reload() — it\'s cached stale. Showing raw e.message to users instead of mapped friendly text. Forgetting Apple Sign-In when shipping Google Sign-In to iOS → App Store rejection. Building UI off currentUser once instead of listening to authStateChanges → UI doesn\'t react to logout/expiry.',
     efficientWay: {
       title: 'Implementing auth',
       approaches: [
         { name: 'AuthService interface + authStateChanges-driven root', verdict: 'best', reason: 'The course\'s architecture: service abstracts Firebase, stream drives navigation, everything testable.' },
-        { name: 'Exception-code â†’ message mapping table', verdict: 'best', reason: 'One switch maps every FirebaseAuthException code to UX copy — no raw errors leak.' },
+        { name: 'Exception-code → message mapping table', verdict: 'best', reason: 'One switch maps every FirebaseAuthException code to UX copy — no raw errors leak.' },
         { name: 'Firebase calls inline in button handlers', verdict: 'weak', reason: 'Untestable, unswappable, and error handling duplicates per screen — the exact mess the course refactors away.' }
       ],
-      recommendation: 'Follow the course\'s arc deliberately: raw calls â†’ extract AuthService (interface + Firebase implementation) â†’ BLoC consuming the service â†’ root routing off auth state. That refactor sequence IS the lesson.'
+      recommendation: 'Follow the course\'s arc deliberately: raw calls → extract AuthService (interface + Firebase implementation) → BLoC consuming the service → root routing off auth state. That refactor sequence IS the lesson.'
     },
     commonMistakes: [
       'No reload() before checking emailVerified.',
       'Generic "something went wrong" for every auth error — map the codes.',
       'Navigation pushed from handlers instead of reacting to authStateChanges.'
     ],
-    seniorNotes: 'Auth edge cases that separate production from tutorial: token revocation handling, account-exists-with-different-credential (email used by Google AND password), anonymous-to-permanent account linking (linkWithCredential — keeps user data), and rate limiting (too-many-requests â†’ cooldown UI). Mentioning linking in interviews lands well.',
+    seniorNotes: 'Auth edge cases that separate production from tutorial: token revocation handling, account-exists-with-different-credential (email used by Google AND password), anonymous-to-permanent account linking (linkWithCredential — keeps user data), and rate limiting (too-many-requests → cooldown UI). Mentioning linking in interviews lands well.',
     interviewQuestions: [
       'How does authStateChanges drive app navigation?',
       'How do you enforce verified email before app access?',
@@ -2564,8 +2564,8 @@ AuthException mapAuthError(FirebaseAuthException e) => switch (e.code) {
     eli5: 'Firestore is a cloud database that calls YOU: instead of asking "any new notes?" over and over, you subscribe once and Firestore pushes every change to your app instantly — even changes made on the user\'s other phone.',
     analogy: 'A REST database is a newspaper you must go buy each morning. Firestore is a news app with notifications: subscribe to topics (queries) and updates arrive the moment they happen, on every device at once.',
     explanation: 'Cloud Firestore is Firebase\'s NoSQL document database: data lives in documents (JSON-like) grouped into collections, queried with chainable filters, and — its superpower — watched via snapshot listeners that stream live updates. The course migrates the notes app from local SQLite to Firestore, gaining sync across devices.',
-    technicalDeep: 'Model: collections/documents/subcollections (notes/{noteId}); documents max 1MB; design for your QUERIES (denormalize freely — NoSQL â‰  normalized). CRUD: col.add(data) (auto-ID), doc.set (create/overwrite, merge: true to upsert), doc.update (fails if missing), doc.delete. Queries: col.where(\'ownerId\', isEqualTo: uid).orderBy(\'updatedAt\', descending: true).limit(20) — compound queries may demand composite indexes (the error message links the create-index console page). Realtime: col.snapshots() â†’ Stream<QuerySnapshot> — feed straight into StreamBuilder/BLoC; includes latency compensation (your writes appear instantly, reconcile later) and offline persistence (cached data + queued writes by default on mobile). Security Rules: request.auth.uid == resource.data.ownerId — THE authorization layer; client access means rules are not optional (the course learns this via a post-release rules fix!). Pagination: startAfterDocument cursors, not offset. Pricing: per read/write/delete — a 1000-document read costs 1000 reads; design queries narrow.',
-    whatBreaks: 'Default-open rules in production â†’ anyone can read/write everything (a rite-of-passage incident the course itself hits). Unindexed compound queries throw at runtime. snapshots() without limits on big collections â†’ cost explosion and slow first paint. Treating Firestore like SQL — no joins; restructure or duplicate data instead.',
+    technicalDeep: 'Model: collections/documents/subcollections (notes/{noteId}); documents max 1MB; design for your QUERIES (denormalize freely — NoSQL â‰  normalized). CRUD: col.add(data) (auto-ID), doc.set (create/overwrite, merge: true to upsert), doc.update (fails if missing), doc.delete. Queries: col.where(\'ownerId\', isEqualTo: uid).orderBy(\'updatedAt\', descending: true).limit(20) — compound queries may demand composite indexes (the error message links the create-index console page). Realtime: col.snapshots() → Stream<QuerySnapshot> — feed straight into StreamBuilder/BLoC; includes latency compensation (your writes appear instantly, reconcile later) and offline persistence (cached data + queued writes by default on mobile). Security Rules: request.auth.uid == resource.data.ownerId — THE authorization layer; client access means rules are not optional (the course learns this via a post-release rules fix!). Pagination: startAfterDocument cursors, not offset. Pricing: per read/write/delete — a 1000-document read costs 1000 reads; design queries narrow.',
+    whatBreaks: 'Default-open rules in production → anyone can read/write everything (a rite-of-passage incident the course itself hits). Unindexed compound queries throw at runtime. snapshots() without limits on big collections → cost explosion and slow first paint. Treating Firestore like SQL — no joins; restructure or duplicate data instead.',
     efficientWay: {
       title: 'Firestore patterns',
       approaches: [
@@ -2635,8 +2635,8 @@ AuthException mapAuthError(FirebaseAuthException e) => switch (e.code) {
     eli5: 'Beyond login and database, Firebase has more rooms: Storage holds big files (photos), Cloud Messaging sends notifications to phones, Remote Config changes app behavior without an update, and Cloud Functions run your code on Google\'s servers.',
     analogy: 'If Firebase is a serviced apartment building, these are the amenities: a storage unit (files), a concierge who delivers messages to residents (push), switchable building rules posted in the lobby (remote config), and an on-call handyman who reacts to events (functions).',
     explanation: 'Four services that complete most production apps: Firebase Storage (user file uploads with progress and rules), Firebase Cloud Messaging (push notifications — the mobile engagement backbone), Remote Config (feature flags and A/B without releases), and Cloud Functions (server-side logic triggered by events or HTTPS).',
-    technicalDeep: 'Storage: ref.child(\'avatars/$uid.jpg\').putFile(file) â†’ UploadTask (progress stream, pause/resume) â†’ getDownloadURL(); storage rules mirror Firestore rules (auth-scoped paths); compress client-side first (flutter_image_compress). FCM: firebase_messaging — getToken() (send to your backend), foreground messages via FirebaseMessaging.onMessage (show local notification yourself — flutter_local_notifications), background/terminated taps via onMessageOpenedApp/getInitialMessage (deep-link into content), iOS needs APNs key + capability + explicit permission request; Android 13+ needs runtime permission. Topics (subscribeToTopic(\'news\')) vs token-targeted sends. Remote Config: setDefaults, fetchAndActivate, getBool(\'new_checkout_enabled\') — kill switches, gradual rollouts, A/B tests (pairs with Analytics); minimumFetchInterval caching gotcha in dev. Cloud Functions (Node/TS on Blaze plan): HTTPS callables (FirebaseFunctions.instance.httpsCallable) and triggers (onDocumentCreated â†’ send notification, update counters) — where trusted logic lives (Stripe webhooks, moderation, fan-out).',
-    whatBreaks: 'Push on iOS without APNs setup â†’ tokens but no delivery. Expecting system notification UI for foreground messages — you must render those. Remote Config\'s default 12h fetch cache confusing "my flag didn\'t change" in dev. Client-side "admin" logic instead of Functions — clients can\'t be trusted with privileged operations.',
+    technicalDeep: 'Storage: ref.child(\'avatars/$uid.jpg\').putFile(file) → UploadTask (progress stream, pause/resume) → getDownloadURL(); storage rules mirror Firestore rules (auth-scoped paths); compress client-side first (flutter_image_compress). FCM: firebase_messaging — getToken() (send to your backend), foreground messages via FirebaseMessaging.onMessage (show local notification yourself — flutter_local_notifications), background/terminated taps via onMessageOpenedApp/getInitialMessage (deep-link into content), iOS needs APNs key + capability + explicit permission request; Android 13+ needs runtime permission. Topics (subscribeToTopic(\'news\')) vs token-targeted sends. Remote Config: setDefaults, fetchAndActivate, getBool(\'new_checkout_enabled\') — kill switches, gradual rollouts, A/B tests (pairs with Analytics); minimumFetchInterval caching gotcha in dev. Cloud Functions (Node/TS on Blaze plan): HTTPS callables (FirebaseFunctions.instance.httpsCallable) and triggers (onDocumentCreated → send notification, update counters) — where trusted logic lives (Stripe webhooks, moderation, fan-out).',
+    whatBreaks: 'Push on iOS without APNs setup → tokens but no delivery. Expecting system notification UI for foreground messages — you must render those. Remote Config\'s default 12h fetch cache confusing "my flag didn\'t change" in dev. Client-side "admin" logic instead of Functions — clients can\'t be trusted with privileged operations.',
     efficientWay: {
       title: 'Adopting the services',
       approaches: [
@@ -2672,7 +2672,7 @@ FirebaseMessaging.onMessage.listen((msg) {
       payload: msg.data['route']);
 });
 
-// User tapped a notification (app was background) â†’ deep link
+// User tapped a notification (app was background) → deep link
 FirebaseMessaging.onMessageOpenedApp.listen((msg) {
   router.go(msg.data['route'] ?? '/');            // e.g. /notes/abc123
 });
@@ -2699,7 +2699,7 @@ if (rc.getBool('new_editor_enabled')) {
     eli5: 'The course migrates the notes app twice — local SQLite to Firestore, raw calls to services — and barely touches the screens. That\'s not luck: it\'s the payoff of hiding every data source behind interfaces the UI depends on.',
     analogy: 'A restaurant that prints supplier names on the menu must reprint menus to change suppliers. A menu that just says "fresh fish" lets the kitchen switch suppliers overnight. Interfaces are menus without supplier names.',
     explanation: 'This topic consolidates the architectural arc of the whole phase: define service/repository interfaces (AuthService, NotesRepository), implement per backend (SQLite, Firestore, REST), inject implementations, and migrate by swapping. Plus the practical migration playbook: dual-running, data backfill, and stream-based caching.',
-    technicalDeep: 'The course\'s sequence as a pattern: (1) UI calls Firebase directly (works, untestable, coupled); (2) extract AuthService interface + FirebaseAuthProvider implementation ("Migrating to Auth Service" chapter); (3) NotesService with in-memory cache + BehaviorSubject-style stream over SQLite; (4) swap SQLite â†’ Firestore behind the SAME interface ("Migrating to our Firestore Service") — screens untouched. Migration playbook: define target interface first; adapter per source; feature-flag the switch (Remote Config!); for data: backfill job copies local â†’ cloud on first cloud login, dedupe by ID, tombstones for deletes. Caching layers: repository returns local stream immediately, refreshes from network in background (stale-while-revalidate). Composition root: main.dart (or DI container) is the ONE place implementations are chosen — everything else sees interfaces.',
+    technicalDeep: 'The course\'s sequence as a pattern: (1) UI calls Firebase directly (works, untestable, coupled); (2) extract AuthService interface + FirebaseAuthProvider implementation ("Migrating to Auth Service" chapter); (3) NotesService with in-memory cache + BehaviorSubject-style stream over SQLite; (4) swap SQLite → Firestore behind the SAME interface ("Migrating to our Firestore Service") — screens untouched. Migration playbook: define target interface first; adapter per source; feature-flag the switch (Remote Config!); for data: backfill job copies local → cloud on first cloud login, dedupe by ID, tombstones for deletes. Caching layers: repository returns local stream immediately, refreshes from network in background (stale-while-revalidate). Composition root: main.dart (or DI container) is the ONE place implementations are chosen — everything else sees interfaces.',
     whatBreaks: 'Leaky abstractions: interface methods returning QuerySnapshot or Database rows — now every consumer imports Firestore anyway. Interfaces designed after one implementation tend to mirror it (Firestore-shaped methods that SQLite can\'t honor). Migration without a rollback path — flag it.',
     efficientWay: {
       title: 'Architecture for change',
@@ -2765,7 +2765,7 @@ void notesRepositoryContract(NotesRepository Function() make) {
     orderIndex: 43, estimatedMins: 45, prerequisites: ['stateless-stateful-widgets'],
     title: 'Animations: Controllers, Tweens & Curves',
     eli5: 'Animation is just changing a number smoothly over time — a position sliding from 0 to 200, an opacity fading 0 to 1 — and repainting fast enough (60+ times a second) that it looks like motion.',
-    analogy: 'An AnimationController is a film director with a stopwatch: it counts time precisely (0.0 â†’ 1.0), a Tween is the script translating time into values ("at halftime, be halfway across the screen"), and a Curve is the acting style (start slow, end fast).',
+    analogy: 'An AnimationController is a film director with a stopwatch: it counts time precisely (0.0 → 1.0), a Tween is the script translating time into values ("at halftime, be halfway across the screen"), and a Curve is the acting style (start slow, end fast).',
     explanation: 'Flutter\'s animation system has two levels: implicit animations (AnimatedContainer, AnimatedOpacity — set a new value, Flutter animates the change automatically) for 80% of needs, and explicit animations (AnimationController + Tween + AnimatedBuilder) when you need control: repeat, reverse, sequence, or physics.',
     technicalDeep: 'Implicit: AnimatedContainer/Opacity/Positioned/Padding/DefaultTextStyle — give duration + curve, change the property, transition runs automatically. TweenAnimationBuilder for one-shot custom implicit animations. Explicit: AnimationController(vsync: this, duration) requires TickerProviderStateMixin (vsync ties to the frame clock, pauses offscreen — battery); .forward()/.reverse()/.repeat(); always dispose(). Tween(begin, end).animate(CurvedAnimation(parent: controller, curve: Curves.easeOutCubic)) maps 0-1 to your values. AnimatedBuilder(animation, builder, child:) rebuilds ONLY the builder closure each tick — pass static subtrees via child (the key perf pattern). Staggered: Interval(0.0, 0.5) curves run multiple tweens on one controller. Transition widgets (Fade/Slide/ScaleTransition) consume animations directly without builder.',
     whatBreaks: 'Forgetting vsync mixin or dispose() — errors and leaks. Rebuilding huge subtrees every tick (no child param) — janky animation, the opposite of the goal. setState per tick instead of AnimatedBuilder. Curves.bounce on serious UI — animation style is UX tone.',
@@ -2776,7 +2776,7 @@ void notesRepositoryContract(NotesRepository Function() make) {
         { name: 'One controller + Intervals for staggered sequences', verdict: 'best', reason: 'Coordinated chains stay in sync and dispose together.' },
         { name: 'Explicit controllers for every fade', verdict: 'weak', reason: 'Ten lines of lifecycle for what AnimatedOpacity does in one.' }
       ],
-      recommendation: 'Decision ladder: property change â†’ Animated* widget; one-shot custom â†’ TweenAnimationBuilder; repeat/reverse/sequencing/gesture-driven â†’ AnimationController. Keep durations 150-300ms for UI feedback; respect MediaQuery.disableAnimations for accessibility.'
+      recommendation: 'Decision ladder: property change → Animated* widget; one-shot custom → TweenAnimationBuilder; repeat/reverse/sequencing/gesture-driven → AnimationController. Keep durations 150-300ms for UI feedback; respect MediaQuery.disableAnimations for accessibility.'
     },
     commonMistakes: [
       'No child param in AnimatedBuilder — rebuilding the world per frame.',
@@ -2835,15 +2835,15 @@ class PulseState extends State<Pulse> with SingleTickerProviderStateMixin {
     analogy: 'Without Hero, switching screens is a hard cut between camera angles. With Hero, it\'s a tracking shot — the camera follows the subject from one scene into the next, and your brain reads it as one continuous space.',
     explanation: 'Motion polish lives here: Hero (shared-element transitions between routes), AnimatedSwitcher (cross-fade when content changes), custom page transitions (PageRouteBuilder), and the animations package (Material motion: container transform, shared axis). Small effort, outsized perceived quality.',
     technicalDeep: 'Hero(tag: noteId, child: image) on BOTH screens with matching tags — during the route transition Flutter lifts the child to an overlay and tweens its rect between positions; tags must be unique per screen; mismatched child shapes use flightShuttleBuilder. AnimatedSwitcher(duration, child: Text(key: ValueKey(value))) — cross-fades when the child\'s key/type changes (the key is mandatory for same-type swaps). Page transitions: PageRouteBuilder(transitionsBuilder: (c, anim, sec, child) => SlideTransition(...)); themed globally via PageTransitionsTheme. animations package: OpenContainer (card morphs into page — the Material container transform), SharedAxisTransition (paged flows). AnimatedList/SliverAnimatedList for insert/remove row animations. Skeleton loaders (shimmer) > spinners for content-shaped waits.',
-    whatBreaks: 'Duplicate Hero tags on one screen â†’ runtime exception mid-transition. AnimatedSwitcher without distinct keys â†’ no animation (same-type children look identical to the diff). Heavy widgets in Hero flights — jank exactly when the user is staring. Overdone motion: 600ms transitions feel broken, not fancy.',
+    whatBreaks: 'Duplicate Hero tags on one screen → runtime exception mid-transition. AnimatedSwitcher without distinct keys → no animation (same-type children look identical to the diff). Heavy widgets in Hero flights — jank exactly when the user is staring. Overdone motion: 600ms transitions feel broken, not fancy.',
     efficientWay: {
       title: 'Polish that pays',
       approaches: [
-        { name: 'Hero on listâ†’detail images + OpenContainer for cards', verdict: 'best', reason: 'The two highest-perceived-value transitions, both nearly free to add.' },
+        { name: 'Hero on list→detail images + OpenContainer for cards', verdict: 'best', reason: 'The two highest-perceived-value transitions, both nearly free to add.' },
         { name: 'AnimatedSwitcher on changing text/icons', verdict: 'best', reason: 'Counters, status chips, toggles — one wrapper makes every change smooth.' },
         { name: 'Custom transitions on every route', verdict: 'weak', reason: 'Platform defaults are familiar; nonstandard everywhere reads as wrong, not premium.' }
       ],
-      recommendation: 'Add Hero to your primary listâ†’detail flow, AnimatedSwitcher to dynamic labels, and stop. Respect platform transition defaults elsewhere. Test reduced-motion accessibility settings.'
+      recommendation: 'Add Hero to your primary list→detail flow, AnimatedSwitcher to dynamic labels, and stop. Respect platform transition defaults elsewhere. Test reduced-motion accessibility settings.'
     },
     commonMistakes: [
       'Hero tag collisions from using a constant tag in a list — tag with the item ID.',
@@ -2854,7 +2854,7 @@ class PulseState extends State<Pulse> with SingleTickerProviderStateMixin {
     interviewQuestions: [
       'How does Hero actually animate a widget between two routes?',
       'Why does AnimatedSwitcher need keys on its children?',
-      'Which Material motion pattern fits a listâ†’detail navigation?'
+      'Which Material motion pattern fits a list→detail navigation?'
     ],
     codeExamples: [
       {
@@ -2899,8 +2899,8 @@ OpenContainer(
     eli5: 'Behind your widget code, Flutter secretly maintains three parallel structures: your blueprints (widgets), the construction managers (elements), and the actual buildings (render objects). Knowing this explains nearly every "why does Flutter…" mystery.',
     analogy: 'Widgets are architectural drawings — cheap to redraw and throw away. Elements are the site managers who compare new drawings to the standing building and order only the needed changes. RenderObjects are the physical structure — expensive, so reused whenever the drawings allow.',
     explanation: 'The widget/element/render-object trio is Flutter\'s core design: immutable widget configs rebuilt constantly, persistent elements diffing and holding state, and heavyweight render objects doing layout/paint only when truly needed. Keys, GlobalKeys, state preservation, and performance all derive from this.',
-    technicalDeep: 'Reconciliation: on rebuild, each element checks canUpdate(oldWidget, newWidget) — same runtimeType AND same key â†’ element survives, updates config, render object mutates in place; different â†’ element (and its State!) is torn down and rebuilt. This is WHY State persists across rebuilds and why keys matter in lists: without keys, a removed first row makes every element shift identity (state sticks to position); ValueKey(id) lets elements follow their data. GlobalKey: element findable from anywhere (FormState access), and subtree REPARENTING without losing state (moving a player widget between layouts). Immutability everywhere: widgets are const-able because they\'re pure config — the diff makes immutability cheap. RenderObject layer: performLayout (the constraints protocol from Phase 2), paint, compositing layers; RepaintBoundary inserts a layer so a repainting child doesn\'t dirty its parent (use around frequently-updating regions). BuildOwner/PipelineOwner orchestrate the frame: build â†’ layout â†’ paint â†’ composite.',
-    whatBreaks: 'Stateful list items without keys â†’ checkbox states attached to row POSITIONS, chaos on reorder. GlobalKey collisions (same key, two places) â†’ crash. RepaintBoundary everywhere "for performance" — each costs memory; place by measurement. Misreading "rebuild" as "re-layout" — most rebuilds never touch render objects.',
+    technicalDeep: 'Reconciliation: on rebuild, each element checks canUpdate(oldWidget, newWidget) — same runtimeType AND same key → element survives, updates config, render object mutates in place; different → element (and its State!) is torn down and rebuilt. This is WHY State persists across rebuilds and why keys matter in lists: without keys, a removed first row makes every element shift identity (state sticks to position); ValueKey(id) lets elements follow their data. GlobalKey: element findable from anywhere (FormState access), and subtree REPARENTING without losing state (moving a player widget between layouts). Immutability everywhere: widgets are const-able because they\'re pure config — the diff makes immutability cheap. RenderObject layer: performLayout (the constraints protocol from Phase 2), paint, compositing layers; RepaintBoundary inserts a layer so a repainting child doesn\'t dirty its parent (use around frequently-updating regions). BuildOwner/PipelineOwner orchestrate the frame: build → layout → paint → composite.',
+    whatBreaks: 'Stateful list items without keys → checkbox states attached to row POSITIONS, chaos on reorder. GlobalKey collisions (same key, two places) → crash. RepaintBoundary everywhere "for performance" — each costs memory; place by measurement. Misreading "rebuild" as "re-layout" — most rebuilds never touch render objects.',
     efficientWay: {
       title: 'Internalizing internals',
       approaches: [
@@ -2915,7 +2915,7 @@ OpenContainer(
       'Keys everywhere or nowhere — they matter exactly where children of the same type reorder.',
       'GlobalKeys as a state-access convenience — they\'re for identity, not a Provider substitute.'
     ],
-    seniorNotes: 'THE Flutter senior interview chain: "Explain the three trees" â†’ "so why do keys exist?" â†’ "when does an element NOT survive?" â†’ "what does GlobalKey enable?" Practice that chain aloud. Bonus depth: how RepaintBoundary creates compositor layers and when Flutter inserts them automatically (scrollables do).',
+    seniorNotes: 'THE Flutter senior interview chain: "Explain the three trees" → "so why do keys exist?" → "when does an element NOT survive?" → "what does GlobalKey enable?" Practice that chain aloud. Bonus depth: how RepaintBoundary creates compositor layers and when Flutter inserts them automatically (scrollables do).',
     interviewQuestions: [
       'Walk through what happens, tree by tree, when setState is called.',
       'Why do keys fix state misbehavior in reorderable lists?',
@@ -2926,7 +2926,7 @@ OpenContainer(
         lang: 'javascript',
         label: 'Keys and element identity (Dart)',
         code: `// BUG: stateful tiles without keys
-// Remove item 0 â†’ every element shifts â†’ checkbox states
+// Remove item 0 → every element shifts → checkbox states
 // now belong to the WRONG items (state stuck to position)
 ListView(
   children: todos.map((t) => TodoTile(todo: t)).toList(),
@@ -2941,8 +2941,8 @@ ListView(
 // canUpdate — the diff's core rule (framework source, simplified):
 // static bool canUpdate(Widget old, Widget neu) =>
 //     old.runtimeType == neu.runtimeType && old.key == neu.key;
-// true  â†’ element survives, State survives, render object updates
-// false â†’ subtree torn down and rebuilt from scratch
+// true  → element survives, State survives, render object updates
+// false → subtree torn down and rebuilt from scratch
 
 // RepaintBoundary: isolate a hot-repainting region
 Column(children: [
@@ -2966,11 +2966,11 @@ Column(children: [
     efficientWay: {
       title: 'Performance workflow',
       approaches: [
-        { name: 'Profile mode + DevTools timeline â†’ fix the worst frame', verdict: 'best', reason: 'The flame chart names the expensive widget; fixing measured problems is 10x more effective than guessing.' },
+        { name: 'Profile mode + DevTools timeline → fix the worst frame', verdict: 'best', reason: 'The flame chart names the expensive widget; fixing measured problems is 10x more effective than guessing.' },
         { name: 'Rebuild-scope hygiene as you code', verdict: 'best', reason: 'const, select, child params — free habits that prevent most jank before it exists.' },
         { name: 'Optimization sprint after "the app feels slow"', verdict: 'weak', reason: 'Vague complaints, accumulated debt, no baselines — measure continuously instead.' }
       ],
-      recommendation: 'The four-step loop: reproduce in profile mode on a real device â†’ DevTools timeline â†’ identify UI vs raster and the exact widget â†’ apply the targeted fix â†’ re-measure. Decode images at display size TODAY — it\'s the most common silent win.'
+      recommendation: 'The four-step loop: reproduce in profile mode on a real device → DevTools timeline → identify UI vs raster and the exact widget → apply the targeted fix → re-measure. Decode images at display size TODAY — it\'s the most common silent win.'
     },
     commonMistakes: [
       'Network images without cacheWidth — decoding wallpaper-sized bitmaps for thumbnails.',
@@ -3008,8 +3008,8 @@ FadeTransition(opacity: animation, child: card)
 final parsed = await compute(parseBigJson, body);
 
 // 7. Profile properly
-// flutter run --profile          â† never judge perf in debug
-// DevTools â†’ Performance â†’ record â†’ inspect the tallest frame`
+// flutter run --profile          ← never judge perf in debug
+// DevTools → Performance → record → inspect the tallest frame`
       }
     ]
   },
@@ -3020,7 +3020,7 @@ final parsed = await compute(parseBigJson, body);
     eli5: 'Flutter DevTools is your app\'s X-ray machine: see the widget tree of the running app, watch which widgets rebuild, track memory, inspect network calls, and read every log — all live while you click around.',
     analogy: 'Debugging without DevTools is fixing a car engine by listening to it. DevTools opens the hood with sensors attached: every part labeled, temperatures live, and a slow-motion replay of any misfire (frame).',
     explanation: 'The Flutter tooling suite: Widget Inspector (explore/select widgets, view constraints, toggle guidelines), Performance view (frame timeline), Memory, Network, Logging, and CPU profiler — plus in-code tools: debugPrint, debugger() breakpoints, assert-only code, and error customization. Daily fluency here is a productivity multiplier.',
-    technicalDeep: 'Inspector: select-widget mode taps a widget on device â†’ jumps to source; Layout Explorer visualizes flex/constraints (THE tool for layout mysteries); Debug Paint (guidelines), Slow Animations (5x), Repaint Rainbow (flashing colors = repaint regions — find over-painting). Performance: frame chart, UI/raster split, "Track widget rebuilds" in IDE shows rebuild counts inline. Network tab: every http call with timing/payloads. Logging: structured dart:developer log() over print (levels, names); debugPrint throttles to avoid dropped lines. Breakpoints in VS Code/Android Studio; conditional breakpoints; debugger(when:) programmatic. Error surfaces: FlutterError.onError (framework errors), PlatformDispatcher.onError (uncaught async) — route both to Crashlytics in production (Phase 7). kDebugMode guards and assert(() {...}()) for debug-only code.',
+    technicalDeep: 'Inspector: select-widget mode taps a widget on device → jumps to source; Layout Explorer visualizes flex/constraints (THE tool for layout mysteries); Debug Paint (guidelines), Slow Animations (5x), Repaint Rainbow (flashing colors = repaint regions — find over-painting). Performance: frame chart, UI/raster split, "Track widget rebuilds" in IDE shows rebuild counts inline. Network tab: every http call with timing/payloads. Logging: structured dart:developer log() over print (levels, names); debugPrint throttles to avoid dropped lines. Breakpoints in VS Code/Android Studio; conditional breakpoints; debugger(when:) programmatic. Error surfaces: FlutterError.onError (framework errors), PlatformDispatcher.onError (uncaught async) — route both to Crashlytics in production (Phase 7). kDebugMode guards and assert(() {...}()) for debug-only code.',
     whatBreaks: 'print-debugging production-grade problems that the timeline answers in seconds. Leaving Repaint Rainbow conclusions unverified in profile mode. Debugging release-build-only crashes without symbolication (Phase 7 covers it).',
     efficientWay: {
       title: 'Debugging workflow',
@@ -3029,7 +3029,7 @@ final parsed = await compute(parseBigJson, body);
         { name: 'Breakpoints over prints for logic bugs', verdict: 'best', reason: 'Full variable state, step-through, conditions — prints are stone tools by comparison.' },
         { name: 'print() everywhere always', verdict: 'weak', reason: 'Fine for a quick trace; a habit that caps your debugging ceiling.' }
       ],
-      recommendation: 'Bind the Inspector to muscle memory this week: every layout surprise â†’ select mode â†’ Layout Explorer. Every logic bug â†’ breakpoint, not print. Every jank â†’ Performance tab in profile mode.'
+      recommendation: 'Bind the Inspector to muscle memory this week: every layout surprise → select mode → Layout Explorer. Every logic bug → breakpoint, not print. Every jank → Performance tab in profile mode.'
     },
     commonMistakes: [
       'Debugging layout by code-staring when Layout Explorer draws the answer.',
@@ -3088,8 +3088,8 @@ void onWeirdState(Order order) {
     eli5: 'FutureBuilder and StreamBuilder are widgets that watch async data and rebuild themselves when it arrives: show a spinner while loading, the data when it comes, an error message if it fails — all declared in one place.',
     analogy: 'A StreamBuilder is a departures board at an airport: permanently wired to the data feed, it re-renders itself every time the feed updates — you don\'t refresh it, it refreshes itself.',
     explanation: 'These two widgets glue async Dart (Phase 0) to widget trees: FutureBuilder renders one eventual value (an API call), StreamBuilder renders a live sequence (Firestore snapshots, auth state). Used well they\'re elegant; used carelessly they cause the most classic Flutter bugs (re-fired futures, missed states).',
-    technicalDeep: 'FutureBuilder(future, builder): builder receives AsyncSnapshot — connectionState (waiting/active/done), hasData/data, hasError/error. THE bug: creating the future IN build (future: fetchNotes()) — every rebuild refires the request (spinner loops, duplicate calls); fix: create once in initState, reference the field. StreamBuilder: same snapshot API over a stream; waiting = before first event; remember a stream CAN emit errors then continue. initialData skips the first spinner when a cached value exists. Exhaustive snapshot handling: waiting â†’ spinner; hasError â†’ retryable error UI; hasData â†’ content; else (done, no data) â†’ empty state. Beyond basics: multiple builders nesting â†’ lift to one combined stream (combineLatest, Phase 3) or proper state management; for whole-feature state, BLoC/Riverpod\'s AsyncValue patterns supersede builders (they ARE StreamBuilder, structured). The course\'s notes list = StreamBuilder over the notes service stream.',
-    whatBreaks: 'future: in build â†’ infinite refetch loop (the #1 FutureBuilder bug, easily a top-5 all-Flutter bug). Ignoring snapshot.hasError â†’ silent blank screens on failure. Streams without initialData flashing spinners over already-known data. Nesting four builders â†’ pyramid of doom; restructure.',
+    technicalDeep: 'FutureBuilder(future, builder): builder receives AsyncSnapshot — connectionState (waiting/active/done), hasData/data, hasError/error. THE bug: creating the future IN build (future: fetchNotes()) — every rebuild refires the request (spinner loops, duplicate calls); fix: create once in initState, reference the field. StreamBuilder: same snapshot API over a stream; waiting = before first event; remember a stream CAN emit errors then continue. initialData skips the first spinner when a cached value exists. Exhaustive snapshot handling: waiting → spinner; hasError → retryable error UI; hasData → content; else (done, no data) → empty state. Beyond basics: multiple builders nesting → lift to one combined stream (combineLatest, Phase 3) or proper state management; for whole-feature state, BLoC/Riverpod\'s AsyncValue patterns supersede builders (they ARE StreamBuilder, structured). The course\'s notes list = StreamBuilder over the notes service stream.',
+    whatBreaks: 'future: in build → infinite refetch loop (the #1 FutureBuilder bug, easily a top-5 all-Flutter bug). Ignoring snapshot.hasError → silent blank screens on failure. Streams without initialData flashing spinners over already-known data. Nesting four builders → pyramid of doom; restructure.',
     efficientWay: {
       title: 'Async UI patterns',
       approaches: [
@@ -3167,13 +3167,13 @@ StreamBuilder<List<Note>>(
     eli5: 'A unit test is a robot that checks one piece of your code automatically: "when I call login with a wrong password, does it throw the right error?" Write the check once, and the robot re-verifies it forever — on every change.',
     analogy: 'Unit tests are smoke detectors installed per room: each one watches one specific thing, costs little, and the moment a change starts a fire in the logic, the right alarm names the exact room.',
     explanation: 'Unit tests verify pure Dart logic — services, blocs, models, validators — without widgets or devices. This is where the architecture investment pays out: code depending on injected interfaces tests in milliseconds with fakes. The course unit-tests its AuthService; you\'ll test everything below the widget line.',
-    technicalDeep: 'flutter_test (bundled): test(\'description\', () {...}), group, setUp/tearDown, expect(actual, matcher) — matchers: equals, isA<T>(), throwsA(isA<AuthException>()), emitsInOrder for streams, completion for futures. Async tests: just async/await; fakeAsync/FakeTimer for time control (debounce tests without real waits). Mocking: mocktail (no codegen) — class MockAuthService extends Mock implements AuthService; when(() => mock.logIn(any(), any())).thenAnswer((_) async => user); verify(() => mock.logIn(\'a@b.c\', any())).called(1); registerFallbackValue for custom arg types. bloc_test package: blocTest(build:, act:, expect: [AuthLoading, AuthSuccess]) — bloc testing as data. Coverage: flutter test --coverage â†’ lcov; chase meaningful coverage (logic branches), not %. AAA structure: Arrange (mocks/inputs), Act (call), Assert (expect + verify).',
-    whatBreaks: 'Testing implementation details (verifying internal call order) â†’ tests break on every refactor while catching nothing. Real dependencies (network/DB) in unit tests â†’ slow, flaky, CI-hostile. Untestable code (static singletons, new-ed dependencies) discovered at test-writing time — the architecture lesson, learned backwards.',
+    technicalDeep: 'flutter_test (bundled): test(\'description\', () {...}), group, setUp/tearDown, expect(actual, matcher) — matchers: equals, isA<T>(), throwsA(isA<AuthException>()), emitsInOrder for streams, completion for futures. Async tests: just async/await; fakeAsync/FakeTimer for time control (debounce tests without real waits). Mocking: mocktail (no codegen) — class MockAuthService extends Mock implements AuthService; when(() => mock.logIn(any(), any())).thenAnswer((_) async => user); verify(() => mock.logIn(\'a@b.c\', any())).called(1); registerFallbackValue for custom arg types. bloc_test package: blocTest(build:, act:, expect: [AuthLoading, AuthSuccess]) — bloc testing as data. Coverage: flutter test --coverage → lcov; chase meaningful coverage (logic branches), not %. AAA structure: Arrange (mocks/inputs), Act (call), Assert (expect + verify).',
+    whatBreaks: 'Testing implementation details (verifying internal call order) → tests break on every refactor while catching nothing. Real dependencies (network/DB) in unit tests → slow, flaky, CI-hostile. Untestable code (static singletons, new-ed dependencies) discovered at test-writing time — the architecture lesson, learned backwards.',
     efficientWay: {
       title: 'What to unit test',
       approaches: [
         { name: 'Blocs/services first — the logic core', verdict: 'best', reason: 'Highest bug density, cheapest to test (pure Dart + fakes), the tests that catch real regressions.' },
-        { name: 'bloc_test for every bloc', verdict: 'best', reason: 'Event-in â†’ states-out as declarative data; the entire state machine verified per test.' },
+        { name: 'bloc_test for every bloc', verdict: 'best', reason: 'Event-in → states-out as declarative data; the entire state machine verified per test.' },
         { name: '100% coverage as the goal', verdict: 'weak', reason: 'Testing getters to hit a number wastes time; cover branches where bugs actually live.' }
       ],
       recommendation: 'Test pyramid: many unit tests (logic), some widget tests (UI behavior), few integration tests (critical journeys). Start with your AuthBloc: wrong-password, success, and network-failure paths — three tests that would each catch a real production bug.'
@@ -3242,7 +3242,7 @@ void main() {
     analogy: 'A widget test is a flight simulator for one screen: real controls, real instrument responses, scripted scenarios — but no airplane, no fuel, and a crash costs nothing.',
     explanation: 'Widget tests sit between unit tests (no UI) and integration tests (real device): they pump widget trees into a test harness, find elements, simulate gestures, and assert what renders. The sweet spot for testing form validation, conditional rendering, and per-state UI.',
     technicalDeep: 'testWidgets(\'…\', (tester) async {...}): tester.pumpWidget(harness) renders; wrap targets in MaterialApp/Scaffold (and providers — the harness mirrors the real ancestry). Finders: find.text, find.byType, find.byKey(Key(\'login-button\')) (stable test IDs), find.byIcon, find.descendant. Actions: tester.tap/enterText/drag/longPress — then tester.pump() (one frame), pump(duration) (advance time), pumpAndSettle() (until animations finish — beware infinite animations hanging it). Assertions: expect(finder, findsOneWidget/findsNothing/findsNWidgets(n)). Async UI: pump() after triggering futures. Fake dependencies injected via the same DI as production (BlocProvider(create: (_) => mockBloc)) — mocktail mocks work directly. Golden tests: expect(find.byType(Card), matchesGoldenFile(\'card.png\')) — pixel-regression for design systems. Run headless: flutter test, in CI, milliseconds per test.',
-    whatBreaks: 'pumpAndSettle hanging forever on repeating animations (use bounded pumps). Tests coupled to copy text (find.text(\'Submit\')) breaking on every wording tweak — prefer Keys for actionable elements. Missing ancestors (no MaterialApp â†’ "No Directionality widget found" and friends).',
+    whatBreaks: 'pumpAndSettle hanging forever on repeating animations (use bounded pumps). Tests coupled to copy text (find.text(\'Submit\')) breaking on every wording tweak — prefer Keys for actionable elements. Missing ancestors (no MaterialApp → "No Directionality widget found" and friends).',
     efficientWay: {
       title: 'Widget testing strategy',
       approaches: [
@@ -3257,7 +3257,7 @@ void main() {
       'Testing through real services because the harness lacks DI — inject mocks like production does.',
       'One test asserting forty things — failures become archaeology.'
     ],
-    seniorNotes: 'The high-value widget tests mirror the course\'s error-handling chapters: "wrong password â†’ error dialog appears", "submit disables while loading", "empty notes â†’ placeholder renders". State-driven UI (Phase 3) makes these nearly free: mock the bloc, emit the state, assert the widgets.',
+    seniorNotes: 'The high-value widget tests mirror the course\'s error-handling chapters: "wrong password → error dialog appears", "submit disables while loading", "empty notes → placeholder renders". State-driven UI (Phase 3) makes these nearly free: mock the bloc, emit the state, assert the widgets.',
     interviewQuestions: [
       'pump vs pumpAndSettle — when does each apply and what\'s the hang risk?',
       'How do you provide mocked blocs/providers inside a widget test?',
@@ -3308,11 +3308,11 @@ void main() {
     analogy: 'Unit tests check each car part on a bench; widget tests check the dashboard works when wired up; integration tests put a crash-test dummy in the driver\'s seat and drive the actual car around the track.',
     explanation: 'Integration tests (integration_test package) execute full user flows on real devices/emulators with everything live: real rendering, real navigation, real plugins (and optionally real-ish backends via emulators). Slow but irreplaceable for the critical paths — the flows where breakage means losing users.',
     technicalDeep: 'Setup: integration_test in dev_dependencies; tests in integration_test/ folder; IntegrationTestWidgetsFlutterBinding.ensureInitialized(); same testWidgets API — pump your REAL main app (app.main() or pumpWidget(const MyApp())). Run: flutter test integration_test -d <device>. Backends: Firebase Emulator Suite (auth + Firestore local — useAuthEmulator/useFirestoreEmulator) keeps tests hermetic: no prod data, free, resettable per test. Performance capture: traceAction + reportData for frame timings of hot flows (jank budgets in CI). Device farms: Firebase Test Lab runs them across real device matrices. Patrol package extends to NATIVE interactions (permission dialogs, notifications) that plain integration_test can\'t touch. Screenshots: binding.takeScreenshot for visual artifacts. Flakiness discipline: explicit waits on finders (no arbitrary sleeps), unique test accounts, reset state per test.',
-    whatBreaks: 'Tests against production Firebase — polluted data, costs, and rate limits. Sleep-based waits â†’ flaky in CI, slow everywhere. Testing every feature at this level — minutes per test makes broad coverage unmaintainable; that\'s what the lower pyramid layers are for.',
+    whatBreaks: 'Tests against production Firebase — polluted data, costs, and rate limits. Sleep-based waits → flaky in CI, slow everywhere. Testing every feature at this level — minutes per test makes broad coverage unmaintainable; that\'s what the lower pyramid layers are for.',
     efficientWay: {
       title: 'Integration test scope',
       approaches: [
-        { name: '3-5 critical journeys only', verdict: 'best', reason: 'Registerâ†’verifyâ†’login, createâ†’editâ†’delete note, logout — the flows that page you at night.' },
+        { name: '3-5 critical journeys only', verdict: 'best', reason: 'Register→verify→login, create→edit→delete note, logout — the flows that page you at night.' },
         { name: 'Firebase Emulator Suite as the backend', verdict: 'best', reason: 'Hermetic, fast, free, resettable — production parity without production risk.' },
         { name: 'Full regression suite as integration tests', verdict: 'weak', reason: 'Hour-long flaky CI runs that teams learn to ignore — the pyramid inverted.' }
       ],
@@ -3343,7 +3343,7 @@ void main() {
     FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
   });
 
-  testWidgets('register â†’ create note â†’ logout journey', (tester) async {
+  testWidgets('register → create note → logout journey', (tester) async {
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
 
@@ -3378,7 +3378,7 @@ void main() {
     title: 'TDD & BDD',
     eli5: 'TDD flips the order: write the test FIRST (it fails — the feature doesn\'t exist), write just enough code to pass it, clean up, repeat. The tests stop being homework after the fact and become the blueprint you build against.',
     analogy: 'Building without tests-first is sculpting freehand and inspecting at the end. TDD is setting up guide rails before each cut — every move is checked the moment you make it, and the rails remain forever to catch anyone who bumps the work later.',
-    explanation: 'TDD (Test-Driven Development): red â†’ green â†’ refactor cycles where tests precede implementation. BDD (Behavior-Driven Development): specs written as behaviors ("Given a logged-in user, When they delete a note, Then it disappears") — readable by non-engineers. In Flutter both shine for logic layers (blocs, services); pragmatic teams apply them selectively.',
+    explanation: 'TDD (Test-Driven Development): red → green → refactor cycles where tests precede implementation. BDD (Behavior-Driven Development): specs written as behaviors ("Given a logged-in user, When they delete a note, Then it disappears") — readable by non-engineers. In Flutter both shine for logic layers (blocs, services); pragmatic teams apply them selectively.',
     technicalDeep: 'TDD cycle: (1) RED — write a failing test naming the next small behavior; (2) GREEN — minimal code to pass (resist gold-plating); (3) REFACTOR — clean both code and tests under green. Benefits compound where logic is complex: bloc state machines TDD beautifully (blocTest the AuthFailure path before writing the catch). Design pressure: TDD makes untestable design painful immediately — DI violations surface at step 1, not at testing-week. BDD in Flutter: plain bloc_test names following Given/When/Then; or bdd_widget_test / gherkin packages generating tests from .feature files for stakeholder-readable specs. Where TDD strains in Flutter: exploratory UI work (pixel-pushing has no spec yet) — TDD the logic, iterate the UI visually, backfill widget tests for settled behavior.',
     whatBreaks: 'Dogmatic TDD on visual experiments — specs for layouts you\'re still discovering waste cycles. Test-after rationalized as "TDD-ish" — the design pressure (the actual point) is lost. BDD ceremony (cucumber files, step definitions) for a team of two engineers — tooling without the audience it serves.',
     efficientWay: {
@@ -3404,7 +3404,7 @@ void main() {
     codeExamples: [
       {
         lang: 'javascript',
-        label: 'TDD a bloc: red â†’ green â†’ refactor (Dart)',
+        label: 'TDD a bloc: red → green → refactor (Dart)',
         code: `// STEP 1 — RED: spec the behavior that doesn't exist yet
 blocTest<NotesBloc, NotesState>(
   'emits updated list after DeleteRequested',
@@ -3416,14 +3416,14 @@ blocTest<NotesBloc, NotesState>(
   act: (bloc) => bloc.add(DeleteRequested('n1')),
   expect: () => [isA<NotesLoaded>().having((s) => s.notes, 'notes', isEmpty)],
 );
-// flutter test â†’ FAILS: DeleteRequested doesn't exist. Good.
+// flutter test → FAILS: DeleteRequested doesn't exist. Good.
 
 // STEP 2 — GREEN: minimal implementation
 on<DeleteRequested>((event, emit) async {
   await repo.delete(event.noteId);
   emit(NotesLoaded(await repo.getNotes()));
 });
-// flutter test â†’ PASSES.
+// flutter test → PASSES.
 
 // STEP 3 — REFACTOR under green:
 // extract a _reload() helper shared with other handlers,
@@ -3438,16 +3438,16 @@ on<DeleteRequested>((event, emit) async {
     eli5: 'Things WILL go wrong: networks die, servers hiccup, users type nonsense. Error handling architecture decides what happens next — a helpful message and a retry button, or a frozen screen and a one-star review.',
     analogy: 'Errors are kitchen fires. Amateur kitchens have a panicked cook yelling different things each time. Professional kitchens have a fire plan: every station knows what to catch, what to escalate, and exactly what to tell the dining room ("your order needs five more minutes") — never the gory details.',
     explanation: 'Production-grade error handling is layered: typed exceptions at service boundaries (Phase 4), failure states in blocs (Phase 3), friendly UI per failure type, global handlers for the unexpected (Phase 5\'s onError hooks), and crash reporting closing the loop. This topic assembles the complete architecture.',
-    technicalDeep: 'The error taxonomy: expected domain failures (wrong password, no internet, validation) — typed, caught, rendered with recovery actions; unexpected bugs (null deref, state corruption) — caught globally, reported, generic apology UI. Layered flow: data layer throws typed exceptions (NetworkException, AuthException with user-presentable messages) â†’ bloc catches, emits Failure states â†’ UI renders per type (retry button for network, field error for validation) â†’ anything escaping reaches FlutterError.onError / PlatformDispatcher.onError / runZonedGuarded â†’ Crashlytics + graceful fallback. Result types as an alternative: Result<T>/Either<Failure, T> (fpdart) make failures explicit in signatures — no invisible throws; heavier syntax, stronger guarantees. ErrorWidget.builder replaces red-screen-of-death with branded fallback in release. Retry design: exponential backoff for transient network; never auto-retry non-idempotent writes; circuit-break repeated failures. Empty vs error vs offline states are DIFFERENT screens — design all three.',
+    technicalDeep: 'The error taxonomy: expected domain failures (wrong password, no internet, validation) — typed, caught, rendered with recovery actions; unexpected bugs (null deref, state corruption) — caught globally, reported, generic apology UI. Layered flow: data layer throws typed exceptions (NetworkException, AuthException with user-presentable messages) → bloc catches, emits Failure states → UI renders per type (retry button for network, field error for validation) → anything escaping reaches FlutterError.onError / PlatformDispatcher.onError / runZonedGuarded → Crashlytics + graceful fallback. Result types as an alternative: Result<T>/Either<Failure, T> (fpdart) make failures explicit in signatures — no invisible throws; heavier syntax, stronger guarantees. ErrorWidget.builder replaces red-screen-of-death with branded fallback in release. Retry design: exponential backoff for transient network; never auto-retry non-idempotent writes; circuit-break repeated failures. Empty vs error vs offline states are DIFFERENT screens — design all three.',
     whatBreaks: 'catch (e) { print(e); } — the error black hole: user sees nothing, you learn nothing. Raw exception strings in dialogs (FirebaseAuthException codes, stack traces). One generic "Something went wrong" for everything — no recovery path, support tickets instead of retries. Swallowing errors in streams (onError missing) killing subscriptions silently.',
     efficientWay: {
       title: 'Error architecture',
       approaches: [
-        { name: 'Typed exceptions â†’ failure states â†’ typed UI', verdict: 'best', reason: 'Each layer translates: technical â†’ domain â†’ presentable. Every error has one home and one rendering.' },
+        { name: 'Typed exceptions → failure states → typed UI', verdict: 'best', reason: 'Each layer translates: technical → domain → presentable. Every error has one home and one rendering.' },
         { name: 'Result/Either types at service boundaries', verdict: 'ok', reason: 'Compile-enforced handling — excellent discipline if the team embraces functional style.' },
         { name: 'Global catch-all with generic toast', verdict: 'weak', reason: 'One handler can\'t know recovery actions; "an error occurred" helps no one.' }
       ],
-      recommendation: 'Define your exception hierarchy once (AppException â†’ Network/Auth/Validation/Unknown, each with userMessage). Every service maps platform errors into it; every bloc catches it into states; every screen renders failure states with a recovery action. Wire global handlers + Crashlytics for the rest.'
+      recommendation: 'Define your exception hierarchy once (AppException → Network/Auth/Validation/Unknown, each with userMessage). Every service maps platform errors into it; every bloc catches it into states; every screen renders failure states with a recovery action. Wire global handlers + Crashlytics for the rest.'
     },
     commonMistakes: [
       'Empty catch blocks — errors deserve handling or propagation, never silence.',
@@ -3475,7 +3475,7 @@ class PermissionException extends AppException {
   @override String get userMessage => 'You don\\'t have access to this item.';
 }
 
-// 2. Service boundary: platform errors â†’ domain errors
+// 2. Service boundary: platform errors → domain errors
 Future<void> deleteNote(String id) async {
   try {
     await _firestore.collection('notes').doc(id).delete();
@@ -3488,7 +3488,7 @@ Future<void> deleteNote(String id) async {
   }
 }
 
-// 3. Bloc: domain errors â†’ failure states (never re-throw to UI)
+// 3. Bloc: domain errors → failure states (never re-throw to UI)
 on<DeleteRequested>((event, emit) async {
   try {
     await repo.deleteNote(event.id);
@@ -3498,7 +3498,7 @@ on<DeleteRequested>((event, emit) async {
   }
 });
 
-// 4. UI: failure state â†’ message + RECOVERY ACTION
+// 4. UI: failure state → message + RECOVERY ACTION
 if (state is NotesFailure) {
   return ErrorPanel(
     message: state.message,
@@ -3515,8 +3515,8 @@ if (state is NotesFailure) {
     eli5: 'The Dart analyzer is a tireless reviewer reading your code as you type: catching bugs before you run, flagging risky patterns, and enforcing the style rules your whole team agreed on — automatically, on every line.',
     analogy: 'Lints are the spell-check and grammar-check of code: invisible when you write well, instantly underlining the mistake when you don\'t — and far cheaper than a human catching it in review (or a user catching it in production).',
     explanation: 'Dart\'s static analysis is exceptional: the analyzer catches type errors, dead code, and bug patterns live; lint rules (flutter_lints, or stricter sets) enforce idioms; analysis_options.yaml configures it all; CI runs flutter analyze as a merge gate. Free quality, configured once.',
-    technicalDeep: 'analysis_options.yaml: include: package:flutter_lints/flutter.yaml (the sane default) â†’ stricter tiers: lints/recommended, very_good_analysis (the strictest popular set). Key rules worth enforcing: always_use_package_imports, prefer_const_constructors (+ literals — your Phase 5 performance wins, automated), avoid_dynamic_calls, unawaited_futures (catches fire-and-forget bugs — a real production-incident class), use_build_context_synchronously (the mounted-check bug from Phase 0, caught statically!), require_trailing_commas (formatter-friendly diffs). language: strict-casts/strict-raw-types for maximum type rigor. dart format: non-negotiable, zero-config, CI-checked (--set-exit-if-changed). dart fix --apply auto-fixes many violations. Custom ignores: // ignore: rule_name (with justification comment) — auditable escape hatches. CI gate: flutter analyze + dart format check + flutter test = the minimum merge bar.',
-    whatBreaks: 'Lint debt: enabling strict rules on a mature codebase â†’ 3,000 warnings â†’ team ignores ALL warnings including real ones — ratchet up gradually instead. Ignoring use_build_context_synchronously and unawaited_futures specifically — those two catch real crash classes, not style nits.',
+    technicalDeep: 'analysis_options.yaml: include: package:flutter_lints/flutter.yaml (the sane default) → stricter tiers: lints/recommended, very_good_analysis (the strictest popular set). Key rules worth enforcing: always_use_package_imports, prefer_const_constructors (+ literals — your Phase 5 performance wins, automated), avoid_dynamic_calls, unawaited_futures (catches fire-and-forget bugs — a real production-incident class), use_build_context_synchronously (the mounted-check bug from Phase 0, caught statically!), require_trailing_commas (formatter-friendly diffs). language: strict-casts/strict-raw-types for maximum type rigor. dart format: non-negotiable, zero-config, CI-checked (--set-exit-if-changed). dart fix --apply auto-fixes many violations. Custom ignores: // ignore: rule_name (with justification comment) — auditable escape hatches. CI gate: flutter analyze + dart format check + flutter test = the minimum merge bar.',
+    whatBreaks: 'Lint debt: enabling strict rules on a mature codebase → 3,000 warnings → team ignores ALL warnings including real ones — ratchet up gradually instead. Ignoring use_build_context_synchronously and unawaited_futures specifically — those two catch real crash classes, not style nits.',
     efficientWay: {
       title: 'Quality automation',
       approaches: [
@@ -3576,8 +3576,8 @@ flutter analyze || exit 1`
     eli5: 'Before strangers download your app, they see three things: its icon on the store, its name under the icon, and the splash screen while it loads. These are your app\'s handshake — worth getting right.',
     analogy: 'Icon, name, and splash are your app\'s storefront, sign, and lobby. The product may be great inside, but a clip-art sign and a flickering lobby light tell customers to expect clip-art quality everywhere.',
     explanation: 'The polish trio before release: launcher icons (per-platform sizes and shapes, automated by flutter_launcher_icons), display name (per-platform config files), and the native splash screen (flutter_native_splash) shown by the OS before Flutter boots — eliminating the default white flash.',
-    technicalDeep: 'Icons: one 1024Ã—1024 master â†’ flutter_launcher_icons generates all densities; Android adaptive icons (separate background + foreground layers, OS masks to circle/squircle — test both; keep foreground content in the inner 66% safe zone); iOS forbids transparency. App name: Android — android:label in AndroidManifest.xml; iOS — CFBundleDisplayName in Info.plist (max ~12 chars before truncation under icon). Splash: the OS-level launch screen exists BEFORE the Flutter engine starts — flutter_native_splash generates Android 12+ themed splash (centered icon on color — Android 12 enforces this layout) and iOS storyboard; match your app\'s first frame background to avoid a visible "double splash" jump. Extended branded loading (animated logo while bootstrapping) is a separate FLUTTER-side screen after engine start — keep total perceived wait under ~2s. Version identity: name + applicationId/bundle ID are permanent after first store release.',
-    whatBreaks: 'Adaptive icon foreground touching edges â†’ logo clipped to a circle on half of Android devices. White default splash flashing before a dark app — the "cheap app" tell. Renaming applicationId after release = a NEW app on the store, reviews and installs orphaned.',
+    technicalDeep: 'Icons: one 1024×1024 master → flutter_launcher_icons generates all densities; Android adaptive icons (separate background + foreground layers, OS masks to circle/squircle — test both; keep foreground content in the inner 66% safe zone); iOS forbids transparency. App name: Android — android:label in AndroidManifest.xml; iOS — CFBundleDisplayName in Info.plist (max ~12 chars before truncation under icon). Splash: the OS-level launch screen exists BEFORE the Flutter engine starts — flutter_native_splash generates Android 12+ themed splash (centered icon on color — Android 12 enforces this layout) and iOS storyboard; match your app\'s first frame background to avoid a visible "double splash" jump. Extended branded loading (animated logo while bootstrapping) is a separate FLUTTER-side screen after engine start — keep total perceived wait under ~2s. Version identity: name + applicationId/bundle ID are permanent after first store release.',
+    whatBreaks: 'Adaptive icon foreground touching edges → logo clipped to a circle on half of Android devices. White default splash flashing before a dark app — the "cheap app" tell. Renaming applicationId after release = a NEW app on the store, reviews and installs orphaned.',
     efficientWay: {
       title: 'Polish workflow',
       approaches: [
@@ -3589,7 +3589,7 @@ flutter analyze || exit 1`
     },
     commonMistakes: [
       'Logo with fine detail — illegible at the 48px launcher size; test small.',
-      'Splash background â‰  first app frame â†’ jarring color jump at engine start.',
+      'Splash background â‰  first app frame → jarring color jump at engine start.',
       'Forgetting to re-run generators after icon updates — stale icons ship.'
     ],
     seniorNotes: 'Time-to-interactive is a product metric: defer non-critical initialization (analytics, remote config fetch) until after first frame rather than padding the splash. deferFirstFrame/allowFirstFrame exists for genuinely-required async boot work — but the bar for "required before ANY pixel" should be high.',
@@ -3625,8 +3625,8 @@ dart run flutter_launcher_icons
 dart run flutter_native_splash:create
 
 # App display name
-# Android: android/app/src/main/AndroidManifest.xml â†’ android:label="My Notes"
-# iOS: ios/Runner/Info.plist â†’ CFBundleDisplayName = "My Notes"`
+# Android: android/app/src/main/AndroidManifest.xml → android:label="My Notes"
+# iOS: ios/Runner/Info.plist → CFBundleDisplayName = "My Notes"`
       }
     ]
   },
@@ -3638,7 +3638,7 @@ dart run flutter_native_splash:create
     analogy: 'Hardcoded strings are signs painted directly on walls — repainting the building for every country. Localization is a digital signboard system: one switch and every sign in the building displays the chosen language, including mirroring the layout for right-to-left readers.',
     explanation: 'Flutter\'s official l10n: ARB files (JSON-like, one per language) hold strings; flutter gen-l10n generates a typed AppLocalizations class; context.l10n.welcomeMessage replaces every literal. The system handles plurals, placeholders, dates/numbers (intl), and RTL layouts — the course covers it as the final feature before outro for good reason: retrofitting is painful.',
     technicalDeep: 'Setup: flutter_localizations + intl in pubspec; l10n.yaml (arb-dir, template-arb-file, output-class); lib/l10n/app_en.arb as template with @-metadata (description, placeholders); per-language app_es.arb, app_hi.arb. Codegen: flutter gen-l10n (auto on build). Wire: localizationsDelegates: AppLocalizations.delegates, supportedLocales — MaterialApp resolves device locale with fallback chain. Usage: AppLocalizations.of(context)!.noteCount(n) — plurals via ICU syntax ({count, plural, =0{No notes} one{1 note} other{{count} notes}}), placeholders typed from metadata. Dates/numbers: DateFormat.yMMMd(locale).format(date), NumberFormat.currency — NEVER hand-format. RTL: Directionality flows automatically from locale IF you used EdgeInsetsDirectional.only(start:) instead of left: — the discipline that makes Arabic/Hebrew free. Locale override (in-app language picker): locale: on MaterialApp from user preference. Missing keys fall back to template language.',
-    whatBreaks: 'Retrofitting 400 hardcoded strings — why l10n starts early even single-language. EdgeInsets.only(left:) everywhere â†’ broken RTL mirroring later. String concatenation for sentences ("You have " + n + " notes") — grammar breaks across languages; placeholders + plurals exist for this. Hardcoded date formats (MM/DD/YY) confusing the non-US world.',
+    whatBreaks: 'Retrofitting 400 hardcoded strings — why l10n starts early even single-language. EdgeInsets.only(left:) everywhere → broken RTL mirroring later. String concatenation for sentences ("You have " + n + " notes") — grammar breaks across languages; placeholders + plurals exist for this. Hardcoded date formats (MM/DD/YY) confusing the non-US world.',
     efficientWay: {
       title: 'i18n strategy',
       approaches: [
@@ -3674,7 +3674,7 @@ dart run flutter_native_splash:create
 //     "placeholders": { "count": { "type": "int" } }
 //   }
 // }
-// lib/l10n/app_hi.arb  â†’ same keys, Hindi values
+// lib/l10n/app_hi.arb  → same keys, Hindi values
 
 // MaterialApp wiring
 MaterialApp(
@@ -3706,9 +3706,9 @@ Padding(
     title: 'Android Release: Signing & Play Store',
     eli5: 'Releasing on Android means: cryptographically sign your app (proving updates come from you), build a release bundle, and walk it through the Google Play Console — store listing, content forms, testing track, then production rollout.',
     analogy: 'The keystore is your wax seal: every update must carry it, the store rejects any letter without it, and losing the seal means never writing to your readers again under that name. Play Console is the publishing house: manuscript (AAB), cover art (listing), content rating forms, then the printing press.',
-    explanation: 'The Android pipeline: generate an upload keystore â†’ configure Gradle signing â†’ flutter build appbundle --release â†’ Play Console (one-time $25): app content declarations, data safety form, store listing, then internal â†’ closed â†’ production tracks with staged rollouts. The course releases its notes app through exactly this gauntlet.',
-    technicalDeep: 'Keystore: keytool -genkey â†’ upload-keystore.jks; android/key.properties (gitignored!) holds paths/passwords; build.gradle signingConfigs.release reads it. Play App Signing (default, enroll always): Google holds the APP signing key, your keystore is just the UPLOAD key — losable keys become a support ticket instead of a tombstone. Build: flutter build appbundle (AAB required — Play generates optimized per-device APKs); versionCode (integer, MUST increase every upload) + versionName (display) from pubspec version: 1.2.0+7 (name+code). Shrinking: R8 minification default; add proguard keep-rules if reflection-using plugins crash in release. Console gauntlet: app content (privacy policy URL — required; ads declaration; target audience; data safety form — what you collect and why, mirrors your actual SDKs!), store listing (title 30 chars, short desc 80, full 4000, screenshots per form factor, feature graphic), content rating questionnaire. Tracks: internal (instant, 100 testers) â†’ closed â†’ open â†’ production with staged rollout (5% â†’ 20% â†’ 100%, halt on crash spikes). Review: hours to a few days typically. Pre-launch report: Play\'s robo-tests on real devices — free crash intel.',
-    whatBreaks: 'Lost upload keystore WITHOUT Play App Signing enrolled â†’ permanent update lockout (the career-story incident from git-for-flutter). versionCode not incremented â†’ upload rejected. Data safety form contradicting actual SDK behavior (Firebase Analytics collects identifiers!) â†’ rejection or later takedown. Release-only crashes from R8 stripping reflective code — always test the RELEASE build before upload.',
+    explanation: 'The Android pipeline: generate an upload keystore → configure Gradle signing → flutter build appbundle --release → Play Console (one-time $25): app content declarations, data safety form, store listing, then internal → closed → production tracks with staged rollouts. The course releases its notes app through exactly this gauntlet.',
+    technicalDeep: 'Keystore: keytool -genkey → upload-keystore.jks; android/key.properties (gitignored!) holds paths/passwords; build.gradle signingConfigs.release reads it. Play App Signing (default, enroll always): Google holds the APP signing key, your keystore is just the UPLOAD key — losable keys become a support ticket instead of a tombstone. Build: flutter build appbundle (AAB required — Play generates optimized per-device APKs); versionCode (integer, MUST increase every upload) + versionName (display) from pubspec version: 1.2.0+7 (name+code). Shrinking: R8 minification default; add proguard keep-rules if reflection-using plugins crash in release. Console gauntlet: app content (privacy policy URL — required; ads declaration; target audience; data safety form — what you collect and why, mirrors your actual SDKs!), store listing (title 30 chars, short desc 80, full 4000, screenshots per form factor, feature graphic), content rating questionnaire. Tracks: internal (instant, 100 testers) → closed → open → production with staged rollout (5% → 20% → 100%, halt on crash spikes). Review: hours to a few days typically. Pre-launch report: Play\'s robo-tests on real devices — free crash intel.',
+    whatBreaks: 'Lost upload keystore WITHOUT Play App Signing enrolled → permanent update lockout (the career-story incident from git-for-flutter). versionCode not incremented → upload rejected. Data safety form contradicting actual SDK behavior (Firebase Analytics collects identifiers!) → rejection or later takedown. Release-only crashes from R8 stripping reflective code — always test the RELEASE build before upload.',
     efficientWay: {
       title: 'Play release workflow',
       approaches: [
@@ -3744,7 +3744,7 @@ keytool -genkey -v -keystore upload-keystore.jks \\
 # storeFile=/secure/path/upload-keystore.jks
 
 # pubspec.yaml — versionName + versionCode
-# version: 1.2.0+7        â† name 1.2.0, code 7 (code must always increase)
+# version: 1.2.0+7        ← name 1.2.0, code 7 (code must always increase)
 
 # Build the signed bundle
 flutter build appbundle --release \\
@@ -3755,7 +3755,7 @@ flutter build appbundle --release \\
 flutter install --release -d <device>
 
 # Upload build/app/outputs/bundle/release/app-release.aab
-# Play Console â†’ Internal testing â†’ promote â†’ staged production (5% â†’ 100%)`
+# Play Console → Internal testing → promote → staged production (5% → 100%)`
       }
     ]
   },
@@ -3765,9 +3765,9 @@ flutter install --release -d <device>
     title: 'iOS Release: App Store Connect',
     eli5: 'Releasing on iPhone means joining Apple\'s developer program ($99/year), letting Xcode handle the signing certificates, uploading your build to App Store Connect, testing via TestFlight, and then passing Apple\'s famously picky human review.',
     analogy: 'If Google Play is a bustling marketplace with spot checks, the App Store is a luxury department store with a doorman: stricter dress code (guidelines), an actual human inspecting your goods (review), and higher rejection rates — but the same shelf access for everyone who passes.',
-    explanation: 'The iOS pipeline: Apple Developer Program enrollment â†’ signing (let Xcode manage certificates/profiles automatically) â†’ flutter build ipa â†’ upload to App Store Connect â†’ TestFlight beta â†’ store listing + privacy nutrition labels â†’ human review (1-2 days typically) â†’ release. The course walks this for the notes app, including a security-rules fix and resubmission — a very realistic detail.',
-    technicalDeep: 'Signing: development vs distribution certificates + provisioning profiles — "Automatically manage signing" in Xcode handles 95% of cases; bundle ID registered in the developer portal. Build: flutter build ipa â†’ Xcode Organizer or Transporter app uploads; build number must increase per upload (CFBundleVersion). TestFlight: internal testers (your team, instant) vs external (up to 10K, requires lightweight beta review); builds expire in 90 days. Listing requirements: screenshots per device class (6.7", 6.5", 5.5", iPad if supported — no simulator chrome), privacy nutrition labels (the data-collection disclosure grid — must match your SDKs), age rating, support URL. Review gotchas that reject Flutter apps: crashes on launch (test release on REAL device), broken links, sign-in apps without Sign in with Apple (required when offering other social logins), demo account missing for login-gated apps, "minimum functionality" (thin webview-like apps), payments bypassing IAP for digital goods. Rejections: respond in Resolution Center, fix, resubmit — normal lifecycle, not catastrophe (the course resubmits!). Phased release: 7-day automatic gradual rollout option.',
-    whatBreaks: 'Login-gated app without a demo account in review notes â†’ guaranteed rejection. Google Sign-In without Apple Sign-In â†’ rejection (guideline 4.8). Selling digital content via Stripe instead of IAP â†’ rejection (and the 30%/15% commission reality). Privacy labels missing SDK-collected data â†’ rejection or post-approval removal.',
+    explanation: 'The iOS pipeline: Apple Developer Program enrollment → signing (let Xcode manage certificates/profiles automatically) → flutter build ipa → upload to App Store Connect → TestFlight beta → store listing + privacy nutrition labels → human review (1-2 days typically) → release. The course walks this for the notes app, including a security-rules fix and resubmission — a very realistic detail.',
+    technicalDeep: 'Signing: development vs distribution certificates + provisioning profiles — "Automatically manage signing" in Xcode handles 95% of cases; bundle ID registered in the developer portal. Build: flutter build ipa → Xcode Organizer or Transporter app uploads; build number must increase per upload (CFBundleVersion). TestFlight: internal testers (your team, instant) vs external (up to 10K, requires lightweight beta review); builds expire in 90 days. Listing requirements: screenshots per device class (6.7", 6.5", 5.5", iPad if supported — no simulator chrome), privacy nutrition labels (the data-collection disclosure grid — must match your SDKs), age rating, support URL. Review gotchas that reject Flutter apps: crashes on launch (test release on REAL device), broken links, sign-in apps without Sign in with Apple (required when offering other social logins), demo account missing for login-gated apps, "minimum functionality" (thin webview-like apps), payments bypassing IAP for digital goods. Rejections: respond in Resolution Center, fix, resubmit — normal lifecycle, not catastrophe (the course resubmits!). Phased release: 7-day automatic gradual rollout option.',
+    whatBreaks: 'Login-gated app without a demo account in review notes → guaranteed rejection. Google Sign-In without Apple Sign-In → rejection (guideline 4.8). Selling digital content via Stripe instead of IAP → rejection (and the 30%/15% commission reality). Privacy labels missing SDK-collected data → rejection or post-approval removal.',
     efficientWay: {
       title: 'App Store workflow',
       approaches: [
@@ -3793,10 +3793,10 @@ flutter install --release -d <device>
         lang: 'bash',
         label: 'iOS release pipeline',
         code: `# Prereqs: Apple Developer Program ($99/yr), Xcode, real device
-# Xcode â†’ Runner â†’ Signing & Capabilities â†’ "Automatically manage signing"
+# Xcode → Runner → Signing & Capabilities → "Automatically manage signing"
 # Bundle ID: com.yourname.mynotes (registered in developer portal)
 
-# Version: pubspec version: 1.2.0+7 â†’ CFBundleShortVersionString 1.2.0, build 7
+# Version: pubspec version: 1.2.0+7 → CFBundleShortVersionString 1.2.0, build 7
 
 # Build the archive
 flutter build ipa --release \\
@@ -3808,12 +3808,12 @@ open build/ios/archive/Runner.xcarchive
 # build/ios/ipa/mynotes.ipa
 
 # App Store Connect checklist:
-# 1. TestFlight â†’ internal testers â†’ install on real devices
+# 1. TestFlight → internal testers → install on real devices
 # 2. App Information: name (30 chars), subtitle, category
 # 3. Privacy nutrition labels — match your actual SDKs (Firebase!)
 # 4. Screenshots: 6.7" + 6.5" + 5.5" (+ iPad if supported)
 # 5. REVIEW NOTES: demo account email/password, feature walkthrough
-# 6. Submit â†’ typically 24-48h â†’ respond to any rejection in Resolution Center`
+# 6. Submit → typically 24-48h → respond to any rejection in Resolution Center`
       }
     ]
   },
@@ -3824,8 +3824,8 @@ open build/ios/archive/Runner.xcarchive
     eli5: 'CI/CD replaces "build it on my laptop and pray" with robots: every code push gets automatically tested, built, signed, and shipped to testers or stores — the same way every time, with no human forgetting a step.',
     analogy: 'Manual releases are home cooking for a banquet: possible, exhausting, and one distracted moment ruins course seven. CI/CD is a commercial kitchen line — every dish assembled identically, quality-checked at each station, plated and delivered without the head chef touching a pan.',
     explanation: 'The Flutter delivery stack: CI (GitHub Actions running analyze/test/build per PR) + build automation (Fastlane lanes for signing and store upload) + optional managed services (Codemagic, Bitrise — Flutter-native CI with macOS runners included) + distribution (Firebase App Distribution for testers, TestFlight, Play tracks). The roadmap names all of these; together they\'re one pipeline.',
-    technicalDeep: 'GitHub Actions: PR workflow — checkout, subosito/flutter-action (pinned version), pub get, format check, analyze, test, build apk (the quality gate from the linting topic). Release workflow on tags: build signed artifacts â†’ deploy. Secrets: keystore/certificates base64-encoded into repo secrets, decoded in-job; --dart-define values from secrets. iOS on CI needs macOS runners (10x Linux cost) — why managed services exist. Fastlane: Ruby DSL — lanes scripting store interactions; match solves team iOS signing (certificates in an encrypted repo, synced across machines/CI); supply (Play upload), deliver/pilot (App Store/TestFlight upload), gym/build per platform. Codemagic: Flutter-first managed CI — YAML or UI workflows, macOS included, automatic signing integrations, direct store publishing; Bitrise similar with step marketplace. Firebase App Distribution: post-build hook ships APK/IPA to tester groups with release notes — the team dogfood loop. Versioning: CI injects build number from run number/git tag — humans never bump integers. Caching (pub, gradle) halves build times.',
-    whatBreaks: 'Secrets committed instead of injected — keystore in repo history is compromised forever. Unpinned Flutter version in CI â†’ builds break the day stable channel moves. iOS signing on CI without match/managed tooling â†’ certificate hell that consumes sprints. No artifact retention â†’ "which commit is build 47?" archaeology during incident response.',
+    technicalDeep: 'GitHub Actions: PR workflow — checkout, subosito/flutter-action (pinned version), pub get, format check, analyze, test, build apk (the quality gate from the linting topic). Release workflow on tags: build signed artifacts → deploy. Secrets: keystore/certificates base64-encoded into repo secrets, decoded in-job; --dart-define values from secrets. iOS on CI needs macOS runners (10x Linux cost) — why managed services exist. Fastlane: Ruby DSL — lanes scripting store interactions; match solves team iOS signing (certificates in an encrypted repo, synced across machines/CI); supply (Play upload), deliver/pilot (App Store/TestFlight upload), gym/build per platform. Codemagic: Flutter-first managed CI — YAML or UI workflows, macOS included, automatic signing integrations, direct store publishing; Bitrise similar with step marketplace. Firebase App Distribution: post-build hook ships APK/IPA to tester groups with release notes — the team dogfood loop. Versioning: CI injects build number from run number/git tag — humans never bump integers. Caching (pub, gradle) halves build times.',
+    whatBreaks: 'Secrets committed instead of injected — keystore in repo history is compromised forever. Unpinned Flutter version in CI → builds break the day stable channel moves. iOS signing on CI without match/managed tooling → certificate hell that consumes sprints. No artifact retention → "which commit is build 47?" archaeology during incident response.',
     efficientWay: {
       title: 'Pipeline strategy',
       approaches: [
@@ -3840,7 +3840,7 @@ open build/ios/archive/Runner.xcarchive
       'One workflow doing PR checks AND deployment — separate triggers, separate permissions.',
       'No release notes automation — testers get builds with zero context.'
     ],
-    seniorNotes: 'The pipeline IS the release runbook, executable and versioned. Senior moves: build numbers from CI run numbers, changelogs generated from conventional commits, symbol files (--split-debug-info) uploaded to Crashlytics per build, and a one-click rollback path (previous artifact re-promotion). Interview answer shape: "push â†’ gate â†’ build â†’ distribute â†’ monitor", with tools named at each arrow.',
+    seniorNotes: 'The pipeline IS the release runbook, executable and versioned. Senior moves: build numbers from CI run numbers, changelogs generated from conventional commits, symbol files (--split-debug-info) uploaded to Crashlytics per build, and a one-click rollback path (previous artifact re-promotion). Interview answer shape: "push → gate → build → distribute → monitor", with tools named at each arrow.',
     interviewQuestions: [
       'Design a CI/CD pipeline for a Flutter app shipping to both stores.',
       'How do you handle signing secrets safely in CI?',
@@ -3871,7 +3871,7 @@ open build/ios/archive/Runner.xcarchive
 #         env: { KEYSTORE_B64: \${{ secrets.KEYSTORE_B64 }} }
 #       - run: flutter build appbundle --release
 #           --build-number=\${{ github.run_number }}
-#       - uses: r0adkll/upload-google-play@v1   # â†’ internal track
+#       - uses: r0adkll/upload-google-play@v1   # → internal track
 
 # Fastlane lane (ios/fastlane/Fastfile)
 # lane :beta do
@@ -3894,13 +3894,13 @@ firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.ap
     eli5: 'Once your app is on thousands of phones, you\'re blind without instruments: Crashlytics tells you when and why it crashes out there, analytics tells you what users actually do (not what you hoped), and performance monitoring tells you where it\'s slow.',
     analogy: 'Shipping without monitoring is launching a satellite with no telemetry: it\'s out there, something\'s happening, and your only signal is angry one-star transmissions. Instrumentation is mission control — dashboards for every system, alarms before users notice.',
     explanation: 'The production observability stack: Firebase Crashlytics (crash + non-fatal error reporting with symbolicated stacks), Firebase Analytics (events, funnels, audiences — feeds Remote Config A/B tests), alternatives/complements (Mixpanel, Segment as event router), and Sentry as the strong non-Firebase contender. The roadmap\'s analytics block, turned into an architecture.',
-    technicalDeep: 'Crashlytics: firebase_crashlytics — wire BOTH hooks (FlutterError.onError â†’ recordFlutterFatalError; PlatformDispatcher.onError â†’ recordError — Phase 5\'s setup completed); recordError(e, stack, fatal: false) for caught-but-notable exceptions (your AppException handler\'s unknown branch); setCustomKey/setUserIdentifier for crash context (screen, feature flags); obfuscated builds need symbol upload (--split-debug-info files â†’ Crashlytics) or stacks are hex soup. Velocity alerts: crash spikes page you — the staged-rollout halt trigger. Analytics: logEvent(name, parameters) — design a SMALL taxonomy (10-20 events: note_created, signup_completed) with consistent params; screen tracking via observer; user properties segment audiences; funnels expose drop-off (signup_started â†’ completed at 40%? UX bug found). Feeds Remote Config experiments — A/B tests measured by YOUR events. Segment: one SDK fan-outs events to many tools — adopt when tool count > 2. Sentry: sentry_flutter — superior issue grouping/breadcrumbs, backend correlation (your Backend track services + app in one trace view). Privacy: consent gates (GDPR), no PII in event params, store disclosure alignment (the labels from the release topics!).',
-    whatBreaks: 'Symbol files not uploaded â†’ obfuscated crash stacks are unreadable â†’ bugs unfixable. Event taxonomy sprawl (300 ad-hoc events, inconsistent naming) â†’ analytics nobody trusts or uses. PII in event parameters â†’ GDPR incident. Analytics declared "not collected" in store privacy forms while Firebase Analytics runs â†’ policy violation.',
+    technicalDeep: 'Crashlytics: firebase_crashlytics — wire BOTH hooks (FlutterError.onError → recordFlutterFatalError; PlatformDispatcher.onError → recordError — Phase 5\'s setup completed); recordError(e, stack, fatal: false) for caught-but-notable exceptions (your AppException handler\'s unknown branch); setCustomKey/setUserIdentifier for crash context (screen, feature flags); obfuscated builds need symbol upload (--split-debug-info files → Crashlytics) or stacks are hex soup. Velocity alerts: crash spikes page you — the staged-rollout halt trigger. Analytics: logEvent(name, parameters) — design a SMALL taxonomy (10-20 events: note_created, signup_completed) with consistent params; screen tracking via observer; user properties segment audiences; funnels expose drop-off (signup_started → completed at 40%? UX bug found). Feeds Remote Config experiments — A/B tests measured by YOUR events. Segment: one SDK fan-outs events to many tools — adopt when tool count > 2. Sentry: sentry_flutter — superior issue grouping/breadcrumbs, backend correlation (your Backend track services + app in one trace view). Privacy: consent gates (GDPR), no PII in event params, store disclosure alignment (the labels from the release topics!).',
+    whatBreaks: 'Symbol files not uploaded → obfuscated crash stacks are unreadable → bugs unfixable. Event taxonomy sprawl (300 ad-hoc events, inconsistent naming) → analytics nobody trusts or uses. PII in event parameters → GDPR incident. Analytics declared "not collected" in store privacy forms while Firebase Analytics runs → policy violation.',
     efficientWay: {
       title: 'Observability rollout',
       approaches: [
         { name: 'Crashlytics + 12-event taxonomy at launch', verdict: 'best', reason: 'Crash visibility is non-negotiable; a dozen well-named events answer 90% of product questions.' },
-        { name: 'Sentry when you also own the backend', verdict: 'best', reason: 'App release â†” API error correlation in one tool — debugging compound incidents in one view.' },
+        { name: 'Sentry when you also own the backend', verdict: 'best', reason: 'App release ↔ API error correlation in one tool — debugging compound incidents in one view.' },
         { name: 'Track-everything-decide-later', verdict: 'weak', reason: 'Event swamps produce dashboards nobody reads and bills everybody questions.' }
       ],
       recommendation: 'Before first release: Crashlytics with both error hooks + symbol upload in CI, velocity alerts on. Write the event taxonomy as a reviewed doc (name, params, trigger, owner) — 12 events, consistently named. Add funnels for your activation flow week one.'
@@ -3910,7 +3910,7 @@ firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.ap
       'Testing Crashlytics in debug mode — it batches/disables; use test crash in release.',
       'Event names like "click7" and "newEvent_final2" — taxonomy or chaos.'
     ],
-    seniorNotes: 'Close the loop into engineering practice: crash-free rate (target >99.5%) on the team dashboard, staged rollouts halted by velocity alerts automatically, every Crashlytics issue triaged like a failing test (reproduce â†’ failing test â†’ fix â†’ ship). Analytics maturity: events reviewed in PRs like schema changes, because they are.',
+    seniorNotes: 'Close the loop into engineering practice: crash-free rate (target >99.5%) on the team dashboard, staged rollouts halted by velocity alerts automatically, every Crashlytics issue triaged like a failing test (reproduce → failing test → fix → ship). Analytics maturity: events reviewed in PRs like schema changes, because they are.',
     interviewQuestions: [
       'Wire up complete crash reporting for Flutter — what are the pieces?',
       'How do you design an analytics event taxonomy that stays useful?',
@@ -3964,7 +3964,7 @@ await FirebaseAnalytics.instance.logEvent(
     analogy: 'Store policies are building codes: you CAN design a house that violates them, but it won\'t pass inspection — and the expensive time to learn the code is before pouring the foundation (auth and payment flows), not at inspection day.',
     explanation: 'The compliance layer around shipping: Apple\'s App Review Guidelines and Google\'s Developer Programme Policies — payments rules (IAP commissions), data/privacy disclosure regimes, account-deletion mandates, update cadence requirements (target API levels), and the operational rhythm of keeping a published app alive and compliant.',
     technicalDeep: 'Payments: digital goods/subscriptions MUST use IAP (Apple 3.1.1, Play Billing) — 15-30% commission (15% under $1M/small-business programs); physical goods/services exempt (Uber model); in_app_purchase package or RevenueCat (receipt validation, cross-platform entitlements — strongly preferred). Account deletion: BOTH stores mandate in-app account deletion for apps with account creation (not just a support email). Privacy regimes: iOS nutrition labels + ATT prompt (only if cross-app tracking) + Privacy Manifests (SDK declarations); Play Data Safety form; both must match actual SDK behavior — audits happen. Android target API ratchet: Play requires targeting recent API levels (~1 year window) — an annual forced maintenance update even with zero features; abandoning an app gets it delisted. Update mechanics: no partial updates in stores (full binary through review every time) — hence Remote Config/feature flags for logic switches (code push à la Shorebird exists; mind policy boundaries). Review re-runs on EVERY update — a previously-approved feature can be re-flagged. Subscriptions: mandatory management links, price-change consent flows, grace periods.',
-    whatBreaks: 'Stripe checkout for premium features â†’ rejection (or post-approval takedown + payout clawback risk). Account signup without account deletion â†’ rejection under current policies. Skipping the annual target-API bump â†’ Play delisting warnings. Assuming approval is permanent — re-review on update flags two-year-old features.',
+    whatBreaks: 'Stripe checkout for premium features → rejection (or post-approval takedown + payout clawback risk). Account signup without account deletion → rejection under current policies. Skipping the annual target-API bump → Play delisting warnings. Assuming approval is permanent — re-review on update flags two-year-old features.',
     efficientWay: {
       title: 'Compliance strategy',
       approaches: [
@@ -3989,7 +3989,7 @@ await FirebaseAnalytics.instance.logEvent(
       {
         lang: 'javascript',
         label: 'Policy-aware monetization (Dart)',
-        code: `// Digital goods â†’ IAP required. RevenueCat handles the hard parts.
+        code: `// Digital goods → IAP required. RevenueCat handles the hard parts.
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 await Purchases.configure(PurchasesConfiguration(revenueCatApiKey));
@@ -3998,18 +3998,18 @@ await Purchases.configure(PurchasesConfiguration(revenueCatApiKey));
 final offerings = await Purchases.getOfferings();
 final monthly = offerings.current?.monthly;
 
-// Purchase â†’ validated receipt â†’ entitlement (cross-platform)
+// Purchase → validated receipt → entitlement (cross-platform)
 final info = await Purchases.purchasePackage(monthly!);
 final isPro = info.entitlements.active.containsKey('pro');
 
-// Check entitlement anywhere (survives reinstall, syncs iOSâ†”Android)
+// Check entitlement anywhere (survives reinstall, syncs iOS↔Android)
 final customerInfo = await Purchases.getCustomerInfo();
 if (customerInfo.entitlements.active.containsKey('pro')) {
   // unlock premium features
 }
 
 // MANDATORY: account deletion path in-app (both stores)
-// Settings â†’ Delete Account â†’ confirm â†’
+// Settings → Delete Account → confirm →
 //   await user.delete() + cascade Firestore data + entitlement cleanup
 
 // MANDATORY (subscriptions): link to manage/cancel
@@ -4026,7 +4026,7 @@ if (customerInfo.entitlements.active.containsKey('pro')) {
     analogy: 'Finishing the curriculum is earning the chef\'s knife skills; getting hired is the tasting menu — a few polished signature dishes (portfolio apps), confident technique under observation (live coding), and enough culinary theory to discuss any course (system design + internals).',
     explanation: 'The capstone: converting skills into employment. What Flutter interviews actually test (Dart + lifecycle + state management + internals + one system design), what a hireable portfolio looks like (shipped > sophisticated), how Flutter fits the wider mobile market (vs native, vs React Native), and the adjacent tracks that compound (native platform basics, backend — your other track!).',
     technicalDeep: 'Interview canon (you\'ve seen every answer in this curriculum): three trees + keys (Phase 5), StatefulWidget lifecycle (Phase 1), constraint model (Phase 2), your state library deep + comparisons (Phase 3), async/isolates (Phase 0), and a system design ("architect a chat app": auth flow, repository interfaces, realtime stream choice, offline strategy, error architecture, testing pyramid — Phases 3-6 assembled aloud). Live coding: build a small UI from a mock with clean state handling — practice timed. Portfolio that converts: 1-2 SHIPPED store apps (store links beat repo links — shipping proves the last 20% most candidates lack) + one architecture-showcase repo (tests, CI badge, README with decisions). The market: Flutter dominates cross-platform job growth; pay parity with native; companies value the native-basics-plus-Flutter combo (platform channels confidence). Adjacent compounding skills: Kotlin/Swift basics (debug platform issues, write channels), backend (your parallel track — full-stack mobile engineers are rare and prized), Firebase depth. Community: contributing to pub packages is visible proof of competence.',
-    whatBreaks: 'Portfolio of 12 tutorial clones — reviewers recognize the course apps instantly; one original shipped app outweighs all of them. Memorized definitions without the connecting why ("widgets are immutable" — so what? â†’ because the element diff makes rebuilds cheap, which is why composition works). Applying only to "Flutter Developer" titles — "Mobile Engineer" roles increasingly mean Flutter.',
+    whatBreaks: 'Portfolio of 12 tutorial clones — reviewers recognize the course apps instantly; one original shipped app outweighs all of them. Memorized definitions without the connecting why ("widgets are immutable" — so what? → because the element diff makes rebuilds cheap, which is why composition works). Applying only to "Flutter Developer" titles — "Mobile Engineer" roles increasingly mean Flutter.',
     efficientWay: {
       title: 'Path to hired',
       approaches: [
@@ -4054,25 +4054,25 @@ if (customerInfo.entitlements.active.containsKey('pro')) {
         code: `# The hireable Flutter portfolio
 #
 # 1. SHIPPED app (the differentiator)
-#    âœ“ Original idea, small scope, polished UX
-#    âœ“ Live on Play Store (+ App Store if possible) — store links in CV
-#    âœ“ Crashlytics + analytics wired (mention crash-free % in interviews)
-#    âœ“ Built with: state management, Firebase/API, tests, CI
+#    ✓ Original idea, small scope, polished UX
+#    ✓ Live on Play Store (+ App Store if possible) — store links in CV
+#    ✓ Crashlytics + analytics wired (mention crash-free % in interviews)
+#    ✓ Built with: state management, Firebase/API, tests, CI
 #
 # 2. Architecture showcase repo
-#    âœ“ README: decisions and WHY (state mgmt choice, layer diagram)
-#    âœ“ Tests: unit (blocs/services) + widget + 1 integration journey
-#    âœ“ CI badge: analyze + format + test on every PR
-#    âœ“ Feature-first structure, typed errors, l10n-ready
+#    ✓ README: decisions and WHY (state mgmt choice, layer diagram)
+#    ✓ Tests: unit (blocs/services) + widget + 1 integration journey
+#    ✓ CI badge: analyze + format + test on every PR
+#    ✓ Feature-first structure, typed errors, l10n-ready
 #
 # 3. Interview canon — rehearse ALOUD:
-#    âœ“ Three trees, keys, GlobalKey          (internals)
-#    âœ“ Lifecycle + constraint model           (foundations)
-#    âœ“ Your state library vs alternatives     (judgment)
-#    âœ“ "Design a chat app" end-to-end         (system design)
-#    âœ“ A production story: bug â†’ diagnosis â†’ fix â†’ prevention
+#    ✓ Three trees, keys, GlobalKey          (internals)
+#    ✓ Lifecycle + constraint model           (foundations)
+#    ✓ Your state library vs alternatives     (judgment)
+#    ✓ "Design a chat app" end-to-end         (system design)
+#    ✓ A production story: bug → diagnosis → fix → prevention
 #
-# 4. Parallel track: Backend (you're already on it) â†’ full-stack mobile`
+# 4. Parallel track: Backend (you're already on it) → full-stack mobile`
       }
     ]
   },

@@ -152,20 +152,20 @@ useEffect(() => {
   { id: 3, text: 'Deploy', done: false },
 ];
 
-// map â†’ render a list
+// map → render a list
 const items = todos.map(todo => (
   <li key={todo.id} style={{ opacity: todo.done ? 0.5 : 1 }}>
     {todo.text}
   </li>
 ));
 
-// filter â†’ show only incomplete
+// filter → show only incomplete
 const pending = todos.filter(t => !t.done);
 
-// find â†’ get one
+// find → get one
 const first = todos.find(t => t.id === 2);  // { id:2, text:'Build...' }
 
-// reduce â†’ count done
+// reduce → count done
 const doneCount = todos.reduce((acc, t) => acc + (t.done ? 1 : 0), 0);`
       }
     ]
@@ -538,7 +538,7 @@ function UserView() {
     eli5: 'The DOM is the browser\'s model of your webpage as a tree of boxes. Events are things that happen (click, type, scroll). React replaces direct DOM manipulation with a Virtual DOM — understanding what React abstracts away helps you know when you need to go around it.',
     analogy: 'The DOM is the room\'s furniture. Native events are when someone touches furniture. React is an interior designer who works with blueprints (Virtual DOM) and only physically moves furniture when the blueprint changes.',
     explanation: 'React wraps native DOM events with `SyntheticEvent` — a cross-browser wrapper. You almost never touch the real DOM in React, but you need to know it exists for: third-party libraries that manipulate DOM directly, `useRef` for DOM access, `document.addEventListener` for global events, and `getBoundingClientRect()` for positioning.',
-    technicalDeep: 'React 17+ uses event delegation on the root element instead of individual elements — all events bubble up to one listener. `SyntheticEvent` is pooled in React 16 (no longer in 17+). Event propagation: capture phase (down the tree) â†’ target â†’ bubble phase (up the tree). `e.stopPropagation()` stops bubbling. `e.preventDefault()` prevents default browser behavior (like form submit navigating the page). `useRef` gives a stable reference to the actual DOM node for cases like: focus management, scroll control, measuring element size, integrating non-React libraries.',
+    technicalDeep: 'React 17+ uses event delegation on the root element instead of individual elements — all events bubble up to one listener. `SyntheticEvent` is pooled in React 16 (no longer in 17+). Event propagation: capture phase (down the tree) → target → bubble phase (up the tree). `e.stopPropagation()` stops bubbling. `e.preventDefault()` prevents default browser behavior (like form submit navigating the page). `useRef` gives a stable reference to the actual DOM node for cases like: focus management, scroll control, measuring element size, integrating non-React libraries.',
     whatBreaks: '`e.target.value` works for input events; `e.target` is typed as `EventTarget` in TypeScript which has no `.value` — cast to `HTMLInputElement`. Attaching event listeners to `document` inside useEffect without removing them in cleanup causes memory leaks.',
     efficientWay: {
       title: 'Understanding the DOM in a React context',
@@ -612,7 +612,7 @@ function UserView() {
       'Nesting component definitions inside render functions — creates a new component type every render, forcing unmount/remount.',
       'Treating the Virtual DOM as a performance win in all cases — for very simple UIs, direct DOM manipulation is faster. React wins at scale.'
     ],
-    seniorNotes: 'In interviews: React\'s reconciliation is O(n) (linear scan of both trees), not the theoretical O(nÂ³) of arbitrary tree diffing — it makes two assumptions: elements of different types produce different trees, and the key prop is stable identity. Both are your responsibility as the developer.',
+    seniorNotes: 'In interviews: React\'s reconciliation is O(n) (linear scan of both trees), not the theoretical O(n³) of arbitrary tree diffing — it makes two assumptions: elements of different types produce different trees, and the key prop is stable identity. Both are your responsibility as the developer.',
     interviewQuestions: [
       'What is the Virtual DOM and how does reconciliation work?',
       'What does changing a component\'s `key` prop do?',
@@ -648,7 +648,7 @@ function App() {
     eli5: 'Vite is the tool that sets up your React workshop. It creates all the files, starts a fast preview server, and when you\'re ready, packages everything up neatly to send to the internet.',
     analogy: 'Vite is the scaffolding crew. They set up the construction site (project files, server, build pipeline) so the builders (you) can start building immediately without worrying about the crane.',
     explanation: 'Vite is the de-facto React build tool in 2024+. It uses ES module native imports in development (instant HMR — hot module replacement) and Rollup for production builds. Create a TypeScript React project in seconds: `npm create vite@latest my-app -- --template react-ts`. No configuration needed to start.',
-    technicalDeep: 'Vite\'s dev server serves source files as ES modules — the browser requests each file, Vite transforms on demand (no bundling). This is why HMR is instant regardless of app size. In production, Vite uses Rollup with code splitting at dynamic `import()` boundaries. Key config: `vite.config.ts` for aliases (`@/` â†’ `./src/`), proxy (for dev API calls to avoid CORS), and environment variables. `.env` files: `VITE_` prefix makes vars available in client code via `import.meta.env.VITE_API_URL`. Non-prefixed vars stay server-only. `tsconfig.json` `paths` must match Vite aliases for TypeScript to resolve correctly.',
+    technicalDeep: 'Vite\'s dev server serves source files as ES modules — the browser requests each file, Vite transforms on demand (no bundling). This is why HMR is instant regardless of app size. In production, Vite uses Rollup with code splitting at dynamic `import()` boundaries. Key config: `vite.config.ts` for aliases (`@/` → `./src/`), proxy (for dev API calls to avoid CORS), and environment variables. `.env` files: `VITE_` prefix makes vars available in client code via `import.meta.env.VITE_API_URL`. Non-prefixed vars stay server-only. `tsconfig.json` `paths` must match Vite aliases for TypeScript to resolve correctly.',
     whatBreaks: '`process.env.REACT_APP_*` (Create React App convention) does not work in Vite — use `import.meta.env.VITE_*`. The `public/` folder is served as-is; `src/assets/` goes through the bundler (gets hashed for cache busting).',
     efficientWay: {
       title: 'Getting started with Vite',
@@ -705,7 +705,7 @@ npm i -D eslint prettier eslint-plugin-react-hooks
     title: 'JSX & TSX',
     eli5: 'JSX lets you write HTML-looking code inside JavaScript. It\'s not real HTML — it gets compiled into `React.createElement()` calls. TSX is the same thing but in TypeScript files.',
     analogy: 'JSX is HTML wearing a JavaScript costume. It looks like HTML at the party, but backstage it\'s pure JavaScript function calls.',
-    explanation: 'JSX is syntactic sugar compiled by Babel/SWC to `React.createElement(type, props, ...children)` calls. Rules: class â†’ className, for â†’ htmlFor, all tags must close (`<br />`), one root element (or use `<>` fragment), expressions in `{}`. TSX adds TypeScript — all JSX rules plus prop types.',
+    explanation: 'JSX is syntactic sugar compiled by Babel/SWC to `React.createElement(type, props, ...children)` calls. Rules: class → className, for → htmlFor, all tags must close (`<br />`), one root element (or use `<>` fragment), expressions in `{}`. TSX adds TypeScript — all JSX rules plus prop types.',
     technicalDeep: 'Modern React (17+) uses the new JSX transform — no more `import React from "react"` at the top of every file. The transform imports `jsx` from `react/jsx-runtime` automatically. JSX expressions can contain any JS expression; statements (if, for) cannot appear directly — use ternary `? :` or `&&` for conditionals, `array.map()` for lists. String props don\'t need `{}`: `<Btn label="Click" />`. Non-string props always need `{}`: `<Btn count={5} />`. Spreading props: `<Comp {...props} />` — equivalent to listing every prop individually. Self-closing tags: any component without children should self-close: `<Avatar />` not `<Avatar></Avatar>`.',
     whatBreaks: '`class` instead of `className` silently adds an unknown DOM attribute — no error, just missing styles. Returning adjacent elements without a wrapper throws "JSX must have one parent element". Falsy values: `0` renders as the text "0" — use `condition !== 0 && <X>` or `!!condition && <X>`.',
     efficientWay: {
@@ -732,7 +732,7 @@ npm i -D eslint prettier eslint-plugin-react-hooks
       {
         lang: 'tsx',
         label: 'JSX rules in one file',
-        code: `// âœ… One root element (or fragment)
+        code: `// ✅ One root element (or fragment)
 function Card({ title, count, isAdmin }: { title: string; count: number; isAdmin: boolean }) {
   return (
     <div className="card">          {/* className not class */}
@@ -804,16 +804,16 @@ function Wrapper() {
 
 // Function declaration — preferred over arrow function for components
 function UserCard({ name, email, avatarUrl }: UserCardProps): JSX.Element {
-  // âœ… Hooks here — always at the top level
+  // ✅ Hooks here — always at the top level
   const [expanded, setExpanded] = useState(false);
 
-  // âœ… Derived values — computed from props/state
+  // ✅ Derived values — computed from props/state
   const initials = name.split(' ').map(n => n[0]).join('');
 
-  // âœ… Event handlers — defined in component body
+  // ✅ Event handlers — defined in component body
   function handleToggle() { setExpanded(e => !e); }
 
-  // âœ… Return JSX — the only required output
+  // ✅ Return JSX — the only required output
   return (
     <div className="card" onClick={handleToggle}>
       {avatarUrl
@@ -836,7 +836,7 @@ export default UserCard;`
     title: 'Props & Component Communication',
     eli5: 'Props are the settings you hand to a component. Like filling out a form for a pizza order: you choose the toppings (props) and the pizza shop (component) makes the pizza (UI) with exactly those toppings.',
     analogy: 'Props are function arguments. A component is a function. When you write `<Button color="red" />` you are calling `Button({ color: "red" })`.',
-    explanation: 'Props are read-only data passed from parent to child. They flow in one direction: parent â†’ child (unidirectional data flow). To "pass data up," a parent passes a callback function as a prop; the child calls it. All React components must treat their props as immutable.',
+    explanation: 'Props are read-only data passed from parent to child. They flow in one direction: parent → child (unidirectional data flow). To "pass data up," a parent passes a callback function as a prop; the child calls it. All React components must treat their props as immutable.',
     technicalDeep: 'Props are plain objects received as the first argument. Destructuring is idiomatic: `function Btn({ label, onClick }: BtnProps)`. Default values: `function Btn({ label = "Click" })`. Spread props `<Child {...parentProps} />` passes all parent props — useful for wrappers but can leak unwanted props to DOM elements (TypeScript catches this). `children` is a special prop: `React.ReactNode` type, passed between opening/closing tags. Prop drilling (passing props many levels deep) is a smell — Context or state management is the fix. Never mutate props — React relies on props being immutable to optimize renders.',
     whatBreaks: 'Mutating props directly (`props.user.name = "new"`) causes subtle bugs — React may not re-render because the reference didn\'t change. Spreading all props onto a DOM element passes unknown HTML attributes — TypeScript\'s `HTMLDivElement` props type catches this.',
     efficientWay: {
@@ -876,7 +876,7 @@ function Alert({ type = 'info', onClose, children }: AlertProps) {
     <div style={{ borderLeft: \`4px solid \${colors[type]}\`, padding: 12 }}>
       {children}
       {onClose && (
-        <button onClick={onClose}>âœ•</button>
+        <button onClick={onClose}>✕</button>
       )}
     </div>
   );
@@ -950,7 +950,7 @@ const [config, setConfig] = useState(() => {
 
 // What NOT to do
 const [doubled, setDoubled] = useState(count * 2); // âŒ derived state, will get stale
-// âœ… Instead: const doubled = count * 2;`
+// ✅ Instead: const doubled = count * 2;`
       }
     ]
   },
@@ -1117,7 +1117,7 @@ function TodoList({ todos }: { todos: Todo[] }) {
   return (
     <ul>
       {todos.map(todo => (
-        // âœ… Use the stable database ID
+        // ✅ Use the stable database ID
         <li key={todo.id} style={{ opacity: todo.done ? 0.4 : 1 }}>
           {todo.text}
         </li>
@@ -1150,7 +1150,7 @@ function Table({ rows }: { rows: Todo[] }) {
     eli5: 'A controlled input is an input whose value is stored in React state. Every keystroke updates the state, and the state updates the input — React is the boss of what the input shows.',
     analogy: 'An uncontrolled input is like a notebook you write in directly. A controlled input is like a dictation system: you speak (type), the transcriber (React state) writes it down, and the screen shows what the transcriber wrote.',
     explanation: 'Controlled: `<input value={state} onChange={e => setState(e.target.value)} />`. Value comes FROM state; changes go THROUGH setState. Uncontrolled: `<input ref={ref} />` — the DOM holds the value, you read it on submit. Controlled is the React standard for forms with validation, formatting, or conditional behavior.',
-    technicalDeep: 'Controlled inputs create a React-DOM round trip on each keystroke: event â†’ handler â†’ setState â†’ re-render â†’ DOM update. This is fast but means: (a) you can validate/transform on every keystroke, (b) the input value is always in sync with state. Uncontrolled inputs (`useRef`) bypass this loop — better for file inputs (`<input type="file">`) which cannot be controlled, and for performance-sensitive forms. `defaultValue` vs `value`: `value` = controlled (React owns it), `defaultValue` = uncontrolled initial value. Mixing both creates a warning. Form libraries (React Hook Form, Formik) use refs + controlled inputs strategically to minimize re-renders.',
+    technicalDeep: 'Controlled inputs create a React-DOM round trip on each keystroke: event → handler → setState → re-render → DOM update. This is fast but means: (a) you can validate/transform on every keystroke, (b) the input value is always in sync with state. Uncontrolled inputs (`useRef`) bypass this loop — better for file inputs (`<input type="file">`) which cannot be controlled, and for performance-sensitive forms. `defaultValue` vs `value`: `value` = controlled (React owns it), `defaultValue` = uncontrolled initial value. Mixing both creates a warning. Form libraries (React Hook Form, Formik) use refs + controlled inputs strategically to minimize re-renders.',
     whatBreaks: '`<input value={state} />` without an `onChange` creates a read-only input (React warns). `<input value={undefined} />` starts as uncontrolled; if state later becomes a string, React switches it to controlled — warning about "uncontrolled to controlled" change.',
     efficientWay: {
       title: 'Building forms',
@@ -1318,7 +1318,7 @@ function PageLayout({
 function CounterA() { const [n, setN] = useState(0); return <button onClick={() => setN(n+1)}>{n}</button>; }
 function CounterB() { const [n, setN] = useState(0); return <div>Same as A? No: {n}</div>; }
 
-// âœ… After: state lifted to common parent
+// ✅ After: state lifted to common parent
 function Parent() {
   const [count, setCount] = useState(0); // shared state lives here
 
@@ -1401,7 +1401,7 @@ import { cn } from '@/lib/utils';
     eli5: 'React DevTools is a browser extension that lets you peek inside your React components — see their state, props, and how fast they render. It\'s like X-ray vision for your app.',
     analogy: 'React DevTools is the dashboard of a car. Without it you just drive and hope. With it you see the engine temperature, fuel level, and which parts are working overtime.',
     explanation: 'React DevTools (browser extension) adds two panels: Components (inspect the tree, state, props of any component) and Profiler (record and analyze renders, find what re-renders and why). Essential for understanding and debugging React apps.',
-    technicalDeep: 'Components panel: click any element in the DevTools component tree to see its current state and props. You can even edit state directly for testing. Highlight updates: Settings â†’ "Highlight updates when components render" — flashes a colored border on every re-rendering component. Profiler: record a user interaction, then see a flame graph of render times. Each bar is a component; wide bars are expensive. Hooks are listed under "hooks" in the component inspector — each hook\'s current value is shown. `displayName`: React DevTools shows the function name; anonymous arrow functions show as "Anonymous" — prefer named functions or set `MyComp.displayName = "MyComp"`. `__REACT_DEVTOOLS_GLOBAL_HOOK__` is the extension API — you cannot use DevTools to inspect production builds unless you use `react-dom/profiler` and a special build.',
+    technicalDeep: 'Components panel: click any element in the DevTools component tree to see its current state and props. You can even edit state directly for testing. Highlight updates: Settings → "Highlight updates when components render" — flashes a colored border on every re-rendering component. Profiler: record a user interaction, then see a flame graph of render times. Each bar is a component; wide bars are expensive. Hooks are listed under "hooks" in the component inspector — each hook\'s current value is shown. `displayName`: React DevTools shows the function name; anonymous arrow functions show as "Anonymous" — prefer named functions or set `MyComp.displayName = "MyComp"`. `__REACT_DEVTOOLS_GLOBAL_HOOK__` is the extension API — you cannot use DevTools to inspect production builds unless you use `react-dom/profiler` and a special build.',
     whatBreaks: 'React DevTools do not work on apps served from `file://` — use a local dev server. Production builds minify component names — use the profiler build or a source map for production profiling.',
     efficientWay: {
       title: 'Using DevTools',
@@ -1414,7 +1414,7 @@ import { cn } from '@/lib/utils';
     },
     commonMistakes: [
       'Not using DevTools at all — debugging React without them is like debugging without a console.',
-      'Profiling in development mode — development React is 2-3Ã— slower due to extra checks. Profile in production build.',
+      'Profiling in development mode — development React is 2-3× slower due to extra checks. Profile in production build.',
       'Naming all components as arrow functions assigned to `const` — they show as "Anonymous" in DevTools until you add displayName.'
     ],
     seniorNotes: 'The Profiler flame chart shows "Why did this render?" when you enable that setting — it lists exactly which state or props change triggered each render. This is the fastest path to finding unnecessary re-renders without guessing.',
@@ -1517,8 +1517,8 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
     title: 'StrictMode & Development Behavior',
     eli5: 'StrictMode is a special wrapper that makes React complain louder in development about code that could cause bugs. It also runs certain things twice to catch mistakes — but only while you\'re developing, not in the real app.',
     analogy: 'StrictMode is your code\'s stress test. It shakes the car harder on the test track than on real roads to find parts that are about to break.',
-    explanation: 'Wrap your app in `<React.StrictMode>` (Vite does this by default). In development: renders components twice to detect side effects, runs effects twice (mount â†’ unmount â†’ mount), warns about deprecated APIs. None of this runs in production. The double-invoke is intentional — your render function must be pure.',
-    technicalDeep: 'Strict Mode in React 18: components render twice in development to surface non-pure render functions. This means `console.log` in a component body fires twice — confusing but intentional. `useEffect` also runs twice: mount â†’ cleanup â†’ mount. This catches effects that don\'t clean up properly. If your app breaks on double-invoke, the render or effect has a side effect that\'s not idempotent. Strict Mode also warns about: string refs (legacy), legacy lifecycle methods (`componentWillMount`, `componentWillReceiveProps`, `componentWillUpdate`), `findDOMNode`, and legacy Context API. In Next.js, Strict Mode is on by default in `next.config.js`.',
+    explanation: 'Wrap your app in `<React.StrictMode>` (Vite does this by default). In development: renders components twice to detect side effects, runs effects twice (mount → unmount → mount), warns about deprecated APIs. None of this runs in production. The double-invoke is intentional — your render function must be pure.',
+    technicalDeep: 'Strict Mode in React 18: components render twice in development to surface non-pure render functions. This means `console.log` in a component body fires twice — confusing but intentional. `useEffect` also runs twice: mount → cleanup → mount. This catches effects that don\'t clean up properly. If your app breaks on double-invoke, the render or effect has a side effect that\'s not idempotent. Strict Mode also warns about: string refs (legacy), legacy lifecycle methods (`componentWillMount`, `componentWillReceiveProps`, `componentWillUpdate`), `findDOMNode`, and legacy Context API. In Next.js, Strict Mode is on by default in `next.config.js`.',
     whatBreaks: 'Effects that don\'t clean up subscriptions/timers break when Strict Mode runs them twice — but this reveals a real bug that would happen in production with rapid navigation. The fix is always to add proper cleanup.',
     efficientWay: {
       title: 'Working with StrictMode',
@@ -1558,9 +1558,9 @@ useEffect(() => {
 }, []);
 
 // Without cleanup, StrictMode reveals the bug:
-// mount â†’ subscribe (#1) â†’ cleanup ??? â†’ mount â†’ subscribe (#2)
+// mount → subscribe (#1) → cleanup ??? → mount → subscribe (#2)
 // Result: two active subscriptions in the same session.
-// With cleanup: mount â†’ subscribe â†’ unsubscribe â†’ mount â†’ subscribe (1 active = correct)`
+// With cleanup: mount → subscribe → unsubscribe → mount → subscribe (1 active = correct)`
       }
     ]
   },
@@ -1574,7 +1574,7 @@ useEffect(() => {
     eli5: 'useEffect says "after React draws the component, do this thing." It\'s for anything that reaches outside of React: fetching data, setting up a timer, talking to a browser API.',
     analogy: 'useEffect is the "after-school job." The school day (render) finishes, then you go do your side job (fetch data, update the document title). You don\'t do the job DURING class.',
     explanation: '`useEffect(fn, deps)` runs `fn` after every render by default. With `[]` it runs once after mount. With `[dep1, dep2]` it re-runs when those values change. The effect must not return anything except optionally a cleanup function.',
-    technicalDeep: 'Effects run after the browser paints — they do not block the UI. `useLayoutEffect` runs synchronously before paint (for DOM measurements). Dependency array: every reactive value (state, props, context, functions defined in render) used inside the effect MUST be in the deps array — the `exhaustive-deps` ESLint rule enforces this. Omitting a dep causes stale closure bugs. Object/array deps: `useEffect` compares by reference — `{}` !== `{}`. Memoize objects with `useMemo` or `useCallback` before using them as deps. Effects fire after every render where deps changed, not on a schedule. The order: render â†’ browser paint â†’ cleanup previous effect â†’ run new effect.',
+    technicalDeep: 'Effects run after the browser paints — they do not block the UI. `useLayoutEffect` runs synchronously before paint (for DOM measurements). Dependency array: every reactive value (state, props, context, functions defined in render) used inside the effect MUST be in the deps array — the `exhaustive-deps` ESLint rule enforces this. Omitting a dep causes stale closure bugs. Object/array deps: `useEffect` compares by reference — `{}` !== `{}`. Memoize objects with `useMemo` or `useCallback` before using them as deps. Effects fire after every render where deps changed, not on a schedule. The order: render → browser paint → cleanup previous effect → run new effect.',
     whatBreaks: 'Missing deps cause stale closures. Empty `[]` with a value that changes inside — the effect sees the initial value forever. Functions defined in render used as deps — they change reference every render, causing infinite loops. Fix: move functions inside the effect or wrap with `useCallback`.',
     efficientWay: {
       title: 'Using useEffect correctly',
@@ -1586,7 +1586,7 @@ useEffect(() => {
       recommendation: 'Enable `eslint-plugin-react-hooks` from day one. Follow the exhaustive-deps rule religiously. For fetching, prefer TanStack Query over raw useEffect — it handles caching, deduplication, and stale data automatically.'
     },
     commonMistakes: [
-      'Putting an object/array literal in the deps array — new reference every render â†’ infinite loop.',
+      'Putting an object/array literal in the deps array — new reference every render → infinite loop.',
       'Fetching data in useEffect without handling the unmounted component case.',
       'Using `async` directly in useEffect — it returns a Promise; use an inner async function instead.'
     ],
@@ -1619,7 +1619,7 @@ useEffect(() => {
       cancelled = true;
       controller.abort();
     };
-  }, [userId]);   // â† re-run when userId changes
+  }, [userId]);   // ← re-run when userId changes
 
   // Document title side effect — runs after every render
   useEffect(() => {
@@ -1648,7 +1648,7 @@ useEffect(() => {
         { name: 'Use ref instead of state to avoid re-renders', verdict: 'ok', reason: 'Valid optimization, but if the value should appear in the UI, state is correct.' },
         { name: 'Use useRef to store previous state (ref.current = value after render)', verdict: 'ok', reason: 'Useful pattern for comparing current vs previous value.' }
       ],
-      recommendation: 'Decision: "Does changing this value need to update the UI?" Yes â†’ state. No â†’ ref.'
+      recommendation: 'Decision: "Does changing this value need to update the UI?" Yes → state. No → ref.'
     },
     commonMistakes: [
       'Reading DOM ref.current during render (before mount) — it\'s null.',
@@ -1696,7 +1696,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
     id: 'useMemo', phase: 2, phaseName: 'React Hooks',
     orderIndex: 29, estimatedMins: 20, prerequisites: ['useEffect'],
     title: 'useMemo — Memoized Values',
-    eli5: 'useMemo saves the result of an expensive calculation. If the inputs haven\'t changed, it gives you the saved answer instead of recalculating. Like remembering the answer to 12 Ã— 543 so you don\'t have to multiply it every time someone asks.',
+    eli5: 'useMemo saves the result of an expensive calculation. If the inputs haven\'t changed, it gives you the saved answer instead of recalculating. Like remembering the answer to 12 × 543 so you don\'t have to multiply it every time someone asks.',
     analogy: 'useMemo is a calculator with a memory button. Press M+ after a complex calculation; next time, just press MR instead of doing the math again.',
     explanation: '`const result = useMemo(() => expensiveCalc(a, b), [a, b])` — memoizes the return value of the function and only recomputes when `a` or `b` changes. Use for: expensive calculations, creating stable object/array references for other hooks\' deps.',
     technicalDeep: 'useMemo runs its function synchronously during render, caches the result, and returns the cached value on subsequent renders where deps haven\'t changed. Unlike `useCallback` (memoizes a function), `useMemo` memoizes the function\'s RETURN VALUE. The dependency comparison is Object.is (reference equality for objects). useMemo has a cost: the deps comparison runs every render. Only use when the calculation is actually expensive (>1ms) OR when you need a stable reference for another hook\'s deps array. React may discard the memo cache (e.g., between tab switches) — `useMemo` is an optimization hint, not a guarantee.',
@@ -1793,8 +1793,8 @@ const ExpensiveList = React.memo(function ExpensiveList({
 function Parent({ items }: { items: Item[] }) {
   const [filter, setFilter] = useState('');
 
-  // Without useCallback: new function every render â†’ ExpensiveList re-renders despite memo
-  // With useCallback: same reference â†’ memo comparison passes â†’ no re-render
+  // Without useCallback: new function every render → ExpensiveList re-renders despite memo
+  // With useCallback: same reference → memo comparison passes → no re-render
   const handleDelete = useCallback((id: number) => {
     // delete item from server/store
     console.log('delete', id);
@@ -2184,7 +2184,7 @@ function Profile({ userId }: { userId?: number }) {
   const [user, setUser] = useState(null);   // ERROR: called fewer hooks than last render
 }
 
-// âœ… FIX: call hooks first, condition after
+// ✅ FIX: call hooks first, condition after
 function Profile({ userId }: { userId?: number }) {
   const [user, setUser] = useState(null); // always called
   if (!userId) return <p>Not logged in</p>; // condition AFTER all hooks
@@ -2197,7 +2197,7 @@ function Search({ enabled }: { enabled: boolean }) {
   }
 }
 
-// âœ… FIX: always call, use enabled inside
+// ✅ FIX: always call, use enabled inside
 function Search({ enabled }: { enabled: boolean }) {
   const [q, setQ] = useState('');
   if (!enabled) return null; // after all hooks
@@ -2222,7 +2222,7 @@ function Search({ enabled }: { enabled: boolean }) {
         { name: 'Put all logic in one large custom hook per feature', verdict: 'ok', reason: 'Works but the hook becomes hard to unit test.' },
         { name: 'Avoid custom hooks and put logic in components directly', verdict: 'weak', reason: 'Logic duplication across components; hard to test.' }
       ],
-      recommendation: 'Think in layers: primitive hooks (useState, useEffect) â†’ utility hooks (useDebounce, useLocalStorage) â†’ domain hooks (useUserProfile, useCart) â†’ component hooks (useCheckoutPage).'
+      recommendation: 'Think in layers: primitive hooks (useState, useEffect) → utility hooks (useDebounce, useLocalStorage) → domain hooks (useUserProfile, useCart) → component hooks (useCheckoutPage).'
     },
     commonMistakes: [
       'Building a "god hook" that manages all state for a whole feature — untestable and hard to maintain.',
@@ -2880,7 +2880,7 @@ Tabs.Panel = TabPanel;
     eli5: 'Before hooks, React had two patterns for sharing logic: HOCs (wrap a component to inject superpowers) and Render Props (a component that calls a function to decide what to render). You\'ll see both in old code and some libraries still use them.',
     analogy: 'HOC is a superhero cape factory — you take any hero (component) and wrap them to add a cape (logic). Render Props is a cafeteria that asks "how do you want your data served?" — you hand them a function, they call it with the ingredients.',
     explanation: 'Before custom hooks (React 16.8, 2019), HOCs and Render Props were the main patterns for reusing stateful logic across components. You\'ll encounter them in legacy codebases and some popular libraries (old React Router `withRouter`, Redux `connect`, class-based component libraries). Custom hooks replaced most new uses, but reading and understanding these patterns is essential.',
-    technicalDeep: 'HOC: `const withAuth = (Wrapped) => (props) => isAuth ? <Wrapped {...props} /> : <Redirect to="/login" />`. Naming convention: `with*`. HOC pitfalls: loses `displayName` in DevTools (fix: `WrappedComponent.displayName = "withAuth(Component)"`), doesn\'t forward refs automatically (fix: `React.forwardRef`), prop collision if HOC and component use the same prop name. Always spread props: `<Wrapped {...props} injectedProp={x} />`. Render Props: `<DataFetcher url="/api/users" render={(data) => <UserList users={data} />} />` — or via `children` prop: `<Mouse>{({ x, y }) => <Tracker x={x} y={y} />}</Mouse>`. Modern libraries using HOCs: react-redux `connect()` (replaced by `useSelector`/`useDispatch`), `styled-components` `withTheme` (replaced by `useTheme()`). Custom hook equivalent is always simpler: `const { x, y } = useMouse()`. The evolution: HOC â†’ Render Props â†’ Custom Hook all solve the same problem — sharing stateful logic — with progressively simpler syntax.',
+    technicalDeep: 'HOC: `const withAuth = (Wrapped) => (props) => isAuth ? <Wrapped {...props} /> : <Redirect to="/login" />`. Naming convention: `with*`. HOC pitfalls: loses `displayName` in DevTools (fix: `WrappedComponent.displayName = "withAuth(Component)"`), doesn\'t forward refs automatically (fix: `React.forwardRef`), prop collision if HOC and component use the same prop name. Always spread props: `<Wrapped {...props} injectedProp={x} />`. Render Props: `<DataFetcher url="/api/users" render={(data) => <UserList users={data} />} />` — or via `children` prop: `<Mouse>{({ x, y }) => <Tracker x={x} y={y} />}</Mouse>`. Modern libraries using HOCs: react-redux `connect()` (replaced by `useSelector`/`useDispatch`), `styled-components` `withTheme` (replaced by `useTheme()`). Custom hook equivalent is always simpler: `const { x, y } = useMouse()`. The evolution: HOC → Render Props → Custom Hook all solve the same problem — sharing stateful logic — with progressively simpler syntax.',
     whatBreaks: 'Creating HOCs inside a render function — a new component is created on every render, breaking React\'s reconciliation and unmounting/remounting on every render. Forgetting to spread original props in HOC — parent-passed props are silently lost.',
     efficientWay: {
       title: 'When to use these patterns',
@@ -2896,7 +2896,7 @@ Tabs.Panel = TabPanel;
       'Not forwarding refs through HOCs — breaks parent components that need a DOM ref.',
       'Reaching for Render Props when a custom hook is simpler and available.'
     ],
-    seniorNotes: 'The progression HOC â†’ Render Props â†’ Custom Hooks all solve the same problem: sharing stateful logic without inheritance. Understanding this history explains *why* hooks exist and why `useSelector` replaced `connect()`. In senior interviews, explaining this evolution — including the specific problems each pattern solved and introduced — signals deep React understanding beyond just "hooks are better."',
+    seniorNotes: 'The progression HOC → Render Props → Custom Hooks all solve the same problem: sharing stateful logic without inheritance. Understanding this history explains *why* hooks exist and why `useSelector` replaced `connect()`. In senior interviews, explaining this evolution — including the specific problems each pattern solved and introduced — signals deep React understanding beyond just "hooks are better."',
     interviewQuestions: [
       'What problem do HOCs and Render Props solve, and why were they largely replaced by hooks?',
       'What are the main pitfalls of Higher-Order Components?',
@@ -2905,7 +2905,7 @@ Tabs.Panel = TabPanel;
     codeExamples: [
       {
         lang: 'tsx',
-        label: 'HOC â†’ Render Prop â†’ Custom Hook: the same logic across three eras',
+        label: 'HOC → Render Prop → Custom Hook: the same logic across three eras',
         code: `// 1. HOC (2016-2019 era) — wraps the component
 function withWindowSize<P extends { width: number; height: number }>(
   Wrapped: React.ComponentType<P>
@@ -2993,7 +2993,7 @@ function Button({ variant = 'solid', loading = false, children, ...rest }: Butto
     eli5: 'When you use TypeScript with React hooks, you tell the hook what TYPE of data it\'s storing. `useState<User | null>(null)` means "state is a User or null."',
     analogy: 'Typing a hook is labeling a box before you put anything in it: "this box holds User objects or nothing."',
     explanation: 'Most hooks infer types automatically, but when the initial value is `null` or `[]`, you must annotate explicitly. `useState<User | null>(null)`. `useRef<HTMLInputElement>(null)`. `useReducer<Reducer<State, Action>>(reducer, init)`.',
-    technicalDeep: '`useState<T>` — TypeScript infers `T` from the initial value. `useState(0)` â†’ `[number, ...]`. `useState(null)` â†’ `[null, ...]` (wrong — add generic). `useRef<T>(null)` — generic needed for DOM nodes. `useCallback<(id: number) => void>(() => ..., [])` — explicit return type catches mistakes. `useReducer` signature: TypeScript infers state and action from the reducer function type — usually no explicit annotation needed. Custom hook return types: `as const` on a tuple return: `return [state, setState] as const` so TypeScript knows it\'s `[S, Dispatch<S>]` not `(S | Dispatch<S>)[]`.',
+    technicalDeep: '`useState<T>` — TypeScript infers `T` from the initial value. `useState(0)` → `[number, ...]`. `useState(null)` → `[null, ...]` (wrong — add generic). `useRef<T>(null)` — generic needed for DOM nodes. `useCallback<(id: number) => void>(() => ..., [])` — explicit return type catches mistakes. `useReducer` signature: TypeScript infers state and action from the reducer function type — usually no explicit annotation needed. Custom hook return types: `as const` on a tuple return: `return [state, setState] as const` so TypeScript knows it\'s `[S, Dispatch<S>]` not `(S | Dispatch<S>)[]`.',
     whatBreaks: '`useState(null)` without a generic makes state permanently `null` type — TypeScript errors when you try to set a User. `useRef(null)` without a type creates `RefObject<unknown>` — no `.current.value` autocomplete.',
     efficientWay: {
       title: 'Typing hooks',
@@ -3033,7 +3033,7 @@ const [open, toggleOpen] = useToggle();` }]
     eli5: 'TypeScript knows the difference between a click on a button and a change on an input. When you type your event handlers, the editor tells you exactly what properties are available.',
     analogy: 'Event types are the specific forms for each situation: a click form has x/y coordinates, a change form has the new value, a submit form has the form data.',
     explanation: 'React provides specific event types: `React.ChangeEvent<HTMLInputElement>`, `React.FormEvent<HTMLFormElement>`, `React.MouseEvent<HTMLButtonElement>`, `React.KeyboardEvent<HTMLInputElement>`. Each gives access to the right properties on `e.target` and `e.currentTarget`.',
-    technicalDeep: 'Event type hierarchy: `React.SyntheticEvent<T>` â†’ `React.MouseEvent<T>`, `React.ChangeEvent<T>`, etc. `e.target` is typed as `EventTarget & T` — `e.target.value` works for `HTMLInputElement`. `e.currentTarget` is always typed as `T` (the element the handler is on). For checkboxes: `e.target.checked`. For selects: `e.target.value`. Handler type aliases: `type InputHandler = React.ChangeEventHandler<HTMLInputElement>` = `(e: React.ChangeEvent<HTMLInputElement>) => void`. `React.MouseEventHandler<HTMLButtonElement>` similarly. These are useful for prop types when you pass handlers down.',
+    technicalDeep: 'Event type hierarchy: `React.SyntheticEvent<T>` → `React.MouseEvent<T>`, `React.ChangeEvent<T>`, etc. `e.target` is typed as `EventTarget & T` — `e.target.value` works for `HTMLInputElement`. `e.currentTarget` is always typed as `T` (the element the handler is on). For checkboxes: `e.target.checked`. For selects: `e.target.value`. Handler type aliases: `type InputHandler = React.ChangeEventHandler<HTMLInputElement>` = `(e: React.ChangeEvent<HTMLInputElement>) => void`. `React.MouseEventHandler<HTMLButtonElement>` similarly. These are useful for prop types when you pass handlers down.',
     whatBreaks: '`e.target as HTMLInputElement` is sometimes necessary when the event listener is on a parent element — the target could be a child. `e.currentTarget` is always the element with the handler.',
     efficientWay: {
       title: 'Typing events',
@@ -3416,7 +3416,7 @@ npx shadcn@latest init
 npx shadcn@latest add button dialog card input select toast
 
 # Components appear in src/components/ui/ — you own them
-# src/components/ui/button.tsx  â† edit this freely
+# src/components/ui/button.tsx  ← edit this freely
 # src/components/ui/dialog.tsx` }]
   },
 
@@ -3671,13 +3671,13 @@ cd my-app && npm run dev
 # App Router directory structure:
 # src/
 #   app/
-#     layout.tsx    â† root layout
-#     page.tsx      â† / route
+#     layout.tsx    ← root layout
+#     page.tsx      ← / route
 #     about/
-#       page.tsx    â† /about route
+#       page.tsx    ← /about route
 #     blog/
 #       [slug]/
-#         page.tsx  â† /blog/:slug route` }]
+#         page.tsx  ← /blog/:slug route` }]
   },
 
   {
@@ -3757,7 +3757,7 @@ function UserProfile({ userId }: { userId: string }) {
     eli5: 'The App Router uses a folder structure where folders = URL segments and special files (`page.tsx`, `layout.tsx`) define what shows at each URL. Nesting folders nests layouts automatically.',
     analogy: 'App Router is a building blueprint where each floor (folder) has a standard plan (layout.tsx) and each room (page.tsx) is the specific content. Floors share their plumbing (layouts) with all rooms on that floor.',
     explanation: 'App Router maps `app/` folder structure to URLs. `page.tsx` renders a route. `layout.tsx` wraps a route and its children — persists across navigation. `loading.tsx` is the Suspense fallback. `error.tsx` is the error boundary. All are Server Components by default.',
-    technicalDeep: 'Route segments: `app/dashboard/settings/page.tsx` â†’ `/dashboard/settings`. Dynamic segments: `app/blog/[slug]/page.tsx` â†’ `/blog/any-slug`. Catch-all: `[...slug]`. Optional catch-all: `[[...slug]]`. Route groups: `(marketing)/about/page.tsx` — parentheses exclude from URL, used to share layouts without URL nesting. Parallel routes: `@modal/page.tsx` — render multiple pages in the same layout simultaneously. Intercepting routes: `(.)photo/[id]/page.tsx` — intercept route and show modal instead of full page. `generateStaticParams()` in dynamic routes for static generation. `generateMetadata()` for dynamic SEO metadata. Layout persistence: layouts re-render on navigation ONLY if their segment is different — the root layout NEVER re-renders between navigations (preserving scroll position, form state, etc.).',
+    technicalDeep: 'Route segments: `app/dashboard/settings/page.tsx` → `/dashboard/settings`. Dynamic segments: `app/blog/[slug]/page.tsx` → `/blog/any-slug`. Catch-all: `[...slug]`. Optional catch-all: `[[...slug]]`. Route groups: `(marketing)/about/page.tsx` — parentheses exclude from URL, used to share layouts without URL nesting. Parallel routes: `@modal/page.tsx` — render multiple pages in the same layout simultaneously. Intercepting routes: `(.)photo/[id]/page.tsx` — intercept route and show modal instead of full page. `generateStaticParams()` in dynamic routes for static generation. `generateMetadata()` for dynamic SEO metadata. Layout persistence: layouts re-render on navigation ONLY if their segment is different — the root layout NEVER re-renders between navigations (preserving scroll position, form state, etc.).',
     whatBreaks: 'Trying to use `useState` directly in a layout or page file without `"use client"`. Layouts re-render when params change — if you need the layout to NOT re-render on param change, use the group pattern.',
     efficientWay: {
       title: 'Understanding App Router',
@@ -3831,11 +3831,11 @@ export default async function UserPage({ params }: { params: { id: string } }) {
         lang: 'tsx',
         label: 'Photo modal: parallel + intercepting routes',
         code: `// File structure:
-// app/feed/page.tsx                          â† photo grid
-// app/feed/layout.tsx                        â† receives @modal slot
-// app/feed/@modal/default.tsx                â† null (no modal by default)
-// app/feed/@modal/(.)photo/[id]/page.tsx     â† modal (intercepts from /feed)
-// app/photo/[id]/page.tsx                    â† full photo page (direct URL)
+// app/feed/page.tsx                          ← photo grid
+// app/feed/layout.tsx                        ← receives @modal slot
+// app/feed/@modal/default.tsx                ← null (no modal by default)
+// app/feed/@modal/(.)photo/[id]/page.tsx     ← modal (intercepts from /feed)
+// app/photo/[id]/page.tsx                    ← full photo page (direct URL)
 
 // app/feed/layout.tsx
 export default function FeedLayout({
@@ -3879,7 +3879,7 @@ export default function PhotoModal({ params }: { params: { id: string } }) {
     eli5: 'Server Components run on the server and send HTML — they can talk to databases and keep secrets. Client Components run in the browser — they can react to clicks and remember state. Most components should be Server Components.',
     analogy: 'Server Components are chefs in the kitchen — they see all the raw ingredients (database, secrets) and prepare the dish. Client Components are waiters — they interact with the customer and bring the food, but they never see the kitchen.',
     explanation: 'All components in App Router are Server Components by default. Add `"use client"` directive to make a component a Client Component. Server Components: async, can fetch, can read server secrets. Client Components: can use hooks, handle events, access browser APIs.',
-    technicalDeep: 'Server Components: run at request time on the server. Zero client JavaScript. Can `await` data, use Node APIs, access environment secrets. Serialized as HTML + JSON flight data. Cannot use: useState, useEffect, browser APIs, event handlers. Client Components: `"use client"` at top of file — this marks a "client boundary." All imports of a Client Component are also client-bundled. Server Components CAN be children/props of Client Components (they\'re rendered by the server and passed as already-rendered HTML). This is the "server component as children" pattern — critical for keeping the server/client boundary in the right place. Data flow: Server Component fetches data â†’ passes as props to Client Component (which is serialized as JSON — no class instances, functions, or Dates without serialization).',
+    technicalDeep: 'Server Components: run at request time on the server. Zero client JavaScript. Can `await` data, use Node APIs, access environment secrets. Serialized as HTML + JSON flight data. Cannot use: useState, useEffect, browser APIs, event handlers. Client Components: `"use client"` at top of file — this marks a "client boundary." All imports of a Client Component are also client-bundled. Server Components CAN be children/props of Client Components (they\'re rendered by the server and passed as already-rendered HTML). This is the "server component as children" pattern — critical for keeping the server/client boundary in the right place. Data flow: Server Component fetches data → passes as props to Client Component (which is serialized as JSON — no class instances, functions, or Dates without serialization).',
     whatBreaks: 'Passing non-serializable values (functions, class instances, Dates) from Server to Client Components as props — they cannot cross the serialization boundary. Using browser APIs (localStorage, window) in a Server Component — they don\'t exist on the server.',
     efficientWay: {
       title: 'Deciding server vs client',
@@ -3888,14 +3888,14 @@ export default function PhotoModal({ params }: { params: { id: string } }) {
         { name: 'Add "use client" to all components for simplicity', verdict: 'weak', reason: 'Defeats the purpose of Server Components — you\'re back to a plain React SPA.' },
         { name: 'Separate files for server data fetching and client interaction', verdict: 'best', reason: 'Server Component fetches data, passes to Client Component for interactivity.' }
       ],
-      recommendation: 'Decision tree: "Does this component need state/effects/events/browser APIs?" â†’ Client Component. Everything else â†’ Server Component. Push the `"use client"` boundary as far down the tree as possible.'
+      recommendation: 'Decision tree: "Does this component need state/effects/events/browser APIs?" → Client Component. Everything else → Server Component. Push the `"use client"` boundary as far down the tree as possible.'
     },
     commonMistakes: ['`"use client"` on a parent when only one child needs interactivity — add it to the child instead.', 'Importing a client-only library (e.g., chart.js) in a Server Component — crashes.', 'Passing a Date object as prop to a Client Component — serialize to ISO string first.'],
-    seniorNotes: 'The "donut" pattern: Server Component (outer) â†’ Client Component shell (with "use client") â†’ Server Component children (passed via props). This lets you have a client-side interactive wrapper with server-rendered content inside — common for modals, sidebars, and carousels.',
+    seniorNotes: 'The "donut" pattern: Server Component (outer) → Client Component shell (with "use client") → Server Component children (passed via props). This lets you have a client-side interactive wrapper with server-rendered content inside — common for modals, sidebars, and carousels.',
     interviewQuestions: ['What can Server Components do that Client Components cannot, and vice versa?', 'How do you pass data from a Server Component to a Client Component?', 'Can a Server Component be a child of a Client Component?'],
-    codeExamples: [{ lang: 'tsx', label: 'Server â†’ Client boundary', code: `// app/users/page.tsx — Server Component (no "use client")
+    codeExamples: [{ lang: 'tsx', label: 'Server → Client boundary', code: `// app/users/page.tsx — Server Component (no "use client")
 async function UsersPage() {
-  // âœ… Direct DB access, no fetch needed
+  // ✅ Direct DB access, no fetch needed
   const users = await db.user.findMany({ take: 20 });
 
   return (
@@ -3959,7 +3959,7 @@ export async function generateMetadata(
   const post = await getPost(params.slug);
   if (!post) return { title: 'Post Not Found' };
   return {
-    title: post.title,          // â†’ "My Post | MyApp"
+    title: post.title,          // → "My Post | MyApp"
     description: post.excerpt,
     openGraph: {
       title: post.title,
@@ -4133,8 +4133,8 @@ function HeroSection() {
     eli5: 'In Next.js Server Components, you use `fetch()` directly — no useEffect needed. Next.js caches the response automatically so the same request isn\'t repeated on every page view.',
     analogy: 'Fetching in Server Components is like a chef making stock once and keeping it on the stove — everyone who needs it gets it from the pot, not from a fresh batch.',
     explanation: 'In Server Components, `fetch()` is enhanced by Next.js — it caches, deduplicates, and supports revalidation. Fetch in the component that needs the data (no prop drilling). Multiple fetches for the same URL in one request are deduplicated automatically.',
-    technicalDeep: 'Next.js extends the native `fetch`: `cache` option controls caching behavior. `fetch(url, { cache: "force-cache" })` — static, cache forever (default for SSG). `fetch(url, { cache: "no-store" })` — dynamic, never cache (SSR). `fetch(url, { next: { revalidate: 60 } })` — ISR, revalidate after 60 seconds. In Next.js 15, `cache: "no-store"` is the new default (opt-in to caching). Deduplication: same URL + same options fetched by two components in one render cycle â†’ one request. Data fetching waterfall: if component A awaits before rendering B which also fetches, they run sequentially. Fix: use `Promise.all` for parallel fetches, or fetch at the page level and pass data down. `cache()` function from React for memoizing arbitrary async functions across a request. `unstable_cache` from `next/cache` for cross-request caching of non-fetch async functions (e.g., database queries).',
-    whatBreaks: 'Fetching in a loop (fetch per item) â†’ N sequential requests. Use `Promise.all(items.map(id => fetch(...)))` for parallel. Forgetting `{ cache: "no-store" }` on user-specific data — shared cached response across users.',
+    technicalDeep: 'Next.js extends the native `fetch`: `cache` option controls caching behavior. `fetch(url, { cache: "force-cache" })` — static, cache forever (default for SSG). `fetch(url, { cache: "no-store" })` — dynamic, never cache (SSR). `fetch(url, { next: { revalidate: 60 } })` — ISR, revalidate after 60 seconds. In Next.js 15, `cache: "no-store"` is the new default (opt-in to caching). Deduplication: same URL + same options fetched by two components in one render cycle → one request. Data fetching waterfall: if component A awaits before rendering B which also fetches, they run sequentially. Fix: use `Promise.all` for parallel fetches, or fetch at the page level and pass data down. `cache()` function from React for memoizing arbitrary async functions across a request. `unstable_cache` from `next/cache` for cross-request caching of non-fetch async functions (e.g., database queries).',
+    whatBreaks: 'Fetching in a loop (fetch per item) → N sequential requests. Use `Promise.all(items.map(id => fetch(...)))` for parallel. Forgetting `{ cache: "no-store" }` on user-specific data — shared cached response across users.',
     efficientWay: {
       title: 'Data fetching patterns',
       approaches: [
@@ -4149,7 +4149,7 @@ function HeroSection() {
     interviewQuestions: ['What does fetch deduplication mean in Next.js?', 'What is the difference between no-store and revalidate in fetch cache options?', 'How do you avoid a data waterfall in Server Components?'],
     codeExamples: [{ lang: 'tsx', label: 'Fetch patterns in Server Components', code: `// app/dashboard/page.tsx — parallel fetches
 async function DashboardPage() {
-  // âœ… Parallel — both start at the same time
+  // ✅ Parallel — both start at the same time
   const [user, stats] = await Promise.all([
     fetch('/api/me',    { cache: 'no-store' }).then(r => r.json()),
     fetch('/api/stats', { next: { revalidate: 60 } }).then(r => r.json()),
@@ -4181,7 +4181,7 @@ const getCachedConfig = unstable_cache(
     eli5: 'Next.js can build pages ahead of time (SSG — super fast), build them fresh for each request (SSR — always up to date), rebuild them occasionally (ISR — best of both), or stream parts of the page as data arrives.',
     analogy: 'SSG is a printed brochure — made once, given to everyone. SSR is a custom letter — written each time. ISR is a brochure that reprints itself every hour. Streaming is handing pages out as the printer prints them.',
     explanation: 'SSG: `fetch(url, { cache: "force-cache" })` or no fetch — page built at build time. SSR: `fetch(url, { cache: "no-store" })` — rendered per request. ISR: `{ next: { revalidate: N } }` — static HTML rebuilt after N seconds. Streaming: multiple `<Suspense>` boundaries let Next.js send HTML in chunks.',
-    technicalDeep: 'The rendering strategy is inferred from the fetch options in a route segment. Any `no-store` fetch makes the route dynamic (SSR). All `force-cache` or revalidated fetches â†’ static. `generateStaticParams()` in dynamic routes: `export async function generateStaticParams() { const posts = await getPosts(); return posts.map(p => ({ slug: p.slug })); }` — pre-generates pages for each slug at build time. ISR on-demand revalidation: `revalidatePath("/blog/my-post")` or `revalidateTag("posts")` — called from a Server Action or API route to immediately invalidate cache. Streaming: wrap slow Server Components in `<Suspense>` — faster data resolves first, slow ones stream in. `loading.tsx` is the route-level Suspense fallback. Nested Suspense for granular streaming.',
+    technicalDeep: 'The rendering strategy is inferred from the fetch options in a route segment. Any `no-store` fetch makes the route dynamic (SSR). All `force-cache` or revalidated fetches → static. `generateStaticParams()` in dynamic routes: `export async function generateStaticParams() { const posts = await getPosts(); return posts.map(p => ({ slug: p.slug })); }` — pre-generates pages for each slug at build time. ISR on-demand revalidation: `revalidatePath("/blog/my-post")` or `revalidateTag("posts")` — called from a Server Action or API route to immediately invalidate cache. Streaming: wrap slow Server Components in `<Suspense>` — faster data resolves first, slow ones stream in. `loading.tsx` is the route-level Suspense fallback. Nested Suspense for granular streaming.',
     whatBreaks: 'Dynamic route without `generateStaticParams()` — 404 at build time for static export. Using `revalidatePath` in a Client Component — it only works on the server.',
     efficientWay: {
       title: 'Choosing a rendering strategy',
@@ -4190,7 +4190,7 @@ const getCachedConfig = unstable_cache(
         { name: 'SSR for user-specific or real-time data', verdict: 'best', reason: 'Authenticated dashboards, live prices, personalized feeds need per-request rendering.' },
         { name: 'SSG for marketing/docs pages', verdict: 'best', reason: 'Fastest possible load — HTML is pre-built and served from CDN edge.' }
       ],
-      recommendation: 'Decision: "Does the content change per user?" â†’ SSR (no-store). "Does content change every few minutes?" â†’ ISR (revalidate: 60-300). "Rarely changes?" â†’ SSG (force-cache or static).'
+      recommendation: 'Decision: "Does the content change per user?" → SSR (no-store). "Does content change every few minutes?" → ISR (revalidate: 60-300). "Rarely changes?" → SSG (force-cache or static).'
     },
     commonMistakes: ['No-store on public pages — SSR overhead for content that could be static.', 'force-cache on user-specific pages — serving one user\'s data to another.', 'Missing generateStaticParams for dynamic SSG routes.'],
     seniorNotes: 'On-demand ISR (`revalidatePath` / `revalidateTag`) is the production-grade pattern: pages stay static until a content change triggers a revalidation. CMS webhooks call a Next.js API route that calls `revalidatePath` — the next request gets the freshly built page.',
@@ -4202,14 +4202,14 @@ export async function generateStaticParams() {
 }
 async function BlogPost({ params }: { params: { slug: string } }) {
   const post = await fetch(\`/api/posts/\${params.slug}\`, {
-    cache: 'force-cache' // â† SSG
+    cache: 'force-cache' // ← SSG
   }).then(r => r.json());
   return <Article post={post} />;
 }
 
 // SSR — user dashboard
 async function DashboardPage() {
-  const user = await fetch('/api/me', { cache: 'no-store' }).then(r => r.json()); // â† SSR
+  const user = await fetch('/api/me', { cache: 'no-store' }).then(r => r.json()); // ← SSR
   return <Dashboard user={user} />;
 }
 
@@ -4236,7 +4236,7 @@ async function ProductPage({ params }: { params: { id: string } }) {
     eli5: 'Route Handlers are server-side functions that respond to HTTP requests. They live inside your Next.js app and act as a mini API server — perfect for handling forms, webhooks, and authenticated requests.',
     analogy: 'Route Handlers are the restaurant\'s kitchen phone line. The dining room (browser) calls with an order; the kitchen (server) prepares and responds. Nobody eats in the kitchen.',
     explanation: 'Create `app/api/[path]/route.ts` — export named functions for HTTP methods: `GET`, `POST`, `PUT`, `DELETE`, `PATCH`. They receive a `Request` object and return a `Response`. Used for: webhooks, file uploads, authenticated API calls, third-party service proxies.',
-    technicalDeep: 'Route handler: `export async function GET(request: Request) { return Response.json({ data }) }`. Dynamic segments: `app/api/users/[id]/route.ts` â†’ params in second argument: `(request, { params }: { params: { id: string } })`. `NextRequest` extends `Request` with helpers: `nextUrl.searchParams`, cookies, geo. `NextResponse` extends `Response`: `NextResponse.json()`, `NextResponse.redirect()`, `NextResponse.rewrite()`. Cookies: `request.cookies.get("token")`. Auth pattern: read the cookie/header, validate the session, return 401 if invalid. CORS: set headers in the Response. Caching: GET handlers are cached by default; `request.nextUrl.searchParams` or cookies opt them out. Edge runtime: add `export const runtime = "edge"` for low-latency, globally distributed handlers.',
+    technicalDeep: 'Route handler: `export async function GET(request: Request) { return Response.json({ data }) }`. Dynamic segments: `app/api/users/[id]/route.ts` → params in second argument: `(request, { params }: { params: { id: string } })`. `NextRequest` extends `Request` with helpers: `nextUrl.searchParams`, cookies, geo. `NextResponse` extends `Response`: `NextResponse.json()`, `NextResponse.redirect()`, `NextResponse.rewrite()`. Cookies: `request.cookies.get("token")`. Auth pattern: read the cookie/header, validate the session, return 401 if invalid. CORS: set headers in the Response. Caching: GET handlers are cached by default; `request.nextUrl.searchParams` or cookies opt them out. Edge runtime: add `export const runtime = "edge"` for low-latency, globally distributed handlers.',
     whatBreaks: 'Naming the file `api.ts` instead of `route.ts` — Next.js won\'t recognize it. Not returning a Response — handler returns undefined, Next.js sends 500. Using `GET` and `POST` in the same export — separate named function exports.',
     efficientWay: {
       title: 'API routes',
@@ -4438,7 +4438,7 @@ export function CreateUserForm() {
       {
         lang: 'ts',
         label: 'Explicit runtime declarations',
-        code: `// app/api/geo/route.ts — geolocation, no DB needed â†’ Edge
+        code: `// app/api/geo/route.ts — geolocation, no DB needed → Edge
 export const runtime = 'edge';
 
 export function GET(request: Request) {
@@ -4446,7 +4446,7 @@ export function GET(request: Request) {
   return Response.json({ country, message: \`Hello from \${country}!\` });
 }
 
-// app/api/users/route.ts — database query â†’ Node.js (default)
+// app/api/users/route.ts — database query → Node.js (default)
 export const runtime = 'nodejs'; // explicit for clarity
 
 import { db } from '@/lib/db'; // Prisma — requires Node.js
@@ -4520,7 +4520,7 @@ import { signIn, signOut } from 'next-auth/react';
     title: 'Prisma ORM & Database',
     eli5: 'Prisma lets you talk to a database using TypeScript instead of raw SQL. You define your data shape in a schema file, and Prisma generates typed functions for reading and writing data.',
     analogy: 'Prisma is an interpreter between you and the database. You speak TypeScript; Prisma translates to the database\'s language (SQL) and brings back typed results.',
-    explanation: 'Prisma ORM: define models in `schema.prisma` â†’ generate a typed client â†’ use `db.user.findMany()` etc. in Server Components and Server Actions. Works with PostgreSQL, MySQL, SQLite, MongoDB. Recommended database hosts: Neon (Postgres serverless), PlanetScale (MySQL serverless), Supabase.',
+    explanation: 'Prisma ORM: define models in `schema.prisma` → generate a typed client → use `db.user.findMany()` etc. in Server Components and Server Actions. Works with PostgreSQL, MySQL, SQLite, MongoDB. Recommended database hosts: Neon (Postgres serverless), PlanetScale (MySQL serverless), Supabase.',
     technicalDeep: 'Prisma setup: `npm i prisma @prisma/client`. `npx prisma init`. Define schema: `model User { id String @id @default(cuid()) name String email String @unique posts Post[] }`. Generate client: `npx prisma generate`. Migrations: `npx prisma migrate dev --name add-user-model` — creates migration SQL and applies it. Prisma Client: singleton pattern for serverless environments: `const globalForPrisma = global as unknown as { prisma: PrismaClient }; export const db = globalForPrisma.prisma ?? new PrismaClient(); if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db`. Query types: `findUnique`, `findMany`, `create`, `update`, `upsert`, `delete`. Relations: `include: { posts: true }`, `select: { id: true, name: true }`. Transactions: `db.$transaction([...])`. Prisma Accelerate: connection pooling for serverless (Neon provides this natively).',
     whatBreaks: 'Creating a new PrismaClient instance on every request in serverless — each lambda gets a new connection, exhausting the DB connection pool. Use the global singleton. Forgetting `npx prisma generate` after schema changes — client is out of date.',
     efficientWay: {
@@ -4574,7 +4574,7 @@ async function getUser(id: string) {
     eli5: 'Deploying to Vercel is as simple as connecting your GitHub repo. Vercel runs your Next.js app, handles scaling, and gives you a URL. Before deploying, you should check images, fonts, security headers, and environment variables.',
     analogy: 'Deploying is like opening a restaurant to the public. Vercel is the building (infrastructure). Your environment variables are the staff training manual. The production checklist is the health inspector\'s visit before opening day.',
     explanation: 'Vercel is the natural Next.js host — zero-config deployment, automatic edge optimization. The production checklist covers: environment variables, security headers, error monitoring, Core Web Vitals, and bundle size.',
-    technicalDeep: 'Vercel deployment: connect GitHub repo â†’ automatic CI/CD on every push. Preview deployments on every PR. Environment variables: add in Vercel dashboard, never commit `.env.local`. Security headers: add in `next.config.js` `headers()` function — Content-Security-Policy, X-Frame-Options, X-Content-Type-Options. CSP is the most impactful security header. Bundle analysis: `npm i @next/bundle-analyzer`. `ANALYZE=true npm run build` — opens a treemap of chunk sizes. Web Vitals monitoring: `npm i web-vitals` + `export function reportWebVitals(metric)` in layout — send to analytics. Sentry: `npm i @sentry/nextjs; npx @sentry/wizard@latest -i nextjs` — captures unhandled errors and performance traces. `next.config.js` optimizations: `compress: true` (gzip), `poweredByHeader: false` (remove X-Powered-By), `images.formats: ["image/avif", "image/webp"]`. Rate limiting: use Upstash Redis + `@upstash/ratelimit` in Middleware for API routes.',
+    technicalDeep: 'Vercel deployment: connect GitHub repo → automatic CI/CD on every push. Preview deployments on every PR. Environment variables: add in Vercel dashboard, never commit `.env.local`. Security headers: add in `next.config.js` `headers()` function — Content-Security-Policy, X-Frame-Options, X-Content-Type-Options. CSP is the most impactful security header. Bundle analysis: `npm i @next/bundle-analyzer`. `ANALYZE=true npm run build` — opens a treemap of chunk sizes. Web Vitals monitoring: `npm i web-vitals` + `export function reportWebVitals(metric)` in layout — send to analytics. Sentry: `npm i @sentry/nextjs; npx @sentry/wizard@latest -i nextjs` — captures unhandled errors and performance traces. `next.config.js` optimizations: `compress: true` (gzip), `poweredByHeader: false` (remove X-Powered-By), `images.formats: ["image/avif", "image/webp"]`. Rate limiting: use Upstash Redis + `@upstash/ratelimit` in Middleware for API routes.',
     whatBreaks: 'Missing environment variables in Vercel — `undefined` in production, hard to debug. Missing `NEXTAUTH_SECRET` — auth fails silently. Open CORS headers on all origins — security vulnerability.',
     efficientWay: {
       title: 'Production deployment',
