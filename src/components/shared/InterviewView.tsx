@@ -315,7 +315,7 @@ export default function InterviewView({
         </div>
 
         {/* Readiness */}
-        <div className={cn('rounded-xl p-4 border flex items-center gap-4', a.bg, a.border)}>
+        <div className={cn('rounded-xl p-4 border flex flex-wrap items-center gap-4', a.bg, a.border)}>
           <div className="relative w-14 h-14 shrink-0">
             <svg className="w-14 h-14 -rotate-90" viewBox="0 0 36 36">
               <circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" strokeWidth="3" className="text-gray-800" />
@@ -568,7 +568,7 @@ export default function InterviewView({
               <p className="text-[11px] text-gray-500 mb-2">
                 Rate like an interviewer: correctness · production thinking · trade-offs · failure handling · communication
               </p>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {RATINGS.map(r => (
                   <button
                     key={r.key}

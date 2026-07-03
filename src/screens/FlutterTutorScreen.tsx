@@ -208,7 +208,7 @@ function LessonView({
   return (
     <div className="space-y-6 pb-12">
       {/* Header */}
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs font-medium px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
@@ -219,13 +219,13 @@ function LessonView({
               {topic.estimatedMins} min
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-white">{topic.title}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white break-words">{topic.title}</h1>
         </div>
         <button
           onClick={onMarkComplete}
           disabled={status === 'completed'}
           className={cn(
-            'shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all',
+            'shrink-0 flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all w-full sm:w-auto',
             status === 'completed'
               ? 'bg-green-500/20 text-green-400 border border-green-500/30 cursor-default'
               : 'bg-cyan-500 hover:bg-cyan-600 text-white',
@@ -911,7 +911,7 @@ export default function FlutterTutorScreen() {
         </header>
 
         {/* Content area */}
-        <main className="flex-1 overflow-y-auto px-6 md:px-10 py-6">
+        <main className="flex-1 overflow-y-auto px-4 sm:px-6 md:px-10 py-6">
           {activeTab === 'lesson' && (
             <LessonView
               topic={activeTopic}

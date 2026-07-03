@@ -232,15 +232,17 @@ export default function ReadAloudBar({ topic, accentColor = 'blue' }: ReadAloudB
           </span>
         </div>
 
-        {/* Controls when idle */}
+        {/* Controls when idle (voice picker hidden on phones — available once playing) */}
         {!isActive && (
           <div className="flex items-center gap-2 shrink-0">
-            <VoiceSelector
-              voices={voices}
-              selected={selectedVoice}
-              onChange={setVoice}
-              accentText={a.text}
-            />
+            <div className="hidden sm:block">
+              <VoiceSelector
+                voices={voices}
+                selected={selectedVoice}
+                onChange={setVoice}
+                accentText={a.text}
+              />
+            </div>
             <button
               onClick={() => play(narrationRef.current)}
               className={cn(
