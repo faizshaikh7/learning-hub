@@ -1,4 +1,5 @@
 import type { InterviewBank } from '@/types'
+import { REACT_SCENARIO_QUESTIONS } from './interview-scenarios'
 
 /** React / Next.js frontend interview bank: roles + 3-round question set. */
 export const REACT_INTERVIEW: InterviewBank = {
@@ -320,5 +321,6 @@ export const REACT_INTERVIEW: InterviewBank = {
       redFlags: ['Optimizes by adding memoization everywhere without profiling', 'Cannot state how the improvement was measured'],
       topicId: 'performance-patterns',
     },
+    ...REACT_SCENARIO_QUESTIONS,
   ],
 }

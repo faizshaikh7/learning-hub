@@ -50,7 +50,7 @@ interface InterviewViewProps {
 
 const ROUNDS: { level: InterviewLevel; name: string; short: string; blurb: string; count: number; seconds: number }[] = [
   { level: 'screen',    name: 'Round 1 · Phone Screen',        short: 'Screen',    blurb: 'Fundamentals & breadth',        count: 5, seconds: 90 },
-  { level: 'technical', name: 'Round 2 · Technical Deep Dive', short: 'Technical', blurb: 'Depth & problem-solving',        count: 5, seconds: 120 },
+  { level: 'technical', name: 'Round 2 · Technical Deep Dive', short: 'Technical', blurb: 'Production scenarios & debugging', count: 5, seconds: 120 },
   { level: 'design',    name: 'Round 3 · System Design',       short: 'Design',    blurb: 'Architecture & senior judgment', count: 3, seconds: 180 },
 ]
 
@@ -564,7 +564,10 @@ export default function InterviewView({
 
             {/* Self-rating */}
             <div>
-              <p className="text-sm font-semibold text-gray-200 mb-2">How did you do?</p>
+              <p className="text-sm font-semibold text-gray-200 mb-1">How did you do?</p>
+              <p className="text-[11px] text-gray-500 mb-2">
+                Rate like an interviewer: correctness · production thinking · trade-offs · failure handling · communication
+              </p>
               <div className="grid grid-cols-4 gap-2">
                 {RATINGS.map(r => (
                   <button

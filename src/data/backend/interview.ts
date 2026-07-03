@@ -1,4 +1,5 @@
 import type { InterviewBank } from '@/types'
+import { BACKEND_SCENARIO_QUESTIONS } from './interview-scenarios'
 
 /** Backend Engineering interview bank: roles + 3-round question set. */
 export const BACKEND_INTERVIEW: InterviewBank = {
@@ -308,5 +309,6 @@ export const BACKEND_INTERVIEW: InterviewBank = {
       ],
       topicId: 'incident-management',
     },
+    ...BACKEND_SCENARIO_QUESTIONS,
   ],
 }

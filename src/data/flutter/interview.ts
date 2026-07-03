@@ -1,4 +1,5 @@
 import type { InterviewBank } from '@/types'
+import { FLUTTER_SCENARIO_QUESTIONS } from './interview-scenarios'
 
 /** Flutter / mobile-engineering interview bank: roles + 3-round question set. */
 export const FLUTTER_INTERVIEW: InterviewBank = {
@@ -327,5 +328,6 @@ export const FLUTTER_INTERVIEW: InterviewBank = {
       followUp: 'How would you catch this class of regression automatically before it ships next time?',
       topicId: 'performance-optimization',
     },
+    ...FLUTTER_SCENARIO_QUESTIONS,
   ],
 }
