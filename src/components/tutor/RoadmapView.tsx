@@ -45,6 +45,12 @@ const TRACK_ACCENT: Record<TrackKey, { ring: string; bar: string; header: string
     header: 'bg-orange-500/10 border-orange-500/30',
     dot:    'bg-orange-500',
   },
+  aiml: {
+    ring:   'ring-emerald-500/40',
+    bar:    'bg-emerald-500',
+    header: 'bg-emerald-500/10 border-emerald-500/30',
+    dot:    'bg-emerald-500',
+  },
 }
 
 /** Returns the status icon element for a topic. */

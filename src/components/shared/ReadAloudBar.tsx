@@ -85,6 +85,14 @@ const ACCENT = {
     speedActive: 'bg-orange-500/20 text-orange-400 border-orange-500/40',
     dot: 'bg-orange-400',
   },
+  emerald: {
+    ring: 'ring-emerald-500/40',
+    activeBg: 'bg-emerald-500/10 border-emerald-500/25',
+    text: 'text-emerald-400',
+    playBtn: 'bg-emerald-500 hover:bg-emerald-600',
+    speedActive: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40',
+    dot: 'bg-emerald-400',
+  },
 }
 
 // ─── Voice selector ────────────────────────────────────────────────────────────

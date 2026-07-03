@@ -1,6 +1,6 @@
 // ─── Track ────────────────────────────────────────────────────────────────────
 
-export type TrackKey = 'backend' | 'ai' | 'flutter' | 'react'
+export type TrackKey = 'backend' | 'ai' | 'flutter' | 'react' | 'aiml'
 
 export interface Track {
   key: TrackKey
@@ -61,6 +61,13 @@ export interface CodeExample {
   code: string
 }
 
+/** An external learning resource linked from a topic (video, book, docs…). */
+export interface TopicResource {
+  label: string
+  url: string
+  kind: 'video' | 'course' | 'book' | 'article' | 'docs' | 'repo' | 'practice'
+}
+
 /** A named concept within a topic — each gets 2-4 paragraphs of explanation. */
 export interface TopicConcept {
   title: string
@@ -98,6 +105,7 @@ export interface CurriculumTopic {
   codeExamples: CodeExample[]
   concepts?: TopicConcept[]          // 4-8 named concept deep-dives
   practicalExercise?: PracticalExercise
+  resources?: TopicResource[]        // external videos/books/docs to go deeper
 }
 
 // ─── Case Studies ─────────────────────────────────────────────────────────────

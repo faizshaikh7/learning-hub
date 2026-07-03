@@ -4,6 +4,7 @@ import BackendTutorScreen from '@/screens/BackendTutorScreen'
 import AiTutorScreen from '@/screens/AiTutorScreen'
 import FlutterTutorScreen from '@/screens/FlutterTutorScreen'
 import ReactTutorScreen from '@/screens/ReactTutorScreen'
+import AimlTutorScreen from '@/screens/AimlTutorScreen'
 import SettingsScreen from '@/screens/SettingsScreen'
 
 /** Application router — one route per screen. */
@@ -13,5 +14,6 @@ export const router = createBrowserRouter([
   { path: '/ai',       element: <AiTutorScreen /> },
   { path: '/flutter',  element: <FlutterTutorScreen /> },
   { path: '/react',    element: <ReactTutorScreen /> },
+  { path: '/aiml',     element: <AimlTutorScreen /> },
   { path: '/settings', element: <SettingsScreen /> },
 ])

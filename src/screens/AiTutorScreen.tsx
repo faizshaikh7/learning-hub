@@ -61,6 +61,7 @@ import ProjectsView from '@/components/shared/ProjectsView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 import TabBar from '@/components/shared/TabBar'
 import LessonInterview from '@/components/shared/LessonInterview'
+import LessonResources from '@/components/shared/LessonResources'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -347,6 +348,9 @@ function LessonView({
           <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">{topic.seniorNotes}</p>
         </div>
       )}
+
+      {/* Learn It Deeper — external reference links */}
+      <LessonResources topic={topic} accentColor="purple" />
 
       {/* Interview Questions — timed drill with reveal */}
       <LessonInterview topic={topic} accentColor="purple" />

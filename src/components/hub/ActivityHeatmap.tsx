@@ -9,9 +9,10 @@ const TRACK_PREFIXES: Record<TrackKey, string> = {
   ai: 'at',
   flutter: 'ft',
   react: 'rt',
+  aiml: 'ml',
 }
 
-const TRACK_KEYS: TrackKey[] = ['backend', 'ai', 'flutter', 'react']
+const TRACK_KEYS: TrackKey[] = ['backend', 'ai', 'flutter', 'react', 'aiml']
 
 /** Maps a study count to a Tailwind bg color class for the heatmap cell. */
 function countToColor(count: number): string {

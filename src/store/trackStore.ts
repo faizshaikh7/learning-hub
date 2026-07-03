@@ -11,6 +11,7 @@ const TRACK_CONFIG = {
   ai:      { prefix: 'at', total: 76 },
   flutter: { prefix: 'ft', total: 65 },
   react:   { prefix: 'rt', total: 81 },
+  aiml:    { prefix: 'ml', total: 58 },
 } as const
 
 const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]> = {
@@ -52,6 +53,16 @@ const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]
     { min: 52, max: 56, label: 'Phase 5 — React Ecosystem' },
     { min: 57, max: 63, label: 'Phase 6 — Next.js Foundations' },
     { min: 64, max: 70, label: 'Phase 7 — Next.js & Production' },
+  ],
+  ml: [
+    { min: 0,  max: 5,  label: 'Phase 0 — Python & Data Toolkit' },
+    { min: 6,  max: 16, label: 'Phase 1 — Statistics & Probability' },
+    { min: 17, max: 22, label: 'Phase 2 — Linear Algebra' },
+    { min: 23, max: 26, label: 'Phase 3 — Calculus & Optimization' },
+    { min: 27, max: 36, label: 'Phase 4 — Core Machine Learning' },
+    { min: 37, max: 43, label: 'Phase 5 — Ensembles & Unsupervised' },
+    { min: 44, max: 51, label: 'Phase 6 — Deep Learning' },
+    { min: 52, max: 58, label: 'Phase 7 — Production ML & Career' },
   ],
 }
 
@@ -97,6 +108,7 @@ export const useTrackStore = create<TrackStore>()(
       ai:      computeStats('ai'),
       flutter: computeStats('flutter'),
       react:   computeStats('react'),
+      aiml:    computeStats('aiml'),
     },
 
     /** Re-read all stats from localStorage. Call after any progress mutation. */
@@ -107,6 +119,7 @@ export const useTrackStore = create<TrackStore>()(
           ai:      computeStats('ai'),
           flutter: computeStats('flutter'),
           react:   computeStats('react'),
+          aiml:    computeStats('aiml'),
         },
       })
     },

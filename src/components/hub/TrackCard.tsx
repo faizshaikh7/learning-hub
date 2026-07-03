@@ -53,6 +53,18 @@ export const TRACKS: Track[] = [
     textClass: 'text-orange-400',
     route: '/react',
   },
+  {
+    key: 'aiml',
+    label: 'AI/ML In-Depth',
+    subtitle: 'Math → ML → Deep Learning',
+    emoji: '🧮',
+    prefix: 'ml',
+    total: 58,
+    colorClass: 'bg-emerald-500',
+    borderClass: 'border-emerald-500/30',
+    textClass: 'text-emerald-400',
+    route: '/aiml',
+  },
 ]
 
 interface CircularProgressProps {

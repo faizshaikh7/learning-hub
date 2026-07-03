@@ -19,6 +19,7 @@ const TRACK_ACCENT: Record<TrackKey, string> = {
   ai:      'text-purple-400 bg-purple-500/10 border-purple-500/30',
   flutter: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
   react:   'text-orange-400 bg-orange-500/10 border-orange-500/30',
+  aiml:    'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
 }
 
 const TRACK_ACTIVE: Record<TrackKey, string> = {
@@ -26,6 +27,7 @@ const TRACK_ACTIVE: Record<TrackKey, string> = {
   ai:      'bg-purple-500/15 border-l-2 border-purple-400',
   flutter: 'bg-cyan-500/15 border-l-2 border-cyan-400',
   react:   'bg-orange-500/15 border-l-2 border-orange-400',
+  aiml:    'bg-emerald-500/15 border-l-2 border-emerald-400',
 }
 
 /** Renders a status icon for a topic based on its completion status. */

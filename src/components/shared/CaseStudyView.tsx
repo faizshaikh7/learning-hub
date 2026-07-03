@@ -18,7 +18,7 @@ import type { CaseStudy, CaseStudyDecision } from '@/types'
 
 interface CaseStudyViewProps {
   caseStudies: CaseStudy[]
-  accentColor: 'blue' | 'purple' | 'cyan' | 'orange'
+  accentColor: 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald'
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -28,6 +28,7 @@ const ACCENT = {
   purple: { bg: 'bg-purple-500/15', border: 'border-purple-500/30', text: 'text-purple-400', badge: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
   cyan:   { bg: 'bg-cyan-500/15',   border: 'border-cyan-500/30',   text: 'text-cyan-400',   badge: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' },
   orange: { bg: 'bg-orange-500/15', border: 'border-orange-500/30', text: 'text-orange-400', badge: 'bg-orange-500/20 text-orange-400 border-orange-500/30' },
+  emerald: { bg: 'bg-emerald-500/15', border: 'border-emerald-500/30', text: 'text-emerald-400', badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
 }
 
 // ─── Decision accordion item ───────────────────────────────────────────────────

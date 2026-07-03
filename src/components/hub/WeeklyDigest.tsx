@@ -11,9 +11,10 @@ const TRACK_PREFIXES: Record<TrackKey, string> = {
   ai: 'at',
   flutter: 'ft',
   react: 'rt',
+  aiml: 'ml',
 }
 
-const TRACK_KEYS: TrackKey[] = ['backend', 'ai', 'flutter', 'react']
+const TRACK_KEYS: TrackKey[] = ['backend', 'ai', 'flutter', 'react', 'aiml']
 
 /** XP awarded per completed topic (mirrors store convention). */
 const XP_PER_TOPIC = 10

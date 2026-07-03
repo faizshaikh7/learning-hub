@@ -41,15 +41,15 @@ import { useXPStore } from '@/store/xpStore'
 import { useNotesStore } from '@/store/notesStore'
 import { useTimerStore } from '@/store/timerStore'
 import type { CurriculumTopic, TopicStatus, TimerMode } from '@/types'
-import { REACT_CURRICULUM } from '@/data/react/curriculum'
-import { REACT_FLASHCARDS } from '@/data/react/flashcards'
-import { REACT_CASE_STUDIES } from '@/data/react/case-studies'
-import { REACT_LIFECYCLES } from '@/data/react/lifecycles'
-import { REACT_INTERVIEW } from '@/data/react/interview'
-import { REACT_COMPARISONS } from '@/data/react/comparisons'
-import { REACT_CHEATSHEETS } from '@/data/react/cheatsheets'
-import { REACT_CONCEPT_MAP } from '@/data/react/concept-map'
-import { REACT_PROJECTS } from '@/data/react/projects'
+import { AIML_CURRICULUM } from '@/data/aiml/curriculum'
+import { AIML_FLASHCARDS } from '@/data/aiml/flashcards'
+import { AIML_CASE_STUDIES } from '@/data/aiml/case-studies'
+import { AIML_LIFECYCLES } from '@/data/aiml/lifecycles'
+import { AIML_INTERVIEW } from '@/data/aiml/interview'
+import { AIML_COMPARISONS } from '@/data/aiml/comparisons'
+import { AIML_CHEATSHEETS } from '@/data/aiml/cheatsheets'
+import { AIML_CONCEPT_MAP } from '@/data/aiml/concept-map'
+import { AIML_PROJECTS } from '@/data/aiml/projects'
 import CaseStudyView from '@/components/shared/CaseStudyView'
 import LifecycleView from '@/components/shared/LifecycleView'
 import InterviewView from '@/components/shared/InterviewView'
@@ -84,11 +84,11 @@ function groupByPhase(topics: CurriculumTopic[]): Map<string, CurriculumTopic[]>
 function langColor(lang: string): string {
   const map: Record<string, string> = {
     javascript: 'text-yellow-400',
-    typescript: 'text-orange-400',
+    typescript: 'text-purple-400',
     bash: 'text-green-400',
     sql: 'text-orange-400',
     nginx: 'text-teal-400',
-    python: 'text-orange-300',
+    python: 'text-purple-300',
   }
   return map[lang.toLowerCase()] ?? 'text-gray-400'
 }
@@ -120,13 +120,13 @@ function TopicItem({
       className={cn(
         'w-full text-left px-3 py-2 rounded-lg flex items-start gap-2 transition-colors group',
         isActive
-          ? 'bg-orange-500/20 border border-orange-500/40'
+          ? 'bg-emerald-500/20 border border-emerald-500/40'
           : 'hover:bg-gray-800/60 border border-transparent',
       )}
     >
       <span className="mt-0.5 shrink-0">
         {status === 'completed' ? (
-          <CheckCircle2 className="w-4 h-4 text-orange-400" />
+          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
         ) : status === 'in-progress' ? (
           <Circle className="w-4 h-4 text-yellow-400" />
         ) : (
@@ -211,7 +211,7 @@ function LessonView({
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-medium px-2 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30">
+            <span className="text-xs font-medium px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
               {topic.phaseName}
             </span>
             <span className="text-xs text-gray-500 flex items-center gap-1">
@@ -228,7 +228,7 @@ function LessonView({
             'shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all',
             status === 'completed'
               ? 'bg-green-500/20 text-green-400 border border-green-500/30 cursor-default'
-              : 'bg-orange-500 hover:bg-orange-600 text-white',
+              : 'bg-emerald-500 hover:bg-emerald-600 text-white',
           )}
         >
           {status === 'completed' ? (
@@ -246,7 +246,7 @@ function LessonView({
       </div>
 
       {/* Read Aloud */}
-      <ReadAloudBar topic={topic} accentColor="orange" />
+      <ReadAloudBar topic={topic} accentColor="emerald" />
 
       {/* ELI5 */}
       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
@@ -258,10 +258,10 @@ function LessonView({
       </div>
 
       {/* Analogy */}
-      <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+      <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4">
         <div className="flex items-center gap-2 mb-2">
-          <Brain className="w-4 h-4 text-purple-400" />
-          <span className="text-sm font-semibold text-purple-400">Analogy</span>
+          <Brain className="w-4 h-4 text-emerald-400" />
+          <span className="text-sm font-semibold text-emerald-400">Analogy</span>
         </div>
         <p className="text-gray-300 text-sm leading-relaxed">{topic.analogy}</p>
       </div>
@@ -269,8 +269,8 @@ function LessonView({
       {/* Explanation */}
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
         <div className="flex items-center gap-2 mb-3">
-          <BookOpen className="w-4 h-4 text-orange-400" />
-          <span className="text-sm font-semibold text-orange-400">Explanation</span>
+          <BookOpen className="w-4 h-4 text-emerald-400" />
+          <span className="text-sm font-semibold text-emerald-400">Explanation</span>
         </div>
         <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">{topic.explanation}</p>
       </div>
@@ -308,8 +308,8 @@ function LessonView({
             </div>
           ))}
         </div>
-        <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3">
-          <p className="text-sm text-orange-200">{topic.efficientWay.recommendation}</p>
+        <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3">
+          <p className="text-sm text-emerald-200">{topic.efficientWay.recommendation}</p>
         </div>
       </div>
 
@@ -350,10 +350,10 @@ function LessonView({
       )}
 
       {/* Learn It Deeper — external reference links */}
-      <LessonResources topic={topic} accentColor="orange" />
+      <LessonResources topic={topic} accentColor="emerald" />
 
       {/* Interview Questions — timed drill with reveal */}
-      <LessonInterview topic={topic} accentColor="orange" />
+      <LessonInterview topic={topic} accentColor="emerald" />
 
       {/* Code Examples */}
       {topic.codeExamples.length > 0 && (
@@ -395,7 +395,7 @@ function LessonView({
 
 /** Flashcard view with flip animation for spaced repetition. */
 function FlashcardView({ topic }: { topic: CurriculumTopic }) {
-  const cards = useMemo(() => REACT_FLASHCARDS[topic.id] ?? [], [topic.id])
+  const cards = useMemo(() => AIML_FLASHCARDS[topic.id] ?? [], [topic.id])
   const [cardIdx, setCardIdx] = useState(0)
   const [flipped, setFlipped] = useState(false)
 
@@ -442,7 +442,7 @@ function FlashcardView({ topic }: { topic: CurriculumTopic }) {
       {/* Progress bar */}
       <div className="h-1 bg-gray-800 rounded-full">
         <div
-          className="h-1 bg-orange-500 rounded-full transition-all duration-300"
+          className="h-1 bg-emerald-500 rounded-full transition-all duration-300"
           style={{ width: `${((cardIdx + 1) / cards.length) * 100}%` }}
         />
       </div>
@@ -450,7 +450,7 @@ function FlashcardView({ topic }: { topic: CurriculumTopic }) {
       {/* Card */}
       <button
         onClick={() => setFlipped(f => !f)}
-        className="w-full min-h-48 bg-gray-900 border border-gray-800 rounded-xl p-6 text-left hover:border-orange-500/40 transition-colors"
+        className="w-full min-h-48 bg-gray-900 border border-gray-800 rounded-xl p-6 text-left hover:border-emerald-500/40 transition-colors"
       >
         <div className="flex items-center gap-2 mb-4">
           {flipped ? (
@@ -458,7 +458,7 @@ function FlashcardView({ topic }: { topic: CurriculumTopic }) {
               ANSWER
             </span>
           ) : (
-            <span className="text-xs font-semibold text-orange-400 px-2 py-0.5 bg-orange-500/10 border border-orange-500/20 rounded">
+            <span className="text-xs font-semibold text-emerald-400 px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded">
               QUESTION
             </span>
           )}
@@ -492,14 +492,14 @@ function FlashcardView({ topic }: { topic: CurriculumTopic }) {
 /** Notes view — per-topic notes with auto-save. */
 function NotesView({ topic }: { topic: CurriculumTopic }) {
   const { getNoteForTopic, upsertNote } = useNotesStore()
-  const existing = getNoteForTopic(topic.id, 'react')
+  const existing = getNoteForTopic(topic.id, 'aiml')
   const [content, setContent] = useState(existing?.content ?? '')
   const [saved, setSaved] = useState(true)
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Sync note content when topic changes
   useEffect(() => {
-    const note = getNoteForTopic(topic.id, 'react')
+    const note = getNoteForTopic(topic.id, 'aiml')
     setContent(note?.content ?? '')
     setSaved(true)
   }, [topic.id, getNoteForTopic])
@@ -509,7 +509,7 @@ function NotesView({ topic }: { topic: CurriculumTopic }) {
     setSaved(false)
     if (saveTimer.current) clearTimeout(saveTimer.current)
     saveTimer.current = setTimeout(() => {
-      upsertNote(topic.id, 'react', val)
+      upsertNote(topic.id, 'aiml', val)
       setSaved(true)
     }, 800)
   }, [topic.id, upsertNote])
@@ -529,7 +529,7 @@ function NotesView({ topic }: { topic: CurriculumTopic }) {
         value={content}
         onChange={e => handleChange(e.target.value)}
         placeholder={`Write your notes for "${topic.title}"...\n\n• Key concepts\n• Things to remember\n• Your own analogies\n• Questions to revisit`}
-        className="w-full min-h-[400px] bg-gray-900 border border-gray-800 rounded-xl p-4 text-gray-300 text-sm leading-relaxed resize-y focus:outline-none focus:border-orange-500/50 placeholder:text-gray-600 font-mono"
+        className="w-full min-h-[400px] bg-gray-900 border border-gray-800 rounded-xl p-4 text-gray-300 text-sm leading-relaxed resize-y focus:outline-none focus:border-emerald-500/50 placeholder:text-gray-600 font-mono"
       />
       <p className="text-xs text-gray-600">Notes are saved automatically and stored locally in your browser.</p>
     </div>
@@ -546,9 +546,9 @@ function RoadmapView({
   activeTopic: CurriculumTopic
   onSelect: (t: CurriculumTopic) => void
 }) {
-  const phases = useMemo(() => groupByPhase(REACT_CURRICULUM), [])
+  const phases = useMemo(() => groupByPhase(AIML_CURRICULUM), [])
   const completed = Object.values(progress).filter(s => s === 'completed').length
-  const total = REACT_CURRICULUM.length
+  const total = AIML_CURRICULUM.length
   const pct = Math.round((completed / total) * 100)
 
   return (
@@ -557,14 +557,14 @@ function RoadmapView({
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <p className="text-sm font-semibold text-white">React + Next.js Progress</p>
+            <p className="text-sm font-semibold text-white">AI/ML In-Depth Progress</p>
             <p className="text-xs text-gray-400 mt-0.5">{completed} of {total} topics completed</p>
           </div>
           <Trophy className="w-6 h-6 text-yellow-400" />
         </div>
         <div className="h-2 bg-gray-800 rounded-full">
           <div
-            className="h-2 bg-gradient-to-r from-orange-500 to-orange-400 rounded-full transition-all duration-500"
+            className="h-2 bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -592,12 +592,12 @@ function RoadmapView({
                     className={cn(
                       'flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors',
                       t.id === activeTopic.id
-                        ? 'bg-orange-500/20 border border-orange-500/30'
+                        ? 'bg-emerald-500/20 border border-emerald-500/30'
                         : 'hover:bg-gray-800',
                     )}
                   >
                     {s === 'completed' ? (
-                      <CheckCircle2 className="w-4 h-4 text-orange-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                     ) : s === 'in-progress' ? (
                       <Circle className="w-4 h-4 text-yellow-400 shrink-0" />
                     ) : (
@@ -634,8 +634,8 @@ function TimerView() {
     { key: 'long-break', label: 'Long Break', icon: <Coffee className="w-4 h-4" /> },
   ]
 
-  const modeColor = mode === 'focus' ? 'text-orange-400' : mode === 'short-break' ? 'text-green-400' : 'text-teal-400'
-  const ringColor = mode === 'focus' ? 'stroke-orange-500' : mode === 'short-break' ? 'stroke-green-500' : 'stroke-teal-500'
+  const modeColor = mode === 'focus' ? 'text-emerald-400' : mode === 'short-break' ? 'text-green-400' : 'text-teal-400'
+  const ringColor = mode === 'focus' ? 'stroke-emerald-500' : mode === 'short-break' ? 'stroke-green-500' : 'stroke-teal-500'
 
   const totalSecs = mode === 'focus' ? 25 * 60 : mode === 'short-break' ? 5 * 60 : 15 * 60
   const pct = ((totalSecs - secondsLeft) / totalSecs) * 100
@@ -656,7 +656,7 @@ function TimerView() {
             className={cn(
               'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
               mode === m.key
-                ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
+                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                 : 'text-gray-400 hover:text-gray-200 border border-transparent',
             )}
           >
@@ -699,7 +699,7 @@ function TimerView() {
         </button>
         <button
           onClick={isRunning ? pause : start}
-          className="px-8 py-3 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg transition-colors flex items-center gap-2"
+          className="px-8 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-lg transition-colors flex items-center gap-2"
         >
           {isRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
           {isRunning ? 'Pause' : 'Start'}
@@ -728,17 +728,17 @@ function TimerView() {
 // ─── Main Screen ──────────────────────────────────────────────────────────────
 
 /**
- * BackendTutorScreen — full learning experience for the Backend Engineering track.
+ * AimlTutorScreen — full learning experience for the AI/ML In-Depth track.
  * Features: lesson viewer, quiz, flashcards, notes, roadmap, and Pomodoro timer.
  */
-export default function ReactTutorScreen() {
+export default function AimlTutorScreen() {
   const navigate = useNavigate()
   const { markTopic } = useTrackStore()
   const { addXP } = useXPStore()
 
   // Read progress from localStorage via store
   const rawProgress = useMemo(
-    () => getProgress('rt') as Record<string, TopicStatus>,
+    () => getProgress('ml') as Record<string, TopicStatus>,
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   )
@@ -747,23 +747,23 @@ export default function ReactTutorScreen() {
   // Determine initial topic: first incomplete or first topic
   const initialTopic = useMemo(() => {
     return (
-      REACT_CURRICULUM.find(t => (rawProgress[t.id] ?? 'not-started') !== 'completed') ??
-      REACT_CURRICULUM[0]
+      AIML_CURRICULUM.find(t => (rawProgress[t.id] ?? 'not-started') !== 'completed') ??
+      AIML_CURRICULUM[0]
     )
   }, [rawProgress])
 
   const [activeTopic, setActiveTopic] = useState<CurriculumTopic>(initialTopic)
   const [activeTab, setActiveTab] = useState<TabKey>('lesson')
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768)
-  const phaseGroups = useMemo(() => groupByPhase(REACT_CURRICULUM), [])
+  const phaseGroups = useMemo(() => groupByPhase(AIML_CURRICULUM), [])
 
   // Prev/next for bottom navigation
   const currentTopicIdx = useMemo(
-    () => REACT_CURRICULUM.findIndex(t => t.id === activeTopic.id),
+    () => AIML_CURRICULUM.findIndex(t => t.id === activeTopic.id),
     [activeTopic.id],
   )
-  const prevTopic = currentTopicIdx > 0 ? REACT_CURRICULUM[currentTopicIdx - 1] : null
-  const nextTopic = currentTopicIdx < REACT_CURRICULUM.length - 1 ? REACT_CURRICULUM[currentTopicIdx + 1] : null
+  const prevTopic = currentTopicIdx > 0 ? AIML_CURRICULUM[currentTopicIdx - 1] : null
+  const nextTopic = currentTopicIdx < AIML_CURRICULUM.length - 1 ? AIML_CURRICULUM[currentTopicIdx + 1] : null
 
   /** Select a topic and switch to the lesson tab. */
   const handleSelectTopic = useCallback((t: CurriculumTopic) => {
@@ -771,7 +771,7 @@ export default function ReactTutorScreen() {
     setActiveTab('lesson')
     if (window.innerWidth < 768) setSidebarOpen(false)
     if ((progress[t.id] ?? 'not-started') === 'not-started') {
-      markTopic('react', t.id, 'in-progress')
+      markTopic('aiml', t.id, 'in-progress')
       setProgress(p => ({ ...p, [t.id]: 'in-progress' }))
     }
   }, [progress, markTopic])
@@ -780,13 +780,13 @@ export default function ReactTutorScreen() {
   const handleMarkComplete = useCallback(() => {
     if (progress[activeTopic.id] === 'completed') return
 
-    markTopic('react', activeTopic.id, 'completed')
+    markTopic('aiml', activeTopic.id, 'completed')
     addXP(10)
     setProgress(p => ({ ...p, [activeTopic.id]: 'completed' }))
 
     // Auto-advance to next incomplete topic
-    const currentIdx = REACT_CURRICULUM.findIndex(t => t.id === activeTopic.id)
-    const nextTopic = REACT_CURRICULUM.slice(currentIdx + 1).find(
+    const currentIdx = AIML_CURRICULUM.findIndex(t => t.id === activeTopic.id)
+    const nextTopic = AIML_CURRICULUM.slice(currentIdx + 1).find(
       t => (progress[t.id] ?? 'not-started') !== 'completed',
     )
     if (nextTopic) {
@@ -814,7 +814,7 @@ export default function ReactTutorScreen() {
   ]
 
   const completedCount = Object.values(progress).filter(s => s === 'completed').length
-  const totalCount = REACT_CURRICULUM.length
+  const totalCount = AIML_CURRICULUM.length
   const pct = Math.round((completedCount / totalCount) * 100)
 
   return (
@@ -856,18 +856,18 @@ export default function ReactTutorScreen() {
             </button>
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center">
-              <Code2 className="w-4 h-4 text-orange-400" />
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+              <Brain className="w-4 h-4 text-emerald-400" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">React + Next.js</p>
+              <p className="text-sm font-semibold text-white">AI/ML In-Depth</p>
               <p className="text-xs text-gray-400">{completedCount}/{totalCount} completed</p>
             </div>
           </div>
           {/* Track progress bar */}
           <div className="h-1 bg-gray-800 rounded-full">
             <div
-              className="h-1 bg-orange-500 rounded-full transition-all duration-500"
+              className="h-1 bg-emerald-500 rounded-full transition-all duration-500"
               style={{ width: `${pct}%` }}
             />
           </div>
@@ -906,7 +906,7 @@ export default function ReactTutorScreen() {
             tabs={tabs}
             activeTab={activeTab}
             onSelect={(key) => setActiveTab(key as TabKey)}
-            accentColor="orange"
+            accentColor="emerald"
           />
         </header>
 
@@ -922,10 +922,10 @@ export default function ReactTutorScreen() {
           {activeTab === 'cards' && <FlashcardView topic={activeTopic} />}
           {activeTab === 'review' && (
             <ReviewView
-              track="react"
-              curriculum={REACT_CURRICULUM}
-              flashcards={REACT_FLASHCARDS}
-              accentColor="orange"
+              track="aiml"
+              curriculum={AIML_CURRICULUM}
+              flashcards={AIML_FLASHCARDS}
+              accentColor="emerald"
             />
           )}
           {activeTab === 'notes' && <NotesView topic={activeTopic} />}
@@ -938,49 +938,49 @@ export default function ReactTutorScreen() {
           )}
           {activeTab === 'timer' && <TimerView />}
           {activeTab === 'lifecycle' && (
-            <LifecycleView lifecycles={REACT_LIFECYCLES} accentColor="orange" />
+            <LifecycleView lifecycles={AIML_LIFECYCLES} accentColor="emerald" />
           )}
           {activeTab === 'interview' && (
             <InterviewView
-              bank={REACT_INTERVIEW}
-              curriculum={REACT_CURRICULUM}
+              bank={AIML_INTERVIEW}
+              curriculum={AIML_CURRICULUM}
               progress={progress}
-              track="react"
-              accentColor="orange"
+              track="aiml"
+              accentColor="emerald"
               onOpenTopic={(id) => {
-                const t = REACT_CURRICULUM.find(x => x.id === id)
+                const t = AIML_CURRICULUM.find(x => x.id === id)
                 if (t) { handleSelectTopic(t); setActiveTab('lesson') }
               }}
             />
           )}
           {activeTab === 'comparisons' && (
-            <ComparisonView comparisons={REACT_COMPARISONS} accentColor="orange" />
+            <ComparisonView comparisons={AIML_COMPARISONS} accentColor="emerald" />
           )}
           {activeTab === 'conceptmap' && (
             <ConceptMapView
-              conceptMap={REACT_CONCEPT_MAP}
-              accentColor="orange"
+              conceptMap={AIML_CONCEPT_MAP}
+              accentColor="emerald"
               onOpenTopic={(id) => {
-                const t = REACT_CURRICULUM.find(x => x.id === id)
+                const t = AIML_CURRICULUM.find(x => x.id === id)
                 if (t) { handleSelectTopic(t); setActiveTab('lesson') }
               }}
             />
           )}
           {activeTab === 'cheatsheet' && (
-            <CheatsheetView cheatsheets={REACT_CHEATSHEETS} accentColor="orange" />
+            <CheatsheetView cheatsheets={AIML_CHEATSHEETS} accentColor="emerald" />
           )}
           {activeTab === 'projects' && (
             <ProjectsView
-              bank={REACT_PROJECTS}
-              accentColor="orange"
+              bank={AIML_PROJECTS}
+              accentColor="emerald"
               onOpenTopic={(id) => {
-                const t = REACT_CURRICULUM.find(x => x.id === id)
+                const t = AIML_CURRICULUM.find(x => x.id === id)
                 if (t) { handleSelectTopic(t); setActiveTab('lesson') }
               }}
             />
           )}
           {activeTab === 'cases' && (
-            <CaseStudyView caseStudies={REACT_CASE_STUDIES} accentColor="orange" />
+            <CaseStudyView caseStudies={AIML_CASE_STUDIES} accentColor="emerald" />
           )}
 
           {/* Previous / Next topic navigation */}
