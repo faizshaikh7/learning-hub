@@ -27,7 +27,6 @@ import {
   Check,
   X,
   RotateCw,
-  MessageSquare,
   Menu,
   Workflow,
   Briefcase,
@@ -64,6 +63,7 @@ import ConceptMapView from '@/components/shared/ConceptMapView'
 import ProjectsView from '@/components/shared/ProjectsView'
 import ReadAloudBar from '@/components/shared/ReadAloudBar'
 import TabBar from '@/components/shared/TabBar'
+import LessonInterview from '@/components/shared/LessonInterview'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -351,23 +351,8 @@ function LessonView({
         </div>
       )}
 
-      {/* Interview Questions */}
-      {topic.interviewQuestions.length > 0 && (
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
-          <div className="flex items-center gap-2 mb-3">
-            <MessageSquare className="w-4 h-4 text-blue-400" />
-            <span className="text-sm font-semibold text-blue-400">Interview Questions</span>
-          </div>
-          <ul className="space-y-2">
-            {topic.interviewQuestions.map((q, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
-                <span className="shrink-0 text-blue-500 font-mono text-xs mt-1">Q{i + 1}.</span>
-                {q}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* Interview Questions — timed drill with reveal */}
+      <LessonInterview topic={topic} accentColor="blue" />
 
       {/* Code Examples */}
       {topic.codeExamples.length > 0 && (
