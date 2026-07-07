@@ -71,7 +71,7 @@ export const TRACKS: Track[] = [
     subtitle: 'Concepts for Any Framework',
     emoji: '📲',
     prefix: 'mb',
-    total: 77,
+    total: 84,
     colorClass: 'bg-amber-500',
     borderClass: 'border-amber-500/30',
     textClass: 'text-amber-400',

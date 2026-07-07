@@ -1,7 +1,9 @@
 import type { FlashcardData } from '@/types'
+import { MOBILE_ARCH_FLASHCARDS } from './curriculum-arch'
+import { MOBILE_EXTRA_FLASHCARDS } from './curriculum-extras'
 
 /** Mobile Development (concept-first, framework-agnostic) flashcard deck keyed by topic id. */
-export const MOBILE_FLASHCARDS: FlashcardData = {
+const MOBILE_FLASHCARDS_BASE: FlashcardData = {
   // ─── P0 · Foundations ───────────────────────────────────────────────────────
   'what-is-mobile': [
     { id: 'mbfc_whatis_1', q: 'What actually makes mobile development different from web or desktop?', a: "Constraints, not the language. A phone is a battery-powered, sometimes-connected, sensor-rich device the OS can suspend or kill at any moment to protect memory and battery. You are a guest in a tightly managed environment: limited RAM, a strict process lifecycle, background execution limits, and permission-gated hardware. Master those constraints and any framework becomes a detail.", hint: 'Think about what the OS can do TO your app.' },
@@ -287,4 +289,11 @@ export const MOBILE_FLASHCARDS: FlashcardData = {
     { id: 'mbfc_stack_3', q: 'When does cross-platform (Flutter/React Native) clearly win?', a: "When shared business logic and fast time-to-market across both stores matter more than squeezing out native-level performance or same-day OS features, when the team already knows JS/Dart, or when a small team must ship and maintain both platforms. Most CRUD/content/commerce apps fit here — you accept an abstraction layer in exchange for a single codebase and velocity." },
     { id: 'mbfc_stack_4', q: 'Why is ‘understand mobile, then any framework is learnable’ the real takeaway?', a: "Because the hard, durable knowledge — lifecycle and process death, the single UI thread, the frame budget, background limits, permissions, secure storage, offline-first networking, and store operations — is identical across Flutter, React Native, Kotlin, and Swift. Frameworks change syntax and rendering strategy; the platform behavior you must respect does not. Master the concepts and you can pick up any stack." },
   ],
+}
+
+/** Base decks plus the architecture, animation, gesture, and reactive topic decks. */
+export const MOBILE_FLASHCARDS: FlashcardData = {
+  ...MOBILE_FLASHCARDS_BASE,
+  ...MOBILE_ARCH_FLASHCARDS,
+  ...MOBILE_EXTRA_FLASHCARDS,
 }
