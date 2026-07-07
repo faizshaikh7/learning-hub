@@ -12,7 +12,7 @@ const TRACK_CONFIG = {
   flutter: { prefix: 'ft', total: 65 },
   react:   { prefix: 'rt', total: 81 },
   aiml:    { prefix: 'ml', total: 58 },
-  mobile:  { prefix: 'mb', total: 84 },
+  mobile:  { prefix: 'mb', total: 88 },
 } as const
 
 const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]> = {
@@ -66,18 +66,18 @@ const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]
     { min: 52, max: 58, label: 'Phase 7 — Production ML & Career' },
   ],
   mb: [
-    { min: 0,  max: 5,  label: 'Phase 0 — Mobile Foundations' },
-    { min: 6,  max: 12, label: 'Phase 1 — App Lifecycle & Process Model' },
-    { min: 13, max: 16, label: 'Phase 2 — App Architecture & Structure' },
-    { min: 17, max: 24, label: 'Phase 3 — UI Rendering & the Frame Pipeline' },
-    { min: 25, max: 32, label: 'Phase 4 — Adaptive UI, Navigation & Accessibility' },
-    { min: 33, max: 40, label: 'Phase 5 — State, Data & Local Storage' },
-    { min: 41, max: 47, label: 'Phase 6 — Networking on Mobile' },
-    { min: 48, max: 55, label: 'Phase 7 — Concurrency & Background Execution' },
-    { min: 56, max: 62, label: 'Phase 8 — Device Capabilities & Native Integration' },
-    { min: 63, max: 69, label: 'Phase 9 — Security & Privacy' },
-    { min: 70, max: 76, label: 'Phase 10 — Performance, Testing & Observability' },
-    { min: 77, max: 83, label: 'Phase 11 — Build, Release & Distribution' },
+    { min: 0,  max: 9,  label: 'Phase 0 — Mobile Foundations' },
+    { min: 10, max: 16, label: 'Phase 1 — App Lifecycle & Process Model' },
+    { min: 17, max: 20, label: 'Phase 2 — App Architecture & Structure' },
+    { min: 21, max: 28, label: 'Phase 3 — UI Rendering & the Frame Pipeline' },
+    { min: 29, max: 36, label: 'Phase 4 — Adaptive UI, Navigation & Accessibility' },
+    { min: 37, max: 44, label: 'Phase 5 — State, Data & Local Storage' },
+    { min: 45, max: 51, label: 'Phase 6 — Networking on Mobile' },
+    { min: 52, max: 59, label: 'Phase 7 — Concurrency & Background Execution' },
+    { min: 60, max: 66, label: 'Phase 8 — Device Capabilities & Native Integration' },
+    { min: 67, max: 73, label: 'Phase 9 — Security & Privacy' },
+    { min: 74, max: 80, label: 'Phase 10 — Performance, Testing & Observability' },
+    { min: 81, max: 87, label: 'Phase 11 — Build, Release & Distribution' },
   ],
 }
 

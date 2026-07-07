@@ -1,5 +1,6 @@
 import type { CurriculumTopic } from '@/types'
 import { MOBILE_P0 } from './curriculum-p0'
+import { MOBILE_TOOLCHAIN } from './curriculum-toolchain'
 import { MOBILE_P1 } from './curriculum-p1'
 import { MOBILE_ARCH } from './curriculum-arch'
 import { MOBILE_P2 } from './curriculum-p2'
@@ -22,6 +23,7 @@ import { MOBILE_P10 } from './curriculum-p10'
  */
 export const MOBILE_CURRICULUM: CurriculumTopic[] = [
   ...MOBILE_P0,
+  ...MOBILE_TOOLCHAIN,
   ...MOBILE_P1,
   ...MOBILE_ARCH,
   ...MOBILE_P2, ...MOBILE_ANIMATION,

@@ -1,6 +1,7 @@
 import type { FlashcardData } from '@/types'
 import { MOBILE_ARCH_FLASHCARDS } from './curriculum-arch'
 import { MOBILE_EXTRA_FLASHCARDS } from './curriculum-extras'
+import { MOBILE_TOOLCHAIN_FLASHCARDS } from './curriculum-toolchain'
 
 /** Mobile Development (concept-first, framework-agnostic) flashcard deck keyed by topic id. */
 const MOBILE_FLASHCARDS_BASE: FlashcardData = {
@@ -294,6 +295,7 @@ const MOBILE_FLASHCARDS_BASE: FlashcardData = {
 /** Base decks plus the architecture, animation, gesture, and reactive topic decks. */
 export const MOBILE_FLASHCARDS: FlashcardData = {
   ...MOBILE_FLASHCARDS_BASE,
+  ...MOBILE_TOOLCHAIN_FLASHCARDS,
   ...MOBILE_ARCH_FLASHCARDS,
   ...MOBILE_EXTRA_FLASHCARDS,
 }
