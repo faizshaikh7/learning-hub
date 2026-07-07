@@ -26,7 +26,7 @@ const TRACKS = [
   { key: 'ft', label: 'Flutter',             accent: 'cyan' },
   { key: 'rt', label: 'React + Next.js',     accent: 'orange' },
   { key: 'ml', label: 'AI/ML In-Depth',      accent: 'emerald' },
-  { key: 'mb', label: 'Mobile Development',   accent: 'rose' },
+  { key: 'mb', label: 'Mobile Development',   accent: 'amber' },
 ] as const
 
 /** Every localStorage key owned by this app. */

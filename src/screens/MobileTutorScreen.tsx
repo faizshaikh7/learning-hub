@@ -90,7 +90,7 @@ function langColor(lang: string): string {
     nginx: 'text-teal-400',
     python: 'text-purple-300',
     kotlin: 'text-orange-300',
-    swift: 'text-rose-300',
+    swift: 'text-amber-300',
     yaml: 'text-cyan-400',
     text: 'text-gray-400',
   }
@@ -124,13 +124,13 @@ function TopicItem({
       className={cn(
         'w-full text-left px-3 py-2 rounded-lg flex items-start gap-2 transition-colors group',
         isActive
-          ? 'bg-rose-500/20 border border-rose-500/40'
+          ? 'bg-amber-500/20 border border-amber-500/40'
           : 'hover:bg-gray-800/60 border border-transparent',
       )}
     >
       <span className="mt-0.5 shrink-0">
         {status === 'completed' ? (
-          <CheckCircle2 className="w-4 h-4 text-rose-400" />
+          <CheckCircle2 className="w-4 h-4 text-amber-400" />
         ) : status === 'in-progress' ? (
           <Circle className="w-4 h-4 text-yellow-400" />
         ) : (
@@ -215,7 +215,7 @@ function LessonView({
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-medium px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30">
+            <span className="text-xs font-medium px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">
               {topic.phaseName}
             </span>
             <span className="text-xs text-gray-500 flex items-center gap-1">
@@ -232,7 +232,7 @@ function LessonView({
             'shrink-0 flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all w-full sm:w-auto',
             status === 'completed'
               ? 'bg-green-500/20 text-green-400 border border-green-500/30 cursor-default'
-              : 'bg-rose-500 hover:bg-rose-600 text-white',
+              : 'bg-amber-500 hover:bg-amber-600 text-white',
           )}
         >
           {status === 'completed' ? (
@@ -250,7 +250,7 @@ function LessonView({
       </div>
 
       {/* Read Aloud */}
-      <ReadAloudBar topic={topic} accentColor="rose" />
+      <ReadAloudBar topic={topic} accentColor="amber" />
 
       {/* ELI5 */}
       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
@@ -262,10 +262,10 @@ function LessonView({
       </div>
 
       {/* Analogy */}
-      <div className="bg-rose-500/10 border border-rose-500/20 rounded-xl p-4">
+      <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
         <div className="flex items-center gap-2 mb-2">
-          <Brain className="w-4 h-4 text-rose-400" />
-          <span className="text-sm font-semibold text-rose-400">Analogy</span>
+          <Brain className="w-4 h-4 text-amber-400" />
+          <span className="text-sm font-semibold text-amber-400">Analogy</span>
         </div>
         <p className="text-gray-300 text-sm leading-relaxed">{topic.analogy}</p>
       </div>
@@ -273,8 +273,8 @@ function LessonView({
       {/* Explanation */}
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
         <div className="flex items-center gap-2 mb-3">
-          <BookOpen className="w-4 h-4 text-rose-400" />
-          <span className="text-sm font-semibold text-rose-400">Explanation</span>
+          <BookOpen className="w-4 h-4 text-amber-400" />
+          <span className="text-sm font-semibold text-amber-400">Explanation</span>
         </div>
         <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line">{topic.explanation}</p>
       </div>
@@ -312,8 +312,8 @@ function LessonView({
             </div>
           ))}
         </div>
-        <div className="bg-rose-500/10 border border-rose-500/20 rounded-lg p-3">
-          <p className="text-sm text-rose-200">{topic.efficientWay.recommendation}</p>
+        <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3">
+          <p className="text-sm text-amber-200">{topic.efficientWay.recommendation}</p>
         </div>
       </div>
 
@@ -354,10 +354,10 @@ function LessonView({
       )}
 
       {/* Learn It Deeper — external reference links */}
-      <LessonResources topic={topic} accentColor="rose" />
+      <LessonResources topic={topic} accentColor="amber" />
 
       {/* Interview Questions — timed drill with reveal */}
-      <LessonInterview topic={topic} accentColor="rose" />
+      <LessonInterview topic={topic} accentColor="amber" />
 
       {/* Code Examples */}
       {topic.codeExamples.length > 0 && (
@@ -446,7 +446,7 @@ function FlashcardView({ topic }: { topic: CurriculumTopic }) {
       {/* Progress bar */}
       <div className="h-1 bg-gray-800 rounded-full">
         <div
-          className="h-1 bg-rose-500 rounded-full transition-all duration-300"
+          className="h-1 bg-amber-500 rounded-full transition-all duration-300"
           style={{ width: `${((cardIdx + 1) / cards.length) * 100}%` }}
         />
       </div>
@@ -454,7 +454,7 @@ function FlashcardView({ topic }: { topic: CurriculumTopic }) {
       {/* Card */}
       <button
         onClick={() => setFlipped(f => !f)}
-        className="w-full min-h-48 bg-gray-900 border border-gray-800 rounded-xl p-6 text-left hover:border-rose-500/40 transition-colors"
+        className="w-full min-h-48 bg-gray-900 border border-gray-800 rounded-xl p-6 text-left hover:border-amber-500/40 transition-colors"
       >
         <div className="flex items-center gap-2 mb-4">
           {flipped ? (
@@ -462,7 +462,7 @@ function FlashcardView({ topic }: { topic: CurriculumTopic }) {
               ANSWER
             </span>
           ) : (
-            <span className="text-xs font-semibold text-rose-400 px-2 py-0.5 bg-rose-500/10 border border-rose-500/20 rounded">
+            <span className="text-xs font-semibold text-amber-400 px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded">
               QUESTION
             </span>
           )}
@@ -533,7 +533,7 @@ function NotesView({ topic }: { topic: CurriculumTopic }) {
         value={content}
         onChange={e => handleChange(e.target.value)}
         placeholder={`Write your notes for "${topic.title}"...\n\n• Key concepts\n• Things to remember\n• Your own analogies\n• Questions to revisit`}
-        className="w-full min-h-[400px] bg-gray-900 border border-gray-800 rounded-xl p-4 text-gray-300 text-sm leading-relaxed resize-y focus:outline-none focus:border-rose-500/50 placeholder:text-gray-600 font-mono"
+        className="w-full min-h-[400px] bg-gray-900 border border-gray-800 rounded-xl p-4 text-gray-300 text-sm leading-relaxed resize-y focus:outline-none focus:border-amber-500/50 placeholder:text-gray-600 font-mono"
       />
       <p className="text-xs text-gray-600">Notes are saved automatically and stored locally in your browser.</p>
     </div>
@@ -568,7 +568,7 @@ function RoadmapView({
         </div>
         <div className="h-2 bg-gray-800 rounded-full">
           <div
-            className="h-2 bg-gradient-to-r from-rose-500 to-rose-400 rounded-full transition-all duration-500"
+            className="h-2 bg-gradient-to-r from-amber-500 to-amber-400 rounded-full transition-all duration-500"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -596,12 +596,12 @@ function RoadmapView({
                     className={cn(
                       'flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors',
                       t.id === activeTopic.id
-                        ? 'bg-rose-500/20 border border-rose-500/30'
+                        ? 'bg-amber-500/20 border border-amber-500/30'
                         : 'hover:bg-gray-800',
                     )}
                   >
                     {s === 'completed' ? (
-                      <CheckCircle2 className="w-4 h-4 text-rose-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
                     ) : s === 'in-progress' ? (
                       <Circle className="w-4 h-4 text-yellow-400 shrink-0" />
                     ) : (
@@ -638,8 +638,8 @@ function TimerView() {
     { key: 'long-break', label: 'Long Break', icon: <Coffee className="w-4 h-4" /> },
   ]
 
-  const modeColor = mode === 'focus' ? 'text-rose-400' : mode === 'short-break' ? 'text-green-400' : 'text-teal-400'
-  const ringColor = mode === 'focus' ? 'stroke-rose-500' : mode === 'short-break' ? 'stroke-green-500' : 'stroke-teal-500'
+  const modeColor = mode === 'focus' ? 'text-amber-400' : mode === 'short-break' ? 'text-green-400' : 'text-teal-400'
+  const ringColor = mode === 'focus' ? 'stroke-amber-500' : mode === 'short-break' ? 'stroke-green-500' : 'stroke-teal-500'
 
   const totalSecs = mode === 'focus' ? 25 * 60 : mode === 'short-break' ? 5 * 60 : 15 * 60
   const pct = ((totalSecs - secondsLeft) / totalSecs) * 100
@@ -660,7 +660,7 @@ function TimerView() {
             className={cn(
               'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
               mode === m.key
-                ? 'bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
                 : 'text-gray-400 hover:text-gray-200 border border-transparent',
             )}
           >
@@ -703,7 +703,7 @@ function TimerView() {
         </button>
         <button
           onClick={isRunning ? pause : start}
-          className="px-8 py-3 rounded-full bg-rose-500 hover:bg-rose-600 text-white font-semibold text-lg transition-colors flex items-center gap-2"
+          className="px-8 py-3 rounded-full bg-amber-500 hover:bg-amber-600 text-white font-semibold text-lg transition-colors flex items-center gap-2"
         >
           {isRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
           {isRunning ? 'Pause' : 'Start'}
@@ -860,8 +860,8 @@ export default function MobileTutorScreen() {
             </button>
           </div>
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center">
-              <Brain className="w-4 h-4 text-rose-400" />
+            <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
+              <Brain className="w-4 h-4 text-amber-400" />
             </div>
             <div>
               <p className="text-sm font-semibold text-white">Mobile Development</p>
@@ -871,7 +871,7 @@ export default function MobileTutorScreen() {
           {/* Track progress bar */}
           <div className="h-1 bg-gray-800 rounded-full">
             <div
-              className="h-1 bg-rose-500 rounded-full transition-all duration-500"
+              className="h-1 bg-amber-500 rounded-full transition-all duration-500"
               style={{ width: `${pct}%` }}
             />
           </div>
@@ -910,7 +910,7 @@ export default function MobileTutorScreen() {
             tabs={tabs}
             activeTab={activeTab}
             onSelect={(key) => setActiveTab(key as TabKey)}
-            accentColor="rose"
+            accentColor="amber"
           />
         </header>
 
@@ -929,7 +929,7 @@ export default function MobileTutorScreen() {
               track="mobile"
               curriculum={MOBILE_CURRICULUM}
               flashcards={MOBILE_FLASHCARDS}
-              accentColor="rose"
+              accentColor="amber"
             />
           )}
           {activeTab === 'notes' && <NotesView topic={activeTopic} />}
@@ -942,7 +942,7 @@ export default function MobileTutorScreen() {
           )}
           {activeTab === 'timer' && <TimerView />}
           {activeTab === 'lifecycle' && (
-            <LifecycleView lifecycles={MOBILE_LIFECYCLES} accentColor="rose" />
+            <LifecycleView lifecycles={MOBILE_LIFECYCLES} accentColor="amber" />
           )}
           {activeTab === 'interview' && (
             <InterviewView
@@ -950,7 +950,7 @@ export default function MobileTutorScreen() {
               curriculum={MOBILE_CURRICULUM}
               progress={progress}
               track="mobile"
-              accentColor="rose"
+              accentColor="amber"
               onOpenTopic={(id) => {
                 const t = MOBILE_CURRICULUM.find(x => x.id === id)
                 if (t) { handleSelectTopic(t); setActiveTab('lesson') }
@@ -958,12 +958,12 @@ export default function MobileTutorScreen() {
             />
           )}
           {activeTab === 'comparisons' && (
-            <ComparisonView comparisons={MOBILE_COMPARISONS} accentColor="rose" />
+            <ComparisonView comparisons={MOBILE_COMPARISONS} accentColor="amber" />
           )}
           {activeTab === 'conceptmap' && (
             <ConceptMapView
               conceptMap={MOBILE_CONCEPT_MAP}
-              accentColor="rose"
+              accentColor="amber"
               onOpenTopic={(id) => {
                 const t = MOBILE_CURRICULUM.find(x => x.id === id)
                 if (t) { handleSelectTopic(t); setActiveTab('lesson') }
@@ -971,12 +971,12 @@ export default function MobileTutorScreen() {
             />
           )}
           {activeTab === 'cheatsheet' && (
-            <CheatsheetView cheatsheets={MOBILE_CHEATSHEETS} accentColor="rose" />
+            <CheatsheetView cheatsheets={MOBILE_CHEATSHEETS} accentColor="amber" />
           )}
           {activeTab === 'projects' && (
             <ProjectsView
               bank={MOBILE_PROJECTS}
-              accentColor="rose"
+              accentColor="amber"
               onOpenTopic={(id) => {
                 const t = MOBILE_CURRICULUM.find(x => x.id === id)
                 if (t) { handleSelectTopic(t); setActiveTab('lesson') }
@@ -984,7 +984,7 @@ export default function MobileTutorScreen() {
             />
           )}
           {activeTab === 'cases' && (
-            <CaseStudyView caseStudies={MOBILE_CASE_STUDIES} accentColor="rose" />
+            <CaseStudyView caseStudies={MOBILE_CASE_STUDIES} accentColor="amber" />
           )}
 
           {/* Previous / Next topic navigation */}

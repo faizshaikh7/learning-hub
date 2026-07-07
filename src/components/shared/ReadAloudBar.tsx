@@ -93,13 +93,13 @@ const ACCENT = {
     speedActive: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40',
     dot: 'bg-emerald-400',
   },
-  rose: {
-    ring: 'ring-rose-500/40',
-    activeBg: 'bg-rose-500/10 border-rose-500/25',
-    text: 'text-rose-400',
-    playBtn: 'bg-rose-500 hover:bg-rose-600',
-    speedActive: 'bg-rose-500/20 text-rose-400 border-rose-500/40',
-    dot: 'bg-rose-400',
+  amber: {
+    ring: 'ring-amber-500/40',
+    activeBg: 'bg-amber-500/10 border-amber-500/25',
+    text: 'text-amber-400',
+    playBtn: 'bg-amber-500 hover:bg-amber-600',
+    speedActive: 'bg-amber-500/20 text-amber-400 border-amber-500/40',
+    dot: 'bg-amber-400',
   },
 }
 

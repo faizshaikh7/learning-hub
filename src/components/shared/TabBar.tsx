@@ -8,7 +8,7 @@ export interface TabItem {
   icon: ReactNode
 }
 
-type Accent = 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald' | 'rose'
+type Accent = 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald' | 'amber'
 
 interface TabBarProps {
   tabs: TabItem[]
@@ -25,7 +25,7 @@ const ACTIVE: Record<Accent, string> = {
   cyan: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
   orange: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
   emerald: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-  rose: 'bg-rose-500/20 text-rose-400 border-rose-500/30',
+  amber: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
 }
 
 const DEFAULT_PRIMARY = ['lesson', 'quiz', 'cards', 'review', 'notes', 'roadmap', 'timer']

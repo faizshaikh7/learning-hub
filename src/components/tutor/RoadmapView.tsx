@@ -52,10 +52,10 @@ const TRACK_ACCENT: Record<TrackKey, { ring: string; bar: string; header: string
     dot:    'bg-emerald-500',
   },
   mobile: {
-    ring:   'ring-rose-500/40',
-    bar:    'bg-rose-500',
-    header: 'bg-rose-500/10 border-rose-500/30',
-    dot:    'bg-rose-500',
+    ring:   'ring-amber-500/40',
+    bar:    'bg-amber-500',
+    header: 'bg-amber-500/10 border-amber-500/30',
+    dot:    'bg-amber-500',
   },
 }
 

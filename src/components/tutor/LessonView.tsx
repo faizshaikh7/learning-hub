@@ -19,7 +19,7 @@ const TRACK_ACCENT: Record<TrackKey, { btn: string; badge: string }> = {
   flutter: { btn: 'bg-cyan-600 hover:bg-cyan-500 text-white',     badge: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30' },
   react:   { btn: 'bg-orange-600 hover:bg-orange-500 text-white', badge: 'bg-orange-500/15 text-orange-300 border-orange-500/30' },
   aiml:    { btn: 'bg-emerald-600 hover:bg-emerald-500 text-white', badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' },
-  mobile:  { btn: 'bg-rose-600 hover:bg-rose-500 text-white', badge: 'bg-rose-500/15 text-rose-300 border-rose-500/30' },
+  mobile:  { btn: 'bg-amber-600 hover:bg-amber-500 text-white', badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30' },
 }
 
 const VERDICT_STYLES: Record<EfficientApproach['verdict'], string> = {

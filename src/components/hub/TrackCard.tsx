@@ -72,9 +72,9 @@ export const TRACKS: Track[] = [
     emoji: '📲',
     prefix: 'mb',
     total: 77,
-    colorClass: 'bg-rose-500',
-    borderClass: 'border-rose-500/30',
-    textClass: 'text-rose-400',
+    colorClass: 'bg-amber-500',
+    borderClass: 'border-amber-500/30',
+    textClass: 'text-amber-400',
     route: '/mobile',
   },
 ]
@@ -101,7 +101,7 @@ const CircularProgress = ({ pct, colorClass, size = 96, strokeWidth = 7 }: Circu
     'bg-cyan-500': '#06b6d4',
     'bg-orange-500': '#f97316',
     'bg-emerald-500': '#10b981',
-    'bg-rose-500': '#f43f5e',
+    'bg-amber-500': '#f59e0b',
   }
   const strokeColor = strokeColorMap[colorClass] ?? '#3b82f6'
 
@@ -191,7 +191,7 @@ export default function TrackCard({ track, stats, onClick }: TrackCardProps) {
     'bg-cyan-500': 'hover:shadow-cyan-500/20',
     'bg-orange-500': 'hover:shadow-orange-500/20',
     'bg-emerald-500': 'hover:shadow-emerald-500/20',
-    'bg-rose-500': 'hover:shadow-rose-500/20',
+    'bg-amber-500': 'hover:shadow-amber-500/20',
   }
   const glowClass = glowColorMap[track.colorClass] ?? 'hover:shadow-blue-500/20'
 
@@ -201,7 +201,7 @@ export default function TrackCard({ track, stats, onClick }: TrackCardProps) {
     'bg-cyan-500': 'bg-cyan-500 hover:bg-cyan-400',
     'bg-orange-500': 'bg-orange-500 hover:bg-orange-400',
     'bg-emerald-500': 'bg-emerald-500 hover:bg-emerald-400',
-    'bg-rose-500': 'bg-rose-500 hover:bg-rose-400',
+    'bg-amber-500': 'bg-amber-500 hover:bg-amber-400',
   }
   const buttonClass = buttonColorMap[track.colorClass] ?? 'bg-blue-500 hover:bg-blue-400'
 
