@@ -1,21 +1,25 @@
 import { useNavigate } from 'react-router-dom'
 import { Zap, Settings } from 'lucide-react'
 import { useTrackStore } from '@/store/trackStore'
+import { usePathStore } from '@/store/pathStore'
 import TrackCard, { TRACKS } from '@/components/hub/TrackCard'
 import StatsBar from '@/components/hub/StatsBar'
+import LearningPath from '@/components/hub/LearningPath'
 import ActivityHeatmap from '@/components/hub/ActivityHeatmap'
 import WeeklyDigest from '@/components/hub/WeeklyDigest'
 import type { Track } from '@/types'
 
 /**
  * HubScreen — main dashboard landing page for the Learning Hub application.
- * Displays aggregate stats, four track cards with live progress, a 365-day
- * activity heatmap, and a weekly digest summary. Acts as the central
- * navigation hub to individual track tutor screens.
+ * Displays aggregate stats, a personal learning-path planner, track cards with
+ * live progress, a 365-day activity heatmap, and a weekly digest. Acts as the
+ * central navigation hub to individual track tutor screens.
  */
 export default function HubScreen() {
   const navigate = useNavigate()
   const stats = useTrackStore(s => s.stats)
+  const path = usePathStore(s => s.path)
+  const togglePath = usePathStore(s => s.toggle)
 
   const handleTrackClick = (track: Track) => {
     navigate(track.route)
@@ -23,7 +27,7 @@ export default function HubScreen() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      <div className="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div className="max-w-[90rem] mx-auto px-4 py-8 sm:px-6 lg:px-10">
 
         {/* Header */}
         <header className="mb-8">
@@ -56,22 +60,38 @@ export default function HubScreen() {
           <StatsBar />
         </section>
 
-        {/* Track cards grid */}
-        <section className="mb-8" aria-label="Learning tracks">
-          <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
-            Your Tracks
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {TRACKS.map((track) => (
-              <TrackCard
-                key={track.key}
-                track={track}
-                stats={stats[track.key]}
-                onClick={() => handleTrackClick(track)}
-              />
-            ))}
-          </div>
-        </section>
+        {/* Main area: tracks + learning path side by side on wide screens */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8 items-start">
+          {/* Track cards grid */}
+          <section className="xl:col-span-2" aria-label="Learning tracks">
+            <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
+              Your Tracks
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {TRACKS.map((track) => {
+                const idx = path.indexOf(track.key)
+                return (
+                  <TrackCard
+                    key={track.key}
+                    track={track}
+                    stats={stats[track.key]}
+                    onClick={() => handleTrackClick(track)}
+                    pathIndex={idx === -1 ? null : idx + 1}
+                    onTogglePath={() => togglePath(track.key)}
+                  />
+                )
+              })}
+            </div>
+          </section>
+
+          {/* Learning path planner (sticky sidebar on wide screens) */}
+          <section className="xl:col-span-1 xl:sticky xl:top-8" aria-label="Learning path">
+            <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
+              Plan Your Journey
+            </h2>
+            <LearningPath />
+          </section>
+        </div>
 
         {/* Activity heatmap */}
         <section className="mb-8" aria-label="Study activity heatmap">

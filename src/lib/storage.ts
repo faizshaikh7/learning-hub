@@ -1,4 +1,4 @@
-import type { TrackProgress, StreakData, StreakHistory, Note, XPState, InterviewSession, ReviewItem } from '@/types'
+import type { TrackProgress, StreakData, StreakHistory, Note, XPState, InterviewSession, ReviewItem, TrackKey } from '@/types'
 
 const STORAGE_KEYS = {
   progress: (prefix: string) => `${prefix}_progress`,
@@ -10,6 +10,7 @@ const STORAGE_KEYS = {
   interview: 'hub_interview_sessions',
   review: 'hub_review_items',
   dailyDone: 'hub_daily_done',
+  path: 'hub_path',
 } as const
 
 /** Safely parse JSON from localStorage, returning fallback on error. */
@@ -150,6 +151,18 @@ export function deleteReviewItem(id: string): void {
 /** Read the set of completed daily-challenge ids. */
 export function getDoneChallenges(): string[] {
   return safeGet<string[]>(STORAGE_KEYS.dailyDone, [])
+}
+
+// ─── Learning path (course order) ───────────────────────────────────────────
+
+/** Read the user's ordered course learning path. */
+export function getPath(): TrackKey[] {
+  return safeGet<TrackKey[]>(STORAGE_KEYS.path, [])
+}
+
+/** Write the user's ordered course learning path. */
+export function setPath(path: TrackKey[]): void {
+  safeSet(STORAGE_KEYS.path, path)
 }
 
 /** Toggle a daily-challenge id as done/undone; returns the new list. */

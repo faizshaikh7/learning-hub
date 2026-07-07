@@ -39,6 +39,7 @@ const ALL_KEYS = [
   'hub_notes',
   'hub_xp',
   'hub_timer',
+  'hub_path',
 ]
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -216,7 +217,7 @@ export default function SettingsScreen() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      <div className="max-w-2xl mx-auto px-4 py-8 sm:px-6">
+      <div className="max-w-3xl mx-auto px-4 py-8 sm:px-6">
 
         {/* Header */}
         <header className="flex items-center gap-3 mb-8">

@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ArrowRight, Flame } from 'lucide-react'
+import { ArrowRight, Flame, Plus, Check } from 'lucide-react'
 import { cn, today } from '@/lib/utils'
 import type { Track, TrackStats } from '@/types'
 
@@ -177,6 +177,10 @@ interface TrackCardProps {
   track: Track
   stats: TrackStats
   onClick: () => void
+  /** 1-based position in the user's learning path, or null if not in the path. */
+  pathIndex?: number | null
+  /** Add/remove this track from the learning path. */
+  onTogglePath?: () => void
 }
 
 /**
@@ -184,7 +188,7 @@ interface TrackCardProps {
  * streak info, phase label, 7-day activity dots, and a "Continue Learning" CTA.
  * Accepts the track config, live stats, and an onClick navigation handler.
  */
-export default function TrackCard({ track, stats, onClick }: TrackCardProps) {
+export default function TrackCard({ track, stats, onClick, pathIndex, onTogglePath }: TrackCardProps) {
   const glowColorMap: Record<string, string> = {
     'bg-blue-500': 'hover:shadow-blue-500/20',
     'bg-purple-500': 'hover:shadow-purple-500/20',
@@ -206,13 +210,21 @@ export default function TrackCard({ track, stats, onClick }: TrackCardProps) {
   const buttonClass = buttonColorMap[track.colorClass] ?? 'bg-blue-500 hover:bg-blue-400'
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onClick()
+        }
+      }}
       className={cn(
         'group w-full text-left bg-gray-900 border rounded-2xl p-5 flex flex-col gap-4',
         'transition-all duration-300 cursor-pointer',
         'hover:shadow-xl hover:-translate-y-0.5',
+        'focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-600',
         track.borderClass,
         glowClass
       )}
@@ -220,7 +232,19 @@ export default function TrackCard({ track, stats, onClick }: TrackCardProps) {
       {/* Header row */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-3 min-w-0">
-          <span className="text-2xl shrink-0">{track.emoji}</span>
+          {pathIndex ? (
+            <span
+              className={cn(
+                'shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white',
+                track.colorClass,
+              )}
+              title={`Step ${pathIndex} in your learning path`}
+            >
+              {pathIndex}
+            </span>
+          ) : (
+            <span className="text-2xl shrink-0">{track.emoji}</span>
+          )}
           <div className="min-w-0">
             <h3 className="text-base font-bold text-white leading-tight">{track.label}</h3>
             <p className={cn('text-xs font-medium', track.textClass)}>{track.subtitle}</p>
@@ -265,6 +289,35 @@ export default function TrackCard({ track, stats, onClick }: TrackCardProps) {
         Continue Learning
         <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
       </div>
-    </button>
+
+      {/* Learning-path toggle */}
+      {onTogglePath && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation()
+            onTogglePath()
+          }}
+          className={cn(
+            'flex items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-colors',
+            pathIndex
+              ? cn('border', track.borderClass, track.textClass, 'hover:bg-gray-800')
+              : 'border border-gray-800 text-gray-400 hover:text-white hover:border-gray-700 hover:bg-gray-800',
+          )}
+        >
+          {pathIndex ? (
+            <>
+              <Check className="w-3.5 h-3.5" />
+              In your path · Step {pathIndex}
+            </>
+          ) : (
+            <>
+              <Plus className="w-3.5 h-3.5" />
+              Add to path
+            </>
+          )}
+        </button>
+      )}
+    </div>
   )
 }
