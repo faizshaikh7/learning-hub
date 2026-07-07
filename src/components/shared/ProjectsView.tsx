@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils'
 import type { Project, DailyChallenge, ProjectsBank } from '@/types'
 import { getDoneChallenges, toggleDoneChallenge } from '@/lib/storage'
 
-type Accent = 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald'
+type Accent = 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald' | 'rose'
 
 interface ProjectsViewProps {
   bank: ProjectsBank
@@ -32,6 +32,7 @@ const ACCENT: Record<Accent, { text: string; bg: string; border: string; badge: 
   cyan:   { text: 'text-cyan-400',   bg: 'bg-cyan-500/10',   border: 'border-cyan-500/25',   badge: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',     solid: 'bg-cyan-500 hover:bg-cyan-600' },
   orange: { text: 'text-orange-400', bg: 'bg-orange-500/10', border: 'border-orange-500/25', badge: 'bg-orange-500/20 text-orange-400 border-orange-500/30', solid: 'bg-orange-500 hover:bg-orange-600' },
   emerald: { text: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/25', badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', solid: 'bg-emerald-500 hover:bg-emerald-600' },
+  rose: { text: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/25', badge: 'bg-rose-500/20 text-rose-400 border-rose-500/30', solid: 'bg-rose-500 hover:bg-rose-600' },
 }
 
 const DIFF_COLOR: Record<string, string> = {

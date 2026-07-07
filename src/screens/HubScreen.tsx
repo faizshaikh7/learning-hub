@@ -38,7 +38,7 @@ export default function HubScreen() {
                 </h1>
               </div>
               <p className="text-sm text-gray-400 ml-10.5">
-                Backend · AI · Flutter · React · AI/ML
+                Backend · AI · Flutter · React · AI/ML · Mobile
               </p>
             </div>
             <button

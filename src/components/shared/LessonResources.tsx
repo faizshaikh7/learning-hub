@@ -2,7 +2,7 @@ import { ExternalLink, PlayCircle, BookOpen, FileText, GraduationCap, FolderGit2
 import { cn } from '@/lib/utils'
 import type { CurriculumTopic, TopicResource } from '@/types'
 
-type Accent = 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald'
+type Accent = 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald' | 'rose'
 
 interface LessonResourcesProps {
   topic: CurriculumTopic
@@ -15,6 +15,7 @@ const ACCENT: Record<Accent, { text: string; badge: string }> = {
   cyan:    { text: 'text-cyan-400',    badge: 'hover:border-cyan-500/40' },
   orange:  { text: 'text-orange-400',  badge: 'hover:border-orange-500/40' },
   emerald: { text: 'text-emerald-400', badge: 'hover:border-emerald-500/40' },
+  rose:    { text: 'text-rose-400',    badge: 'hover:border-rose-500/40' },
 }
 
 const KIND_META: Record<TopicResource['kind'], { icon: typeof PlayCircle; label: string; color: string }> = {

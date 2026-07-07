@@ -1,6 +1,6 @@
 // ─── Track ────────────────────────────────────────────────────────────────────
 
-export type TrackKey = 'backend' | 'ai' | 'flutter' | 'react' | 'aiml'
+export type TrackKey = 'backend' | 'ai' | 'flutter' | 'react' | 'aiml' | 'mobile'
 
 export interface Track {
   key: TrackKey

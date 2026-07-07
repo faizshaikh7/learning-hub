@@ -12,6 +12,7 @@ const TRACK_CONFIG = {
   flutter: { prefix: 'ft', total: 65 },
   react:   { prefix: 'rt', total: 81 },
   aiml:    { prefix: 'ml', total: 58 },
+  mobile:  { prefix: 'mb', total: 77 },
 } as const
 
 const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]> = {
@@ -64,6 +65,19 @@ const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]
     { min: 44, max: 51, label: 'Phase 6 — Deep Learning' },
     { min: 52, max: 58, label: 'Phase 7 — Production ML & Career' },
   ],
+  mb: [
+    { min: 0,  max: 5,  label: 'Phase 0 — Mobile Foundations' },
+    { min: 6,  max: 12, label: 'Phase 1 — App Lifecycle & Process Model' },
+    { min: 13, max: 19, label: 'Phase 2 — UI Rendering & the Frame Pipeline' },
+    { min: 20, max: 26, label: 'Phase 3 — Adaptive UI, Navigation & Accessibility' },
+    { min: 27, max: 33, label: 'Phase 4 — State, Data & Local Storage' },
+    { min: 34, max: 40, label: 'Phase 5 — Networking on Mobile' },
+    { min: 41, max: 48, label: 'Phase 6 — Concurrency & Background Execution' },
+    { min: 49, max: 55, label: 'Phase 7 — Device Capabilities & Native Integration' },
+    { min: 56, max: 62, label: 'Phase 8 — Security & Privacy' },
+    { min: 63, max: 69, label: 'Phase 9 — Performance, Testing & Observability' },
+    { min: 70, max: 77, label: 'Phase 10 — Build, Release & Distribution' },
+  ],
 }
 
 /** Derive current phase label from completed count. */
@@ -109,6 +123,7 @@ export const useTrackStore = create<TrackStore>()(
       flutter: computeStats('flutter'),
       react:   computeStats('react'),
       aiml:    computeStats('aiml'),
+      mobile:  computeStats('mobile'),
     },
 
     /** Re-read all stats from localStorage. Call after any progress mutation. */
@@ -120,6 +135,7 @@ export const useTrackStore = create<TrackStore>()(
           flutter: computeStats('flutter'),
           react:   computeStats('react'),
           aiml:    computeStats('aiml'),
+          mobile:  computeStats('mobile'),
         },
       })
     },

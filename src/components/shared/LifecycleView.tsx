@@ -19,7 +19,7 @@ import type { Lifecycle, LifecycleStage } from '@/types'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
-type Accent = 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald'
+type Accent = 'blue' | 'purple' | 'cyan' | 'orange' | 'emerald' | 'rose'
 
 interface LifecycleViewProps {
   lifecycles: Lifecycle[]
@@ -56,6 +56,11 @@ const ACCENT: Record<Accent, {
     bg: 'bg-emerald-500/10', border: 'border-emerald-500/25', text: 'text-emerald-400',
     badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
     node: 'bg-emerald-500', line: 'bg-emerald-500/30', ring: 'ring-emerald-500/40',
+  },
+  rose: {
+    bg: 'bg-rose-500/10', border: 'border-rose-500/25', text: 'text-rose-400',
+    badge: 'bg-rose-500/20 text-rose-400 border-rose-500/30',
+    node: 'bg-rose-500', line: 'bg-rose-500/30', ring: 'ring-rose-500/40',
   },
 }
 

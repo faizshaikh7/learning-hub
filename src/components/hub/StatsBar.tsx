@@ -6,7 +6,7 @@ import { useXPStore } from '@/store/xpStore'
 import { cn } from '@/lib/utils'
 import type { TrackKey } from '@/types'
 
-const TRACK_KEYS: TrackKey[] = ['backend', 'ai', 'flutter', 'react', 'aiml']
+const TRACK_KEYS: TrackKey[] = ['backend', 'ai', 'flutter', 'react', 'aiml', 'mobile']
 
 interface StatPillProps {
   icon: ReactNode

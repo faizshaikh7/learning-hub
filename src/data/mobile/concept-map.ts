@@ -1,0 +1,153 @@
+import type { ConceptMap } from '@/types'
+
+/** How mobile development concepts connect — from OS foundations to shipping a release. */
+export const MOBILE_CONCEPT_MAP: ConceptMap = {
+  title: 'Mobile Development Concept Map',
+  intro:
+    'Mobile engineering is the craft of building responsive, resilient apps on a device the OS controls: constrained battery and memory, a lifecycle that can suspend or kill you at any moment, a strict frame budget, and a hostile, flaky network. Foundations shape the lifecycle, the lifecycle governs rendering, rendering drives adaptive UI, and state, networking, concurrency, device access, security, performance, and release build on top. Tap any concept to see how it links to the rest.',
+  clusters: [
+    {
+      id: 'foundations',
+      name: 'Foundations',
+      concepts: [
+        { id: 'what-is-mobile', label: 'What Is Mobile Development', summary: 'Apps that live on a personal, constrained, always-with-you device.', topicId: 'what-is-mobile', relatesTo: [{ id: 'mobile-os-architecture', relation: 'runs on' }, { id: 'mobile-dev-mindset', relation: 'shapes' }] },
+        { id: 'mobile-os-architecture', label: 'Mobile OS Architecture', summary: 'Kernel, runtime, frameworks, and the app layer stacked above them.', topicId: 'mobile-os-architecture', relatesTo: [{ id: 'app-sandbox-model', relation: 'enforces' }, { id: 'app-lifecycle-states', relation: 'governs' }] },
+        { id: 'app-sandbox-model', label: 'App Sandbox Model', summary: 'Each app is isolated with its own storage and permission boundary.', topicId: 'app-sandbox-model', relatesTo: [{ id: 'permission-model', relation: 'is the basis of' }, { id: 'secure-storage-mobile', relation: 'contains' }] },
+        { id: 'native-vs-crossplatform', label: 'Native vs Cross-Platform', summary: 'One codebase or two — the trade that colors every later choice.', topicId: 'native-vs-crossplatform', relatesTo: [{ id: 'choosing-your-stack', relation: 'decided in' }, { id: 'imperative-vs-declarative-ui', relation: 'informs' }] },
+        { id: 'mobile-dev-mindset', label: 'Mobile Developer Mindset', summary: 'Design for interruption, scarcity, and a device you do not control.', topicId: 'mobile-dev-mindset', relatesTo: [{ id: 'app-lifecycle-states', relation: 'anticipates' }, { id: 'flaky-network-design', relation: 'expects' }] },
+        { id: 'mobile-hardware-constraints', label: 'Hardware Constraints', summary: 'Battery, memory, thermal, and radio limits bound every design.', topicId: 'mobile-hardware-constraints', relatesTo: [{ id: 'app-memory-model', relation: 'constrains' }, { id: 'background-execution-limits', relation: 'motivates' }] },
+      ],
+    },
+    {
+      id: 'lifecycle',
+      name: 'App & Screen Lifecycle',
+      concepts: [
+        { id: 'app-launch-types', label: 'Launch Types', summary: 'Cold, warm, and hot starts — each with a different budget.', topicId: 'app-launch-types', relatesTo: [{ id: 'app-lifecycle-states', relation: 'begins' }, { id: 'render-performance', relation: 'measured by' }] },
+        { id: 'app-lifecycle-states', label: 'App Lifecycle States', summary: 'Foreground, background, suspended — and the transitions between.', topicId: 'app-lifecycle-states', relatesTo: [{ id: 'screen-lifecycle', relation: 'contains' }, { id: 'process-death-restoration', relation: 'can end in' }] },
+        { id: 'screen-lifecycle', label: 'Screen Lifecycle', summary: 'Create, appear, disappear, destroy callbacks per screen.', topicId: 'screen-lifecycle', relatesTo: [{ id: 'state-types', relation: 'drives saving of' }, { id: 'config-changes', relation: 'disrupted by' }] },
+        { id: 'process-death-restoration', label: 'Process Death & Restoration', summary: 'The OS can kill a backgrounded app; you must restore seamlessly.', topicId: 'process-death-restoration', relatesTo: [{ id: 'keyvalue-file-storage', relation: 'restored from' }, { id: 'state-management-concepts', relation: 'stresses' }] },
+        { id: 'main-ui-thread', label: 'Main / UI Thread', summary: 'One thread renders every frame — block it and the app freezes.', topicId: 'main-ui-thread', relatesTo: [{ id: 'threading-models', relation: 'is the center of' }, { id: 'frame-budget-jank', relation: 'must not miss' }] },
+        { id: 'config-changes', label: 'Configuration Changes', summary: 'Rotation, theme, locale, font size — the UI must survive them.', topicId: 'config-changes', relatesTo: [{ id: 'responsive-adaptive-layout', relation: 'triggers' }, { id: 'i18n-rtl', relation: 'includes' }] },
+        { id: 'app-memory-model', label: 'App Memory Model', summary: 'Heap pressure, low-memory kills, and leak avoidance.', topicId: 'app-memory-model', relatesTo: [{ id: 'process-death-restoration', relation: 'causes' }, { id: 'mobile-profiling', relation: 'inspected with' }] },
+      ],
+    },
+    {
+      id: 'rendering',
+      name: 'Rendering & The Frame Budget',
+      concepts: [
+        { id: 'frame-rendering-pipeline', label: 'Frame Rendering Pipeline', summary: 'Input, animation, layout, draw, composite — every frame.', topicId: 'frame-rendering-pipeline', relatesTo: [{ id: 'frame-budget-jank', relation: 'bounded by' }, { id: 'gpu-compositing', relation: 'ends in' }] },
+        { id: 'frame-budget-jank', label: 'Frame Budget & Jank', summary: '16 ms per frame; overrun it and the user sees a stutter.', topicId: 'frame-budget-jank', relatesTo: [{ id: 'list-virtualization', relation: 'protected by' }, { id: 'render-performance', relation: 'diagnosed in' }] },
+        { id: 'imperative-vs-declarative-ui', label: 'Imperative vs Declarative UI', summary: 'Mutate a tree by hand, or describe state and let it diff.', topicId: 'imperative-vs-declarative-ui', relatesTo: [{ id: 'state-management-concepts', relation: 'pairs with' }, { id: 'layout-systems', relation: 'expressed in' }] },
+        { id: 'layout-systems', label: 'Layout Systems', summary: 'Constraints, flex, and stacks that measure and position views.', topicId: 'layout-systems', relatesTo: [{ id: 'responsive-adaptive-layout', relation: 'enables' }, { id: 'density-independence', relation: 'measured in' }] },
+        { id: 'list-virtualization', label: 'List Virtualization', summary: 'Render only the visible window and recycle views.', topicId: 'list-virtualization', relatesTo: [{ id: 'pagination-mobile', relation: 'fed by' }, { id: 'image-loading-caching', relation: 'coordinates with' }] },
+        { id: 'density-independence', label: 'Density Independence', summary: 'Size in dp/pt so layouts hold across screen densities.', topicId: 'density-independence', relatesTo: [{ id: 'screen-diversity', relation: 'addresses' }] },
+        { id: 'gpu-compositing', label: 'GPU Compositing', summary: 'Layers composited on the GPU; animate cheap properties.', topicId: 'gpu-compositing', relatesTo: [{ id: 'render-performance', relation: 'optimized in' }] },
+      ],
+    },
+    {
+      id: 'adaptive-ui',
+      name: 'Adaptive UI & Navigation',
+      concepts: [
+        { id: 'screen-diversity', label: 'Screen Diversity', summary: 'Phones, tablets, foldables, and notches — one UI, many shapes.', topicId: 'screen-diversity', relatesTo: [{ id: 'responsive-adaptive-layout', relation: 'solved by' }] },
+        { id: 'responsive-adaptive-layout', label: 'Responsive & Adaptive Layout', summary: 'Reflow and reconfigure UI to the available space.', topicId: 'responsive-adaptive-layout', relatesTo: [{ id: 'design-systems-mobile', relation: 'built on' }, { id: 'layout-systems', relation: 'implemented with' }] },
+        { id: 'navigation-models', label: 'Navigation Models', summary: 'Stacks, tabs, and the back stack that structure a mobile app.', topicId: 'navigation-models', relatesTo: [{ id: 'deep-linking-mobile', relation: 'entered by' }, { id: 'screen-lifecycle', relation: 'drives' }] },
+        { id: 'deep-linking-mobile', label: 'Deep Linking', summary: 'URLs and app links that open any screen directly.', topicId: 'deep-linking-mobile', relatesTo: [{ id: 'push-notifications-pipeline', relation: 'launched from' }] },
+        { id: 'mobile-accessibility', label: 'Mobile Accessibility', summary: 'Screen readers, dynamic type, contrast, and touch targets.', topicId: 'mobile-accessibility', relatesTo: [{ id: 'design-systems-mobile', relation: 'baked into' }] },
+        { id: 'i18n-rtl', label: 'Internationalization & RTL', summary: 'Locales, translation, and right-to-left mirroring.', topicId: 'i18n-rtl', relatesTo: [{ id: 'design-systems-mobile', relation: 'constrains' }] },
+        { id: 'design-systems-mobile', label: 'Design Systems', summary: 'Reusable tokens and components for a consistent, themeable UI.', topicId: 'design-systems-mobile', relatesTo: [{ id: 'mobile-accessibility', relation: 'encodes' }] },
+      ],
+    },
+    {
+      id: 'state-data',
+      name: 'State & Data',
+      concepts: [
+        { id: 'state-types', label: 'Types of State', summary: 'Ephemeral UI, app, and persistent state — know which is which.', topicId: 'state-types', relatesTo: [{ id: 'state-management-concepts', relation: 'organized by' }, { id: 'keyvalue-file-storage', relation: 'persisted via' }] },
+        { id: 'state-management-concepts', label: 'State Management Concepts', summary: 'Unidirectional data flow, stores, and predictable updates.', topicId: 'state-management-concepts', relatesTo: [{ id: 'imperative-vs-declarative-ui', relation: 'drives' }, { id: 'offline-first', relation: 'underpins' }] },
+        { id: 'keyvalue-file-storage', label: 'Key-Value & File Storage', summary: 'Small settings and blobs on disk in the sandbox.', topicId: 'keyvalue-file-storage', relatesTo: [{ id: 'secure-storage-mobile', relation: 'secured by' }] },
+        { id: 'local-databases', label: 'Local Databases', summary: 'On-device SQL/object stores for structured data.', topicId: 'local-databases', relatesTo: [{ id: 'offline-first', relation: 'is the store for' }, { id: 'caching-strategies-mobile', relation: 'backs' }] },
+        { id: 'caching-strategies-mobile', label: 'Caching Strategies', summary: 'Cache-then-network, TTLs, and invalidation on device.', topicId: 'caching-strategies-mobile', relatesTo: [{ id: 'mobile-request-lifecycle', relation: 'wraps' }, { id: 'image-loading-caching', relation: 'specialized as' }] },
+        { id: 'offline-first', label: 'Offline-First', summary: 'Local store is the source of truth; sync reconciles later.', topicId: 'offline-first', relatesTo: [{ id: 'data-sync-conflict', relation: 'requires' }, { id: 'background-sync', relation: 'flushed by' }] },
+        { id: 'data-sync-conflict', label: 'Data Sync & Conflicts', summary: 'Merging local and server changes without losing data.', topicId: 'data-sync-conflict', relatesTo: [{ id: 'realtime-mobile', relation: 'can use' }] },
+      ],
+    },
+    {
+      id: 'networking',
+      name: 'Networking',
+      concepts: [
+        { id: 'mobile-request-lifecycle', label: 'Request Lifecycle', summary: 'From tap to bytes: build, send, parse, cache, render.', topicId: 'mobile-request-lifecycle', relatesTo: [{ id: 'flaky-network-design', relation: 'hardened by' }, { id: 'rest-graphql-mobile', relation: 'shaped by' }] },
+        { id: 'flaky-network-design', label: 'Designing for Flaky Networks', summary: 'Timeouts, retries with backoff, and graceful degradation.', topicId: 'flaky-network-design', relatesTo: [{ id: 'offline-first', relation: 'motivates' }, { id: 'background-sync', relation: 'defers to' }] },
+        { id: 'rest-graphql-mobile', label: 'REST & GraphQL on Mobile', summary: 'Choosing and shaping payloads for a constrained client.', topicId: 'rest-graphql-mobile', relatesTo: [{ id: 'pagination-mobile', relation: 'implements' }] },
+        { id: 'realtime-mobile', label: 'Realtime on Mobile', summary: 'WebSockets and streams under lifecycle and battery limits.', topicId: 'realtime-mobile', relatesTo: [{ id: 'push-notifications-pipeline', relation: 'complements' }, { id: 'background-execution-limits', relation: 'constrained by' }] },
+        { id: 'pagination-mobile', label: 'Pagination', summary: 'Cursor-based paging and infinite scroll for large lists.', topicId: 'pagination-mobile', relatesTo: [{ id: 'list-virtualization', relation: 'feeds' }] },
+        { id: 'image-loading-caching', label: 'Image Loading & Caching', summary: 'Downsample, decode off-thread, and cache in memory and disk.', topicId: 'image-loading-caching', relatesTo: [{ id: 'frame-budget-jank', relation: 'protects' }, { id: 'app-size-optimization', relation: 'balances' }] },
+        { id: 'tls-cert-pinning', label: 'TLS & Certificate Pinning', summary: 'Encrypt in transit and defeat MITM via pinning.', topicId: 'tls-cert-pinning', relatesTo: [{ id: 'mobile-threat-model', relation: 'answers' }] },
+      ],
+    },
+    {
+      id: 'concurrency-background',
+      name: 'Concurrency & Background Work',
+      concepts: [
+        { id: 'threading-models', label: 'Threading Models', summary: 'Main thread, worker threads, and message loops.', topicId: 'threading-models', relatesTo: [{ id: 'main-ui-thread', relation: 'protects' }, { id: 'async-concurrency', relation: 'abstracted by' }] },
+        { id: 'async-concurrency', label: 'Async & Concurrency', summary: 'Callbacks, promises, coroutines, and async/await.', topicId: 'async-concurrency', relatesTo: [{ id: 'structured-concurrency', relation: 'organized by' }, { id: 'mobile-request-lifecycle', relation: 'powers' }] },
+        { id: 'structured-concurrency', label: 'Structured Concurrency', summary: 'Scoped tasks that cancel and clean up together.', topicId: 'structured-concurrency', relatesTo: [{ id: 'screen-lifecycle', relation: 'tied to' }] },
+        { id: 'background-execution-limits', label: 'Background Execution Limits', summary: 'Doze, App Standby, and suspension bound background work.', topicId: 'background-execution-limits', relatesTo: [{ id: 'scheduled-deferred-work', relation: 'enforced on' }, { id: 'foreground-services', relation: 'exempts' }] },
+        { id: 'scheduled-deferred-work', label: 'Scheduled & Deferred Work', summary: 'Job schedulers run deferrable work under constraints.', topicId: 'scheduled-deferred-work', relatesTo: [{ id: 'background-sync', relation: 'schedules' }] },
+        { id: 'foreground-services', label: 'Foreground Services', summary: 'User-visible ongoing work with a persistent notification.', topicId: 'foreground-services', relatesTo: [{ id: 'location-maps', relation: 'used by' }] },
+        { id: 'push-notifications-pipeline', label: 'Push Notifications Pipeline', summary: 'Server to platform gateway to device, waking the app.', topicId: 'push-notifications-pipeline', relatesTo: [{ id: 'background-sync', relation: 'triggers' }, { id: 'permission-model', relation: 'gated by' }] },
+        { id: 'background-sync', label: 'Background Sync', summary: 'Reconcile local and server data when conditions allow.', topicId: 'background-sync', relatesTo: [{ id: 'data-sync-conflict', relation: 'resolves' }] },
+      ],
+    },
+    {
+      id: 'device-platform',
+      name: 'Device & Platform Integration',
+      concepts: [
+        { id: 'permission-model', label: 'Permission Model', summary: 'Runtime prompts gate access to sensitive capabilities.', topicId: 'permission-model', relatesTo: [{ id: 'mobile-privacy', relation: 'protects' }, { id: 'camera-media', relation: 'gates' }] },
+        { id: 'location-maps', label: 'Location & Maps', summary: 'Foreground vs background location, geofencing, and maps.', topicId: 'location-maps', relatesTo: [{ id: 'mobile-privacy', relation: 'is sensitive to' }] },
+        { id: 'camera-media', label: 'Camera & Media', summary: 'Capture, pick, and process photos, video, and audio.', topicId: 'camera-media', relatesTo: [{ id: 'image-loading-caching', relation: 'produces for' }] },
+        { id: 'sensors-biometrics', label: 'Sensors & Biometrics', summary: 'Accelerometer, GPS, and fingerprint/face unlock.', topicId: 'sensors-biometrics', relatesTo: [{ id: 'mobile-auth', relation: 'strengthens' }] },
+        { id: 'connectivity-hardware', label: 'Connectivity Hardware', summary: 'Bluetooth, NFC, and network radios and their states.', topicId: 'connectivity-hardware', relatesTo: [{ id: 'flaky-network-design', relation: 'informs' }] },
+        { id: 'native-interop', label: 'Native Interop', summary: 'Bridging cross-platform code to native APIs and modules.', topicId: 'native-interop', relatesTo: [{ id: 'native-vs-crossplatform', relation: 'realizes' }, { id: 'ipc-app-integration', relation: 'extends to' }] },
+        { id: 'ipc-app-integration', label: 'IPC & App Integration', summary: 'Share sheets, intents, widgets, and app-to-app flows.', topicId: 'ipc-app-integration', relatesTo: [{ id: 'deep-linking-mobile', relation: 'uses' }] },
+      ],
+    },
+    {
+      id: 'security-privacy',
+      name: 'Security & Privacy',
+      concepts: [
+        { id: 'mobile-threat-model', label: 'Mobile Threat Model', summary: 'Assume a lost, rooted, and instrumented device.', topicId: 'mobile-threat-model', relatesTo: [{ id: 'owasp-mobile-top10', relation: 'catalogued in' }, { id: 'secure-storage-mobile', relation: 'drives' }] },
+        { id: 'secure-storage-mobile', label: 'Secure Storage', summary: 'Keystore/Keychain and encrypted local data.', topicId: 'secure-storage-mobile', relatesTo: [{ id: 'mobile-auth', relation: 'holds tokens for' }] },
+        { id: 'mobile-auth', label: 'Mobile Authentication', summary: 'OAuth, tokens, refresh, and biometric-gated sessions.', topicId: 'mobile-auth', relatesTo: [{ id: 'sensors-biometrics', relation: 'uses' }, { id: 'tls-cert-pinning', relation: 'protected by' }] },
+        { id: 'owasp-mobile-top10', label: 'OWASP Mobile Top 10', summary: 'The canonical checklist of mobile security risks.', topicId: 'owasp-mobile-top10', relatesTo: [{ id: 'reverse-engineering-defense', relation: 'includes' }] },
+        { id: 'reverse-engineering-defense', label: 'Reverse-Engineering Defense', summary: 'Obfuscation and tamper detection raise the attacker cost.', topicId: 'reverse-engineering-defense', relatesTo: [{ id: 'root-jailbreak-detection', relation: 'pairs with' }, { id: 'build-systems-signing', relation: 'applied during' }] },
+        { id: 'root-jailbreak-detection', label: 'Root / Jailbreak Detection', summary: 'Sensing a compromised device for high-risk apps.', topicId: 'root-jailbreak-detection', relatesTo: [{ id: 'mobile-threat-model', relation: 'responds to' }] },
+        { id: 'mobile-privacy', label: 'Mobile Privacy', summary: 'Data minimization, consent, and privacy labels.', topicId: 'mobile-privacy', relatesTo: [{ id: 'app-store-submission', relation: 'declared in' }] },
+      ],
+    },
+    {
+      id: 'performance-quality',
+      name: 'Performance & Quality',
+      concepts: [
+        { id: 'mobile-profiling', label: 'Mobile Profiling', summary: 'Measure CPU, memory, and rendering before optimizing.', topicId: 'mobile-profiling', relatesTo: [{ id: 'render-performance', relation: 'locates' }, { id: 'app-memory-model', relation: 'inspects' }] },
+        { id: 'render-performance', label: 'Render Performance', summary: 'Kill jank: overdraw, layout cost, and off-thread work.', topicId: 'render-performance', relatesTo: [{ id: 'frame-budget-jank', relation: 'defends' }] },
+        { id: 'app-size-optimization', label: 'App Size Optimization', summary: 'Shrink code and assets; ship per-device bundles.', topicId: 'app-size-optimization', relatesTo: [{ id: 'build-systems-signing', relation: 'configured in' }] },
+        { id: 'mobile-testing-pyramid', label: 'Mobile Testing Pyramid', summary: 'Unit, integration, and UI tests in the right proportion.', topicId: 'mobile-testing-pyramid', relatesTo: [{ id: 'device-testing-farms', relation: 'scaled by' }, { id: 'mobile-cicd', relation: 'automated in' }] },
+        { id: 'device-testing-farms', label: 'Device Testing Farms', summary: 'Test across real OS versions and screen shapes at scale.', topicId: 'device-testing-farms', relatesTo: [{ id: 'screen-diversity', relation: 'covers' }] },
+        { id: 'crash-reporting-analytics', label: 'Crash Reporting & Analytics', summary: 'Symbolicated crashes and product metrics from the field.', topicId: 'crash-reporting-analytics', relatesTo: [{ id: 'release-management', relation: 'gates' }, { id: 'feature-flags-ab', relation: 'measured with' }] },
+        { id: 'feature-flags-ab', label: 'Feature Flags & A/B', summary: 'Ship dark, roll out gradually, and experiment safely.', topicId: 'feature-flags-ab', relatesTo: [{ id: 'release-management', relation: 'enables' }] },
+      ],
+    },
+    {
+      id: 'release-delivery',
+      name: 'Release & Delivery',
+      concepts: [
+        { id: 'build-systems-signing', label: 'Build Systems & Signing', summary: 'Reproducible builds signed with protected keys.', topicId: 'build-systems-signing', relatesTo: [{ id: 'mobile-cicd', relation: 'run by' }, { id: 'app-store-submission', relation: 'produces for' }] },
+        { id: 'app-store-submission', label: 'App Store Submission', summary: 'Metadata, privacy labels, and the review process.', topicId: 'app-store-submission', relatesTo: [{ id: 'release-management', relation: 'precedes' }] },
+        { id: 'release-management', label: 'Release Management', summary: 'Staged rollouts, monitoring, and rollback plans.', topicId: 'release-management', relatesTo: [{ id: 'crash-reporting-analytics', relation: 'watches' }, { id: 'app-updates', relation: 'delivers' }] },
+        { id: 'mobile-cicd', label: 'Mobile CI/CD', summary: 'Automate build, test, sign, and deploy on every commit.', topicId: 'mobile-cicd', relatesTo: [{ id: 'mobile-testing-pyramid', relation: 'runs' }] },
+        { id: 'app-updates', label: 'App Updates', summary: 'Versioning, force-update gates, and migrations.', topicId: 'app-updates', relatesTo: [{ id: 'feature-flags-ab', relation: 'complemented by' }] },
+        { id: 'monetization-basics', label: 'Monetization Basics', summary: 'In-app purchases, subscriptions, and ads.', topicId: 'monetization-basics', relatesTo: [{ id: 'app-store-submission', relation: 'reviewed with' }] },
+        { id: 'choosing-your-stack', label: 'Choosing Your Stack', summary: 'Weigh native, cross-platform, team, and product fit.', topicId: 'choosing-your-stack', relatesTo: [{ id: 'native-vs-crossplatform', relation: 'resolves' }, { id: 'mobile-dev-mindset', relation: 'applies' }] },
+      ],
+    },
+  ],
+}

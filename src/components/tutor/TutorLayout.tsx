@@ -25,6 +25,7 @@ const TRACK_LABEL: Record<TrackKey, { label: string; emoji: string; accent: stri
   flutter: { label: 'Flutter Dev',          emoji: '📱', accent: 'text-cyan-400',   prefix: 'ft' },
   react:   { label: 'React Dev',            emoji: '⚛️', accent: 'text-orange-400', prefix: 'rt' },
   aiml:    { label: 'AI/ML In-Depth',       emoji: '🧮', accent: 'text-emerald-400', prefix: 'ml' },
+  mobile:  { label: 'Mobile Development',   emoji: '📲', accent: 'text-rose-400',    prefix: 'mb' },
 }
 
 /**

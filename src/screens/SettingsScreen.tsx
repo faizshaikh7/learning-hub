@@ -26,11 +26,12 @@ const TRACKS = [
   { key: 'ft', label: 'Flutter',             accent: 'cyan' },
   { key: 'rt', label: 'React + Next.js',     accent: 'orange' },
   { key: 'ml', label: 'AI/ML In-Depth',      accent: 'emerald' },
+  { key: 'mb', label: 'Mobile Development',   accent: 'rose' },
 ] as const
 
 /** Every localStorage key owned by this app. */
 const ALL_KEYS = [
-  ...['bt', 'at', 'ft', 'rt', 'ml'].flatMap(p => [
+  ...['bt', 'at', 'ft', 'rt', 'ml', 'mb'].flatMap(p => [
     `${p}_progress`,
     `${p}_streak`,
     `${p}_streak_history`,
@@ -181,7 +182,7 @@ export default function SettingsScreen() {
 
   /** Remove all track keys. */
   function resetAllProgress() {
-    ['bt', 'at', 'ft', 'rt', 'ml'].forEach(p =>
+    ['bt', 'at', 'ft', 'rt', 'ml', 'mb'].forEach(p =>
       [`${p}_progress`, `${p}_streak`, `${p}_streak_history`].forEach(
         k => localStorage.removeItem(k),
       ),

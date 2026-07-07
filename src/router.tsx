@@ -9,6 +9,7 @@ const AiTutorScreen      = lazy(() => import('@/screens/AiTutorScreen'))
 const FlutterTutorScreen = lazy(() => import('@/screens/FlutterTutorScreen'))
 const ReactTutorScreen   = lazy(() => import('@/screens/ReactTutorScreen'))
 const AimlTutorScreen    = lazy(() => import('@/screens/AimlTutorScreen'))
+const MobileTutorScreen  = lazy(() => import('@/screens/MobileTutorScreen'))
 const SettingsScreen     = lazy(() => import('@/screens/SettingsScreen'))
 
 /** Full-screen spinner shown while a lazy course chunk downloads. */
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
   { path: '/flutter',  element: load(<FlutterTutorScreen />) },
   { path: '/react',    element: load(<ReactTutorScreen />) },
   { path: '/aiml',     element: load(<AimlTutorScreen />) },
+  { path: '/mobile',   element: load(<MobileTutorScreen />) },
   { path: '/settings', element: load(<SettingsScreen />) },
   { path: '*',         element: <NotFound /> },
 ])
