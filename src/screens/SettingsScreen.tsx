@@ -14,12 +14,9 @@ import {
   Sun,
   Moon,
   Palette,
-  LogOut,
-  UserCircle,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useThemeStore } from '@/store/themeStore'
-import { useAuthStore } from '@/store/authStore'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -128,7 +125,6 @@ function ConfirmAction({
 export default function SettingsScreen() {
   const navigate = useNavigate()
   const { theme, setTheme } = useThemeStore()
-  const logout = useAuthStore(s => s.logout)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [pending, setPending] = useState<string | null>(null)
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null)
@@ -298,25 +294,6 @@ export default function SettingsScreen() {
                 )}
               </button>
             </div>
-          </div>
-        </section>
-
-        {/* ── Section: Account ── */}
-        <section className="mb-6">
-          <SectionHeading icon={<UserCircle className="w-3.5 h-3.5" />} label="Account" />
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl">
-            <SettingsRow
-              title="Signed in as admin"
-              description="You are logged in as the admin. Sign out to lock the app."
-            >
-              <button
-                onClick={() => { logout(); navigate('/login', { replace: true }) }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 text-sm font-medium transition-colors shrink-0"
-              >
-                <LogOut className="w-4 h-4" />
-                Sign Out
-              </button>
-            </SettingsRow>
           </div>
         </section>
 
