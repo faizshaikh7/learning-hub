@@ -1,7 +1,8 @@
 ﻿import type { FlashcardData } from '@/types'
+import { AI_ADVANCED_FLASHCARDS } from './curriculum-advanced'
 
 /** AI Engineer flashcard deck keyed by topic id. */
-export const AI_FLASHCARDS: FlashcardData = {
+const AI_FLASHCARDS_BASE: FlashcardData = {
   'ai-engineer-intro': [
     { id: 'aien_1', q: 'What does an AI engineer do differently from a traditional software engineer?', a: 'An AI engineer integrates pre-trained models (LLMs, embeddings, multimodal models) into products via APIs and SDKs. Unlike traditional SWE, they work with probabilistic outputs, manage context windows, design prompts, and build retrieval pipelines rather than deterministic logic.' },
     { id: 'aien_2', q: 'What is the AI engineer stack in 2024-2025?', a: 'Core stack: LLM APIs (OpenAI, Anthropic, Google), orchestration frameworks (LangChain, LlamaIndex), vector databases (Pinecone, Chroma), embedding models, and eval frameworks. Deployment often uses Vercel AI SDK, FastAPI, or serverless functions.' },
@@ -500,4 +501,10 @@ export const AI_FLASHCARDS: FlashcardData = {
     { id: 'aop_4', q: 'What is the consulting pattern that bills $150-250/hour?', a: 'Find a repeated 30-minute human task in a business → build the LLM+automation workflow that does it → charge for the transformation, not hours. The deployed-systems portfolio with write-ups IS the sales material.' },
     { id: 'aop_5', q: 'What is the day-31 test?', a: '"Does it run without you?" If your systems (project, RAG, automations) operate unattended — you\'re deploying AI as infrastructure. If not, repeat week 4. Operating versus observing is the entire distinction.' }
   ]
+}
+
+/** Base decks plus the AI gateway, guardrails, and inference-economics decks. */
+export const AI_FLASHCARDS: FlashcardData = {
+  ...AI_FLASHCARDS_BASE,
+  ...AI_ADVANCED_FLASHCARDS,
 }

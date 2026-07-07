@@ -8,7 +8,7 @@ import {
 
 const TRACK_CONFIG = {
   backend: { prefix: 'bt', total: 95 },
-  ai:      { prefix: 'at', total: 76 },
+  ai:      { prefix: 'at', total: 79 },
   flutter: { prefix: 'ft', total: 65 },
   react:   { prefix: 'rt', total: 81 },
   aiml:    { prefix: 'ml', total: 58 },
@@ -26,14 +26,14 @@ const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]
     { min: 82, max: 91, label: 'Phase 6 — Production Engineering' },
   ],
   at: [
-    { min: 0,  max: 9,  label: 'Phase 0 — AI & LLM Foundations' },
-    { min: 10, max: 17, label: 'Phase 1 — Prompt Engineering' },
-    { min: 18, max: 27, label: 'Phase 2 — APIs, Coding & Creative' },
-    { min: 28, max: 35, label: 'Phase 3 — Embeddings & Vector DBs' },
-    { min: 36, max: 44, label: 'Phase 4 — RAG Systems' },
-    { min: 45, max: 54, label: 'Phase 5 — Agents, MCP & Automation' },
-    { min: 55, max: 62, label: 'Phase 6 — Safety & Evaluation' },
-    { min: 63, max: 70, label: 'Phase 7 — Production & Operator Path' },
+    { min: 0,  max: 12, label: 'Phase 0 — AI & LLM Foundations' },
+    { min: 13, max: 20, label: 'Phase 1 — Prompt & Context Engineering' },
+    { min: 21, max: 31, label: 'Phase 2 — AI APIs & Platforms' },
+    { min: 32, max: 39, label: 'Phase 3 — Embeddings & Vector Databases' },
+    { min: 40, max: 49, label: 'Phase 4 — RAG Systems' },
+    { min: 50, max: 59, label: 'Phase 5 — AI Agents & MCP' },
+    { min: 60, max: 68, label: 'Phase 6 — AI Safety & Evaluation' },
+    { min: 69, max: 78, label: 'Phase 7 — Production AI & Observability' },
   ],
   ft: [
     { min: 0,  max: 8,  label: 'Phase 0 — Dart Fundamentals' },
