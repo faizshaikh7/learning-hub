@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import { Zap, Settings } from 'lucide-react'
+import { Zap, Settings, LogOut } from 'lucide-react'
 import { useTrackStore } from '@/store/trackStore'
 import { usePathStore } from '@/store/pathStore'
+import { useAuthStore } from '@/store/authStore'
 import TrackCard, { TRACKS } from '@/components/hub/TrackCard'
 import StatsBar from '@/components/hub/StatsBar'
 import LearningPath from '@/components/hub/LearningPath'
@@ -20,6 +21,7 @@ export default function HubScreen() {
   const stats = useTrackStore(s => s.stats)
   const path = usePathStore(s => s.path)
   const togglePath = usePathStore(s => s.toggle)
+  const logout = useAuthStore(s => s.logout)
 
   const handleTrackClick = (track: Track) => {
     navigate(track.route)
@@ -45,13 +47,23 @@ export default function HubScreen() {
                 Backend · AI · Flutter · React · AI/ML · Mobile
               </p>
             </div>
-            <button
-              onClick={() => navigate('/settings')}
-              className="p-2 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
-              aria-label="Settings"
-            >
-              <Settings className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => navigate('/settings')}
+                className="p-2 rounded-xl text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+                aria-label="Settings"
+              >
+                <Settings className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => { logout(); navigate('/login', { replace: true }) }}
+                className="p-2 rounded-xl text-gray-400 hover:text-red-400 hover:bg-gray-800 transition-colors"
+                aria-label="Sign out"
+                title="Sign out"
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </header>
 
