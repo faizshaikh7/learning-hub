@@ -307,7 +307,7 @@ export default function SettingsScreen() {
           <div className="bg-gray-900 border border-gray-800 rounded-2xl">
             <SettingsRow
               title="Signed in as admin"
-              description="You are logged in as the admin (faiz). Sign out to lock the app."
+              description="You are logged in as the admin. Sign out to lock the app."
             >
               <button
                 onClick={() => { logout(); navigate('/login', { replace: true }) }}

@@ -8,8 +8,8 @@ import { subscribeWithSelector } from 'zustand/middleware'
  * (private data, multiple users) this must move to a backend / auth provider.
  */
 const AUTH_KEY = 'hub_auth'
-const ADMIN_USERNAME = 'faiz'
-const ADMIN_PASSWORD = 'Faiz!@#'
+const ADMIN_USERNAME = 'admin@test.com'
+const ADMIN_PASSWORD = 'Test@1234'
 
 /** Read persisted auth flag from localStorage. */
 function readAuth(): boolean {

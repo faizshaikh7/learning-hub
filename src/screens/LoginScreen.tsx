@@ -54,18 +54,18 @@ export default function LoginScreen() {
           {/* Username */}
           <div>
             <label htmlFor="username" className="block text-xs font-medium text-gray-400 mb-1.5">
-              Username
+              Email
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
               <input
                 id="username"
-                type="text"
-                autoComplete="username"
+                type="email"
+                autoComplete="email"
                 autoCapitalize="none"
                 value={username}
                 onChange={e => { setUsername(e.target.value); setError('') }}
-                placeholder="faiz"
+                placeholder="admin@example.com"
                 className="w-full bg-gray-950 border border-gray-800 rounded-xl pl-9 pr-3 py-2.5 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-yellow-400/50 focus:ring-1 focus:ring-yellow-400/30 transition-colors"
               />
             </div>
