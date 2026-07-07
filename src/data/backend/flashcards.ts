@@ -1,7 +1,9 @@
 ﻿import type { FlashcardData } from '@/types'
+import { BACKEND_SCALE_FLASHCARDS } from './curriculum-scale'
+import { BACKEND_RELIABILITY_FLASHCARDS } from './curriculum-reliability'
 
 /** Backend Engineering flashcard deck keyed by topic id. */
-export const BACKEND_FLASHCARDS: FlashcardData = {
+const BACKEND_FLASHCARDS_BASE: FlashcardData = {
   'how-internet-works': [
     { id: 'hiw_1', q: 'What is the internet at its most fundamental level?', a: 'A global network of computers connected via physical infrastructure (cables, routers), communicating by sending packets of data using standardized protocols.' },
     { id: 'hiw_2', q: 'What is a packet?', a: 'A small chunk of data. Large messages are split into packets, each routed independently across the network, then reassembled at the destination.' },
@@ -2104,4 +2106,11 @@ export const BACKEND_FLASHCARDS: FlashcardData = {
     { id: 'gh_7', q: 'Why should CI run on every PR?', a: 'Machines should catch what machines can catch — failing tests, lint, type errors — before any human spends review time. GitHub Actions runs these automatically on push; branch protection blocks merging until they pass.' },
     { id: 'gh_8', q: 'A teammate requests changes you disagree with. What do you do?', a: 'Discuss in the PR thread with technical reasoning — review is about the code, not the person. If you still disagree, a quick call or a third opinion settles it. Silently ignoring comments or merging anyway destroys team trust.' }
   ]
+}
+
+/** Base decks plus the distributed-scale and reliability topic decks. */
+export const BACKEND_FLASHCARDS: FlashcardData = {
+  ...BACKEND_FLASHCARDS_BASE,
+  ...BACKEND_SCALE_FLASHCARDS,
+  ...BACKEND_RELIABILITY_FLASHCARDS,
 }

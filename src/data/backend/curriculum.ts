@@ -1,6 +1,8 @@
 ﻿import type { CurriculumTopic } from '@/types'
 import { BACKEND_EXTRA_TOPICS } from './curriculum-extra'
 import { BACKEND_NEW_TOPICS } from './curriculum-new'
+import { BACKEND_SCALE_TOPICS } from './curriculum-scale'
+import { BACKEND_RELIABILITY_TOPICS } from './curriculum-reliability'
 import { weaveTopics } from '@/lib/mergeCurriculum'
 
 /** All 91 Backend Engineering curriculum topics. */
@@ -5672,11 +5674,19 @@ const BACKEND_CURRICULUM_BASE: CurriculumTopic[] = [
 
 export const BACKEND_CURRICULUM: CurriculumTopic[] = weaveTopics(
   BACKEND_CURRICULUM_BASE,
-  [...BACKEND_EXTRA_TOPICS, ...BACKEND_NEW_TOPICS],
+  [...BACKEND_EXTRA_TOPICS, ...BACKEND_NEW_TOPICS, ...BACKEND_SCALE_TOPICS, ...BACKEND_RELIABILITY_TOPICS],
   {
     'pagination-patterns': 'rest-api-design',
     'idempotency-exactly-once': 'message-queues',
     'api-versioning': 'openapi-standards',
     'http-query-method': 'http-protocol',
+    'db-replication': 'cap-theorem',
+    'consistent-hashing': 'database-sharding',
+    'distributed-coordination': 'database-sharding',
+    'capacity-planning': 'performance-profiling',
+    'caching-at-scale': 'cdn-edge',
+    'multi-region-dr': 'cdn-edge',
+    'slo-sli-error-budgets': 'observability-stack',
+    'deployment-strategies': 'docker-kubernetes',
   },
 )

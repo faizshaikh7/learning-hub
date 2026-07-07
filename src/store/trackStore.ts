@@ -7,7 +7,7 @@ import {
 } from '@/lib/storage'
 
 const TRACK_CONFIG = {
-  backend: { prefix: 'bt', total: 95 },
+  backend: { prefix: 'bt', total: 103 },
   ai:      { prefix: 'at', total: 79 },
   flutter: { prefix: 'ft', total: 65 },
   react:   { prefix: 'rt', total: 81 },
@@ -17,13 +17,14 @@ const TRACK_CONFIG = {
 
 const PHASE_LABELS: Record<string, { min: number; max: number; label: string }[]> = {
   bt: [
-    { min: 0,  max: 12, label: 'Phase 0 — Network Foundations' },
-    { min: 13, max: 33, label: 'Phase 1 — Backend Foundations' },
-    { min: 34, max: 42, label: 'Phase 2 — Data & Storage' },
-    { min: 43, max: 58, label: 'Phase 3 — Scale & Performance' },
-    { min: 59, max: 67, label: 'Phase 4 — Security Deep Dive' },
-    { min: 68, max: 81, label: 'Phase 5 — Architecture Patterns' },
-    { min: 82, max: 91, label: 'Phase 6 — Production Engineering' },
+    { min: 0,  max: 13, label: 'Phase 0 — Network & Internet Foundations' },
+    { min: 14, max: 30, label: 'Phase 1 — Backend Foundations' },
+    { min: 31, max: 35, label: 'Phase 2 — Core Backend' },
+    { min: 36, max: 44, label: 'Phase 3 — Data & Storage Deep Dive' },
+    { min: 45, max: 67, label: 'Phase 4 — Scale & Performance' },
+    { min: 68, max: 76, label: 'Phase 5 — Security Deep Dive' },
+    { min: 77, max: 91, label: 'Phase 6 — Architecture Patterns' },
+    { min: 92, max: 102, label: 'Phase 7 — Production Engineering' },
   ],
   at: [
     { min: 0,  max: 12, label: 'Phase 0 — AI & LLM Foundations' },

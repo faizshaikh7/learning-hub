@@ -11,7 +11,7 @@ export const TRACKS: Track[] = [
     subtitle: 'Engineering',
     emoji: '⚙️',
     prefix: 'bt',
-    total: 95,
+    total: 103,
     colorClass: 'bg-blue-500',
     borderClass: 'border-blue-500/30',
     textClass: 'text-blue-400',
