@@ -1,6 +1,7 @@
 import { lazy, Suspense, type ReactNode } from 'react'
-import { createBrowserRouter, Link } from 'react-router-dom'
+import { createBrowserRouter, Link, Navigate, Outlet, useLocation } from 'react-router-dom'
 import HubScreen from '@/screens/HubScreen'
+import { useAuthStore } from '@/store/authStore'
 
 // Each course screen (and its large curriculum data) loads on demand,
 // so the Hub renders instantly instead of shipping all 5 courses upfront.
@@ -11,6 +12,7 @@ const ReactTutorScreen   = lazy(() => import('@/screens/ReactTutorScreen'))
 const AimlTutorScreen    = lazy(() => import('@/screens/AimlTutorScreen'))
 const MobileTutorScreen  = lazy(() => import('@/screens/MobileTutorScreen'))
 const SettingsScreen     = lazy(() => import('@/screens/SettingsScreen'))
+const LoginScreen        = lazy(() => import('@/screens/LoginScreen'))
 
 /** Full-screen spinner shown while a lazy course chunk downloads. */
 function ScreenLoader() {
@@ -42,15 +44,35 @@ function NotFound() {
   )
 }
 
-/** Application router — one route per screen; course screens are lazy-loaded. */
+/**
+ * Gate for all app routes. Renders the matched child route when signed in,
+ * otherwise redirects to /login (remembering where the user was headed).
+ */
+function RequireAuth() {
+  const isAuthenticated = useAuthStore(s => s.isAuthenticated)
+  const location = useLocation()
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace state={{ from: location.pathname + location.search }} />
+  }
+  return <Outlet />
+}
+
+/** Application router — everything except /login sits behind the admin gate. */
 export const router = createBrowserRouter([
-  { path: '/',         element: <HubScreen />, errorElement: <NotFound /> },
-  { path: '/backend',  element: load(<BackendTutorScreen />) },
-  { path: '/ai',       element: load(<AiTutorScreen />) },
-  { path: '/flutter',  element: load(<FlutterTutorScreen />) },
-  { path: '/react',    element: load(<ReactTutorScreen />) },
-  { path: '/aiml',     element: load(<AimlTutorScreen />) },
-  { path: '/mobile',   element: load(<MobileTutorScreen />) },
-  { path: '/settings', element: load(<SettingsScreen />) },
-  { path: '*',         element: <NotFound /> },
+  { path: '/login', element: load(<LoginScreen />) },
+  {
+    element: <RequireAuth />,
+    errorElement: <NotFound />,
+    children: [
+      { path: '/',         element: <HubScreen /> },
+      { path: '/backend',  element: load(<BackendTutorScreen />) },
+      { path: '/ai',       element: load(<AiTutorScreen />) },
+      { path: '/flutter',  element: load(<FlutterTutorScreen />) },
+      { path: '/react',    element: load(<ReactTutorScreen />) },
+      { path: '/aiml',     element: load(<AimlTutorScreen />) },
+      { path: '/mobile',   element: load(<MobileTutorScreen />) },
+      { path: '/settings', element: load(<SettingsScreen />) },
+    ],
+  },
+  { path: '*', element: <NotFound /> },
 ])
